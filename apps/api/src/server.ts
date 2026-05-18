@@ -9,6 +9,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.listen(4000, "0.0.0.0", () => {
+  console.log("API running");
+});
+
 // Healthcheck SaaS
 app.get("/health", (_, res) => {
   res.json({ status: "ok", service: "lefrigo-api" });
