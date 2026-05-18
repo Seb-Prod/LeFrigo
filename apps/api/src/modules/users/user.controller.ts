@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { userService } from "../services/user.service";
+import { userService } from "./user.service";
 
 export const userController = {
   getUsers: async (_: Request, res: Response) => {
@@ -7,12 +7,10 @@ export const userController = {
     res.json(users);
   },
   createUser: async (req: Request, res: Response) => {
-
     const { email, password } = req.body;
 
     const user = await userService.createUser({ email, password });
 
     res.json(user);
-
   },
 };
