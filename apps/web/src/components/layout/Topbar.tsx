@@ -1,17 +1,11 @@
 "use client";
 
+import styles from "./Topbar.module.css";
+
 export default function Topbar() {
   return (
-    <header
-      style={{
-        height: 64,
-        borderBottom: "1px solid #eee",
-        display: "flex",
-        alignItems: "center",
-        padding: "0 20px",
-      }}
-    >
-      Topbar
+    <header className={styles.topbar}>
+      <span>Topbar</span>
     </header>
   );
 }

@@ -1,23 +1,14 @@
 "use client";
 
+import styles from "./Sidebar.module.css";
+
 export default function Sidebar() {
   return (
-    <aside
-      style={{
-        width: 260,
-        borderRight: "1px solid #eee",
-        padding: 20,
-      }}
-    >
-      <h2>LeFrigo</h2>
+    <aside className={styles.sidebar}>
+      <h2 className={styles.logo}>LeFrigo</h2>
 
       <nav>
-        <ul
-          style={{
-            listStyle: "none",
-            padding: 0,
-          }}
-        >
+        <ul className={styles.menu}>
           <li>Dashboard</li>
           <li>Produits</li>
           <li>Courses</li>

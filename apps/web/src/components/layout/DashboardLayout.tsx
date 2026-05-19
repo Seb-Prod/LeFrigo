@@ -3,32 +3,21 @@
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
 
+import styles from "./DashboardLayout.module.css";
+
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <div
-      style={{
-        display: "flex",
-        minHeight: "100vh",
-      }}
-    >
+    <div className={styles.container}>
       <Sidebar />
 
-      <div
-        style={{
-          flex: 1,
-        }}
-      >
+      <div className={styles.content}>
         <Topbar />
 
-        <main
-          style={{
-            padding: 24,
-          }}
-        >
+        <main className={styles.main}>
           {children}
         </main>
       </div>
