@@ -3,9 +3,11 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { api } from "@/lib/api";
+import { useAuth } from "@/contexts/auth.context";
 
 export default function HomePage() {
   const router = useRouter();
+  const { login } = useAuth();
 
   const [email, setEmail] = useState("test@test.com");
   const [password, setPassword] = useState("123456");
@@ -14,7 +16,7 @@ export default function HomePage() {
     try {
       const data = await api.login(email, password);
 
-      localStorage.setItem("token", data.token);
+      login(data.token);
 
       router.push("/dashboard");
     } catch {
