@@ -3,6 +3,8 @@ import cors from "cors";
 import userRoutes from "./modules/users/user.routes";
 import authRoutes from "./modules/auth/auth.routes";
 import { authMiddleware } from "./middlewares/autj.middleware";
+import recipeRoutes from "./modules/recipes/recipe.routes";
+import { errorMiddleware } from "./middlewares/error.middleware";
 
 const app = express();
 
@@ -21,6 +23,10 @@ app.get("/health", (_, res) => {
 // Modules
 app.use("/auth", authRoutes);
 app.use("/users", authMiddleware, userRoutes);
+app.use("/recipes", recipeRoutes);
+
+app.use(errorMiddleware);
+app.use(errorMiddleware);
 
 const PORT = process.env.PORT || 4000;
 

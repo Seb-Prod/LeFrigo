@@ -12,4 +12,35 @@ model User {
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
+
+  recipes Recipe[]
+  menus   Menu[]
+}
+
+model Recipe {
+  id        String   @id @default(uuid())
+  name      String
+  userId    String
+  createdAt DateTime @default(now())
+
+  user  User   @relation(fields: [userId], references: [id])
+  menus Menu[]
+}
+
+model Menu {
+  id        String   @id @default(uuid())
+  date      DateTime
+  mealType  MealType
+  createdAt DateTime @default(now())
+
+  userId   String
+  recipeId String
+
+  user   User   @relation(fields: [userId], references: [id])
+  recipe Recipe @relation(fields: [recipeId], references: [id])
+}
+
+enum MealType {
+  LUNCH
+  DINNER
 }
