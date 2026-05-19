@@ -3,17 +3,21 @@
 import { useDevice } from "@/contexts/device.context";
 import styles from "./Topbar.module.css";
 
-export default function Topbar() {
+type Props = {
+  onMenuClick: () => void;
+};
+
+export default function Topbar({ onMenuClick }: Props) {
   const { isMobile } = useDevice();
 
   return (
     <header className={styles.topbar}>
       {isMobile && (
-        <button>
+        <button className={styles.menuButton} onClick={onMenuClick}>
           ☰
         </button>
       )}
-      <span>Topbar</span>
+      <span>LeFrigo</span>
     </header>
   );
 }

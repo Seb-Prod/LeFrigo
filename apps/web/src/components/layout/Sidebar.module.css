@@ -1,24 +1,43 @@
 .sidebar {
-  width: 260px;
-  min-height: 100vh;
+    width: 260px;
+    min-height: 100vh;
 
-  border-right: 1px solid #e5e7eb;
+    border-right: 1px solid #e5e7eb;
 
-  padding: 20px;
+    padding: 20px;
 }
 
 .logo {
-  margin-bottom: 30px;
+    margin-bottom: 30px;
 }
 
 .menu {
-  list-style: none;
+    list-style: none;
 
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
 
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
-  gap: 16px;
+    gap: 16px;
+}
+
+.mobile {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    z-index: 1000;
+
+    background: var(--background);
+
+    width: 260px;
+    height: 100vh;
+}
+
+.closeButton {
+    margin-bottom: 20px;
+    cursor: pointer;
 }

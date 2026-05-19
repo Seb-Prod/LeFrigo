@@ -5,6 +5,7 @@ import Topbar from "./Topbar";
 
 import styles from "./DashboardLayout.module.css";
 import { useDevice } from "@/contexts/device.context";
+import { useState } from "react";
 
 export default function DashboardLayout({
   children,
@@ -13,12 +14,16 @@ export default function DashboardLayout({
 }) {
   const { isMobile } = useDevice();
 
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <div className={styles.container}>
-      {!isMobile && <Sidebar/>}
+      {(!isMobile || menuOpen) && (
+        <Sidebar mobile={isMobile} onClose={() => setMenuOpen(false)} />
+      )}
 
       <div className={styles.content}>
-        <Topbar />
+        <Topbar onMenuClick={() => setMenuOpen(true)} />
         <main className={styles.main}>{children}</main>
       </div>
     </div>

@@ -2,9 +2,15 @@
 
 import styles from "./Sidebar.module.css";
 
-export default function Sidebar() {
+type Props = {
+  mobile?: boolean;
+  onClose?: () => void;
+};
+
+export default function Sidebar({ mobile, onClose }: Props) {
   return (
-    <aside className={styles.sidebar}>
+    <aside className={`${styles.sidebar} ${mobile ? styles.mobile : ""}`}>
+      {mobile && <button className={styles.closeButton} onClick={onClose}>x</button>}
       <h2 className={styles.logo}>LeFrigo</h2>
 
       <nav>
