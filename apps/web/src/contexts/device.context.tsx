@@ -21,6 +21,12 @@ type DeviceContextType = {
   isAndroid: boolean;
   /** `true` si l'application est lancée en mode PWA standalone. */
   isPWA: boolean;
+  /** `true` si l'application est lancée sur desktop */
+  isDesktop: boolean;
+  /** `true` si l'application est lancée sur mobile */
+  isMobile: boolean;
+  /** `true` si l'application est lancée sur tablette */
+  isTablet: boolean;
 };
 
 const DeviceContext = createContext<DeviceContextType | null>(null);
@@ -41,6 +47,9 @@ function detectDevice(): DeviceContextType {
 
   return {
     device: isMobile ? "mobile" : isTablet ? "tablet" : "desktop",
+    isMobile: isMobile,
+    isTablet: isTablet,
+    isDesktop: !isTablet && !isMobile,
     isIOS: /iphone|ipad|ipod/.test(ua),
     isAndroid: /android/.test(ua),
     isPWA:
@@ -59,6 +68,9 @@ const SSR_DEFAULT: DeviceContextType = {
   isIOS: false,
   isAndroid: false,
   isPWA: false,
+  isDesktop: true,
+  isMobile: false,
+  isTablet: false,
 };
 
 /**
@@ -86,7 +98,7 @@ const SSR_DEFAULT: DeviceContextType = {
  */
 export function DeviceProvider({ children }: { children: React.ReactNode }) {
   const [deviceInfo] = useState<DeviceContextType>(() =>
-    typeof window === "undefined" ? SSR_DEFAULT : detectDevice()
+    typeof window === "undefined" ? SSR_DEFAULT : detectDevice(),
   );
 
   return (
