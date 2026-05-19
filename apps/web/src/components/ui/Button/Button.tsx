@@ -1,20 +1,15 @@
 import styles from "./Button.module.css";
 
-type Props = {
-  children: React.ReactNode;
-  onClick?: () => void;
-};
+type Props =
+  React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-export default function Button({
-  children,
-  onClick,
-}: Props) {
+export default function Button(
+  props: Props
+) {
   return (
     <button
       className={styles.button}
-      onClick={onClick}
-    >
-      {children}
-    </button>
+      {...props}
+    />
   );
 }

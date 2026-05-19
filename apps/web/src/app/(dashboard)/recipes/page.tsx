@@ -1,0 +1,66 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+import { Recipe } from "@shared/types/recipe.types";
+
+import { recipeService } from "@/services/recipe.service";
+import RecipeCard from "@/features/recipes/RecipeCard/RecipeCard";
+import styles from "./recipes.module.css";
+import { Button, Input } from "@/components/ui";
+
+export default function RecipesPage() {
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
+
+  const [name, setName] = useState("");
+
+  useEffect(() => {
+    loadRecipes();
+  }, []);
+
+  async function loadRecipes() {
+    const token = localStorage.getItem("token");
+
+    if (!token) return;
+
+    const data = await recipeService.getAll(token);
+
+    setRecipes(data);
+  }
+
+  async function handleCreate() {
+    const token = localStorage.getItem("token");
+
+    if (!token || !name.trim()) {
+      return;
+    }
+
+    await recipeService.create(name, token);
+
+    setName("");
+
+    loadRecipes();
+  }
+
+  return (
+    <>
+      <h1>Recettes</h1>
+
+      <div>
+        <Input
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Nom recette"
+        />
+
+        <Button onClick={handleCreate}>Ajouter</Button>
+      </div>
+
+      <div className={styles.grid}>
+        {recipes.map((recipe) => (
+          <RecipeCard key={recipe.id} name={recipe.name} />
+        ))}
+      </div>
+    </>
+  );
+}
