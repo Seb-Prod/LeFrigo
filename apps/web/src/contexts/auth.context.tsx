@@ -9,36 +9,59 @@ type AuthContextType = {
   logout: () => void;
 };
 
-const getInitialToken = () => {
-  if (typeof window === "undefined") return null;
-  return localStorage.getItem("token");
-};
-
 const AuthContext = createContext<AuthContextType | null>(null);
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [token, setToken] = useState<string | null>(() => getInitialToken());
-  const [loading] = useState(false);
+export function AuthProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const [auth, setAuth] = useState(() => ({
+    token:
+      typeof window !== "undefined"
+        ? localStorage.getItem("token")
+        : null,
+    loading: false,
+  }));
 
   const login = (token: string) => {
     localStorage.setItem("token", token);
-    setToken(token);
+
+    setAuth({
+      token,
+      loading: false,
+    });
   };
 
   const logout = () => {
     localStorage.removeItem("token");
-    setToken(null);
+
+    setAuth({
+      token: null,
+      loading: false,
+    });
   };
 
   return (
-    <AuthContext.Provider value={{ token, login, logout, loading }}>
+    <AuthContext.Provider
+      value={{
+        token: auth.token,
+        loading: auth.loading,
+        login,
+        logout,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
-};
+}
 
-export const useAuth = () => {
-  const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error("useAuth must be used inside AuthProvider");
-  return ctx;
-};
+export function useAuth() {
+  const context = useContext(AuthContext);
+
+  if (!context) {
+    throw new Error("useAuth must be used inside AuthProvider");
+  }
+
+  return context;
+}

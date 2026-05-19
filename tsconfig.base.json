@@ -9,8 +9,10 @@
     "esModuleInterop": true,
     "isolatedModules": true,
     "ignoreDeprecations": "6.0",
+    "baseUrl": ".",
     "paths": {
-      "@shared/*": ["packages/shared/src/*"]
+      "@lefrigo/shared": ["packages/shared/src/index.ts"],
+      "@lefrigo/shared/*": ["packages/shared/src/*"]
     }
   }
 }

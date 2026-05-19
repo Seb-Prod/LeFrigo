@@ -1,3 +1,5 @@
+import { User } from "@shared/types/user.types";
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const api = {
@@ -17,7 +19,7 @@ export const api = {
     return response.json();
   },
 
-  async getUsers(token: string) {
+  async getUsers(token: string): Promise<User[]> {
     const response = await fetch(`${API_URL}/users`, {
       headers: {
         Authorization: `Bearer ${token}`,
