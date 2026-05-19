@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { api } from "@/lib/api";
 import { useAuth } from "@/contexts/auth.context";
+import { Button, Input } from "@/components/ui";
 
 export default function HomePage() {
   const router = useRouter();
@@ -28,7 +29,7 @@ export default function HomePage() {
     <main style={{ padding: 40 }}>
       <h1>LeFrigo</h1>
 
-      <input
+      <Input
         placeholder="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
@@ -37,7 +38,7 @@ export default function HomePage() {
       <br />
       <br />
 
-      <input
+      <Input
         type="password"
         placeholder="password"
         value={password}
@@ -47,9 +48,9 @@ export default function HomePage() {
       <br />
       <br />
 
-      <button onClick={handleLogin}>
+      <Button onClick={handleLogin}>
         Login
-      </button>
+      </Button>
     </main>
   );
 }
