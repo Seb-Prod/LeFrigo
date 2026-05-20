@@ -9,6 +9,13 @@ export const recipeRepository = {
       },
     }),
 
+  findById: (id: string) =>
+    prisma.recipe.findUnique({
+      where: {
+        id,
+      },
+    }),
+
   create: (name: string, userId: string) =>
     prisma.recipe.create({
       data: {
@@ -21,5 +28,4 @@ export const recipeRepository = {
     prisma.recipe.delete({
       where: { id },
     }),
-
 };

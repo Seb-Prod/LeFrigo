@@ -2,10 +2,7 @@ import { Request, Response } from "express";
 import { recipeService } from "./recipe.service";
 import { Prisma } from "@prisma/client";
 import { asyncHandler } from "../../utils/asyncHandler";
-
-type DeleteRecipeParams = {
-  id: string;
-};
+import { createRecipeSchema } from "./recipe.shemas";
 
 type CreateRecipeBody = {
   name: string;
@@ -21,8 +18,10 @@ export const recipeController = {
 
   create: asyncHandler(
     async (req: Request<{}, {}, CreateRecipeBody>, res: Response) => {
+      const body = createRecipeSchema.parse(req.body);
+
       const userId = req.user.userId;
-      const { name } = req.body;
+      const  name  = body.name;
 
       const recipe = await recipeService.create(name, userId);
 
@@ -30,10 +29,9 @@ export const recipeController = {
     },
   ),
 
-  delete: asyncHandler(
-    async (req: Request, res: Response) => {
-      await recipeService.delete(req.params.id as string);
-      return res.status(204).send();
-    },
-  ),
+  delete: asyncHandler(async (req: Request, res: Response) => {
+    const userId = req.user.userId;
+    await recipeService.delete(req.params.id as string, userId);
+    return res.status(204).send();
+  }),
 };
