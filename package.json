@@ -3,9 +3,16 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "tsx scripts/start.ts",
-    "docker:up": "tsx scripts/docker-up.ts",
-    "docker:down": "tsx scripts/docker-down.ts"
+    "start": "npx tsx scripts/start.ts",
+    "api:start": "npx tsx scripts/api-start.ts",
+    "web:start": "npx tsx scripts/web-start.ts",
+    "docker:open": "npx tsx scripts/docker-open.ts",
+    "docker:start": "npx tsx scripts/mysql-start.ts",
+    "docker:stop": "npx tsx scripts/mysql-stop.ts",
+    "docker:restart": "npx tsx scripts/mysql-restart.ts",
+    "browser:open": "npx tsx scripts/browser-open.ts",
+    "vscode:open": "npx tsx scripts/vscode-open.ts",
+    "prisma:start": "npx tsx scripts/prisma-studio.ts"
   },
   "devDependencies": {
     "@types/node": "^20.19.41",
