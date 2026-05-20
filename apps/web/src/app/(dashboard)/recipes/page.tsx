@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import { Recipe } from "@shared/types/recipe.types";
 
-import RecipeCard from "@/features/recipes/RecipeCard/RecipeCard";
+import RecipeCard from "@/features/recipes/components/RecipeCard/RecipeCard";
 import styles from "./recipes.module.css";
 import { Button, Input } from "@/components/ui";
 import { recipeService } from "@/features/recipes/services/recipe.service";

@@ -11,7 +11,7 @@ export const recipeService = {
     });
 
     if (!response.ok) {
-      throw new Error();
+      throw new Error("Impossible de charger les recettes");
     }
 
     return response.json();
@@ -30,13 +30,13 @@ export const recipeService = {
     });
 
     if (!response.ok) {
-      throw new Error();
+      throw new Error("Impossible de créer la recette");
     }
 
     return response.json();
   },
 
-  async delete(id: string, token: string) {
+  async delete(id: string, token: string):Promise<void> {
     const response = await fetch(`${API_URL}/recipes/${id}`, {
       method: "DELETE",
       headers: {
@@ -45,7 +45,7 @@ export const recipeService = {
     });
 
     if (!response.ok) {
-      throw new Error();
+      throw new Error("Impossible de supprimer la recette");
     }
   },
 };
