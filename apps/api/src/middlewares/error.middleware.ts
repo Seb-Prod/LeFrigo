@@ -1,25 +1,40 @@
 import { Request, Response, NextFunction } from "express";
 import { Prisma } from "@prisma/client";
+import { ZodError } from "zod";
+import { AppError } from "../core/errors/AppError";
 
-export const errorMiddleware = (
+export function errorMiddleware(
   error: unknown,
   req: Request,
   res: Response,
   next: NextFunction
-) => {
-  console.error(error);
+) {
+
+  if (error instanceof AppError) {
+    return res.status(error.statusCode).json({
+      message: error.message,
+    });
+  }
+
+  if (error instanceof ZodError) {
+    return res.status(400).json({
+      message: "Validation invalide",
+      errors: error.issues,
+    });
+  }
 
   if (
-    error instanceof Prisma.PrismaClientKnownRequestError
+    error instanceof Prisma.PrismaClientKnownRequestError &&
+    error.code === "P2025"
   ) {
-    if (error.code === "P2025") {
-      return res.status(404).json({
-        message: "Ressource introuvable",
-      });
-    }
+    return res.status(404).json({
+      message: "Ressource introuvable",
+    });
   }
+
+  console.error(error);
 
   return res.status(500).json({
     message: "Erreur serveur",
   });
-};
+}
