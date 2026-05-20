@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 
 import { Recipe } from "@shared/types/recipe.types";
 
-import { recipeService } from "@/services/recipe.service";
 import RecipeCard from "@/features/recipes/RecipeCard/RecipeCard";
 import styles from "./recipes.module.css";
 import { Button, Input } from "@/components/ui";
+import { recipeService } from "@/features/recipes/services/recipe.service";
 
 export default function RecipesPage() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
@@ -42,6 +42,16 @@ export default function RecipesPage() {
     loadRecipes();
   }
 
+  async function handleDelete(id: string) {
+    const token = localStorage.getItem("token");
+
+    if (!token) return;
+
+    await recipeService.delete(id, token);
+
+    await loadRecipes();
+  }
+
   return (
     <>
       <h1>Recettes</h1>
@@ -58,7 +68,7 @@ export default function RecipesPage() {
 
       <div className={styles.grid}>
         {recipes.map((recipe) => (
-          <RecipeCard key={recipe.id} name={recipe.name} />
+          <RecipeCard key={recipe.id} recipe={recipe} onDelete={handleDelete} />
         ))}
       </div>
     </>

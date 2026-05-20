@@ -1,13 +1,16 @@
 import { Card } from "@/components/ui";
+import { Recipe } from "@shared/types/recipe.types";
 
 type Props = {
-  name: string;
+  recipe: Recipe;
+  onDelete: (id: string) => void;
 };
 
-export default function RecipeCard({ name }: Props) {
+export default function RecipeCard({ recipe, onDelete }: Props) {
   return (
     <Card>
-      <h3>{name}</h3>
+      <h3>{recipe.name}</h3>
+      <button onClick={() => onDelete(recipe.id)}>Supprimer</button>
     </Card>
   );
 }
