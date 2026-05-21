@@ -1,9 +1,9 @@
 "use client";
 
-import { useMealPlans } from "@/features/meal-plans";
+import { MealPlanForm, useMealPlans } from "@/features/meal-plans";
 
 export default function PlanningPage() {
-  const { mealPlans } = useMealPlans();
+  const { mealPlans, createMealPlan } = useMealPlans();
 
   return (
     <>
@@ -22,6 +22,7 @@ export default function PlanningPage() {
           {mealPlan.date}
         </div>
       ))}
+      <MealPlanForm onSubmit={createMealPlan}/>
     </>
   );
 }

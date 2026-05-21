@@ -41,5 +41,8 @@ export const mealPlanRepository = {
         recipeId,
         userId,
       },
+      include: {
+        recipe: true
+      }
     }),
 };
