@@ -14,7 +14,7 @@ model User {
   createdAt DateTime @default(now())
 
   recipes Recipe[]
-  menus   Menu[]
+  mealPlans   MealPlan[]
 }
 
 model Recipe {
@@ -24,17 +24,17 @@ model Recipe {
   createdAt DateTime @default(now())
 
   user  User   @relation(fields: [userId], references: [id])
-  menus Menu[]
+  mealPlans MealPlan[]
 }
 
-model Menu {
+model MealPlan {
   id        String   @id @default(uuid())
   date      DateTime
-  mealType  MealType
-  createdAt DateTime @default(now())
-
-  userId   String
+  
   recipeId String
+  userId String
+
+  createdAt DateTime @default(now())
 
   user   User   @relation(fields: [userId], references: [id])
   recipe Recipe @relation(fields: [recipeId], references: [id])
