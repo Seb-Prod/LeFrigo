@@ -22,3 +22,6 @@ curl -X POST http://localhost:4000/recipes -H "Authorization: Bearer eyJhbGciOiJ
 curl -X POST http://localhost:4000/recipes -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmYWVkZjBlZS02YzZmLTQzMWEtODM4OC0wZjJmZGIxNzA2YTQiLCJpYXQiOjE3NzkyNzA4NTgsImV4cCI6MTc3OTg3NTY1OH0.XTBUI6ZNaZi9ahnTNafzPNCLWyKctsyOnOcqJKNQZpc" -H "Content-Type: application/json" -d '{"name":""}'
 
 curl -X DELETE http://localhost:4000/recipes/UUID_DE_LA_RECETTE -H "Authorization: Bearer $TOKEN$"
+
+
+curl -X POST http://localhost:4000/meal-plans -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"date":"2025-11-15","mealType":"LUNCH","recipeId":"224e4df0-b579-4d58-90c7-55755c1f2c84"}'
