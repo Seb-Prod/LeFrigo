@@ -9,7 +9,13 @@ type Props = {
 
 export function RecipeList({ recipes, onDelete }: Props) {
   if (recipes.length === 0) {
-    return <p>Aucune recette.</p>;
+    return (
+      <div className={styles.empty}>
+        <h3>Aucune recette</h3>
+
+        <p>Ajoutez votre première recette pour commencer votre planning.</p>
+      </div>
+    );
   }
 
   return (

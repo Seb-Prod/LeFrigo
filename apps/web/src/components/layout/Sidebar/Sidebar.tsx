@@ -6,10 +6,11 @@ import { usePathname } from "next/navigation";
 
 type Props = {
   mobile?: boolean;
+  open: boolean;
   onClose?: () => void;
 };
 
-export function Sidebar({ mobile, onClose }: Props) {
+export function Sidebar({ mobile, open, onClose }: Props) {
   const pathname = usePathname();
 
   const links = [
@@ -20,7 +21,9 @@ export function Sidebar({ mobile, onClose }: Props) {
   ];
 
   return (
-    <aside className={`${styles.sidebar} ${mobile ? styles.mobile : ""}`}>
+    <aside
+      className={`${styles.sidebar} ${mobile ? styles.mobile : ""} ${!open ? styles.hidden : ""}`}
+    >
       {mobile && (
         <button className={styles.closeButton} onClick={onClose}>
           x
@@ -29,19 +32,21 @@ export function Sidebar({ mobile, onClose }: Props) {
       <h2 className={styles.logo}>LeFrigo</h2>
 
       <nav>
-        {links.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className={
-              pathname === link.href
-                ? `${styles.link} ${styles.active}`
-                : styles.link
-            }
-          >
-            {link.label}
-          </Link>
-        ))}
+        <ul className={styles.menu}>
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={
+                pathname === link.href
+                  ? `${styles.link} ${styles.active}`
+                  : styles.link
+              }
+            >
+              {link.label}
+            </Link>
+          ))}
+        </ul>
       </nav>
     </aside>
   );

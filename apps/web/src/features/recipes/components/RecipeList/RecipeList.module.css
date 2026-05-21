@@ -4,3 +4,19 @@
 
   gap: 12px;
 }
+
+.empty {
+  padding: 3rem;
+
+  text-align: center;
+
+  border: 1px dashed var(--color-border);
+
+  border-radius: var(--radius-lg);
+
+  background: white;
+}
+
+.empty h3 {
+  margin-bottom: 0.5rem;
+}

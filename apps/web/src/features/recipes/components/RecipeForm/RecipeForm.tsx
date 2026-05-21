@@ -10,17 +10,21 @@ type Props = {
 
 export function RecipeForm({ onSubmit }: Props) {
   const [name, setName] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!name.trim()) {
-      return;
+    if (!name.trim()) return;
+
+    try {
+      setIsSubmitting(true);
+
+      await onSubmit(name);
+      setName("");
+    } finally {
+      setIsSubmitting(false);
     }
-
-    await onSubmit(name);
-
-    setName("");
   };
 
   return (
@@ -32,7 +36,7 @@ export function RecipeForm({ onSubmit }: Props) {
         placeholder="Nom de la recette"
       />
 
-      <Button type="submit">Ajouter</Button>
+      <Button type="submit" disabled={isSubmitting}>Ajouter</Button>
     </form>
   );
 }
