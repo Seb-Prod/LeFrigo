@@ -6,6 +6,7 @@ import { authMiddleware } from "./middlewares/auth.middleware";
 import recipeRoutes from "./modules/recipes/recipe.routes";
 import { errorMiddleware } from "./middlewares/error.middleware";
 import { AppError } from "./core/errors/AppError";
+import mealPlanRoutes from "apps/api/src/modules/meal-plans/meal-plan.routes";
 
 const app = express();
 
@@ -19,16 +20,14 @@ app.get("/health", (_, res) => {
 
 console.log("REGISTER ERROR MIDDLEWARE");
 app.get("/test-error", async () => {
-  throw new AppError(
-    404,
-    "Erreur de test"
-  );
+  throw new AppError(404, "Erreur de test");
 });
 
 // Modules
 app.use("/auth", authRoutes);
 app.use("/users", authMiddleware, userRoutes);
 app.use("/recipes", recipeRoutes);
+app.use("/meal-plans", mealPlanRoutes);
 
 // Error middleware — toujours en dernier
 app.use(errorMiddleware);

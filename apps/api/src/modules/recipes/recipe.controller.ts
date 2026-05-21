@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { recipeService } from "./recipe.service";
-import { Prisma } from "@prisma/client";
 import { asyncHandler } from "../../utils/asyncHandler";
 import { createRecipeSchema } from "./recipe.shemas";
 
