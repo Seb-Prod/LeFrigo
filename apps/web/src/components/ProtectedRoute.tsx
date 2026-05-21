@@ -14,7 +14,7 @@ export default function ProtectedRoute({
 
   useEffect(() => {
     if (!loading && !token) {
-      router.replace("/login");
+      router.replace("/");
     }
   }, [loading, token, router]);
 
