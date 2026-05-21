@@ -6,7 +6,7 @@ export const mealPlanService = {
   async getAll(token: string): Promise<MealPlan[]> {
     const response = await fetch(`${API_URL}/meal-plans`, {
       headers: {
-        Authorisation: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -17,16 +17,19 @@ export const mealPlanService = {
     return response.json();
   },
 
-  async create(data: {
-    date: string;
-    mealType: "LUNCH" | "DINNER";
-    recipeId: string;
-}, token: string,
+  async create(
+    data: {
+      date: string;
+      mealType: "LUNCH" | "DINNER";
+      recipeId: string;
+    },
+    token: string,
   ) {
     const response = await fetch(`${API_URL}/meal-plans`, {
       method: "POST",
       headers: {
-        Authorisation: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });
