@@ -7,4 +7,5 @@ export interface MealPlan {
   recipeId: string;
   userId: string;
   createAt: string;
+  recipe: { id: string; name: string };
 }
