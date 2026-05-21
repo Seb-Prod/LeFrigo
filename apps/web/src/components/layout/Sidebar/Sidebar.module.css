@@ -41,3 +41,21 @@
     margin-bottom: 20px;
     cursor: pointer;
 }
+
+.link {
+    display: block;
+    padding: 12px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--color-text);
+}
+
+.link:hover {
+    background: var(--color-surface-hover);
+}
+
+.active {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    font-weight: 600;
+}

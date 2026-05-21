@@ -1,13 +1,12 @@
 "use client";
 
-import Sidebar from "./Sidebar";
-import Topbar from "./Topbar";
 
+import { Sidebar, Topbar } from "@/components/layout";
 import styles from "./DashboardLayout.module.css";
 import { useDevice } from "@/contexts/device.context";
 import { useState } from "react";
 
-export default function DashboardLayout({
+export function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;

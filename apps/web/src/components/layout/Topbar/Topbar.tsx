@@ -7,7 +7,7 @@ type Props = {
   onMenuClick: () => void;
 };
 
-export default function Topbar({ onMenuClick }: Props) {
+export function Topbar({ onMenuClick }: Props) {
   const { isMobile } = useDevice();
 
   return (
