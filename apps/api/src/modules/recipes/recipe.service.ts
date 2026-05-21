@@ -2,8 +2,12 @@ import { AppError } from "../../core/errors/AppError";
 import { recipeRepository } from "./recipe.repository";
 
 export const recipeService = {
-  getAll(userId: string) {
+  getAllByUser(userId: string) {
     return recipeRepository.findAllByUser(userId);
+  },
+
+  getAll() {
+    return recipeRepository.findAll();
   },
 
   create(name: string, userId: string) {
@@ -18,17 +22,11 @@ export const recipeService = {
     const recipe = await recipeRepository.findById(id);
 
     if (!recipe) {
-      throw new AppError(
-        404,
-        "Recette introuvable",
-      );
+      throw new AppError(404, "Recette introuvable");
     }
 
     if (recipe.userId !== userId) {
-      throw new AppError(
-        403,
-        "Accès interdit",
-      );
+      throw new AppError(403, "Accès interdit");
     }
 
     await recipeRepository.delete(id);

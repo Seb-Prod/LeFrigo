@@ -9,8 +9,7 @@ type CreateRecipeBody = {
 
 export const recipeController = {
   getAll: asyncHandler(async (req: Request, res: Response) => {
-    const userId = req.user.userId;
-    const recipes = await recipeService.getAll(userId);
+    const recipes = await recipeService.getAll();
 
     return res.json(recipes);
   }),

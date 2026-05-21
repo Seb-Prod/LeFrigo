@@ -16,6 +16,13 @@ export const recipeRepository = {
       },
     }),
 
+  findAll: () =>
+    prisma.recipe.findMany({
+      orderBy: {
+        name: "asc",
+      },
+    }),
+
   create: (name: string, userId: string) =>
     prisma.recipe.create({
       data: {
