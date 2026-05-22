@@ -4,7 +4,15 @@
   padding: 12px 20px;
   border-radius: var(--radius-md);
   font-weight: 600;
-  transition: 0.2s ease;
+  transition: background 0.2s ease, transform 0.1s ease, opacity 0.2s ease;
+}
+
+.button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.button:active:not(:disabled) {
+  transform: scale(0.97);
 }
 
 .primary {
