@@ -3,6 +3,8 @@
 import Link from "next/link";
 import styles from "./Sidebar.module.css";
 import { usePathname } from "next/navigation";
+import { useAuth } from "@/contexts/auth.context";
+import { LogoutButton } from "@/features/auth";
 
 type Props = {
   mobile?: boolean;
@@ -11,6 +13,7 @@ type Props = {
 
 export function Sidebar({ mobile, onClose }: Props) {
   const pathname = usePathname();
+  const { logout } = useAuth();
 
   const links = [
     { label: "Dashboard", href: "/dashboard" },
@@ -31,20 +34,22 @@ export function Sidebar({ mobile, onClose }: Props) {
       <nav>
         <ul className={styles.menu}>
           {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={
-                pathname === link.href
-                  ? `${styles.link} ${styles.active}`
-                  : styles.link
-              }
-            >
-              {link.label}
-            </Link>
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                className={
+                  pathname === link.href
+                    ? `${styles.link} ${styles.active}`
+                    : styles.link
+                }
+              >
+                {link.label}
+              </Link>
+            </li>
           ))}
         </ul>
       </nav>
+     <LogoutButton onClick={logout} className={styles.logoutButton}/>
     </aside>
   );
 }

@@ -1,4 +1,6 @@
 .sidebar {
+    display: flex;
+    flex-direction: column;
     width: 260px;
     min-height: 100vh;
     background: white;
@@ -62,4 +64,9 @@
 
 .hidden {
   display: none;
+}
+
+.logoutButton {
+    margin-left: auto;
+  margin-top: auto;
 }
