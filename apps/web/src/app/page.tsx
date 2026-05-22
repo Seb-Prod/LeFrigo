@@ -1,56 +1,65 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { api } from "@/lib/api";
+import Link from "next/link";
+
+import { Button } from "@/components/ui";
 import { useAuth } from "@/contexts/auth.context";
-import { Button, Input } from "@/components/ui";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function HomePage() {
   const router = useRouter();
-  const { login } = useAuth();
+  const { token, loading } = useAuth();
 
-  const [email, setEmail] = useState("test@test.com");
-  const [password, setPassword] = useState("123456");
-
-  const handleLogin = async () => {
-    try {
-      const data = await api.login(email, password);
-
-      login(data.token);
-
-      router.push("/dashboard");
-    } catch {
-      alert("Login failed");
+  useEffect(() => {
+    if (token) {
+      router.replace("/dashboard");
     }
-  };
+  }, [token, router]);
+
+  if (loading) {
+    return null;
+  }
 
   return (
-    <main style={{ padding: 40 }}>
-      <h1>LeFrigo</h1>
+    <main
+      style={{
+        minHeight: "100vh",
+        display: "grid",
+        placeItems: "center",
+        padding: "2rem",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: 600,
+          textAlign: "center",
+        }}
+      >
+        <h1>LeFrigo</h1>
 
-      <Input
-        placeholder="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
+        <p>
+          Planifiez vos repas, organisez vos menus et préparez vos futures
+          listes de courses.
+        </p>
 
-      <br />
-      <br />
+        <div
+          style={{
+            display: "flex",
+            gap: "1rem",
+            justifyContent: "center",
+            marginTop: "2rem",
+          }}
+        >
+          <Link href="/login">
+            <Button>Se connecter</Button>
+          </Link>
 
-      <Input
-        type="password"
-        placeholder="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-
-      <br />
-      <br />
-
-      <Button onClick={handleLogin}>
-        Login
-      </Button>
+          <Link href="/register">
+            <Button>Créer un compte</Button>
+          </Link>
+        </div>
+      </div>
     </main>
   );
 }

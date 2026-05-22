@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 type AuthContextType = {
   token: string | null;
@@ -11,42 +11,31 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-export function AuthProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const [auth, setAuth] = useState(() => ({
-    token:
-      typeof window !== "undefined"
-        ? localStorage.getItem("token")
-        : null,
-    loading: false,
-  }));
+export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const [token, setToken] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  const login = (token: string) => {
-    localStorage.setItem("token", token);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setToken(localStorage.getItem("token"));
+    setLoading(false);
+  }, []);
 
-    setAuth({
-      token,
-      loading: false,
-    });
+  const login = (newToken: string) => {
+    localStorage.setItem("token", newToken);
+    setToken(newToken);
   };
 
   const logout = () => {
     localStorage.removeItem("token");
-
-    setAuth({
-      token: null,
-      loading: false,
-    });
+    setToken(null);
   };
 
   return (
     <AuthContext.Provider
       value={{
-        token: auth.token,
-        loading: auth.loading,
+        token: token,
+        loading: loading,
         login,
         logout,
       }}
