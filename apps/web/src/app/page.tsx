@@ -51,7 +51,7 @@ export default function HomePage() {
             marginTop: "2rem",
           }}
         >
-          <Link href="/login">
+          <Link href="/auth">
             <Button>Se connecter</Button>
           </Link>
 

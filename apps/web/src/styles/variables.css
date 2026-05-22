@@ -1,90 +1,81 @@
 :root {
-    /* ==========
-     BRAND
-  ========== */
+   /* BRAND */
 
-    --color-primary: #2bb673;
-    --color-primary-hover: #239a61;
+   --color-primary: #009B4D;
+   --color-primary-hover: #12732d;
 
-    --color-primary-light: #e9f8f1;
+   --color-accent: #f9cf15;
+   --color-accent-hover: #fbf48f;
 
-    /* ==========
-     STATUS
-  ========== */
+   /* STATUS */
 
-    --color-success: #2bb673;
+   --color-success: #009B4D;
+   --color-warning: #FFCC00;
+   --color-danger: #ef4444;
 
-    --color-warning: #f59e0b;
+   /* BACKGROUND */
 
-    --color-danger: #ef4444;
+   --color-background: #f9f5e9;
 
-    /* ==========
-     BACKGROUND
-  ========== */
+   --color-surface: #f9ecce;
+   --color-surface-hover: #f1ea8f;
 
-    --color-background: #f8faf9;
+   /* TEXT */
 
-    --color-surface: #ffffff;
+   --color-text: #202721;
+   --color-text-secondary: #023500;
+   --color-text-hover: #169d4c;
+   --color-text-muted: #626262;
 
-    --color-surface-hover: #f4f6f5;
+   /* BORDERS */
 
-    /* ==========
-     TEXT
-  ========== */
+   --color-border: #169d4c;
 
-    --color-text: #16323b;
+   /* WHITE & BLACK */
 
-    --color-text-secondary: #64748b;
+   --color-white: #fff;
+   --color-black: #000;
 
-    --color-text-muted: #94a3b8;
+   /* ==========
+       SHADOWS
+    ========== */
 
-    /* ==========
-     BORDERS
-  ========== */
+   --shadow-sm:
+      0 1px 2px rgba(0, 0, 0, 0.04);
 
-    --color-border: #e5e7eb;
+   --shadow-md:
+      0 4px 12px rgba(0, 0, 0, 0.08);
 
-    /* ==========
-     SHADOWS
-  ========== */
+   --shadow-lg:
+      0 10px 30px rgba(0, 0, 0, 0.12);
 
-    --shadow-sm:
-        0 1px 2px rgba(0, 0, 0, 0.04);
+   /* ==========
+       RADIUS
+    ========== */
 
-    --shadow-md:
-        0 4px 12px rgba(0, 0, 0, 0.08);
+   --radius-sm: 8px;
 
-    --shadow-lg:
-        0 10px 30px rgba(0, 0, 0, 0.12);
+   --radius-md: 12px;
 
-    /* ==========
-     RADIUS
-  ========== */
+   --radius-lg: 20px;
 
-    --radius-sm: 8px;
+   --radius-xl: 32px;
 
-    --radius-md: 12px;
+   /* ==========
+       SPACING
+    ========== */
 
-    --radius-lg: 20px;
+   --space-xs: 4px;
 
-    --radius-xl: 32px;
+   --space-sm: 8px;
 
-    /* ==========
-     SPACING
-  ========== */
+   --space-md: 16px;
 
-    --space-xs: 4px;
+   --space-lg: 24px;
 
-    --space-sm: 8px;
+   --space-xl: 32px;
 
-    --space-md: 16px;
+   --space-2xl: 48px;
 
-    --space-lg: 24px;
-
-    --space-xl: 32px;
-
-    --space-2xl: 48px;
-
-
-    --container-max-width: 1400px;
+   --container-max-width: 1400px;
 }
