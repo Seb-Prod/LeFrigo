@@ -1,9 +1,5 @@
 "use client";
 
-type Props = {
-  onRegister: () => Promise<void>;
-};
-
 import { useState } from "react";
 import styles from "./AuthForm.module.css";
 import { LoginForm } from "@/features/auth/components/LoginForm/LoginForm";
@@ -16,7 +12,7 @@ export function AuthForm() {
     <section className={styles.wrapper}>
       <RegisterForm onToggle={() => setisLogin(false)} active={!isLogin} />
       <div className={`${styles.formLogin} ${isLogin ? styles.active : ""}`}>
-        <LoginForm onToggle={() => setisLogin(true)} active={isLogin} />
+        <LoginForm onToggle={() => setisLogin(true)} active={isLogin}/>
       </div>
     </section>
   );
