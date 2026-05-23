@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import { authDevDefaults } from "@/lib/dev/auth.dev";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/auth.context";
-import { InputEmail, InputPassword } from "@/components/ui/Input";
+import { InputEmail, InputPassword, InputUserName } from "@/components/ui/Input";
 import Link from "next/link";
 
 type Props = {
@@ -54,8 +54,7 @@ export function RegisterForm({ onToggle, active }: Props) {
       />
 
       <form onSubmit={handleSubmit} className={styles.fields}>
-        <Input
-          type="text"
+        <InputUserName
           placeholder="Pseudo"
           required
           value={pseudo}

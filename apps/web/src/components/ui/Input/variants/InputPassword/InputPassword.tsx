@@ -19,34 +19,25 @@ type Props = Omit<React.InputHTMLAttributes<HTMLInputElement>, "type">;
 export function InputPassword({ className, ...props }: Props) {
   const [show, setShow] = useState(false);
 
+  const toggleButton = (
+    <button
+      type="button"
+      aria-label={show ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+      aria-pressed={show}
+      onClick={() => setShow((prev) => !prev)}
+      className={styles.iconRight}
+    >
+      {show ? <FiEyeOff /> : <FiEye />}
+    </button>
+  );
+
   return (
-    <div className={styles.wrapper}>
-      <FiLock
-        className={styles.iconLeft}
-        aria-hidden="true"
-      />
-
-      <Input
-        {...props}
-        type={show ? "text" : "password"}
-        className={[styles.input, className]
-          .filter(Boolean)
-          .join(" ")}
-      />
-
-      <button
-        type="button"
-        aria-label={
-          show
-            ? "Masquer le mot de passe"
-            : "Afficher le mot de passe"
-        }
-        aria-pressed={show}
-        onClick={() => setShow((prev) => !prev)}
-        className={styles.iconRight}
-      >
-        {show ? <FiEyeOff /> : <FiEye />}
-      </button>
-    </div>
+    <Input
+      {...props}
+      className={className}
+      type={show ? "text" : "password"}
+      iconLeft={<FiLock />}
+      iconRight={toggleButton}
+    />
   );
 }

@@ -1,16 +1,11 @@
 .input {
   width: 100%;
-
   padding: 12px 16px;
-
   border-radius: var(--radius-md);
-
   border: 1px solid var(--color-border);
-
   background: white;
-
   font-size: 1rem;
-
+  color: var(--color-text);
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease;
@@ -18,13 +13,41 @@
 
 .input:focus {
   outline: none;
-
   border-color: var(--color-primary);
-
-  box-shadow: 0 0 0 3px
-    rgba(107, 142, 35, 0.15);
+  box-shadow: 0 0 0 3px rgba(107, 142, 35, 0.15);
 }
 
 .input::placeholder {
   color: #9ca3af;
+}
+
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.iconLeft,
+.iconRight {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  color: var(--color-text);
+}
+
+.iconLeft {
+  left: 0.75rem;
+  pointer-events: none;
+}
+
+.iconRight {
+  right: 0.75rem;
+}
+
+.hasIconLeft {
+  padding-left: 2.25rem;
+}
+
+.hasIconRight {
+  padding-right: 2.25rem;
 }
