@@ -1,16 +1,21 @@
-.loginFields{
+.loginFields {
     display: flex;
     flex-direction: column;
     gap: 20px;
     margin-top: 40px;
 }
 
-.forgot{
+.forgot {
     margin-left: auto;
     color: var(--color-text)
 }
 
-.forgot:hover{
-    color:var(--color-text-hover);
+.forgot:hover {
+    color: var(--color-text-hover);
     text-decoration: underline;
+}
+
+.checkbox {
+    margin-left: auto;
+    margin-right: auto;
 }

@@ -1,4 +1,6 @@
-import { Button } from "@/components/ui";
+"use client"
+
+import { Button, Checkbox } from "@/components/ui";
 import styles from "./LoginForm.module.css";
 import { AuthTab } from "../AuthTab/AuthTab";
 import { useState } from "react";
@@ -10,7 +12,7 @@ import Link from "next/link";
 
 type Props = {
   onToggle: () => void;
-  active:boolean;
+  active: boolean;
 };
 
 export function LoginForm({ onToggle, active }: Props) {
@@ -19,6 +21,7 @@ export function LoginForm({ onToggle, active }: Props) {
 
   const [email, setEmail] = useState("test@test.com");
   const [password, setPassword] = useState("123456");
+  const [remember, setRemember] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -43,7 +46,12 @@ export function LoginForm({ onToggle, active }: Props) {
 
   return (
     <div>
-      <AuthTab onToggle={onToggle} activeLabel="Connectez-vous à votre compte" active={active} inactiveLabel={"Dèjà un compte ? Connectez vous"} />
+      <AuthTab
+        onToggle={onToggle}
+        activeLabel="Connectez-vous à votre compte"
+        active={active}
+        inactiveLabel={"Dèjà un compte ? Connectez vous"}
+      />
 
       <form onSubmit={handleLogin} className={styles.loginFields}>
         <InputEmail
@@ -64,6 +72,13 @@ export function LoginForm({ onToggle, active }: Props) {
         <Button variant={"secondary"} type="submit" disabled={loading}>
           {loading ? "Connexion..." : "Se connecter"}
         </Button>
+        <Checkbox
+          id="signupcheck"
+          label="Enregistrer mes identifiants"
+          className={styles.checkbox}
+          checked={remember}
+          onChange={(e) => setRemember(e.target.checked)}
+        />
         {error && <p className={styles.error}>{error}</p>}
       </form>
     </div>
