@@ -1,32 +1,97 @@
-import { Button, Input } from "@/components/ui";
+import { Alert, Button, Checkbox, Input } from "@/components/ui";
 import styles from "./RegisterForm.module.css";
 import { AuthTab } from "@/features/auth/components/AuthTab/AuthTab";
+import { useMemo, useState } from "react";
+import { authDevDefaults } from "@/lib/dev/auth.dev";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/auth.context";
+import { InputEmail, InputPassword } from "@/components/ui/Input";
+import Link from "next/link";
 
-type Props = { onToggle: () => void; active: boolean };
+type Props = {
+  /** Bascule entre le formulaire login et register */
+  onToggle: () => void;
+  /** Indique si ce formulaire est actif (affiché en avant-plan) */
+  active: boolean;
+};
 
 export function RegisterForm({ onToggle, active }: Props) {
-  const handleSubmit = async (e: React.FormEvent) => {
+  const router = useRouter();
+  // const { register } = useAuth();
+
+  const devDefaults = useMemo(() => authDevDefaults, []);
+
+  // -- État du formulaire
+  const [pseudo, setPseudo] = useState("");
+  const [email, setEmail] = useState(devDefaults.email);
+  const [password, setPassword] = useState(devDefaults.password);
+  const [confirmPassword, setConfirmPassword] = useState(devDefaults.password);
+  const [accept, setAccept] = useState(false);
+
+  // -- État UI
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
-    // logique register
+    setLoading(true);
+    setError(null);
+
+    try {
+    } catch {
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className={styles.formSignup}>
+    <div>
       <AuthTab
         onToggle={onToggle}
-        activeLabel="Créez un compte gratuitement" active={active} inactiveLabel={"Pas encore de compte ? Créez-en un."}      />
+        active={active}
+        activeLabel="Créez un compte gratuitement"
+        inactiveLabel={"Pas encore de compte ? Créez-en un."}
+      />
+
       <form onSubmit={handleSubmit} className={styles.fields}>
-        <Input type="text" placeholder="Full name" required />
-        <Input type="email" placeholder="Email address" required />
-        <Input type="password" placeholder="Password" required />
-        <Input type="password" placeholder="Confirm Password" required />
-        <div className={styles.checkbox}>
-          <input className={styles.input} type="checkbox" id="signupcheck" />
-          <label htmlFor="signupcheck">i accept all terms and conditions</label>
-        </div>
-        <Button type="submit" className={styles.btnSignup}>
-          Create account
+        <Input
+          type="text"
+          placeholder="Pseudo"
+          required
+          value={pseudo}
+          onChange={(e) => setPseudo(e.target.value)}
+        />
+        <InputEmail
+          placeholder="Adresse Email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <InputPassword
+          placeholder="Mot de passe"
+          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <InputPassword
+          placeholder="Confirmez le mot de passe"
+          required
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+        <Checkbox
+          id="signupcheck"
+          label="Accepter les conditions d'utilisation"
+          checked={accept}
+          onChange={(e) => setAccept(e.target.checked)}
+        />
+        <Link href="/terms" className={styles.terms}>
+          Voire les conditions d&apos;utilisation
+        </Link>
+        <Button variant="secondary" type="submit" disabled={loading}>
+          {loading ? "Création du compte..." : "Créer mon compte"}
         </Button>
+        {error && <Alert variant="error">{error}</Alert>}
       </form>
     </div>
   );

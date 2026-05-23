@@ -6,7 +6,7 @@ import { LoginForm } from "@/features/auth/components/LoginForm/LoginForm";
 import { RegisterForm } from "@/features/auth/components/RegisterForm/RegisterForm";
 
 export function AuthForm() {
-  const [isLogin, setisLogin] = useState(true);
+  const [isLogin, setisLogin] = useState(false);
 
   return (
     <section className={styles.wrapper}>

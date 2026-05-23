@@ -62,7 +62,7 @@ export function LoginForm({ onToggle, active }: Props) {
 
       <form onSubmit={handleLogin} className={styles.loginFields}>
         <InputEmail
-          placeholder="Email address"
+          placeholder="Adresse Email"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
