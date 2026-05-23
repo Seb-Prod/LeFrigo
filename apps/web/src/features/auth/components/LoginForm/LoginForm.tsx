@@ -10,6 +10,8 @@ import { useRouter } from "next/navigation";
 import { InputEmail, InputPassword } from "@/components/ui/Input";
 import Link from "next/link";
 import { authDevDefaults } from "@/lib/dev/auth.dev";
+import { loginSchema } from "@lefrigo/shared";
+
 
 type Props = {
   /** Bascule entre le formulaire login et signup */
@@ -39,8 +41,19 @@ export function LoginForm({ onToggle, active }: Props) {
     setLoading(true);
     setError(null);
 
+    // Validation Zod
+    const result = loginSchema.safeParse({ email, password });
+
+    if (!result.success) {
+      const message = result.error.issues[0]?.message ?? "Données invalides";
+
+      setError(message);
+      setLoading(false);
+      return;
+    }
+
     try {
-      const data = await api.login(email, password);
+      const data = await api.login(result.data.email, result.data.password);
       login(data.token);
       // TODO: implémenter la persistance de session avec `remember`
       router.push("/dashboard");
