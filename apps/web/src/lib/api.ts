@@ -13,7 +13,19 @@ export const api = {
     });
 
     if (!response.ok) {
-      throw new Error("Login failed");
+      switch (response.status) {
+        case 401:
+          throw new Error("Email ou mot de passe incorrect");
+
+        case 429:
+          throw new Error("Trop de tentatives de connexion");
+
+        case 500:
+          throw new Error("Erreur serveur");
+
+        default:
+          throw new Error("Impossible de se connecter");
+      }
     }
 
     return response.json();
