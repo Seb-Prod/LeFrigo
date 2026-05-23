@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { authService } from "./auth.service";
 import { AppError } from "apps/api/src/core/errors/AppError";
+import { loginSchema } from "@lefrigo/shared";
 
 export const authController = {
   register: async (req: Request, res: Response) => {
@@ -11,9 +12,21 @@ export const authController = {
 
   login: async (req: Request, res: Response) => {
     try {
-      const { email, password } = req.body;
-      const result = await authService.login(email, password);
-      return res.json(result);
+      const result = loginSchema.safeParse(req.body);
+
+      if (!result.success) {
+        return res.status(400).json({
+          message: "Données invalides",
+
+          errors: result.error.issues,
+        });
+      }
+
+      const { email, password } = result.data;
+
+      const auth = await authService.login(email, password);
+
+      return res.json(auth);
     } catch (error) {
       if (error instanceof AppError) {
         return res.status(error.statusCode).json({

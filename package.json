@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "build:shared": "pnpm --filter @lefrigo/shared build",
     "start": "npx tsx scripts/start.ts",
     "api:start": "npx tsx scripts/api-start.ts",
     "web:start": "npx tsx scripts/web-start.ts",

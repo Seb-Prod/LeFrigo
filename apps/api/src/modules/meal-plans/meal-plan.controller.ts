@@ -1,7 +1,8 @@
+
 import { Request, Response } from "express";
 import { mealPlanService } from "apps/api/src/modules/meal-plans/meal-plan.service";
 import { asyncHandler } from "apps/api/src/utils/asyncHandler";
-import { createMealPlanSchema } from "apps/api/src/modules/meal-plans/meal-plan.shemas";
+import { createMealPlanSchema } from "@lefrigo/shared";
 
 type CreateMealPlanBody = {
   date: string;
