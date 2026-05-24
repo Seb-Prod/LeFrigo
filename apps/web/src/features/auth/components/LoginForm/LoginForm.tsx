@@ -11,6 +11,7 @@ import { InputEmail, InputPassword } from "@/components/ui/Input";
 import Link from "next/link";
 import { authDevDefaults } from "@/lib/dev/auth.dev";
 import { loginSchema } from "@lefrigo/shared";
+import { authService } from "@/features/auth/services/auth.service";
 
 
 type Props = {
@@ -53,8 +54,8 @@ export function LoginForm({ onToggle, active }: Props) {
     }
 
     try {
-      const data = await api.login(result.data.email, result.data.password);
-      login(data.token);
+      const auth = await authService.login(result.data)
+      login(auth.token)
       // TODO: implémenter la persistance de session avec `remember`
       router.push("/dashboard");
     } catch (err) {

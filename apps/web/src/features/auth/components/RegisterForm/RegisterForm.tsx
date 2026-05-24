@@ -13,6 +13,7 @@ import {
 import Link from "next/link";
 import { registerSchema, zodErrorsToRecord } from "@lefrigo/shared";
 import { useFormErrors } from "@/hooks";
+import { authService } from "@/features/auth/services/auth.service";
 
 type Props = {
   /** Bascule entre le formulaire login et register */
@@ -47,7 +48,11 @@ export function RegisterForm({ onToggle, active }: Props) {
   /** Met à jour un champ du formulaire et efface son erreur associée. */
   const handleChange =
     (field: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      setForm((prev) => ({ ...prev, [field]: e.target.value }));
+      const value =
+        e.target.type === "checkbox" ? e.target.checked : e.target.value;
+
+      setForm((prev) => ({ ...prev, [field]: value }));
+
       clearFieldError(field);
     };
 
@@ -67,7 +72,18 @@ export function RegisterForm({ onToggle, active }: Props) {
     }
 
     try {
-    } catch {
+      const auth = await authService.register(result.data);
+
+      // TODO si tu veux : login context ici
+
+      // login(auth.token, auth.user);
+
+      router.push("/dashboard");
+    } catch (err) {
+      const message =
+        err instanceof Error ? err.message : "Une erreur est survenue";
+
+      setErrors({ form: [message] });
     } finally {
       setLoading(false);
     }
@@ -115,13 +131,7 @@ export function RegisterForm({ onToggle, active }: Props) {
           id="signupcheck"
           label="Accepter les conditions d'utilisation"
           checked={form.accept}
-          onChange={(e) => {
-            setForm((prev) => ({
-              ...prev,
-              accept: e.target.checked,
-            }));
-            clearFieldError("accept");
-          }}
+          onChange={handleChange("accept")}
         />
         <Link href="/terms" className={styles.terms}>
           Voir les conditions d&apos;utilisation
