@@ -37,9 +37,7 @@ export const loginSchema = z.object({
    * Mot de passe de l'utilisateur.
    * Minimum 6 caractères.
    */
-  password: z
-    .string()
-    .min(6, AUTH_MESSAGES.password.min),
+  password: z.string().min(6, AUTH_MESSAGES.password.min),
 });
 
 /**
@@ -75,10 +73,21 @@ export type LoginDto = z.infer<typeof loginSchema>;
 export const registerSchema = z
   .object({
     /**
+     * Pseudo de l'utilisateur
+     * @example "grogou"
+     */
+    userName: z
+      .string()
+      .min(6, AUTH_MESSAGES.userName.min)
+      .max(50, AUTH_MESSAGES.userName.tooLong),
+
+    /**
      * Adresse email de l'utilisateur.
      * @example "user@example.com"
      */
-    email: z.email(AUTH_MESSAGES.email.invalid),
+    email: z
+      .email(AUTH_MESSAGES.email.invalid)
+      .max(254, AUTH_MESSAGES.email.tooLong),
 
     /**
      * Mot de passe de l'utilisateur.
@@ -95,10 +104,21 @@ export const registerSchema = z
     password: z
       .string()
       .min(6, AUTH_MESSAGES.password.min)
-      .regex(/[A-Z]/, AUTH_MESSAGES.password.uppercase)
-      .regex(/[a-z]/, AUTH_MESSAGES.password.lowercase)
-      .regex(/[0-9]/, AUTH_MESSAGES.password.digit)
-      .regex(/[^A-Za-z0-9]/, AUTH_MESSAGES.password.special),
+      .max(128, AUTH_MESSAGES.password.tooLong)
+      .superRefine((val, ctx) => {
+        const rules = [
+          { test: /[A-Z]/, message: AUTH_MESSAGES.password.uppercase },
+          { test: /[a-z]/, message: AUTH_MESSAGES.password.lowercase },
+          { test: /[0-9]/, message: AUTH_MESSAGES.password.digit },
+          { test: /[^A-Za-z0-9]/, message: AUTH_MESSAGES.password.special },
+        ];
+
+        rules.forEach(({ test, message }) => {
+          if (!test.test(val)) {
+            ctx.addIssue({ code: z.ZodIssueCode.custom, message });
+          }
+        });
+      }),
 
     /**
      * Confirmation du mot de passe.

@@ -1,12 +1,17 @@
-import { Alert, Button, Checkbox, Input } from "@/components/ui";
+import { Alert, Button, Checkbox } from "@/components/ui";
 import styles from "./RegisterForm.module.css";
 import { AuthTab } from "@/features/auth/components/AuthTab/AuthTab";
 import { useMemo, useState } from "react";
 import { authDevDefaults } from "@/lib/dev/auth.dev";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/auth.context";
-import { InputEmail, InputPassword, InputUserName } from "@/components/ui/Input";
+import {
+  InputEmail,
+  InputPassword,
+  InputUserName,
+} from "@/components/ui/Input";
 import Link from "next/link";
+import { registerSchema, zodErrorsToRecord } from "@lefrigo/shared";
 
 type Props = {
   /** Bascule entre le formulaire login et register */
@@ -22,7 +27,7 @@ export function RegisterForm({ onToggle, active }: Props) {
   const devDefaults = useMemo(() => authDevDefaults, []);
 
   // -- État du formulaire
-  const [pseudo, setPseudo] = useState("");
+  const [userName, setUserName] = useState("");
   const [email, setEmail] = useState(devDefaults.email);
   const [password, setPassword] = useState(devDefaults.password);
   const [confirmPassword, setConfirmPassword] = useState(devDefaults.password);
@@ -30,12 +35,27 @@ export function RegisterForm({ onToggle, active }: Props) {
 
   // -- État UI
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<Record<string, string[]>>({});
 
+  // -- Soumission
   const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
     setLoading(true);
-    setError(null);
+    setErrors({});
+
+    // Validation Zod
+    const result = registerSchema.safeParse({
+      userName,
+      email,
+      password,
+      confirmPassword,
+    });
+
+    if (!result.success) {
+      setErrors(zodErrorsToRecord(result.error));
+      setLoading(false);
+      return;
+    }
 
     try {
     } catch {
@@ -57,8 +77,8 @@ export function RegisterForm({ onToggle, active }: Props) {
         <InputUserName
           placeholder="Pseudo"
           required
-          value={pseudo}
-          onChange={(e) => setPseudo(e.target.value)}
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
         />
         <InputEmail
           placeholder="Adresse Email"
@@ -85,12 +105,22 @@ export function RegisterForm({ onToggle, active }: Props) {
           onChange={(e) => setAccept(e.target.checked)}
         />
         <Link href="/terms" className={styles.terms}>
-          Voire les conditions d&apos;utilisation
+          Voir les conditions d&apos;utilisation
         </Link>
         <Button variant="secondary" type="submit" disabled={loading}>
           {loading ? "Création du compte..." : "Créer mon compte"}
         </Button>
-        {error && <Alert variant="error">{error}</Alert>}
+        {Object.keys(errors).length > 0 && (
+          <Alert variant="error">
+            <ul>
+              {Object.values(errors)
+                .flat()
+                .map((error) => (
+                  <li key={error}>{error}</li>
+                ))}
+            </ul>
+          </Alert>
+        )}
       </form>
     </div>
   );
