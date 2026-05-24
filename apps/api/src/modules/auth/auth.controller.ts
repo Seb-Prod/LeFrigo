@@ -1,13 +1,27 @@
 import { Request, Response } from "express";
+import { loginSchema, registerSchema } from "@lefrigo/shared";
+
 import { authService } from "./auth.service";
 import { AppError } from "apps/api/src/core/errors/AppError";
-import { loginSchema } from "@lefrigo/shared";
 
 export const authController = {
   register: async (req: Request, res: Response) => {
-    const { email, password } = req.body;
-    const user = await authService.register(email, password);
-    res.json(user);
+    try {
+      const result = registerSchema.safeParse(req.body);
+
+      if (!result.success) {
+        return res.status(400).json({
+          message: "Données invalides",
+          errors: result.error.issues,
+        });
+      }
+
+      const user = await authService.register(result.data.email, result.data.password);
+
+      return res.status(201).json(user);
+    } catch (error) {
+      return handleError(error, res);
+    }
   },
 
   login: async (req: Request, res: Response) => {
@@ -17,28 +31,32 @@ export const authController = {
       if (!result.success) {
         return res.status(400).json({
           message: "Données invalides",
-
           errors: result.error.issues,
         });
       }
 
-      const { email, password } = result.data;
-
-      const auth = await authService.login(email, password);
+      const auth = await authService.login(result.data.email, result.data.password);
 
       return res.json(auth);
     } catch (error) {
-      if (error instanceof AppError) {
-        return res.status(error.statusCode).json({
-          message: error.message,
-        });
-      }
-
-      console.error(error);
-
-      return res.status(500).json({
-        message: "Erreur serveur",
-      });
+      return handleError(error, res);
     }
   },
 };
+
+/**
+ * Gestion centralisée des erreurs du contrôleur.
+ */
+function handleError(error: unknown, res: Response) {
+  if (error instanceof AppError) {
+    return res.status(error.statusCode).json({
+      message: error.message,
+    });
+  }
+
+  console.error(error);
+
+  return res.status(500).json({
+    message: "Erreur serveur",
+  });
+}
