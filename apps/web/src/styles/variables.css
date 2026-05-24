@@ -1,6 +1,5 @@
 :root {
    /* BRAND */
-
    --color-primary: #009B4D;
    --color-primary-hover: #12732d;
 
@@ -8,6 +7,23 @@
    --color-accent-hover: #fbf48f;
 
    /* STATUS */
+   --color-danger-background: #fef3f2;
+   --color-danger-text: #b42318;
+   --color-danger-border: #fecdca;
+   
+   --color-success-background: #ecfdf3;
+   --color-success-text: #027a48;
+   --color-success-border: #abefc6;
+   
+   --color-warning-background: #fffaeb;
+   --color-warning-text: #b54708;
+   --color-warning-border: #fedf89;
+   
+   --color-info-background: #eff8ff;
+   --color-info-text: #175cd3;
+   --color-info-border: #b2ddff;
+
+
 
    --color-success: #009B4D;
    --color-warning: #FFCC00;

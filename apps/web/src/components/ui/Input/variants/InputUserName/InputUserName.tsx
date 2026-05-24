@@ -1,7 +1,10 @@
 import { Input } from "../../Input";
 import { FiUser } from "react-icons/fi";
 
-type Props = Omit<React.InputHTMLAttributes<HTMLInputElement>, "type">;
+type Props = Omit<
+  React.ComponentProps<typeof Input>,
+  "type"
+>;
 
 /**
  * Champ de saisie pour les pseudo avec icône user

@@ -36,6 +36,15 @@ export function RegisterForm({ onToggle, active }: Props) {
   // -- État UI
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string[]>>({});
+  const errorMessages = Object.values(errors).flat();
+
+  const clearFieldError = (field: string) => {
+    setErrors((prev) => {
+      const next = { ...prev };
+      delete next[field];
+      return next;
+    });
+  };
 
   // -- Soumission
   const handleSubmit = async (e: React.SubmitEvent) => {
@@ -77,26 +86,42 @@ export function RegisterForm({ onToggle, active }: Props) {
         <InputUserName
           placeholder="Pseudo"
           required
+          error={!!errors.userName}
           value={userName}
-          onChange={(e) => setUserName(e.target.value)}
+          onChange={(e) => {
+            setUserName(e.target.value);
+            clearFieldError("userName");
+          }}
         />
         <InputEmail
           placeholder="Adresse Email"
           required
+          error={!!errors.email}
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            clearFieldError("email");
+          }}
         />
         <InputPassword
           placeholder="Mot de passe"
           required
+          error={!!errors.password}
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => {
+            setPassword(e.target.value);
+            clearFieldError("password");
+          }}
         />
         <InputPassword
           placeholder="Confirmez le mot de passe"
+          error={!!errors.confirmPassword}
           required
           value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
+          onChange={(e) => {
+            setPassword(e.target.value);
+            clearFieldError("confirmPassword");
+          }}
         />
         <Checkbox
           id="signupcheck"
@@ -110,14 +135,12 @@ export function RegisterForm({ onToggle, active }: Props) {
         <Button variant="secondary" type="submit" disabled={loading}>
           {loading ? "Création du compte..." : "Créer mon compte"}
         </Button>
-        {Object.keys(errors).length > 0 && (
+        {errorMessages.length > 0 && (
           <Alert variant="error">
             <ul>
-              {Object.values(errors)
-                .flat()
-                .map((error) => (
-                  <li key={error}>{error}</li>
-                ))}
+              {errorMessages.map((error) => (
+                <li key={error}>{error}</li>
+              ))}
             </ul>
           </Alert>
         )}

@@ -3,7 +3,10 @@ import { Input } from "../../Input";
 import { FiLock, FiEye, FiEyeOff } from "react-icons/fi";
 import styles from "./InputPassword.module.css";
 
-type Props = Omit<React.InputHTMLAttributes<HTMLInputElement>, "type">;
+type Props = Omit<
+  React.ComponentProps<typeof Input>,
+  "type"
+>;
 
 /**
  * Champ de saisie pour les mots de passe avec icône de verrouillage

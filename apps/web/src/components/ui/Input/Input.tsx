@@ -4,6 +4,7 @@ import styles from "./Input.module.css";
 type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   iconLeft?: ReactNode;
   iconRight?: ReactNode;
+  error?: boolean;
 };
 
 /**
@@ -27,15 +28,27 @@ type Props = React.InputHTMLAttributes<HTMLInputElement> & {
  *   onChange={(e) => setValue(e.target.value)}
  * />
  */
-export function Input({ className, iconLeft, iconRight, ...props }: Props) {
+export function Input({
+  className,
+  iconLeft,
+  iconRight,
+  error,
+  ...props
+}: Props) {
   const hasIcon = iconLeft || iconRight;
 
   if (!hasIcon) {
-    return <input className={`${styles.input} ${className ?? ""}`} {...props} />;
+    return (
+      <input className={`${styles.input} ${className ?? ""}`} {...props} />
+    );
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div
+      className={[styles.wrapper, error && styles.hasError]
+        .filter(Boolean)
+        .join(" ")}
+    >
       {iconLeft && (
         <span className={styles.iconLeft} aria-hidden="true">
           {iconLeft}
