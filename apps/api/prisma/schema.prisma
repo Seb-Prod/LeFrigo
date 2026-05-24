@@ -7,23 +7,89 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// USER
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  password  String
+  id String @id @default(uuid())
+
+  email    String @unique
+  userName String @unique
+  password String
+
+  role   UserRole   @default(USER)
+  status UserStatus @default(PENDING)
+
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // EMAIL VERIFICATION
+  emailVerified      Boolean   @default(false)
+  emailVerifyToken   String?
+  emailVerifyExpires DateTime?
+
+  // PASSWORD RESET
+  resetPasswordToken   String?
+  resetPasswordExpires DateTime?
+
+  // SECURITY (BRUTE FORCE PROTECTION)
+  failedLoginAttempts Int       @default(0)
+  lockedUntil         DateTime?
+
+  // RELATIONS
+  sessions  Session[]
+  auditLogs AuditLog[]
 
   recipes   Recipe[]
   mealPlans MealPlan[]
 }
 
-model Recipe {
-  id        String   @id @default(uuid())
-  name      String
-  userId    String
+// SESSION (refresh token / auti-login)
+model Session {
+  id String @id @default(uuid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  refreshToken String @unique
+
+  userAgent String?
+  ip        String?
+
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+
+  revoked Boolean @default(false)
+
+  @@index([userId])
+}
+
+// AUDIT LOGS (sécurité / tracking admin)
+model AuditLog {
+  id String @id @default(uuid())
+
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  action   AuditAction
+  metadata Json?
+
+  ip        String?
+  userAgent String?
+
   createdAt DateTime @default(now())
 
-  user      User       @relation(fields: [userId], references: [id])
+  @@index([userId])
+}
+
+// BUSINESS MODELS
+model Recipe {
+  id   String @id @default(uuid())
+  name String
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
   mealPlans MealPlan[]
 }
 
@@ -34,15 +100,42 @@ model MealPlan {
   mealType MealType
 
   recipeId String
-  userId   String
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
+}
 
-  user   User   @relation(fields: [userId], references: [id])
-  recipe Recipe @relation(fields: [recipeId], references: [id])
+// ENUMS
+
+enum UserRole {
+  USER
+  MODERATOR
+  ADMIN
+}
+
+enum UserStatus {
+  PENDING
+  ACTIVE
+  SUSPENDED
+  BANNED
 }
 
 enum MealType {
   LUNCH
   DINNER
+}
+
+enum AuditAction {
+  LOGIN_SUCCESS
+  LOGIN_FAILED
+  REGISTER
+  LOGOUT
+  PASSWORD_RESET_REQUEST
+  PASSWORD_RESET_SUCCESS
+  EMAIL_VERIFIED
+  USER_BANNED
+  USER_SUSPENDED
 }
