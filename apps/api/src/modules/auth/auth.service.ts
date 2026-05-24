@@ -10,7 +10,7 @@ export const authService = {
     const existing = await userRepository.findByEmail(email);
 
     if (existing) {
-      throw new Error("User already exists");
+      throw new AppError(409, "User already exists");
     }
 
     const hashed = await bcrypt.hash(password, 10);
