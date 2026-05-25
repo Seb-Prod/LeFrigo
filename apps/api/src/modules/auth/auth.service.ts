@@ -1,16 +1,11 @@
 import bcrypt from "bcrypt";
 import crypto from "crypto";
-import jwt from "jsonwebtoken";
 import { userRepository } from "../users/user.repository";
 import { AppError } from "../../core/errors/AppError";
 import { toSafeUser } from "../users/user.types";
-import {
-  generateRefreshToken,
-  hashToken,
-} from "apps/api/src/modules/auth/auth.utils";
-import { sessionRepository } from "apps/api/src/modules/sessions/session.repository";
-
-const JWT_SECRET = process.env.JWT_SECRET || "dev_secret";
+import { generateRefreshToken, hashToken } from "../auth/auth.utils";
+import { sessionRepository } from "../sessions/session.repository";
+import { jwtService } from "../../core/auth/jwt.service";
 
 export const authService = {
   /**
@@ -131,15 +126,7 @@ export const authService = {
     await userRepository.resetLoginAttempts(user.id);
 
     // Access token (court)
-    const accessToken = jwt.sign(
-      {
-        userId: user.id,
-      },
-      JWT_SECRET,
-      {
-        expiresIn: "15m",
-      },
-    );
+    const accessToken = jwtService.generateAccessToken(user.id);
 
     // Refresh Token (long)
     const refreshToken = generateRefreshToken();
@@ -194,15 +181,7 @@ export const authService = {
     });
 
     // Nouvel acces token
-    const accessToken = jwt.sign(
-      {
-        userId: session.userId,
-      },
-      JWT_SECRET,
-      {
-        expiresIn: "15m",
-      },
-    );
+    const accessToken = jwtService.generateAccessToken(session.userId);
 
     return {
       accessToken,
@@ -226,5 +205,14 @@ export const authService = {
     return {
       message: "Déconnexion réussie",
     };
+  },
+
+  me: async (userId: string) => {
+    const user = await userRepository.findById(userId);
+
+    if (!user) {
+      throw new AppError(404, "utilisateur introuvable");
+    }
+    return toSafeUser(user);
   },
 };

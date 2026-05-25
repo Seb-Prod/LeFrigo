@@ -105,6 +105,21 @@ export const authController = {
       return handleError(error, res);
     }
   },
+
+  me: async (req: Request, res: Response) => {
+    try {
+      if (!req.user) {
+        return res.status(401).json({
+          message: "Non authentifié",
+        });
+      }
+
+      const user = await authService.me(req.user.id);
+      return res.json(user);
+    } catch (error) {
+      return handleError(error, res);
+    }
+  },
 };
 
 /**
