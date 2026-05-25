@@ -16,7 +16,13 @@ export const authController = {
         });
       }
 
-      const user = await authService.register(result.data.email, result.data.password);
+      const { userName, email, password} = result.data;
+
+      const user = await authService.register(
+        userName,
+        email,
+        password,
+      );
 
       return res.status(201).json(user);
     } catch (error) {
@@ -35,7 +41,10 @@ export const authController = {
         });
       }
 
-      const auth = await authService.login(result.data.email, result.data.password);
+      const auth = await authService.login(
+        result.data.email,
+        result.data.password,
+      );
 
       return res.json(auth);
     } catch (error) {

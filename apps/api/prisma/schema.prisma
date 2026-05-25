@@ -15,11 +15,14 @@ model User {
   userName String @unique
   password String
 
+  emailLower String @unique
+
   role   UserRole   @default(USER)
   status UserStatus @default(PENDING)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 
   // EMAIL VERIFICATION
   emailVerified      Boolean   @default(false)
@@ -40,6 +43,10 @@ model User {
 
   recipes   Recipe[]
   mealPlans MealPlan[]
+
+  @@index([email])
+  @@index([userName])
+  @@index([status])
 }
 
 // SESSION (refresh token / auti-login)
@@ -49,7 +56,7 @@ model Session {
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  refreshToken String @unique
+  refreshTokenHash String @unique
 
   userAgent String?
   ip        String?

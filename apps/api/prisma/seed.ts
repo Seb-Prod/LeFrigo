@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 const prisma = new PrismaClient();
 
 async function main() {
-  const email = "admin@lefrigo.dev";
+  const email = "admin@lefrigo.Dev";
 
   const existing = await prisma.user.findUnique({
     where: { email },
@@ -23,6 +23,7 @@ async function main() {
       password: hashedPassword,
       userName: "admin",
       createdAt: new Date(),
+      emailLower: email.toLocaleLowerCase()
     },
   });
 
