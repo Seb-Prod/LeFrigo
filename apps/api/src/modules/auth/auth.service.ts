@@ -215,4 +215,44 @@ export const authService = {
     }
     return toSafeUser(user);
   },
+
+  forgotPassword: async (email: string) => {
+    const user = await userRepository.findByEmail(email);
+
+    // Anti-enumération
+    if (!user) {
+      return {
+        message: "Si le compte existe, un email a été envoyé",
+      };
+    }
+
+    const token = crypto.randomBytes(32).toString("hex");
+
+    const expiresAt = new Date(Date.now() + 60 * 60 * 1000);
+
+    await userRepository.setResetPasswordToken(user.id, token, expiresAt);
+
+    return {
+      message: "Si ce compte existe, un email a été envoyé",
+      token,
+    };
+  },
+
+  resetPassword: async (token: string, newPassword: string) => {
+    const user = await userRepository.findByResetPasswordToken(token);
+
+    if (!user) {
+      throw new AppError(400, "Token invalide");
+    }
+
+    if (!user.resetPasswordExpires || user.resetPasswordExpires < new Date()) {
+      throw new AppError(400, "tokeb expiré");
+    }
+
+    const hashed = await bcrypt.hash(newPassword, 10);
+
+    await userRepository.updatePassword(user.id, hashed);
+
+    return { message: "Mot de passe réinitialisé" };
+  },
 };

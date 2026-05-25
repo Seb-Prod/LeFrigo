@@ -64,4 +64,38 @@ export const userRepository = {
     }),
 
   create: (data: CreateUserData) => prisma.user.create({ data }),
+
+  findByResetPasswordToken: (token: string) =>
+    prisma.user.findFirst({
+      where: {
+        resetPasswordToken: token,
+      },
+    }),
+
+  setResetPasswordToken: (userId: string, token: string, expiresAt: Date) =>
+    prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        resetPasswordToken: token,
+        resetPasswordExpires: expiresAt,
+      },
+    }),
+
+  updatePassword: (userId: string, password: string) =>
+    prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        password,
+
+        resetPasswordToken: null,
+        resetPasswordExpires: null,
+
+        failedLoginAttempts: 0,
+        lockedUntil: null,
+      },
+    }),
 };

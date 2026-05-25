@@ -120,6 +120,30 @@ export const authController = {
       return handleError(error, res);
     }
   },
+
+  forgotPassword: async (req: Request, res: Response) => {
+    try {
+      const { email } = req.body;
+
+      const result = await authService.forgotPassword(email);
+
+      return res.json(result);
+    } catch (error) {
+      return handleError(error, res);
+    }
+  },
+
+  resetPassword: async (req: Request, res: Response) => {
+    try {
+      const { token, password } = req.body;
+
+      const result = await authService.resetPassword(token, password);
+
+      return res.json(result);
+    } catch (error) {
+      return handleError(error, res);
+    }
+  },
 };
 
 /**

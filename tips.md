@@ -37,3 +37,9 @@ curl -X POST http://localhost:4000/auth/logout -H "Content-Type: application/jso
 ```bash
 curl http://localhost:4000/auth/me -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNjgxMjJiZC1lMjMzLTQzNzItOTcxYi03MmY3ZTAzMGUyNzUiLCJpYXQiOjE3Nzk3MjE4OTUsImV4cCI6MTc3OTcyMjc5NX0.lOy75QIEJy94OmBYE70XqVpaSFxF8pba4LN7lX7EFbw"
 ``` 
+
+
+curl -X POST http://localhost:4000/auth/forgot-password -H "Content-Type: application/json" -d '{"email":"sebastien@test.fr"}'
+
+
+curl -X POST http://localhost:4000/auth/reset-password -H "Content-Type: application/json" -d '{"token":"a215d3f4eff3f3627589f139f972f6a3b0811e74f5815ba58b25bebca3b345cc","password":"NewPassword123!"}'
