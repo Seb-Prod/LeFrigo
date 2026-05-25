@@ -4,6 +4,11 @@ import jwt from "jsonwebtoken";
 import { userRepository } from "../users/user.repository";
 import { AppError } from "../../core/errors/AppError";
 import { toSafeUser } from "../users/user.types";
+import {
+  generateRefreshToken,
+  hashToken,
+} from "apps/api/src/modules/auth/auth.utils";
+import { sessionRepository } from "apps/api/src/modules/sessions/session.repository";
 
 const JWT_SECRET = process.env.JWT_SECRET || "dev_secret";
 
@@ -83,7 +88,7 @@ export const authService = {
     return { message: "Adresse email validée" };
   },
 
-  login: async (email: string, password: string) => {
+  login: async (email: string, password: string, rememberMe = false) => {
     const user = await userRepository.findByEmail(email);
 
     if (!user) {
@@ -116,12 +121,28 @@ export const authService = {
       throw new AppError(401, "Email ou mot de passe incorrect");
     }
 
+    // Reset secutité
     await userRepository.resetLoginAttempts(user.id);
 
-    const token = jwt.sign({ userId: user.id }, JWT_SECRET, {
-      expiresIn: "7d",
+    // Access token (court)
+    const accessToken = jwt.sign({ user: user.id }, JWT_SECRET, {
+      expiresIn: "15m",
     });
 
-    return { token };
+    // Refresh Token (long)
+    const refreshToken = generateRefreshToken();
+    const refreshTokenHash = hashToken(refreshToken);
+
+    const expiresAt = new Date(
+      Date.now() + (rememberMe ? 30 * 24 * 60 * 1000 : 1 * 24 * 60 * 60 * 1000),
+    );
+
+    await sessionRepository.create({
+      userId: user.id,
+      refreshTokenHash,
+      expiresAt,
+    });
+
+    return { accessToken, refreshToken, user: toSafeUser(user) };
   },
 };
