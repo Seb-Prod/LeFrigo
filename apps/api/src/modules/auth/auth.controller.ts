@@ -58,6 +58,10 @@ export const authController = {
       const auth = await authService.login(
         result.data.email,
         result.data.password,
+        result.data.rememberMe,
+
+        req.headers["user-agent"],
+        req.ip,
       );
 
       return res.json(auth);

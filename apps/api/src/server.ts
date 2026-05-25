@@ -9,7 +9,7 @@ import { AppError } from "./core/errors/AppError";
 import mealPlanRoutes from "apps/api/src/modules/meal-plans/meal-plan.routes";
 
 const app = express();
-
+app.set("trust proxy", true);
 app.use(cors());
 app.use(express.json());
 

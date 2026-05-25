@@ -6,13 +6,13 @@
 import { z } from "zod";
 import { AUTH_MESSAGES } from "./messages";
 
-
 /**
  * Schéma de validation du formulaire de connexion.
  */
 export const loginSchema = z.object({
   email: z.email(AUTH_MESSAGES.email.invalid),
   password: z.string().min(6, AUTH_MESSAGES.password.min),
+  rememberMe: z.boolean().optional().default(false),
 });
 
 /**
@@ -21,9 +21,9 @@ export const loginSchema = z.object({
  * @typedef {Object} LoginDto
  * @property {string} email    - Adresse email valide.
  * @property {string} password - Mot de passe (min. 6 caractères).
+ * @property {boolean} rememberMe - 
  */
 export type LoginDto = z.infer<typeof loginSchema>;
-
 
 /**
  * Schéma de validation du formulaire d'inscription.
@@ -34,7 +34,6 @@ export const registerSchema = z
       .string()
       .min(6, AUTH_MESSAGES.userName.min)
       .max(50, AUTH_MESSAGES.userName.tooLong),
-
 
     email: z
       .email(AUTH_MESSAGES.email.invalid)
@@ -61,7 +60,7 @@ export const registerSchema = z
 
     confirmPassword: z.string(),
 
-    accept: z.literal(true , AUTH_MESSAGES.accept),
+    accept: z.literal(true, AUTH_MESSAGES.accept),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: AUTH_MESSAGES.confirmPassword.mismatch,

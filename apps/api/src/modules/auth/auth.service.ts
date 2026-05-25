@@ -88,7 +88,13 @@ export const authService = {
     return { message: "Adresse email validée" };
   },
 
-  login: async (email: string, password: string, rememberMe = false) => {
+  login: async (
+    email: string,
+    password: string,
+    rememberMe: boolean,
+    userAgent?: string,
+    ip?: string,
+  ) => {
     const user = await userRepository.findByEmail(email);
 
     if (!user) {
@@ -148,6 +154,8 @@ export const authService = {
       userId: user.id,
       refreshTokenHash,
       expiresAt,
+      userAgent,
+      ip,
     });
 
     return { accessToken, refreshToken, user: toSafeUser(user) };
