@@ -45,6 +45,22 @@ export const authService = {
     return toSafeUser(user);
   },
 
+  verifyEmail: async (token: string) => {
+    const user = await userRepository.findByEmailVerifyToken(token);
+
+    if (!user) {
+      throw new AppError(400, "Token de validation invalide");
+    }
+
+    if (!user.emailVerifyExpires || user.emailVerifyExpires < new Date()) {
+      throw new AppError(400, "Token expiré");
+    }
+
+    await userRepository.verifyMail(user.id);
+
+    return { message: "Adresse email validée" };
+  },
+
   login: async (email: string, password: string) => {
     const user = await userRepository.findByEmail(email);
 

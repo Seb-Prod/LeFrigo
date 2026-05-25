@@ -16,15 +16,29 @@ export const authController = {
         });
       }
 
-      const { userName, email, password} = result.data;
+      const { userName, email, password } = result.data;
 
-      const user = await authService.register(
-        userName,
-        email,
-        password,
-      );
+      const user = await authService.register(userName, email, password);
 
       return res.status(201).json(user);
+    } catch (error) {
+      return handleError(error, res);
+    }
+  },
+
+  verifyEmail: async (req: Request, res: Response) => {
+    try {
+      const token = req.query.token;
+
+      if (typeof token !== "string" || !token.trim()) {
+        return res.status(400).json({
+          message: "Token manquant",
+        });
+      }
+
+      const result = await authService.verifyEmail(token);
+
+      return res.json(result);
     } catch (error) {
       return handleError(error, res);
     }
