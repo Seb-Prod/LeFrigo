@@ -17,7 +17,35 @@ export const userRepository = {
   findByUserName: (userName: string) =>
     prisma.user.findUnique({ where: { userName } }),
 
-  verifyMail: (userId: string) =>
+  incrementFailedLogin: (userId: string) =>
+    prisma.user.update({
+      where: { id: userId },
+      data: {
+        failedLoginAttempts: {
+          increment: 1,
+        },
+      },
+    }),
+
+  lockUser: (userId: string) =>
+    prisma.user.update({
+      where: { id: userId },
+      data: {
+        lockedUntil: new Date(Date.now() + 15 * 60 * 1000),
+        failedLoginAttempts: 0,
+      },
+    }),
+
+  resetLoginAttempts: (userId: string) =>
+    prisma.user.update({
+      where: { id: userId },
+      data: {
+        failedLoginAttempts: 0,
+        lockedUntil: null,
+      },
+    }),
+
+  verifyEmail: (userId: string) =>
     prisma.user.update({
       where: {
         id: userId,
