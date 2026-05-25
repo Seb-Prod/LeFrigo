@@ -125,16 +125,23 @@ export const authService = {
     await userRepository.resetLoginAttempts(user.id);
 
     // Access token (court)
-    const accessToken = jwt.sign({ user: user.id }, JWT_SECRET, {
-      expiresIn: "15m",
-    });
+    const accessToken = jwt.sign(
+      {
+        userId: user.id,
+      },
+      JWT_SECRET,
+      {
+        expiresIn: "15m",
+      },
+    );
 
     // Refresh Token (long)
     const refreshToken = generateRefreshToken();
     const refreshTokenHash = hashToken(refreshToken);
 
     const expiresAt = new Date(
-      Date.now() + (rememberMe ? 30 * 24 * 60 * 1000 : 1 * 24 * 60 * 60 * 1000),
+      Date.now() +
+        (rememberMe ? 30 * 24 * 60 * 60 * 1000 : 1 * 24 * 60 * 60 * 1000),
     );
 
     await sessionRepository.create({
@@ -144,5 +151,36 @@ export const authService = {
     });
 
     return { accessToken, refreshToken, user: toSafeUser(user) };
+  },
+
+  refresh: async (refreshToken: string) => {
+    const refreshTokenHash = hashToken(refreshToken);
+
+    const session = await sessionRepository.findValidSession(refreshTokenHash);
+
+    if (!session) {
+      throw new AppError(401, "Session invalide ou expirée");
+    }
+
+    if (session.user.status !== "ACTIVE") {
+      throw new AppError(403, "compte inactif");
+    }
+
+    if (!session.user.emailVerified) {
+      throw new AppError(403, "Compte non vérifié");
+    }
+
+    const accessToken = jwt.sign(
+      {
+        userId: session.userId,
+      },
+      JWT_SECRET,
+      {
+        expiresIn: "15m",
+      },
+    );
+    return {
+      accessToken,
+    };
   },
 };

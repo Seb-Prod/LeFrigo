@@ -7,11 +7,10 @@ export const sessionRepository = {
     userAgent?: string;
     ip?: string;
     expiresAt: Date;
-  }) => {
+  }) =>
     prisma.session.create({
       data,
-    });
-  },
+    }),
 
   findByTokenHash: (refreshTokenHash: string) =>
     prisma.session.findFirst({
@@ -31,5 +30,19 @@ export const sessionRepository = {
     prisma.session.updateMany({
       where: { userId },
       data: { revoked: true },
+    }),
+
+  findValidSession: (refreshTokenHash: string) =>
+    prisma.session.findFirst({
+      where: {
+        refreshTokenHash,
+        revoked: false,
+        expiresAt: {
+          gt: new Date(),
+        },
+      },
+      include: {
+        user: true,
+      },
     }),
 };
