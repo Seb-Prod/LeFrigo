@@ -170,14 +170,30 @@ export const authService = {
       throw new AppError(401, "Session invalide ou expirée");
     }
 
-    if (session.user.status !== "ACTIVE") {
-      throw new AppError(403, "compte inactif");
-    }
-
     if (!session.user.emailVerified) {
       throw new AppError(403, "Compte non vérifié");
     }
 
+    if (session.user.status !== "ACTIVE") {
+      throw new AppError(403, "compte inactif");
+    }
+
+    // Révocation de l'ancien refresh token
+    await sessionRepository.revoke(session.id);
+
+    // Nouveau refresh token
+    const newRefreshToken = generateRefreshToken();
+
+    const newRefreshTokenHash = hashToken(newRefreshToken);
+
+    // Nouvelle session
+    await sessionRepository.create({
+      userId: session.userId,
+      refreshTokenHash: newRefreshTokenHash,
+      expiresAt: session.expiresAt,
+    });
+
+    // Nouvel acces token
     const accessToken = jwt.sign(
       {
         userId: session.userId,
@@ -187,8 +203,10 @@ export const authService = {
         expiresIn: "15m",
       },
     );
+
     return {
       accessToken,
+      refreshToken: newRefreshToken,
     };
   },
 };
