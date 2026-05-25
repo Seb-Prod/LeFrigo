@@ -87,6 +87,24 @@ export const authController = {
       return handleError(error, res);
     }
   },
+
+  logout: async (req: Request, res: Response) => {
+    try {
+      const { refreshToken } = req.body;
+
+      if (!refreshToken) {
+        return res.status(400).json({
+          message: "Refresh token manquant",
+        });
+      }
+
+      const result = await authService.logout(refreshToken);
+
+      return res.json(result);
+    } catch (error) {
+      return handleError(error, res);
+    }
+  },
 };
 
 /**

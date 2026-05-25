@@ -27,8 +27,11 @@ curl -X POST http://localhost:4000/auth/login -H "Content-Type: application/json
 
 ## refresh
 ```bash
-curl -X POST http://localhost:4000/auth/refresh -H "Content-Type: application/json" -d '{"refreshToken":"61bdbf7f6efa96c0482fbe658f2905bec54b4d4451dd0625d1181e09efde83c04e5559f96eab42a6fd776120ddb538505a893d822f8d6b37a46fa88267357f16"}'
+curl -X POST http://localhost:4000/auth/refresh -H "Content-Type: application/json" -d '{"refreshToken":"0efd3be85198506b1d4c6754425e38b77ed3489c16b093dc9505e0b9038f1c9e68c8e3c9a32584d722ef509f38bd0191f65bf9cff1d2ac6ca95add81c3aa6665"}'
 ```
-
+## logout
+```bash
+curl -X POST http://localhost:4000/auth/logout -H "Content-Type: application/json" -d '{"refreshToken":"0efd3be85198506b1d4c6754425e38b77ed3489c16b093dc9505e0b9038f1c9e68c8e3c9a32584d722ef509f38bd0191f65bf9cff1d2ac6ca95add81c3aa6665"}'
+```
 
 curl -X POST http://localhost:4000/auth/refresh -H "Content-Type: application/json" -d '{"refreshToken":"f25273a31f4d49381ee07825e19261b1c535bb33fdff39f2655b497639572e6644ad334d608fed783ba7e52afb8f0143d9e942e13d740aaa336647774ecad821"}'

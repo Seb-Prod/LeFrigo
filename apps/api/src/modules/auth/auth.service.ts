@@ -209,4 +209,22 @@ export const authService = {
       refreshToken: newRefreshToken,
     };
   },
+
+  logout: async (refreshToken: string) => {
+    const refreshTokenHash = hashToken(refreshToken);
+
+    const session = await sessionRepository.findValidSession(refreshTokenHash);
+
+    if (!session) {
+      return {
+        message: "déjà déconnecté",
+      };
+    }
+
+    await sessionRepository.revoke(session.id);
+
+    return {
+      message: "Déconnexion réussie",
+    };
+  },
 };
