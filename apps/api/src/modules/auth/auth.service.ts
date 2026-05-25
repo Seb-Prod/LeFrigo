@@ -253,6 +253,8 @@ export const authService = {
 
     await userRepository.updatePassword(user.id, hashed);
 
+    await sessionRepository.revokeAllUserSessions(user.id);
+
     return { message: "Mot de passe réinitialisé" };
   },
 };

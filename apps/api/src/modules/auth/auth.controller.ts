@@ -3,6 +3,10 @@ import { loginSchema, registerSchema } from "@lefrigo/shared";
 
 import { authService } from "./auth.service";
 import { AppError } from "apps/api/src/core/errors/AppError";
+import {
+  forgotPasswordSchema,
+  resetPasswordShema,
+} from "packages/shared/dist/schemas/auth.schemas";
 
 export const authController = {
   register: async (req: Request, res: Response) => {
@@ -123,11 +127,18 @@ export const authController = {
 
   forgotPassword: async (req: Request, res: Response) => {
     try {
-      const { email } = req.body;
+      const result = forgotPasswordSchema.safeParse(req.body);
 
-      const result = await authService.forgotPassword(email);
+      if (!result.success) {
+        return res.status(400).json({
+          message: "Données invalides",
+          errors: result.error.issues,
+        });
+      }
 
-      return res.json(result);
+      const response = await authService.forgotPassword(result.data.email);
+
+      return res.json(response);
     } catch (error) {
       return handleError(error, res);
     }
@@ -135,11 +146,21 @@ export const authController = {
 
   resetPassword: async (req: Request, res: Response) => {
     try {
-      const { token, password } = req.body;
+      const result = resetPasswordShema.safeParse(req.body);
 
-      const result = await authService.resetPassword(token, password);
+      if (!result.success) {
+        return res.status(400).json({
+          messages: "Données invalide",
+          errors: result.error.issues,
+        });
+      }
 
-      return res.json(result);
+      const response = await authService.resetPassword(
+        result.data.token,
+        result.data.password,
+      );
+
+      return res.json(response);
     } catch (error) {
       return handleError(error, res);
     }
