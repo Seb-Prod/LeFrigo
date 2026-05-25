@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { authMiddleware } from "../../middlewares/auth.middleware";
+import { authMiddleware } from "../../core/auth/auth.middleware";
 
 import { mealPlanController } from "./meal-plan.controller";
 
