@@ -7,6 +7,7 @@ import { Router } from "express";
 import { authController } from "./auth.controller";
 import { authMiddleware } from "../../core/auth/auth.middleware";
 import { mailService } from "../mail/mail.service";
+import { toSafeUser } from "../users/user.types";
 
 const router = Router();
 
@@ -34,22 +35,5 @@ router.post("/forgot-password", authController.forgotPassword);
 /** Réinitialisation du mot de passe via un token. */
 router.post("/reset-password", authController.resetPassword);
 
-router.get(
-  "/test-mail",
-
-  async (_, res) => {
-    await mailService.send({
-      to: "test@test.com",
-
-      subject: "Test",
-
-      html: "<h1>Hello LeFrigo</h1>",
-    });
-
-    res.json({
-      message: "Email envoyé",
-    });
-  },
-);
 
 export default router;

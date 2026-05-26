@@ -1,12 +1,7 @@
 export type AuthResponse = {
   accessToken: string;
   refreshToken: string;
-  user: {
-    id: string;
-    email: string;
-    userName: string;
-    role: string;
-  };
+  user: SafeUser;
 };
 
 export type SafeUser = {

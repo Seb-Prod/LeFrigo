@@ -4,25 +4,27 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/auth.context";
 
-export default function ProtectedRoute({
+export default function AuthenticatedGuard({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const { accessToken, loading } = useAuth();
   const router = useRouter();
-  const { token, loading } = useAuth();
 
   useEffect(() => {
-    if (!loading && !token) {
+    if (!loading && !accessToken) {
       router.replace("/");
     }
-  }, [loading, token, router]);
+  }, [accessToken, loading, router]);
 
   if (loading) {
-    return <div>Chargement...</div>;
+    return <p>Chargement...</p>;
   }
 
-  
+  if (!accessToken) {
+    return null;
+  }
 
   return <>{children}</>;
 }
