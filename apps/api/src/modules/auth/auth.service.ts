@@ -6,6 +6,7 @@ import { toSafeUser } from "../users/user.types";
 import { generateRefreshToken, hashToken } from "../auth/auth.utils";
 import { sessionRepository } from "../sessions/session.repository";
 import { jwtService } from "../../core/auth/jwt.service";
+import { mailService } from "../mail/mail.service";
 
 export const authService = {
   /**
@@ -52,6 +53,8 @@ export const authService = {
       emailVerifyToken,
       emailVerifyExpires,
     });
+
+    await mailService.sendVerificationEmail(user.email, emailVerifyToken);
 
     return toSafeUser(user);
   },
@@ -232,9 +235,10 @@ export const authService = {
 
     await userRepository.setResetPasswordToken(user.id, token, expiresAt);
 
+    await mailService.sendResetPasswordEmail(user.email, token);
+
     return {
-      message: "Si ce compte existe, un email a été envoyé",
-      token,
+      message: "Si ce compte existe, un email a été envoyé"
     };
   },
 

@@ -43,3 +43,12 @@ curl -X POST http://localhost:4000/auth/forgot-password -H "Content-Type: applic
 
 
 curl -X POST http://localhost:4000/auth/reset-password -H "Content-Type: application/json" -d '{"token":"a215d3f4eff3f3627589f139f972f6a3b0811e74f5815ba58b25bebca3b345cc","password":"NewPassword123!"}'
+
+
+curl "http://localhost:4000/auth/verify-email?token=1b2c538dfa5a3bbacaaabb3d6b2c8d4d00ddcff38100bff21d6c61479f43dcbb%22"
+
+
+curl -X POST http://localhost:4000/auth/forgot-password -H "Content-Type: application/json" -d '{"email":"noah@test.com"}'
+
+
+curl -X POST http://localhost:4000/auth/reset-password -H "Content-Type: application/json" -d '{"token":"e50ecb6e240daa126743a125891dff27fb9c78be4957dd1f131757815f55fddb","password":"NewPassword123!","confirmPassword":"NewPassword123!"}'
