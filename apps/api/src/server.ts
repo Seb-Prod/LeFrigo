@@ -13,6 +13,8 @@ app.set("trust proxy", true);
 app.use(cors());
 app.use(express.json());
 
+
+
 // Healthcheck
 app.get("/health", (_, res) => {
   res.json({ status: "ok", service: "lefrigo-api" });
@@ -28,6 +30,8 @@ app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/recipes", recipeRoutes);
 app.use("/meal-plans", mealPlanRoutes);
+
+
 
 // Error middleware — toujours en dernier
 app.use(errorMiddleware);
