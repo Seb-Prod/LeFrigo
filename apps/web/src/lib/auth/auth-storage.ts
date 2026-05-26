@@ -14,7 +14,7 @@ export const authStorage = {
   },
 
   getRefreshToken() {
-    localStorage.getItem(REFRESH_TOKEN_KEY);
+    return localStorage.getItem(REFRESH_TOKEN_KEY);
   },
 
   setRefreshToken(token: string) {
