@@ -4,7 +4,6 @@ import { Alert, Button, Checkbox } from "@/components/ui";
 import styles from "./LoginForm.module.css";
 import { AuthTab } from "../AuthTab/AuthTab";
 import { useMemo, useState } from "react";
-import { api } from "@/lib/api";
 import { useAuth } from "@/contexts/auth.context";
 import { useRouter } from "next/navigation";
 import { InputEmail, InputPassword } from "@/components/ui/Input";
@@ -55,7 +54,7 @@ export function LoginForm({ onToggle, active }: Props) {
 
     try {
       const auth = await authService.login(result.data)
-      login(auth.token)
+      login(auth)
       // TODO: implémenter la persistance de session avec `remember`
       router.push("/dashboard");
     } catch (err) {

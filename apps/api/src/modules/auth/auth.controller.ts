@@ -1,12 +1,9 @@
 import { Request, Response } from "express";
-import { loginSchema, registerSchema } from "@lefrigo/shared";
+import { forgotPasswordSchema, loginSchema, registerSchema, resetPasswordShema } from "@lefrigo/shared";
 
 import { authService } from "./auth.service";
 import { AppError } from "apps/api/src/core/errors/AppError";
-import {
-  forgotPasswordSchema,
-  resetPasswordShema,
-} from "packages/shared/dist/schemas/auth.schemas";
+
 
 export const authController = {
   register: async (req: Request, res: Response) => {

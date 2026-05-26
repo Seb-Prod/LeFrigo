@@ -1,43 +1,74 @@
 "use client";
 
+import { SafeUser } from "@lefrigo/shared";
 import { createContext, useContext, useEffect, useState } from "react";
 
 type AuthContextType = {
-  token: string | null;
+  user: SafeUser | null;
+  accessToken: string | null;
   loading: boolean;
-  login: (token: string) => void;
+
+  login: (data: {
+    accessToken: string;
+    refreshToken: string;
+    user: SafeUser;
+  }) => void;
+
   logout: () => void;
+
+  // setSession: (accessToken: string, user: any) => void;
 };
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [token, setToken] = useState<string | null>(null);
+  const [user, setUser] = useState<any | null>(null);
+  const [accessToken, setAccessToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
+  // Bootstrap session au reload
+
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setToken(localStorage.getItem("token"));
+    const storedAccessToken = localStorage.getItem("accessToken");
+    const storedUser = localStorage.getItem("user");
+
+    if (storedAccessToken && storedUser) {
+      setAccessToken(storedAccessToken);
+      setUser(JSON.parse(storedUser));
+    }
     setLoading(false);
   }, []);
 
-  const login = (newToken: string) => {
-    localStorage.setItem("token", newToken);
-    setToken(newToken);
+  const login = (data: {
+    accessToken: string;
+    refreshToken: string;
+    user: SafeUser;
+  }) => {
+    localStorage.setItem("accessToken", data.accessToken);
+    localStorage.setItem("refreshToken", data.refreshToken);
+    localStorage.setItem("user", JSON.stringify(data.user));
+
+    setAccessToken(data.accessToken);
+    setUser(data.user);
   };
 
   const logout = () => {
-    localStorage.removeItem("token");
-    setToken(null);
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("user");
+
+    setAccessToken(null);
+    setUser(null);
   };
 
   return (
     <AuthContext.Provider
       value={{
-        token: token,
-        loading: loading,
+        user,
+        accessToken,
+        loading,
         login,
-        logout,
+        logout
       }}
     >
       {children}

@@ -1,10 +1,9 @@
 import { Alert, Button, Checkbox } from "@/components/ui";
 import styles from "./RegisterForm.module.css";
 import { AuthTab } from "@/features/auth/components/AuthTab/AuthTab";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { authDevDefaults } from "@/lib/dev/auth.dev";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/contexts/auth.context";
 import {
   InputEmail,
   InputPassword,
