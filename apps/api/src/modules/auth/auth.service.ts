@@ -176,11 +176,13 @@ export const authService = {
 
     const newRefreshTokenHash = hashToken(newRefreshToken);
 
+    const newExpiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+
     // Nouvelle session
     await sessionRepository.create({
       userId: session.userId,
       refreshTokenHash: newRefreshTokenHash,
-      expiresAt: session.expiresAt,
+      expiresAt: newExpiresAt,
     });
 
     // Nouvel acces token
@@ -238,7 +240,7 @@ export const authService = {
     await mailService.sendResetPasswordEmail(user.email, token);
 
     return {
-      message: "Si ce compte existe, un email a été envoyé"
+      message: "Si ce compte existe, un email a été envoyé",
     };
   },
 

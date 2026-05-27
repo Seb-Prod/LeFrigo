@@ -41,7 +41,7 @@ export async function request<T>(
   retry = false,
 ): Promise<T> {
   const token = await getToken();
-
+  console.log("TOKEN USED:", token);
   const headers = new Headers(options.headers);
   headers.set("Content-Type", "application/json");
 
@@ -68,7 +68,7 @@ export async function request<T>(
       console.log("🔥 401 → refresh triggered");
 
       const newToken = await refreshTokenOnce();
-
+      console.log("NEW TOKEN:", newToken);
       console.log("🔄 new token received");
 
       const retryHeaders = new Headers(options.headers);
