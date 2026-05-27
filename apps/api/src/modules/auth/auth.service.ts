@@ -147,6 +147,8 @@ export const authService = {
       expiresAt,
       userAgent,
       ip,
+      rememberMe,
+      lastActivityAt: new Date(),
     });
 
     return { accessToken, refreshToken, user: toSafeUser(user) };
@@ -184,11 +186,22 @@ export const authService = {
 
       const newRefreshToken = generateRefreshToken();
 
+      const duration = session.rememberMe
+        ? 30 * 24 * 60 * 60 * 1000
+        : 24 * 60 * 60 * 1000;
+
+      const newExpiresAt = new Date(Date.now() + duration);
+
       await tx.session.create({
         data: {
           userId: session.userId,
           refreshTokenHash: hashToken(newRefreshToken),
-          expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+          expiresAt: newExpiresAt,
+          rememberMe: session.rememberMe,
+          userAgent: session.userAgent,
+
+          ip: session.ip,
+          lastActivityAt: new Date(),
         },
       });
 

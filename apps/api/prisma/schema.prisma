@@ -58,11 +58,15 @@ model Session {
 
   refreshTokenHash String @unique
 
+  rememberMe Boolean @default(false)
+
   userAgent String?
   ip        String?
 
   createdAt DateTime @default(now())
   expiresAt DateTime
+
+  lastActivityAt DateTime @default(now())
 
   revoked Boolean @default(false)
 

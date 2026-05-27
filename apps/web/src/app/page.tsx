@@ -9,17 +9,17 @@ import { useEffect } from "react";
 
 export default function HomePage() {
   const router = useRouter();
-  // const { token, loading } = useAuth();
+  const { user, loading } = useAuth();
 
-  // useEffect(() => {
-  //   if (token) {
-  //     router.replace("/dashboard");
-  //   }
-  // }, [token, router]);
+  useEffect(() => {
+    if (user) {
+      router.replace("/dashboard");
+    }
+  }, [user, router]);
 
-  // if (loading) {
-  //   return null;
-  // }
+  if (loading) {
+    return null;
+  }
 
   return (
     <main

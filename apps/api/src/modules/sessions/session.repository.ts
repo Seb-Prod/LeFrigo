@@ -7,6 +7,8 @@ export const sessionRepository = {
     userAgent?: string;
     ip?: string;
     expiresAt: Date;
+    rememberMe?: boolean;
+    lastActivityAt: Date;
   }) =>
     prisma.session.create({
       data,
