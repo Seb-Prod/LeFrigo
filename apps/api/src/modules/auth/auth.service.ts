@@ -7,6 +7,7 @@ import { generateRefreshToken, hashToken } from "../auth/auth.utils";
 import { sessionRepository } from "../sessions/session.repository";
 import { jwtService } from "../../core/auth/jwt.service";
 import { mailService } from "../mail/mail.service";
+import { prisma } from "../../lib/prisma";
 
 export const authService = {
   /**
@@ -152,46 +153,52 @@ export const authService = {
   },
 
   refresh: async (refreshToken: string) => {
-    const refreshTokenHash = hashToken(refreshToken);
+    return prisma.$transaction(async (tx) => {
+      const refreshTokenHash = hashToken(refreshToken);
 
-    const session = await sessionRepository.findValidSession(refreshTokenHash);
+      const session = await tx.session.findFirst({
+        where: {
+          refreshTokenHash,
+          revoked: false,
+          expiresAt: {
+            gt: new Date(),
+          },
+        },
+        include: {
+          user: true,
+        },
+      });
 
-    if (!session) {
-      throw new AppError(401, "Session invalide ou expirée");
-    }
+      if (!session) {
+        throw new AppError(401, "Session invalide");
+      }
 
-    if (!session.user.emailVerified) {
-      throw new AppError(403, "Compte non vérifié");
-    }
+      await tx.session.update({
+        where: {
+          id: session.id,
+        },
+        data: {
+          revoked: true,
+        },
+      });
 
-    if (session.user.status !== "ACTIVE") {
-      throw new AppError(403, "compte inactif");
-    }
+      const newRefreshToken = generateRefreshToken();
 
-    // Révocation de l'ancien refresh token
-    await sessionRepository.revoke(session.id);
+      await tx.session.create({
+        data: {
+          userId: session.userId,
+          refreshTokenHash: hashToken(newRefreshToken),
+          expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+        },
+      });
 
-    // Nouveau refresh token
-    const newRefreshToken = generateRefreshToken();
+      const accessToken = jwtService.generateAccessToken(session.userId);
 
-    const newRefreshTokenHash = hashToken(newRefreshToken);
-
-    const newExpiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
-
-    // Nouvelle session
-    await sessionRepository.create({
-      userId: session.userId,
-      refreshTokenHash: newRefreshTokenHash,
-      expiresAt: newExpiresAt,
+      return {
+        accessToken,
+        refreshToken: newRefreshToken,
+      };
     });
-
-    // Nouvel acces token
-    const accessToken = jwtService.generateAccessToken(session.userId);
-
-    return {
-      accessToken,
-      refreshToken: newRefreshToken,
-    };
   },
 
   logout: async (refreshToken: string) => {
@@ -209,6 +216,12 @@ export const authService = {
 
     return {
       message: "Déconnexion réussie",
+    };
+  },
+  logoutAllDevices: async (userId: string) => {
+    await sessionRepository.revokeAllUserSessions(userId);
+    return {
+      message: "Toutes les sessions ont été fermées",
     };
   },
 

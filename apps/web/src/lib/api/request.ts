@@ -40,11 +40,10 @@ export async function request<T>(
       let refreshPromise = getRefreshPromise();
 
       if (!refreshPromise) {
-        refreshPromise = refreshAccessToken();
-        setRefreshPromise(refreshPromise);
-        refreshPromise.finally(() => {
+        refreshPromise = refreshAccessToken().finally(() => {
           setRefreshPromise(null);
         });
+        setRefreshPromise(refreshPromise);
       }
       const newToken = await refreshPromise;
 
@@ -52,7 +51,7 @@ export async function request<T>(
     } catch {
       authStorage.clear();
       window.location.href = "/";
-      throw new ApiError("Session expirée", 401);
+      return Promise.reject(new ApiError("Session expirée", 401));
     }
   }
 

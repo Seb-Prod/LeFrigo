@@ -45,4 +45,18 @@ export const sessionRepository = {
         user: true,
       },
     }),
+
+  deleteExpiredSessions: () =>
+    prisma.session.deleteMany({
+      where: {
+        OR: [
+          { revoked: true },
+          {
+            expiresAt: {
+              lt: new Date(),
+            },
+          },
+        ],
+      },
+    }),
 };
