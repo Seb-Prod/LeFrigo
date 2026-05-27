@@ -1,20 +1,27 @@
-import { request } from "@/lib/api/request";
 import { authStorage } from "@/lib/auth";
 
-export async function refreshAccessToken() {
+const AP_URL = process.env.NEXT_PUBLIC_API_URL;
+
+export async function refreshAccessToken(): Promise<string> {
   const refreshToken = authStorage.getRefreshToken();
-  console.log("🔄 refreshing token...");
+
   if (!refreshToken) {
-    throw new Error("No refresh token");
+    throw new Error("Missing refresh token");
   }
 
-  const data = await request<{
-    accessToken: string;
-    refreshToken: string;
-  }>("/auth/refresh", {
+  const response = await fetch(`${AP_URL}/auth/refresh`, {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({ refreshToken }),
   });
+
+  if (!response.ok) {
+    throw new Error("Refresh failed");
+  }
+
+  const data = await response.json();
 
   authStorage.setAccessToken(data.accessToken);
   authStorage.setRefreshToken(data.refreshToken);
