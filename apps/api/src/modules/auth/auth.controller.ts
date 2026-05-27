@@ -81,7 +81,12 @@ export const authController = {
         });
       }
 
-      const result = await authService.refresh(refreshToken);
+      const currentIp = req.ip;
+    const currentUserAgent = req.headers["user-agent"];
+
+    const result = await authService.refresh(refreshToken, currentIp, currentUserAgent);
+
+    
 
       return res.json(result);
     } catch (error) {

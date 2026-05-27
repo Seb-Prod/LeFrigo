@@ -21,12 +21,14 @@ const AuthContext = createContext<AuthContextType | null>(null);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<SafeUser | null>(null);
   const [accessToken, setAccessToken] = useState<string | null>(null);
+
   const [loading, setLoading] = useState(true);
 
   // Bootstrap session au reload
 
   useEffect(() => {
     const storedAccessToken = authStorage.getAccessToken();
+    const storedRefreshToken = authStorage.getRefreshToken();
     const storedUser = authStorage.getUser();
 
     if (storedAccessToken && storedUser) {

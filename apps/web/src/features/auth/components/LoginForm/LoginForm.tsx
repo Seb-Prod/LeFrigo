@@ -43,8 +43,6 @@ export function LoginForm({ onToggle, active }: Props) {
 
     // Validation Zod
     const result = loginSchema.safeParse({ email, password, rememberMe: remember });
-console.log(result)
-console.log(remember)
     if (!result.success) {
       const message = result.error.issues[0]?.message ?? "Données invalides";
 

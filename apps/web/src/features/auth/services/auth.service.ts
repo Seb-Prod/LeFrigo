@@ -14,6 +14,13 @@ export const authService = {
     });
   },
 
+  logout(refreshToken: string) {
+  return request<void>("/auth/logout", {
+    method: "POST",
+    body: JSON.stringify({ refreshToken }),
+  })
+},
+
   register(data: RegisterDto) {
     return request<RegisterResponse>("/auth/register", {
       method: "POST",

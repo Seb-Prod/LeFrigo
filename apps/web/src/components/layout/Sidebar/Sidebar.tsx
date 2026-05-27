@@ -49,7 +49,7 @@ export function Sidebar({ mobile, onClose }: Props) {
           ))}
         </ul>
       </nav>
-     <LogoutButton onClick={logout} className={styles.logoutButton}/>
+     <LogoutButton  className={styles.logoutButton}/>
     </aside>
   );
 }
