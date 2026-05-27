@@ -35,5 +35,12 @@ router.post("/forgot-password", authController.forgotPassword);
 /** Réinitialisation du mot de passe via un token. */
 router.post("/reset-password", authController.resetPassword);
 
+router.get("/sessions", authMiddleware, authController.sessions);
+
+router.delete(
+  "/sessions/:sessionId",
+  authMiddleware,
+  authController.revoqueSession,
+);
 
 export default router;

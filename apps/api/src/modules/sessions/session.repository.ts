@@ -61,4 +61,15 @@ export const sessionRepository = {
         ],
       },
     }),
+
+  revokeById: (sessionId: string, userId: string) =>
+    prisma.session.updateMany({
+      where: {
+        id: sessionId,
+        userId,
+      },
+      data: {
+        revoked: true,
+      },
+    }),
 };

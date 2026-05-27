@@ -4,6 +4,7 @@ import { AppError } from "../../../core/errors/AppError";
 import { jwtService } from "../../../core/auth/jwt.service";
 import { sessionRepository } from "../../sessions/session.repository";
 import { config } from "../../../core/config";
+import { tr } from "zod/locales";
 
 export const sessionService = {
   /**
@@ -116,6 +117,38 @@ export const sessionService = {
     await sessionRepository.revokeAllUserSessions(userId);
     return {
       message: "Toutes les sessions ont été fermées",
+    };
+  },
+
+  getSessions: async (userId: string) => {
+    return prisma.session.findMany({
+      where: {
+        userId,
+        revoked: false,
+        expiresAt: {
+          gt: new Date(),
+        },
+      },
+      orderBy: {
+        lastActivityAt: "desc",
+      },
+      select: {
+        id: true,
+        userAgent: true,
+        ip: true,
+        createdAt: true,
+        lastActivityAt: true,
+        expiresAt: true,
+        rememberMe: true,
+      },
+    });
+  },
+
+  revokeSession: async (userId: string, sessionId: string) => {
+    await sessionRepository.revokeById(sessionId, userId);
+
+    return {
+      message: "Session révoquée",
     };
   },
 };

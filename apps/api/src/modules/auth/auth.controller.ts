@@ -1,9 +1,13 @@
 import { Request, Response } from "express";
-import { forgotPasswordSchema, loginSchema, registerSchema, resetPasswordShema } from "@lefrigo/shared";
+import {
+  forgotPasswordSchema,
+  loginSchema,
+  registerSchema,
+  resetPasswordShema,
+} from "@lefrigo/shared";
 
 import { authService } from "./auth.service";
 import { AppError } from "apps/api/src/core/errors/AppError";
-
 
 export const authController = {
   register: async (req: Request, res: Response) => {
@@ -82,11 +86,13 @@ export const authController = {
       }
 
       const currentIp = req.ip;
-    const currentUserAgent = req.headers["user-agent"];
+      const currentUserAgent = req.headers["user-agent"];
 
-    const result = await authService.refresh(refreshToken, currentIp, currentUserAgent);
-
-    
+      const result = await authService.refresh(
+        refreshToken,
+        currentIp,
+        currentUserAgent,
+      );
 
       return res.json(result);
     } catch (error) {
@@ -163,6 +169,45 @@ export const authController = {
       );
 
       return res.json(response);
+    } catch (error) {
+      return handleError(error, res);
+    }
+  },
+
+  sessions: async (req: Request, res: Response) => {
+    try {
+      if (!req.user) {
+        return res.status(401).json({
+          message: "Non authentifié",
+        });
+      }
+      const sessions = await authService.getSessions(req.user.id);
+
+      return res.json(sessions);
+    } catch (error) {
+      return handleError(error, res);
+    }
+  },
+
+  revoqueSession: async (req: Request, res: Response) => {
+    try {
+      if (!req.user) {
+        return res.status(401).json({
+          message: "Non authentidié",
+        });
+      }
+
+      const { sessionId } = req.params;
+
+      if (typeof sessionId !== "string") {
+        return res.status(400).json({
+          message: "Session invalide",
+        });
+      }
+
+      const result = await authService.revokeSession(req.user.id, sessionId);
+
+      return res.json(result);
     } catch (error) {
       return handleError(error, res);
     }
