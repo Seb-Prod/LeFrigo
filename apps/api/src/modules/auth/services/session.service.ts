@@ -61,7 +61,7 @@ export const sessionService = {
         ? config.auth.session.rememberMe
         : config.auth.session.default;
 
-      await tx.session.create({
+      const newSession = await tx.session.create({
         data: {
           userId: session.userId,
           refreshTokenHash: hashToken(newRefreshToken),
@@ -75,7 +75,11 @@ export const sessionService = {
 
       const accessToken = jwtService.generateAccessToken(session.userId);
 
-      return { accessToken, refreshToken: newRefreshToken };
+      return {
+        accessToken,
+        refreshToken: newRefreshToken,
+        sessionIdentifier: newSession.sessionIdentifier,
+      };
     });
   },
 

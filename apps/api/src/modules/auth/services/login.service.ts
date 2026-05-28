@@ -81,7 +81,7 @@ export const loginService = {
           : config.auth.session.default),
     );
 
-    await sessionRepository.create({
+    const session = await sessionRepository.create({
       userId: user.id,
       refreshTokenHash,
       expiresAt,
@@ -91,6 +91,11 @@ export const loginService = {
       lastActivityAt: new Date(),
     });
 
-    return { accessToken, refreshToken, user: toSafeUser(user) };
+    return {
+      accessToken,
+      refreshToken,
+      sessionIdentifier: session.sessionIdentifier,
+      user: toSafeUser(user),
+    };
   },
 };

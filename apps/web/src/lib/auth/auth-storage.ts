@@ -3,6 +3,7 @@ import type { SafeUser } from "@lefrigo/shared";
 const ACCESS_TOKEN_KEY = "accessToken";
 const REFRESH_TOKEN_KEY = "refreshToken";
 const USER_KEY = "user";
+const SESSION_IDENTIFIER_KEY = "sessionIdentifier";
 
 export const authStorage = {
   getAccessToken() {
@@ -39,9 +40,18 @@ export const authStorage = {
     localStorage.setItem(USER_KEY, JSON.stringify(user));
   },
 
+  getSessionIdentifier() {
+    return localStorage.getItem(SESSION_IDENTIFIER_KEY);
+  },
+
+  setSessionIdentifier(value: string) {
+    localStorage.setItem(SESSION_IDENTIFIER_KEY, value);
+  },
+
   clear() {
     localStorage.removeItem(ACCESS_TOKEN_KEY);
     localStorage.removeItem(REFRESH_TOKEN_KEY);
     localStorage.removeItem(USER_KEY);
+    localStorage.removeItem(SESSION_IDENTIFIER_KEY);
   },
 };

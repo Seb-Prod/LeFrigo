@@ -51,7 +51,8 @@ model User {
 
 // SESSION (refresh token / auti-login)
 model Session {
-  id String @id @default(uuid())
+  id                String @id @default(uuid())
+  sessionIdentifier String @unique @default(uuid())
 
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
