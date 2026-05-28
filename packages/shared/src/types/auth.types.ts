@@ -15,3 +15,17 @@ export type SafeUser = {
 };
 
 export type RegisterResponse = SafeUser;
+
+export interface UserSession {
+  id: string;
+  sessionIdentifier: string;
+
+  userAgent: string | null;
+  ip: string | null;
+
+  createdAt: string;
+  lastActivityAt: string;
+  expiresAt: string;
+
+  rememberMe: boolean;
+}

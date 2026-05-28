@@ -7,7 +7,7 @@ import { createContext, useContext, useState } from "react";
  * - `tablet`  : tablette (iPad, Android tablet)
  * - `desktop` : ordinateur de bureau ou laptop
  */
-type DeviceType = "mobile" | "tablet" | "desktop";
+export type DeviceType = "mobile" | "tablet" | "desktop";
 
 /**
  * Forme du contexte exposé par {@link DeviceProvider}.
