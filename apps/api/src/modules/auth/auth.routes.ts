@@ -43,4 +43,6 @@ router.delete(
   authController.revoqueSession,
 );
 
+router.get("/sessions", authMiddleware, authController.getSessions);
+
 export default router;

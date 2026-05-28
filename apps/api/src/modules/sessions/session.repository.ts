@@ -72,4 +72,20 @@ export const sessionRepository = {
         revoked: true,
       },
     }),
+
+  findUserSessions: (userId: string) =>
+    prisma.session.findMany({
+      where: {
+        userId,
+        revoked: false,
+        expiresAt: {
+          gt: new Date(),
+        },
+      },
+      orderBy: {
+        lastActivityAt: "desc",
+      },
+    }),
+
+    
 };

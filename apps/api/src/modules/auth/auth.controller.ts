@@ -212,6 +212,21 @@ export const authController = {
       return handleError(error, res);
     }
   },
+
+  getSessions: async (req: Request, res: Response) => {
+    try {
+      if (!req.user) {
+        return res.status(401).json({
+          message: "Non authentifié",
+        });
+      }
+      const sessions = await authService.getSessions(req.user.id);
+
+      return res.json(sessions);
+    } catch (error) {
+      return handleError(error, res);
+    }
+  },
 };
 
 /**

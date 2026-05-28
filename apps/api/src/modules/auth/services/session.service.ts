@@ -121,27 +121,7 @@ export const sessionService = {
   },
 
   getSessions: async (userId: string) => {
-    return prisma.session.findMany({
-      where: {
-        userId,
-        revoked: false,
-        expiresAt: {
-          gt: new Date(),
-        },
-      },
-      orderBy: {
-        lastActivityAt: "desc",
-      },
-      select: {
-        id: true,
-        userAgent: true,
-        ip: true,
-        createdAt: true,
-        lastActivityAt: true,
-        expiresAt: true,
-        rememberMe: true,
-      },
-    });
+    return sessionRepository.findUserSessions(userId);
   },
 
   revokeSession: async (userId: string, sessionId: string) => {
