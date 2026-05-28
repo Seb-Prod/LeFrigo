@@ -42,6 +42,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     authStorage.setAccessToken(data.accessToken);
     authStorage.setRefreshToken(data.refreshToken);
     authStorage.setUser(data.user);
+    authStorage.setSessionIdentifier(data.sessionIdentifier)
 
     setAccessToken(data.accessToken);
     setUser(data.user);

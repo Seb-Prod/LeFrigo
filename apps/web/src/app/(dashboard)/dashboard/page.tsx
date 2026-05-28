@@ -3,7 +3,8 @@
 import { useAuth } from "@/contexts/auth.context";
 import { useDevice } from "@/contexts/device.context";
 import { SessionCard, UserProfileCard } from "@/features/account/components";
-import { authApi, authStorage } from "@/lib/auth";
+import { authService } from "@/features/auth/services/auth.service";
+import { authStorage } from "@/lib/auth";
 import { UserSession } from "@lefrigo/shared";
 import { useEffect, useState } from "react";
 
@@ -14,7 +15,7 @@ export default function DashboardPage() {
 
   useEffect(() => {
     if (!user) return;
-    authApi.getSessions().then(setSessions);
+    authService.getSessions().then(setSessions);
   }, [user]);
 
   if (!user) {
@@ -29,6 +30,11 @@ export default function DashboardPage() {
         <SessionCard
           key={session.id}
           session={session}
+          onRevoke={async () => {
+            await authService.revokeSession(session.id);
+
+            setSessions((prev) => prev.filter((s) => s.id !== session.id));
+          }}
           isCurrent={
             session.sessionIdentifier === authStorage.getSessionIdentifier()
           }

@@ -2,6 +2,7 @@ export type AuthResponse = {
   accessToken: string;
   refreshToken: string;
   user: SafeUser;
+  sessionIdentifier: string;
 };
 
 export type SafeUser = {

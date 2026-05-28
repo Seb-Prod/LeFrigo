@@ -1,18 +1,18 @@
-import { Badge } from "@/components/ui";
+import { Badge, Button } from "@/components/ui";
 import { UserSession } from "@lefrigo/shared";
 import { FiClock, FiMapPin, FiCalendar } from "react-icons/fi";
+import { SiBrave, SiFirefox, SiGooglechrome, SiSafari } from "react-icons/si";
 import {
-  SiBrave,
-  SiFirefox,
-  SiGooglechrome,
-  SiSafari,
-} from "react-icons/si";
-import { MdOutlineDevices, MdOutlineDesktopWindows, MdOutlinePhoneAndroid } from "react-icons/md";
+  MdOutlineDevices,
+  MdOutlineDesktopWindows,
+  MdOutlinePhoneAndroid,
+} from "react-icons/md";
 import styles from "./SessionCard.module.css";
 
 type Props = {
   session: UserSession;
   isCurrent?: boolean;
+  onRevoke?: () => void;
 };
 
 function parseBrowser(ua: string): { name: string; icon: React.ReactNode } {
@@ -22,8 +22,7 @@ function parseBrowser(ua: string): { name: string; icon: React.ReactNode } {
     return { name: "Firefox", icon: <SiFirefox size={18} /> };
   if (/Safari/i.test(ua) && !/Chrome/i.test(ua))
     return { name: "Safari", icon: <SiSafari size={18} /> };
-  if (/Brave/i.test(ua))
-    return { name: "Brave", icon: <SiBrave size={18} /> };
+  if (/Brave/i.test(ua)) return { name: "Brave", icon: <SiBrave size={18} /> };
   return { name: "Navigateur inconnu", icon: <MdOutlineDevices size={18} /> };
 }
 
@@ -36,9 +35,11 @@ function cleanIp(ip: string): string {
   return ip.replace("::ffff:", "");
 }
 
-export function SessionCard({ session, isCurrent = true }: Props) {
+export function SessionCard({ session, isCurrent = false, onRevoke }: Props) {
   const ua = session.userAgent ?? "";
   const browser = parseBrowser(ua);
+
+  
 
   return (
     <div className={`${styles.card} ${isCurrent ? styles.current : ""}`}>
@@ -55,6 +56,11 @@ export function SessionCard({ session, isCurrent = true }: Props) {
           <Badge variant={session.rememberMe ? "info" : "default"}>
             {session.rememberMe ? "Remember me" : "Session courte"}
           </Badge>
+          {!isCurrent && (
+            <button className={styles.logoutButton} onClick={onRevoke}>
+              Déconnecter
+            </button>
+          )}
         </div>
       </div>
 
