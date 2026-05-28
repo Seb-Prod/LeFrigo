@@ -7,13 +7,16 @@ import recipeRoutes from "./modules/recipes/recipe.routes";
 import { errorMiddleware } from "./middlewares/error.middleware";
 import { AppError } from "./core/errors/AppError";
 import mealPlanRoutes from "apps/api/src/modules/meal-plans/meal-plan.routes";
+import "./jobs/session-cleanup.job";
 
 const app = express();
 app.set("trust proxy", true);
 app.use(cors());
 app.use(express.json());
 
-
+app.listen(3000, () => {
+  console.log("API started");
+});
 
 // Healthcheck
 app.get("/health", (_, res) => {
@@ -30,8 +33,6 @@ app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/recipes", recipeRoutes);
 app.use("/meal-plans", mealPlanRoutes);
-
-
 
 // Error middleware — toujours en dernier
 app.use(errorMiddleware);
