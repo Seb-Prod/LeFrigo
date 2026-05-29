@@ -2,7 +2,7 @@ import clsx from "clsx";
 import styles from "./Card.module.css";
 
 type Props = {
-  variant?: "default" | "primary" | "danger" | "warning" | "info" | "success";
+  variant?: "default" | "primary" | "accent"  |"danger" | "warning" | "info" | "success";
   clickable?: boolean;
   children: React.ReactNode;
   className?: string;

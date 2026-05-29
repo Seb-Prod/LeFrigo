@@ -20,6 +20,12 @@
   --border: var(--color-primary-border);
 }
 
+.accent {
+  --bg:     var(--color-accent-background);
+  --text:   var(--color-accent-text);
+  --border: var(--color-accent-border);
+}
+
 .danger {
   --bg:     var(--color-danger-background);
   --text:   var(--color-danger-text);

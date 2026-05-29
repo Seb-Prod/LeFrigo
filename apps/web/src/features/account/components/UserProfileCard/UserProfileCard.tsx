@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, Badge, Card } from "@/components/ui";
+import { Avatar, Badge, Card, Text } from "@/components/ui";
 import { DeviceType } from "@/contexts/device.context";
 import { SafeUser } from "@lefrigo/shared";
 import { FiMonitor, FiSmartphone, FiTablet } from "react-icons/fi";
@@ -20,19 +20,19 @@ const deviceIcon: Record<DeviceType, React.ReactNode> = {
 
 export function UserProfileCard({ user, device }: Props) {
   return (
-    <Card variant="primary" className={styles.card}>
+    <Card variant="accent" className={styles.card}>
       <Avatar username={user.userName} size="lg" />
 
       <div className={styles.user}>
         <div className={styles.header}>
           <h1 className={styles.username}>{user.userName}</h1>
-          <span className={styles.device}>
+          <Text>
             {deviceIcon[device]}
             {device}
-          </span>
+          </Text>
         </div>
 
-        <p className={styles.email}>{user.email}</p>
+        <Text variant="muted" size="sm">{user.email}</Text>
 
         <div className={styles.badges}>
           <Badge variant="info">{user.role}</Badge>
@@ -41,7 +41,7 @@ export function UserProfileCard({ user, device }: Props) {
           </Badge>
           {user.emailVerified && (
             <Badge variant="success">
-              <MdOutlineVerified/>
+              <MdOutlineVerified />
               Email vérifié
             </Badge>
           )}
