@@ -1,6 +1,6 @@
 .avatar {
   border-radius: 50%;
-  background-color: var(--color-primary);
+  background-color: var(--color-primary-background);
   color: var(--color-primary-text);
   display: flex;
   align-items: center;
