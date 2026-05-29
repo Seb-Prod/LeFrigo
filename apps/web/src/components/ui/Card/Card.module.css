@@ -1,15 +1,55 @@
 .card {
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
+  --bg:     var(--color-neutral-background);
+  --text:   var(--color-neutral-text);
+  --border: var(--color-neutral-border);
+
+  background:    var(--bg);
+  border:        1px solid var(--border);
   border-radius: var(--radius-lg);
+  color:         var(--text);
 
-  padding: 1rem;
-
+  padding:    1rem;
   box-shadow: var(--shadow-sm);
-
   transition: 0.2s ease;
 }
 
+/* Variants */
+.primary {
+  --bg:     var(--color-primary-background);
+  --text:   var(--color-primary-text);
+  --border: var(--color-primary-border);
+}
+
+.danger {
+  --bg:     var(--color-danger-background);
+  --text:   var(--color-danger-text);
+  --border: var(--color-danger-border);
+}
+
+.warning {
+  --bg:     var(--color-warning-background);
+  --text:   var(--color-warning-text);
+  --border: var(--color-warning-border);
+}
+
+.info {
+  --bg:     var(--color-info-background);
+  --text:   var(--color-info-text);
+  --border: var(--color-info-border);
+}
+
+.success {
+  --bg:     var(--color-success-background);
+  --text:   var(--color-success-text);
+  --border: var(--color-success-border);
+}
+
+/* Clickable */
+.clickable {
+  cursor: pointer;
+}
+
 .card:hover {
-  box-shadow: var(--shadow-md);
+  border-color: var(--border);
+  box-shadow:   var(--shadow-md);
 }

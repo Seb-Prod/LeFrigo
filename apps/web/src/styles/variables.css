@@ -7,28 +7,58 @@
    --color-accent: #f9cf15;
    --color-accent-hover: #fbf48f;
 
+
+   --color-primary-background: #e6f5ee;
+   --color-primary-text: #009B4D;
+   --color-primary-border: #99d9b8;
+   --color-primary-solid: #009B4D;
+   /* bouton plein, badge... */
+   --color-primary-solid-text: #ffffff;
+   --color-primary-hover: #12732d;
+
+   --color-accent-background: #fffde6;
+   --color-accent-text: #a07c00;
+   --color-accent-border: #fce97a;
+   --color-accent-solid: #f9cf15;
+   --color-accent-hover: #fbf48f;
+
    /* STATUS */
-   --color-danger-background: #fef3f2;
-   --color-danger-text: #b42318;
-   --color-danger-border: #fecdca;
 
    --color-success-background: #ecfdf3;
    --color-success-text: #027a48;
    --color-success-border: #abefc6;
+   --color-success-solid: #009B4D;
+   --color-success-solid-text: #ffffff;
+   --color-success-hover: #027a48;
 
    --color-warning-background: #fffaeb;
    --color-warning-text: #b54708;
    --color-warning-border: #fedf89;
+   --color-warning-solid: #FFCC00;
+   --color-warning-solid-text: #7a3a00;
+   --color-warning-hover: #e6b800;
+
+   --color-danger-background: #fef3f2;
+   --color-danger-text: #b42318;
+   --color-danger-border: #fecdca;
+   --color-danger-solid: #ef4444;
+   --color-danger-solid-text: #ffffff;
+   --color-danger-hover: #b91c1c;
 
    --color-info-background: #eff8ff;
    --color-info-text: #175cd3;
    --color-info-border: #b2ddff;
+   --color-info-solid: #2e90fa;
+   --color-info-solid-text: #ffffff;
+   --color-info-hover: #175cd3;
 
+   --color-neutral-background: #f9fafb;
+   --color-neutral-text: #374151;
+   --color-neutral-border: #e5e7eb;
+   --color-neutral-solid: #4b5563;
+   --color-neutral-solid-text: #ffffff;
+   --color-neutral-hover: #374151;
 
-
-   --color-success: #009B4D;
-   --color-warning: #FFCC00;
-   --color-danger: #ef4444;
 
    /* BACKGROUND */
 

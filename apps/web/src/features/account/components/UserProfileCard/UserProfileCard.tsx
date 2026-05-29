@@ -20,7 +20,7 @@ const deviceIcon: Record<DeviceType, React.ReactNode> = {
 
 export function UserProfileCard({ user, device }: Props) {
   return (
-    <Card className={styles.card}>
+    <Card variant="primary" className={styles.card}>
       <Avatar username={user.userName} size="lg" />
 
       <div className={styles.user}>
