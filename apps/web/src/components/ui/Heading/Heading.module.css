@@ -1,0 +1,38 @@
+.heading {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--font-sans);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* ─── Sizes ──────────────────────────────────────────────── */
+.sm {
+    font-size: 1rem;
+}
+
+.md {
+    font-size: 1.5rem;
+}
+
+.lg {
+    font-size: 2;
+}
+
+/* ─── Variants ───────────────────────────────────────────── */
+.default {
+    color: var(--color-text);
+}
+
+.secondary {
+    color: var(--color-text-secondary)
+}
+
+.muted {
+    color: var(--color-text-muted);
+}
+
+.danger {
+    color: var(--color-danger-text);
+}

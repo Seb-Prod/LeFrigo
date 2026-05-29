@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, Badge, Card, Text } from "@/components/ui";
+import { Avatar, Badge, Card, Heading, Text } from "@/components/ui";
 import { DeviceType } from "@/contexts/device.context";
 import { SafeUser } from "@lefrigo/shared";
 import { FiMonitor, FiSmartphone, FiTablet } from "react-icons/fi";
@@ -25,7 +25,7 @@ export function UserProfileCard({ user, device }: Props) {
 
       <div className={styles.user}>
         <div className={styles.header}>
-          <h1 className={styles.username}>{user.userName}</h1>
+          <Heading>{user.userName}</Heading>
           <Text>
             {deviceIcon[device]}
             {device}

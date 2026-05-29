@@ -7,6 +7,8 @@ export { Button } from "./Button/Button";
 export { Card } from "./Card";
 export * from "./Checkbox";
 
+export { Heading } from "./Heading";
+
 export * from "./Input/Input";
 
 export { Select } from "./Select/Select";
