@@ -2,17 +2,19 @@ import { UserSession } from "@lefrigo/shared";
 import styles from "./OtherSessionList.module.css";
 import { SessionCard } from "../SessionCard";
 import { Alert, Badge, Heading } from "@/components/ui";
+import { LogoutButton } from "@/features/auth";
 
 type Props = {
   sessions?: UserSession[];
   onRevoke?: (id: string) => void;
+  onRevokeAll?:() => void;
 };
 
 /**
  * Affiche la liste des sessions actives autres que la session courante.
  * Affihce un message si aucune session à afficher.
  */
-export function OtherSessionsList({ sessions, onRevoke }: Props) {
+export function OtherSessionsList({ sessions, onRevoke, onRevokeAll }: Props) {
   if (!sessions || sessions.length === 0) return (
     <Alert variant="info">Aucune autre session</Alert>
   );
@@ -32,6 +34,11 @@ export function OtherSessionsList({ sessions, onRevoke }: Props) {
           />
         ))}
       </div>
+      {onRevokeAll && (
+        <LogoutButton onClick={onRevokeAll} size="sm">
+          Déconnecter tous les appareils
+        </LogoutButton>
+      )}
     </section>
   );
 }

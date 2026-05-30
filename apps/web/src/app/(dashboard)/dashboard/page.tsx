@@ -40,12 +40,19 @@ export default function DashboardPage() {
     setSessions((prev) => prev.filter((s) => s.id !== id));
   };
 
+  const handleRevokeAll = async () => {
+    await authService.logoutAllDevices(currentIdentifier!);
+    setSessions((prev) =>
+      prev.filter((s) => s.sessionIdentifier === currentIdentifier),
+    );
+  };
+
   return (
     <main className={styles.main}>
       <UserProfileCard user={user} device={device} />
 
       <CurrentSessionCard session={currentSession} />
-      <OtherSessionsList sessions={otherSessions} onRevoke={handleRevoke} />
+      <OtherSessionsList sessions={otherSessions} onRevoke={handleRevoke} onRevokeAll={handleRevokeAll} />
     </main>
   );
 }

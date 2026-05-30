@@ -117,8 +117,14 @@ export const sessionService = {
    * @param userId - Identifiant de l'utilisateur.
    * @returns Message de confirmation.
    */
-  logoutAllDevices: async (userId: string) => {
-    await sessionRepository.revokeAllUserSessions(userId);
+  logoutAllDevices: async (
+    userId: string,
+    currentSessionIdentifier: string,
+  ) => {
+    await sessionRepository.revokeAllExceptCurrent(
+      userId,
+      currentSessionIdentifier,
+    );
     return {
       message: "Toutes les sessions ont été fermées",
     };

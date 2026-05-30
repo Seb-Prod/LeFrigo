@@ -45,4 +45,6 @@ router.delete(
 
 router.get("/sessions", authMiddleware, authController.getSessions);
 
+router.post("/logout-all", authMiddleware, authController.logoutAllDevices);
+
 export default router;

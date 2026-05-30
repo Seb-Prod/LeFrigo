@@ -87,5 +87,16 @@ export const sessionRepository = {
       },
     }),
 
-    
+  revokeAllExceptCurrent: (userId: string, currentSessionIdentifier: string) =>
+    prisma.session.updateMany({
+      where: {
+        userId,
+        sessionIdentifier: {
+          not: currentSessionIdentifier,
+        },
+      },
+      data: {
+        revoked: true,
+      },
+    }),
 };

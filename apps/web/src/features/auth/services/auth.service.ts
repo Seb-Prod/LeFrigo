@@ -22,9 +22,14 @@ export const authService = {
     });
   },
 
-  logoutAllDevices() {
+  logoutAllDevices(sessionIdentifier: string) {
     return request<void>("/auth/logout-all", {
       method: "POST",
+      body: JSON.stringify({
+
+      sessionIdentifier,
+
+    }),
     });
   },
 

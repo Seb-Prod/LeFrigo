@@ -118,6 +118,27 @@ export const authController = {
     }
   },
 
+  logoutAllDevices: async (req: Request, res: Response) => {
+    try {
+      if (!req.user) {
+        return res.status(401).json({
+          message: "Non authentifié",
+        });
+      }
+
+      const { sessionIdentifier } = req.body;
+
+      const result = await authService.logoutAllDevices(
+        req.user.id,
+        sessionIdentifier,
+      );
+
+      return res.json(result);
+    } catch (error) {
+      return handleError(error, res);
+    }
+  },
+
   me: async (req: Request, res: Response) => {
     try {
       if (!req.user) {
