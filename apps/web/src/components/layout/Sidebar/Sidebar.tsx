@@ -5,6 +5,9 @@ import styles from "./Sidebar.module.css";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/contexts/auth.context";
 import { LogoutButton } from "@/features/auth";
+import { authStorage } from "@/lib/auth";
+import { authService } from "@/features/auth/services/auth.service";
+import { useRouter } from "next/navigation";
 
 type Props = {
   mobile?: boolean;
@@ -12,6 +15,7 @@ type Props = {
 };
 
 export function Sidebar({ mobile, onClose }: Props) {
+  const router = useRouter();
   const pathname = usePathname();
   const { logout } = useAuth();
 
@@ -21,6 +25,20 @@ export function Sidebar({ mobile, onClose }: Props) {
     { label: "Planning", href: "/planning" },
     { label: "Paramètres", href: "/settings" },
   ];
+
+  const handleClose = async () => {
+    try {
+      const refreshToken = authStorage.getRefreshToken();
+      if (refreshToken) {
+        await authService.logout(refreshToken);
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      logout();
+      router.push("/");
+    }
+  };
 
   return (
     <aside className={`${styles.sidebar} ${mobile ? styles.mobile : ""}`}>
@@ -49,7 +67,7 @@ export function Sidebar({ mobile, onClose }: Props) {
           ))}
         </ul>
       </nav>
-     <LogoutButton  className={styles.logoutButton}/>
+      <LogoutButton className={styles.logoutButton} onClick={handleClose} />
     </aside>
   );
 }

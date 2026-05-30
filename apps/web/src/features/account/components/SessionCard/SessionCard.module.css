@@ -1,68 +1,32 @@
-.card {
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 1rem 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  background: #fff;
-}
-
-.current {
-  border-color: #86efac;
-  background: #f0fdf4;
-}
-
 .header {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
-.browserIcon {
-  color: #6b7280;
+.browserInfo {
   display: flex;
   align-items: center;
-  flex-shrink: 0;
+  gap: 0.4rem;
 }
 
-.info {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex: 1;
-  min-width: 0;
-}
-
-.browserName {
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.device {
-  color: #9ca3af;
-  display: flex;
-  align-items: center;
-}
-
-.badges {
+.badge {
   display: flex;
   flex-direction: column;
-  gap: 6px;
   margin-left: auto;
   flex-shrink: 0;
 }
 
-.meta {
+.footer {
   display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
-.metaItem {
+.meta {
   display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 0.8rem;
-  color: #6b7280;
+  flex-direction: column;
+  gap: 0.25rem;
 }

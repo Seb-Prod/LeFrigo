@@ -25,7 +25,7 @@ export async function refreshAccessToken(): Promise<string> {
 
   authStorage.setAccessToken(data.accessToken);
   authStorage.setRefreshToken(data.refreshToken);
-  authStorage.setRefreshToken(data.sessionIdentifier);
+  authStorage.setSessionIdentifier(data.sessionIdentifier);
 
   return data.accessToken;
 }

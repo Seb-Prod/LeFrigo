@@ -1,4 +1,4 @@
-import { Badge, Button } from "@/components/ui";
+import { Badge, Card, Text } from "@/components/ui";
 import { UserSession } from "@lefrigo/shared";
 import { FiClock, FiMapPin, FiCalendar } from "react-icons/fi";
 import { SiBrave, SiFirefox, SiGooglechrome, SiSafari } from "react-icons/si";
@@ -7,6 +7,7 @@ import {
   MdOutlineDesktopWindows,
   MdOutlinePhoneAndroid,
 } from "react-icons/md";
+import { LogoutButton } from "../../../auth/components/LogoutButton/LogoutButton";
 import styles from "./SessionCard.module.css";
 
 type Props = {
@@ -35,49 +36,61 @@ function cleanIp(ip: string): string {
   return ip.replace("::ffff:", "");
 }
 
+function formatLastActivity(date: Date): string {
+  const diffMs = Date.now() - date.getTime();
+  const diffMin = Math.floor(diffMs / 1000 / 60);
+  const diffHours = Math.floor(diffMin / 60);
+  const diffDays = Math.floor(diffHours / 24);
+
+  if (diffMin < 60) return `Il y a ${diffMin} min`;
+  if (diffHours < 24) return `Il y a ${diffHours}h`;
+  return `Il y a ${diffDays}j`;
+}
+
 export function SessionCard({ session, isCurrent = false, onRevoke }: Props) {
   const ua = session.userAgent ?? "";
   const browser = parseBrowser(ua);
 
-  
-
   return (
-    <div className={`${styles.card} ${isCurrent ? styles.current : ""}`}>
+    <Card variant={isCurrent ? "primary" : "default"}>
       <div className={styles.header}>
-        <span className={styles.browserIcon}>{browser.icon}</span>
-
-        <div className={styles.info}>
-          <span className={styles.browserName}>{browser.name}</span>
-          <span className={styles.device}>{parseDevice(ua)}</span>
+        <div className={styles.browserInfo}>
+          {browser.icon}
+          {parseDevice(ua)}
+          <Text>{browser.name}</Text>
+          <Text variant="muted">
+            {formatLastActivity(new Date(session.lastActivityAt))}
+          </Text>
         </div>
-
-        <div className={styles.badges}>
-          {isCurrent && <Badge variant="success">Session actuelle</Badge>}
+        <div className={styles.badge}>
           <Badge variant={session.rememberMe ? "info" : "default"}>
             {session.rememberMe ? "Remember me" : "Session courte"}
           </Badge>
-          {!isCurrent && (
-            <button className={styles.logoutButton} onClick={onRevoke}>
-              Déconnecter
-            </button>
-          )}
         </div>
       </div>
 
-      <div className={styles.meta}>
-        <span className={styles.metaItem}>
-          <FiMapPin size={13} />
-          {cleanIp(session.ip ? session.ip : "")}
-        </span>
-        <span className={styles.metaItem}>
-          <FiClock size={13} />
-          {new Date(session.lastActivityAt).toLocaleString("fr-FR")}
-        </span>
-        <span className={styles.metaItem}>
-          <FiCalendar size={13} />
-          Expire le {new Date(session.expiresAt).toLocaleDateString("fr-FR")}
-        </span>
+      <div className={styles.footer}>
+        <div className={styles.meta}>
+          <Text size="sm">
+            <FiMapPin /> {cleanIp(session.ip ?? "")}
+          </Text>
+          <Text size="sm">
+            <FiClock />{" "}
+            {new Date(session.lastActivityAt).toLocaleString("fr-FR")}
+          </Text>
+          <Text size="sm">
+            <FiCalendar /> Expire le{" "}
+            {new Date(session.expiresAt).toLocaleDateString("fr-FR")}
+          </Text>
+          <Text size="sm" variant="muted">
+            {session.sessionIdentifier}
+          </Text>
+        </div>
+
+        {!isCurrent && onRevoke && (
+          <LogoutButton onClick={onRevoke}>Déconnecter</LogoutButton>
+        )}
       </div>
-    </div>
+    </Card>
   );
 }
