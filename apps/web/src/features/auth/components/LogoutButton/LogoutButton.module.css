@@ -1,11 +1,34 @@
+/* === SIZE TOKENS === */
+.sm {
+  --btn-size: 36px;
+  --btn-expanded: 120px;
+  --icon-size: 20px;
+  --font-size: 12px;
+}
+
+.md {
+  --btn-size: 48px;
+  --btn-expanded: 148px;
+  --icon-size: 32px;
+  --font-size: 14px;
+}
+
+.lg {
+  --btn-size: 60px;
+  --btn-expanded: 180px;
+  --icon-size: 40px;
+  --font-size: 16px;
+}
+
+/* === BASE === */
 .btn {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   border: none;
   border-radius: 50px;
-  width: 48px;
-  height: 48px;
+  width: var(--btn-size);
+  height: var(--btn-size);
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -18,20 +41,21 @@
 }
 
 .btn:hover {
-  width: 148px;
+  width: var(--btn-expanded);
   background-color: #c4256e;
 }
 
 .btn:active {
   transform: scale(0.96);
-  transition: transform 0.1s ease,
+  transition:
+    transform 0.1s ease,
     width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .logoutIcon {
   flex-shrink: 0;
-  width: 48px;
-  height: 48px;
+  width: var(--btn-size);
+  height: var(--btn-size);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,14 +67,14 @@
 }
 
 .logoutIcon .logout {
-  width: 32px;
-  height: 32px;
+  width: var(--icon-size);
+  height: var(--icon-size);
   color: white;
 }
 
 .text {
   color: white;
-  font-size: 14px;
+  font-size: var(--font-size);
   font-weight: 500;
   white-space: nowrap;
   opacity: 0;

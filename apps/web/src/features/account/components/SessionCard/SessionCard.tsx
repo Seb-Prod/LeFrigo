@@ -88,7 +88,7 @@ export function SessionCard({ session, isCurrent = false, onRevoke }: Props) {
         </div>
 
         {!isCurrent && onRevoke && (
-          <LogoutButton onClick={onRevoke}>Déconnecter</LogoutButton>
+          <LogoutButton onClick={onRevoke} size="sm">Déconnecter</LogoutButton>
         )}
       </div>
     </Card>
