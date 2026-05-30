@@ -16,6 +16,10 @@ type Props = {
   onRevoke?: () => void;
 };
 
+/**
+ * Extrait le navigateur depuis le user-agent.
+ * Retourne le nom et l'icône correspondante.
+ */
 function parseBrowser(ua: string): { name: string; icon: React.ReactNode } {
   if (/Chrome/i.test(ua) && !/Chromium|Edg/i.test(ua))
     return { name: "Chrome", icon: <SiGooglechrome size={18} /> };
@@ -27,15 +31,21 @@ function parseBrowser(ua: string): { name: string; icon: React.ReactNode } {
   return { name: "Navigateur inconnu", icon: <MdOutlineDevices size={18} /> };
 }
 
+/**
+ * Retourne l'icône du type d'appareil (mobile ou desktop)
+ * en se basant sur le user-agent.
+ */
 function parseDevice(ua: string): React.ReactNode {
   if (/Mobile/i.test(ua)) return <MdOutlinePhoneAndroid size={14} />;
   return <MdOutlineDesktopWindows size={14} />;
 }
 
+/** Supprime le préfixe IPv6 `::ffff:` d'une adresse IP. */
 function cleanIp(ip: string): string {
   return ip.replace("::ffff:", "");
 }
 
+/** Formate la date de dernière activité en durée relative (ex: "Il y a 5 min"). */
 function formatLastActivity(date: Date): string {
   const diffMs = Date.now() - date.getTime();
   const diffMin = Math.floor(diffMs / 1000 / 60);
@@ -47,6 +57,11 @@ function formatLastActivity(date: Date): string {
   return `Il y a ${diffDays}j`;
 }
 
+/**
+ * Affiche les informations d'une session utilisateur.
+ * La session courante est mise en avant visuellement avec un dot vert.
+ * Un bouton de révocation est affiché pour les sessions non courantes.
+ */
 export function SessionCard({ session, isCurrent = false, onRevoke }: Props) {
   const ua = session.userAgent ?? "";
   const browser = parseBrowser(ua);
@@ -55,18 +70,17 @@ export function SessionCard({ session, isCurrent = false, onRevoke }: Props) {
     <Card variant={isCurrent ? "primary" : "default"}>
       <div className={styles.header}>
         <div className={styles.browserInfo}>
+          {isCurrent && <span className={styles.activeDot} aria-hidden="true" />}
           {browser.icon}
           {parseDevice(ua)}
-          <Text>{browser.name}</Text>
+          <Text size="lg">{browser.name}</Text>
           <Text variant="muted">
             {formatLastActivity(new Date(session.lastActivityAt))}
           </Text>
         </div>
-        <div className={styles.badge}>
-          <Badge variant={session.rememberMe ? "info" : "default"}>
-            {session.rememberMe ? "Remember me" : "Session courte"}
-          </Badge>
-        </div>
+        <Badge className={styles.badge} variant={session.rememberMe ? "info" : "default"}>
+          {session.rememberMe ? "Remember me" : "Session courte"}
+        </Badge>
       </div>
 
       <div className={styles.footer}>
@@ -88,7 +102,9 @@ export function SessionCard({ session, isCurrent = false, onRevoke }: Props) {
         </div>
 
         {!isCurrent && onRevoke && (
-          <LogoutButton onClick={onRevoke} size="sm">Déconnecter</LogoutButton>
+          <LogoutButton onClick={onRevoke} size="sm">
+            Déconnecter
+          </LogoutButton>
         )}
       </div>
     </Card>
