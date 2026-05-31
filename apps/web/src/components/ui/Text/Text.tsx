@@ -3,7 +3,7 @@ import styles from "./Text.module.css";
 
 type Props = {
   as?: "p" | "span" | "label";
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | "xl";
   variant?: "default" | "secondary" | "muted" | "danger";
   children: React.ReactNode;
   className?: string;

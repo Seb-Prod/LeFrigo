@@ -3,6 +3,7 @@ export { Avatar } from "./Avatar";
 
 export { Badge } from "./Badge";
 export { Button } from "./Button/Button";
+export * from "./ButtonIcon";
 
 export { Card } from "./Card";
 export * from "./Checkbox";

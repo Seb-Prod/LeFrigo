@@ -1,18 +1,18 @@
 import { UserSession } from "@lefrigo/shared";
-import styles from "./OtherSessionList.module.css";
-import { SessionCard } from "../SessionCard";
 import { Alert, Badge, Heading } from "@/components/ui";
 import { LogoutButton } from "@/features/auth";
+import { SessionFlipCard } from "../SessionFlipCard";
+import styles from "./OtherSessionList.module.css";
 
 type Props = {
   sessions?: UserSession[];
   onRevoke?: (id: string) => void;
-  onRevokeAll?:() => void;
+  onRevokeAll?: () => void;
 };
 
 /**
  * Affiche la liste des sessions actives autres que la session courante.
- * Affihce un message si aucune session à afficher.
+ * Affiche un message si aucune session à afficher.
  */
 export function OtherSessionsList({ sessions, onRevoke, onRevokeAll }: Props) {
   if (!sessions || sessions.length === 0) return (
@@ -21,24 +21,31 @@ export function OtherSessionsList({ sessions, onRevoke, onRevokeAll }: Props) {
 
   return (
     <section className={styles.section}>
+
+      {/* ── En-tête : titre + compteur ───────────────────── */}
       <Heading size="sm" variant="muted">
         Autres sessions{" "}
         <Badge variant="info">{sessions.length}</Badge>
       </Heading>
+
+      {/* ── Grille de sessions ───────────────────────────── */}
       <div className={styles.list}>
         {sessions.map((session) => (
-          <SessionCard
+          <SessionFlipCard
             key={session.id}
             session={session}
             onRevoke={() => onRevoke?.(session.id)}
           />
         ))}
       </div>
+
+      {/* ── Révoquer toutes les sessions ────────────────── */}
       {onRevokeAll && (
-        <LogoutButton onClick={onRevokeAll} size="sm">
+        <LogoutButton onClick={onRevokeAll} size="md" open className={styles.buttonRevoke}>
           Déconnecter tous les appareils
         </LogoutButton>
       )}
+
     </section>
   );
 }

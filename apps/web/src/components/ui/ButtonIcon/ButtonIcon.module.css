@@ -1,0 +1,98 @@
+/* === SIZE TOKENS === */
+.sm {
+    --btn-icon-size: 28px;
+    --btn-icon-font: 14px;
+}
+
+.md {
+    --btn-icon-size: 36px;
+    --btn-icon-font: 18px;
+}
+
+.lg {
+    --btn-icon-size: 44px;
+    --btn-icon-font: 22px;
+}
+
+/* === BASE === */
+.button {
+    --_bg: var(--color-neutral-solid);
+    --_bg-hover: var(--color-neutral-hover);
+    --_color: var(--color-neutral-solid-text);
+
+    width: var(--btn-icon-size);
+    height: var(--btn-icon-size);
+    border-radius: 50%;
+    border: none;
+
+    background: var(--_bg);
+    color: var(--_color);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    font-size: var(--btn-icon-font);
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.1s ease;
+}
+
+.button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.button:hover:not(:disabled) {
+  background: var(--_bg-hover);
+  border-radius: 40% 60% 55% 45% / 45% 55% 45% 55%;
+}
+
+.button:active:not(:disabled) {
+  transform: scale(0.92);
+  border-radius: 50% 40% 45% 55% / 55% 45% 60% 40%;
+}
+
+/* === VARIANTS === */
+.primary {
+  --_bg: var(--color-primary-solid);
+  --_bg-hover: var(--color-primary-hover);
+  --_color: var(--color-primary-solid-text);
+}
+
+.accent {
+  --_bg: var(--color-accent-solid);
+  --_bg-hover: var(--color-accent-hover);
+  --_color: var(--color-accent-solid-text);
+}
+
+.success {
+  --_bg: var(--color-success-solid);
+  --_bg-hover: var(--color-success-hover);
+  --_color: var(--color-success-solid-text);
+}
+
+.danger {
+  --_bg: var(--color-danger-solid);
+  --_bg-hover: var(--color-danger-hover);
+  --_color: var(--color-danger-solid-text);
+}
+
+.warning {
+  --_bg: var(--color-warning-solid);
+  --_bg-hover: var(--color-warning-hover);
+  --_color: var(--color-warning-solid-text);
+}
+
+.info {
+  --_bg: var(--color-info-solid);
+  --_bg-hover: var(--color-info-hover);
+  --_color: var(--color-info-solid-text);
+}
+
+
+

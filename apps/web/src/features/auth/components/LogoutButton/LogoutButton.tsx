@@ -1,28 +1,37 @@
 import { IoLogOut } from "react-icons/io5";
-import styles from "./LogoutButton.module.css";
 import clsx from "clsx";
+import styles from "./LogoutButton.module.css";
+
+type Size = "sm" | "md" | "lg";
 
 type Props = {
   onClick: () => void;
   className?: string;
   children?: React.ReactNode;
-  size?: "sm" | "md" | "lg";
+  size?: Size;
+  open?: boolean;
 };
 
-export function LogoutButton({
-  className,
-  onClick,
-  size = "md",
-  children,
-}: Props) {
+/**
+ * Bouton de déconnexion animé.
+ * Au survol (ou si `open` est vrai), le bouton s'élargit et affiche le texte.
+ * La prop `open` force l'état étendu sans interaction.
+ */
+export function LogoutButton({ className, onClick, size = "md", open = false, children }: Props) {
   return (
-    <div className={clsx(styles.container, className)}>
-      <button onClick={onClick} className={clsx(styles.btn, styles[size])}>
-        <div className={styles.logoutIcon}>
-          <IoLogOut className={styles.logout} />
-        </div>
-        <div className={styles.text}>{children ? children : "Déconnexion"}</div>
-      </button>
-    </div>
+    <button
+      onClick={onClick}
+      className={clsx(styles.btn, styles[size], open && styles.open, className)}
+    >
+      {/* ── Icône ── */}
+      <div className={styles.logoutIcon}>
+        <IoLogOut className={styles.logout} />
+      </div>
+
+      {/* ── Label ── */}
+      <div className={styles.text}>
+        {children ?? "Déconnexion"}
+      </div>
+    </button>
   );
 }

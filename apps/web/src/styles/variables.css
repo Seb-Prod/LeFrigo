@@ -12,13 +12,13 @@
    --color-primary-text: #009B4D;
    --color-primary-border: #99d9b8;
    --color-primary-solid: #009B4D;
-   /* bouton plein, badge... */
    --color-primary-solid-text: #ffffff;
    --color-primary-hover: #12732d;
 
    --color-accent-background: #fffde6;
    --color-accent-text: #a07c00;
    --color-accent-border: #fce97a;
+   --color-accent-solid-text: #000;
    --color-accent-solid: #f9cf15;
    --color-accent-hover: #fbf48f;
 

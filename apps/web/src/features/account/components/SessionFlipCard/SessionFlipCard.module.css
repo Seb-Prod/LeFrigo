@@ -1,0 +1,82 @@
+/* ── Scène 3D ─────────────────────────────────────────────────
+   Conteneur externe qui établit la perspective.              */
+.scene {
+  display: inline-block;
+  perspective: 600px;
+  height: 200px;
+}
+
+/* ── Carte ────────────────────────────────────────────────────
+   Élément qui se retourne. transform-origin: center right
+   pour l'effet "page qui se tourne".                         */
+.card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform-origin: center right;
+  transition: transform 1s;
+}
+
+.card.flipped {
+  transform: translateX(-100%) rotateY(-180deg);
+}
+
+/* ── Face commune ─────────────────────────────────────────── */
+.cardFace {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-neutral-border);
+  backface-visibility: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.cardFace {
+  box-shadow:   var(--shadow-md);
+}
+
+/* ── Recto ────────────────────────────────────────────────── */
+.cardFaceFront {
+  background: var(--color-neutral-background);
+}
+
+/* ── Verso ────────────────────────────────────────────────── */
+.cardFaceBack {
+  background: var(--color-neutral-border);
+  transform: rotateY(180deg);
+}
+
+/* ── En-tête (bouton info / fermer) ──────────────────────── */
+.cardHeader {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ── Infos navigateur (recto) ────────────────────────────── */
+.browserInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex: 1;
+}
+
+/* ── Métadonnées (verso) ─────────────────────────────────── */
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  margin-top: 8px;
+}
+
+/* ── Bouton révoquer (verso, centré en bas) ──────────────── */
+.buttonRevoke {
+  margin: auto auto 0;
+}

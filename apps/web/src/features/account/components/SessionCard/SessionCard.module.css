@@ -1,3 +1,4 @@
+/* ── En-tête ──────────────────────────────────────────────── */
 .header {
   display: flex;
   align-items: center;
@@ -11,6 +12,12 @@
   gap: 0.4rem;
 }
 
+/* Badge poussé à droite */
+.badge {
+  margin-left: auto;
+}
+
+/* ── Pied ─────────────────────────────────────────────────── */
 .footer {
   display: flex;
   align-items: flex-end;
@@ -24,14 +31,11 @@
   gap: 0.25rem;
 }
 
+/* ── Dot session active ───────────────────────────────────── */
 .activeDot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background: var(--color-success-solid);
   flex-shrink: 0;
-}
-
-.badge{
-  margin-left: auto;
 }
