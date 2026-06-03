@@ -1,0 +1,17 @@
+/* MenuGroup.module.css */
+
+.title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-text-muted);
+  margin: 0 0 5px 4px;
+}
+
+.group {
+  background: var(--color-primary-background);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 0.5px solid var(--color-primary-border);
+}

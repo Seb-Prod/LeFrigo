@@ -2,14 +2,15 @@
 
 import Link from "next/link";
 
-import { Button } from "@/components/ui";
+import { Button, Modal } from "@/components/ui";
 import { useAuth } from "@/contexts/auth.context";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function HomePage() {
   const router = useRouter();
   const { user, loading } = useAuth();
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -60,6 +61,16 @@ export default function HomePage() {
           </Link>
         </div>
       </div>
+      <button onClick={() => setOpen(true)}>Ouvrir la modal</button>
+
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        title="Connexion"
+        animation="slide-down"
+      >
+        <p>Hello 👋</p>
+      </Modal>
     </main>
   );
 }

@@ -1,0 +1,90 @@
+/* SessionDrawer.module.css */
+
+/* ── Overlay ──────────────────────────────────────────────── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 10;
+  animation: fadeIn 0.2s ease;
+}
+
+/* ── Drawer ───────────────────────────────────────────────── */
+.drawer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--color-background-primary);
+  border-radius: 16px 16px 0 0;
+  border-top: 0.5px solid var(--color-border-tertiary);
+  padding: 16px;
+  z-index: 11;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: slideUp 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Handle ───────────────────────────────────────────────── */
+.handle {
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--color-border-secondary);
+  margin: 0 auto;
+}
+
+/* ── En-tête ──────────────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.closeBtn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 0.5px solid var(--color-border-tertiary);
+  background: var(--color-background-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.closeBtn:hover {
+  background: var(--color-background-tertiary);
+}
+
+/* ── Meta ─────────────────────────────────────────────────── */
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ── Bouton révoquer ──────────────────────────────────────── */
+.revokeBtn {
+  width: 100%;
+}
+
+/* ── Animations ───────────────────────────────────────────── */
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

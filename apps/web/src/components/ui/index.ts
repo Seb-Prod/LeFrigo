@@ -12,6 +12,10 @@ export { Heading } from "./Heading";
 
 export * from "./Input/Input";
 
+export * from "./Modal";
+export { MenuGroup } from "./MenuGroup";
+export { MenuItem } from "./MenuItem";
+
 export { Select } from "./Select/Select";
 
 export { Text } from "./Text";

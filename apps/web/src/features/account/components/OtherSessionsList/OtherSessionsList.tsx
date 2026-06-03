@@ -1,5 +1,5 @@
 import { UserSession } from "@lefrigo/shared";
-import { Alert, Badge, Heading } from "@/components/ui";
+import { Alert, Badge, Heading, MenuGroup, MenuItem } from "@/components/ui";
 import { LogoutButton } from "@/features/auth";
 import { SessionFlipCard } from "../SessionFlipCard";
 import styles from "./OtherSessionList.module.css";
@@ -15,21 +15,25 @@ type Props = {
  * Affiche un message si aucune session à afficher.
  */
 export function OtherSessionsList({ sessions, onRevoke, onRevokeAll }: Props) {
-  if (!sessions || sessions.length === 0) return (
-    <Alert variant="info">Aucune autre session</Alert>
-  );
+  if (!sessions || sessions.length === 0)
+    return <Alert variant="info">Aucune autre session</Alert>;
 
   return (
     <section className={styles.section}>
-
+      <MenuGroup title="Autres Sessions">
+        {sessions.map((session) => (
+          
+          <MenuItem key={session.id} label={session.ip ? session.ip : ""}></MenuItem>
+        ))}
+      </MenuGroup>
       {/* ── En-tête : titre + compteur ───────────────────── */}
-      <Heading size="sm" variant="muted">
+      {/* <Heading size="sm" variant="muted">
         Autres sessions{" "}
         <Badge variant="info">{sessions.length}</Badge>
-      </Heading>
+      </Heading> */}
 
       {/* ── Grille de sessions ───────────────────────────── */}
-      <div className={styles.list}>
+      {/* <div className={styles.list}>
         {sessions.map((session) => (
           <SessionFlipCard
             key={session.id}
@@ -37,15 +41,14 @@ export function OtherSessionsList({ sessions, onRevoke, onRevokeAll }: Props) {
             onRevoke={() => onRevoke?.(session.id)}
           />
         ))}
-      </div>
+      </div> */}
 
       {/* ── Révoquer toutes les sessions ────────────────── */}
-      {onRevokeAll && (
+      {/* {onRevokeAll && (
         <LogoutButton onClick={onRevokeAll} size="md" open className={styles.buttonRevoke}>
           Déconnecter tous les appareils
         </LogoutButton>
-      )}
-
+      )} */}
     </section>
   );
 }
