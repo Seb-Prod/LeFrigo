@@ -15,6 +15,7 @@ interface ModalProps {
   children: ReactNode;
   title?: string;
   animation?: Animation;
+  dismissable?: boolean;
 }
 
 export function Modal({
@@ -23,11 +24,12 @@ export function Modal({
   children,
   title,
   animation = "scale",
+  dismissable= true,
 }: ModalProps) {
   // Fermer avec ESC
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
+      if (e.key === "Escape" && dismissable) {
         onClose();
       }
     };
@@ -119,7 +121,7 @@ export function Modal({
 
       {/* Overlay */}
       <div
-        onClick={onClose}
+        onClick={dismissable ? onClose : undefined}
         style={{
           position: "fixed",
           inset: 0,
