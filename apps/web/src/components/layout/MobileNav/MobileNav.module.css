@@ -1,0 +1,86 @@
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MobileNav — Barre de navigation fixe (bas d'écran)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* ── Conteneur principal ──────────────────────────────────── */
+.navigation {
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  margin: 0 8px;
+  padding: 8px;
+  padding-bottom: calc(8px + env(safe-area-inset-bottom));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: color-mix(in srgb, var(--color-primary) 20%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: var(--radius-lg);
+}
+
+/* ── Liste des items ──────────────────────────────────────── */
+.navigation ul {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  position: relative;
+}
+
+/* ── Item individuel ──────────────────────────────────────── */
+.list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+/* Lien — occupe toute la zone tactile ----------------------- */
+.list a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── Icône ───────────────────────────────────────────────── */
+.icon {
+  display: flex;
+  font-size: 2rem;
+  color: var(--color-text-secondary);
+  background: transparent;
+  border-radius: 100%;
+  padding: 4px;
+  transition: color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+}
+
+/* ── État actif ───────────────────────────────────────────── */
+.active .icon {
+  color: var(--color-primary-text);
+  background: var(--color-primary-background);
+}
+
+/* ── Animation organique au clic ─────────────────────────── */
+
+/* Keyframe : rebond élastique simulant une pression physique */
+@keyframes organicBounce {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(0.78) rotate(-4deg); }
+  55%  { transform: scale(1.18) rotate(3deg); }
+  75%  { transform: scale(0.94) rotate(-1deg); }
+  90%  { transform: scale(1.05); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+/* Classe appliquée dynamiquement via JS au moment du clic */
+.pressing .icon {
+  animation: organicBounce 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) forwards;
+}
