@@ -1,1 +1,0 @@
-export { InstallCarousel } from "./InstallCarousel";

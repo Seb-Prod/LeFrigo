@@ -1,0 +1,63 @@
+/* ── Conteneur principal ──────────────────────────────────── */
+.carousel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+/* ── Placeholder image manquante ─────────────────────────── */
+.placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-neutral-subtle);
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  font-size: 3rem;
+  opacity: 0.4;
+}
+
+/* ── Image encadrée par les boutons prev/next ─────────────── */
+.imageNav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+/* ── Zone image — hauteur fixe pour éviter les sauts ─────── */
+.imageWrapper {
+  position: relative;
+  /* prend l'espace entre les boutons */
+  flex: 1;
+  height: 300px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+/* ── Indicateurs dots ─────────────────────────────────────── */
+.dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: var(--color-text-secondary);
+  opacity: 0.3;
+  padding: 0;
+  transition: opacity 0.2s, background 0.2s;
+}
+
+.dotActive {
+  opacity: 1;
+  background: var(--color-primary);
+}

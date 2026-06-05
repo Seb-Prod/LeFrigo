@@ -1,6 +1,5 @@
 import { MdIosShare, MdMoreHoriz } from "react-icons/md";
-import { InstallCarousel } from "../InstallCarousel/InstallCarousel";
-import { Text } from "@/components/ui";
+import { Text, Carousel } from "@/components/ui";
 import { CiSquarePlus } from "react-icons/ci";
 
 const IOS_SLIDES = [
@@ -25,7 +24,8 @@ const IOS_SLIDES = [
     src: "step-4.png",
     label: (
       <Text>
-        Appuyez sur «<CiSquarePlus /><strong>Sur l&apos;écran d&apos;accueil</strong>»
+        Appuyez sur «<CiSquarePlus />
+        <strong>Sur l&apos;écran d&apos;accueil</strong>»
       </Text>
     ),
   },
@@ -40,5 +40,5 @@ const IOS_SLIDES = [
 ];
 
 export function InstallPromptIos() {
-  return <InstallCarousel slides={IOS_SLIDES} basePath="/pwa/ios" />;
+  return <Carousel slides={IOS_SLIDES} basePath="/pwa/ios" />;
 }

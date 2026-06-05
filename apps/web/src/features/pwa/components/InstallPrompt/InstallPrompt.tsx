@@ -2,8 +2,8 @@
 
 import { Modal, Text } from "@/components/ui";
 import { usePwaInstall } from "../../hooks/usePwaInstall";
-import { APP_CONFIG } from "@/config/app";
-import { InstallPromptIos } from "../InstallPromptIos";
+import { InstallPromptIos } from "./InstallPromptIos";
+import { InstallPromptAndroid } from "./InstallPromptAndroid";
 
 export function InstallPrompt() {
   const { os, showPrompt, dismiss } = usePwaInstall();
@@ -15,11 +15,12 @@ export function InstallPrompt() {
       animation="fade"
     >
       <Text>
-        Ajoutez cette application à votre écran d'accueil pour y accéder
+        Ajoutez cette application à votre écran d&apos;accueil pour y accéder
         facilement, comme une vraie app.
       </Text>
-      {os === "ios" && <InstallPromptIos />}
-      {os === "android" && <InstallPromptIos />}
+      <br/>
+      {os === "ioss" && <InstallPromptIos />}
+      {os === "ios" && <InstallPromptAndroid />}
     </Modal>
   );
 }

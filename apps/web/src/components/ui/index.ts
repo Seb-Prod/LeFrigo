@@ -6,6 +6,7 @@ export { Button } from "./Button/Button";
 export * from "./ButtonIcon";
 
 export { Card } from "./Card";
+export { Carousel } from "./Carousel";
 export * from "./Checkbox";
 
 export { Heading } from "./Heading";
