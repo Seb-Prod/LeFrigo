@@ -3,45 +3,24 @@
 import Link from "next/link";
 import { Button, Modal } from "@/components/ui";
 import { useAuth } from "@/contexts/auth.context";
-import { useDevice } from "@/contexts/device.context";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { usePwaInstall } from "@/hooks/usePwaInstall";
-import { MdIosShare } from "react-icons/md";
+import { InstallPrompt } from "@/features/pwa";
 
 export default function HomePage() {
   const router = useRouter();
   const { user, loading } = useAuth();
-  const { isMobile, isPWA } = useDevice();
 
   const [open, setOpen] = useState(false);
 
-  /** Événement natif beforeinstallprompt — capturé pour déclencher l'install */
-  const [installPrompt, setInstallPrompt] = useState<Event | null>(null);
-  const [pwaModalOpen, setPwaModalOpen] = useState(false);
-  const { os, showPrompt, dismiss } = usePwaInstall();
 
   /* Redirige vers le dashboard si déjà connecté */
   useEffect(() => {
     if (user) router.replace("/dashboard");
   }, [user, router]);
 
-  /* Capture le prompt d'installation natif du navigateur */
-  useEffect(() => {
-    const handler = (e: Event) => {
-      e.preventDefault();
-      setInstallPrompt(e);
-    };
-    window.addEventListener("beforeinstallprompt", handler);
-    return () => window.removeEventListener("beforeinstallprompt", handler);
-  }, []);
 
-  /* Ouvre la modale PWA si mobile, pas déjà installé, et prompt disponible */
-  useEffect(() => {
-    if (isMobile && !isPWA && installPrompt) {
-      setPwaModalOpen(true);
-    }
-  }, [isMobile, isPWA, installPrompt]);
+
 
  
 
@@ -90,16 +69,18 @@ export default function HomePage() {
       >
         <p>Hello 👋</p>
       </Modal>
+
+      <InstallPrompt/>
       {/* ── Modal d'invitation à installer la PWA ── */}
 
-      <Modal
+      {/* <Modal
         open={showPrompt}
         onClose={dismiss}
         title="Installer LeFrigo"
         animation="slide-down"
         dismissable={false}
       >
-        {/* ── Instructions iOS ── */}
+        
         {os === "ios" && (
           <div
             style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}
@@ -128,7 +109,7 @@ export default function HomePage() {
           </div>
         )}
 
-        {/* ── Instructions Android ── */}
+        
         {os === "android" && (
           <div
             style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}
@@ -158,7 +139,7 @@ export default function HomePage() {
         <Button onClick={dismiss} style={{ marginTop: "1rem", width: "100%" }}>
           Compris
         </Button>
-      </Modal>
+      </Modal> */}
     </main>
   );
 }

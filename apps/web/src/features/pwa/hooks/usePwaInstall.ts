@@ -1,5 +1,5 @@
 import { useDevice } from "@/contexts/device.context";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 /**
  * Indique si la modale d'invitation à installer la PWA doit être affichée.
@@ -9,18 +9,15 @@ import { useEffect, useState } from "react";
 export function usePwaInstall() {
   const { isMobile, isIOS, isAndroid, isPWA } = useDevice();
 
-  const [showPrompt, setShowPrompt] = useState(false);
-
-  useEffect(() => {
+  const [showPrompt, setShowPrompt] = useState(() => {
+    if (typeof window === "undefined") return false;
     const dismissed = sessionStorage.getItem("pwa-prompt-dismissed");
-    if (isMobile && !isPWA && !dismissed) {
-      setShowPrompt(true);
-    }
-  }, [isMobile, isPWA]);
+    return isMobile && !isPWA && !dismissed;
+  });
 
   /** Ferme la modale et la supprime pour le reste de la session */
   function dismiss() {
-    sessionStorage.setItem("pwa-prompt-dismissed", "1");
+    // sessionStorage.setItem("pwa-prompt-dismissed", "1");
     setShowPrompt(false);
   }
 
