@@ -1,0 +1,117 @@
+/* ── Overlay ──────────────────────────────────────────────── */
+
+.overlay {
+    position: fixed;
+    /* couvre tout le viewport */
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+}
+
+/* ── Modal ────────────────────────────────────────────────── */
+
+/* Centrage absolu via translate pour rester indépendant du flux */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 95vw;
+    max-width: 500px;
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    box-shadow: var(--shadow-md);
+    /* au-dessus de l'overlay */
+    z-index: 1000;
+}
+
+/* ── Wrapper interne (ancre pour position: absolute) ─────── */
+
+.modalInner {
+    /* ancre pour .closeButton */
+    position: relative;
+}
+
+/* ── Bouton de fermeture ──────────────────────────────────── */
+
+.closeButton {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+
+/* Réserve de l'espace à droite pour ne pas chevaucher le bouton de fermeture */
+.header {
+    margin-bottom: var(--space-md);
+    /* clearance pour .closeButton */
+    padding-right: 40px;
+}
+
+/* ── Animations d'entrée ──────────────────────────────────── */
+
+.fade {
+    animation: fadeIn 0.2s ease-out;
+}
+
+.scale {
+    animation: scaleIn 0.25s ease-in-out;
+}
+
+.slideUp {
+    animation: slideUp 0.3s ease-out;
+}
+
+.slideDown {
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Le scale est centré sur l'origine du translate pour éviter tout décalage */
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translate(-50%, calc(-50% + 40px));
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translate(-50%, calc(-50% - 40px));
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
