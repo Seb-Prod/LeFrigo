@@ -5,7 +5,6 @@ import { ReactNode, useEffect } from "react";
 import { ButtonClose } from "../ButtonIcon";
 import styles from "./modal.module.css";
 import clsx from "clsx";
-import { Heading } from "../Heading";
 
 type Animation = "fade" | "scale" | "slideUp" | "slideDown";
 
@@ -13,7 +12,7 @@ interface Props {
   open: boolean;
   onClose: () => void;
   children: ReactNode;
-  title?: string;
+  header?: ReactNode;
   animation?: Animation;
   dismissable?: boolean;
 }
@@ -35,7 +34,7 @@ export function Modal({
   open,
   onClose,
   children,
-  title,
+  header,
   animation = "scale",
   dismissable = false,
 }: Props) {
@@ -67,9 +66,9 @@ export function Modal({
           <ButtonClose onClick={onClose} className={styles.closeButton} />
 
           {/* ── Header (titre optionnel) ── */}
-          {title && (
+          {header && (
             <div className={styles.header}>
-              <Heading>{title}</Heading>
+              {header}
             </div>
           )}
 

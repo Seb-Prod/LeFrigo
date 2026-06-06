@@ -1,0 +1,6 @@
+.circle {
+  position: relative;     /* requis par Image fill */
+  border-radius: 50%;
+  overflow: hidden;       /* coupe l'image au cercle */
+  flex-shrink: 0;         /* évite l'écrasement dans un flex parent */
+}

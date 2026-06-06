@@ -46,9 +46,11 @@
 
 /* Réserve de l'espace à droite pour ne pas chevaucher le bouton de fermeture */
 .header {
+    display: flex;
     margin-bottom: var(--space-md);
     /* clearance pour .closeButton */
-    padding-right: 40px;
+    /* padding-right: 40px; */
+    justify-content: center;
 }
 
 /* ── Animations d'entrée ──────────────────────────────────── */

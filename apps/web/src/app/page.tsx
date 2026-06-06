@@ -6,25 +6,27 @@ import { useAuth } from "@/contexts/auth.context";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { InstallPrompt } from "@/features/pwa";
+import { AuthForm } from "@/features/auth";
 
 export default function HomePage() {
   const router = useRouter();
   const { user, loading } = useAuth();
 
-  const [open, setOpen] = useState(false);
-
+  const [authOpen, setAuthOpen] = useState(false);
 
   /* Redirige vers le dashboard si déjà connecté */
   useEffect(() => {
     if (user) router.replace("/dashboard");
   }, [user, router]);
 
-
-
-
- 
-
-  if (loading) return null;
+  if (loading)
+    return (
+      <main
+        style={{ minHeight: "100vh", display: "grid", placeItems: "center" }}
+      >
+        {/* ton composant Spinner ou juste un texte */}
+      </main>
+    );
 
   return (
     <main
@@ -51,95 +53,22 @@ export default function HomePage() {
             marginTop: "2rem",
           }}
         >
-          <Link href="/auth">
-            <Button>Se connecter</Button>
-          </Link>
-          <Link href="/register">
-            <Button>Créer un compte</Button>
-          </Link>
+          <Button onClick={() => setAuthOpen(true)}>Se connecter</Button>
         </div>
       </div>
       {/* ── Modal de test ── */}
-      <button onClick={() => setOpen(true)}>Ouvrir la modal</button>
+      {/* <button onClick={() => setOpen(true)}>Ouvrir la modal</button>
       <Modal
         open={open}
         onClose={() => setOpen(false)}
         title="Connexion"
-        animation="slide-down"
+        animation="slideDown"
       >
         <p>Hello 👋</p>
-      </Modal>
-
-      <InstallPrompt/>
-      {/* ── Modal d'invitation à installer la PWA ── */}
-
-      {/* <Modal
-        open={showPrompt}
-        onClose={dismiss}
-        title="Installer LeFrigo"
-        animation="slide-down"
-        dismissable={false}
-      >
-        
-        {os === "ios" && (
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}
-          >
-            <p>Pour installer l&apos;app sur votre iPhone :</p>
-            <ol
-              style={{
-                paddingLeft: "1.25rem",
-                display: "flex",
-                flexDirection: "column",
-                gap: "0.5rem",
-              }}
-            >
-              <li>
-                Appuyez sur <MdIosShare style={{ verticalAlign: "middle" }} />{" "}
-                <strong>Partager</strong> en bas de Safari
-              </li>
-              <li>
-                Faites défiler et appuyez sur{" "}
-                <strong>« Sur l&apos;écran d&apos;accueil »</strong>
-              </li>
-              <li>
-                Appuyez sur <strong>Ajouter</strong>
-              </li>
-            </ol>
-          </div>
-        )}
-
-        
-        {os === "android" && (
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}
-          >
-            <p>Pour installer l&apos;app sur votre Android :</p>
-            <ol
-              style={{
-                paddingLeft: "1.25rem",
-                display: "flex",
-                flexDirection: "column",
-                gap: "0.5rem",
-              }}
-            >
-              <li>
-                Appuyez sur <strong>⋮</strong> (menu du navigateur)
-              </li>
-              <li>
-                Appuyez sur <strong>« Ajouter à l&apos;écran d&apos;accueil »</strong>
-              </li>
-              <li>
-                Confirmez en appuyant sur <strong>Ajouter</strong>
-              </li>
-            </ol>
-          </div>
-        )}
-
-        <Button onClick={dismiss} style={{ marginTop: "1rem", width: "100%" }}>
-          Compris
-        </Button>
       </Modal> */}
+
+      <AuthForm open={authOpen} onClose={() => setAuthOpen(false)} />
+      <InstallPrompt />
     </main>
   );
 }

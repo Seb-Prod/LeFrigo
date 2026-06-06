@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useState } from "react";
 import Image from "next/image";
 import styles from "./Carousel.module.css";
 import { ButtonNext, ButtonPrev, Text } from "@/components/ui";
@@ -70,7 +70,7 @@ export function Carousel({ slides, basePath }: Props) {
             </div>
           ) : (
             <Image
-              src={`${basePath}/${slide.src}`}
+              src={`/images/${basePath}/${slide.src}`}
               alt={slide.alt ?? slide.src}
               fill
               style={{ objectFit: "contain" }}

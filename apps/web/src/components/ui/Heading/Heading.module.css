@@ -1,29 +1,43 @@
 .heading {
-    display: flex;
+    display: block;
     align-items: center;
     gap: 6px;
     font-family: var(--font-sans);
     line-height: 1.5;
     margin: 0;
     letter-spacing: 0.08em;
-   
 }
 
 /* ─── Sizes ──────────────────────────────────────────────── */
 .sm {
     font-size: 1rem;
-     font-weight: 500;
+    font-weight: 500;
 }
 
 .md {
     font-size: 1.5rem;
-     font-weight: 600;
+    font-weight: 700;
 }
 
 .lg {
-    font-size: 2;
-     font-weight: 700;
+    font-size: 2rem;
+    font-weight: 700;
 }
+
+/* ─── Alignement ─────────────────────────────────────────── */
+.left {
+    text-align: left;
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+
 
 /* ─── Variants ───────────────────────────────────────────── */
 .default {
@@ -31,7 +45,7 @@
 }
 
 .secondary {
-    color: var(--color-text-secondary)
+    color: var(--color-text-secondary);
 }
 
 .muted {

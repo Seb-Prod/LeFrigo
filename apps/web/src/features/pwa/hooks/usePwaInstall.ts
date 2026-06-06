@@ -17,7 +17,7 @@ export function usePwaInstall() {
 
   /** Ferme la modale et la supprime pour le reste de la session */
   function dismiss() {
-    // sessionStorage.setItem("pwa-prompt-dismissed", "1");
+    sessionStorage.setItem("pwa-prompt-dismissed", "1");
     setShowPrompt(false);
   }
 

@@ -1,3 +1,4 @@
+import { InputEmail } from "./Input/variants/InputEmail/InputEmail";
 export { Alert } from "./Alert";
 export { Avatar } from "./Avatar";
 
@@ -11,7 +12,9 @@ export * from "./Checkbox";
 
 export { Heading } from "./Heading";
 
-export * from "./Input/Input";
+export { Input, InputEmail, InputPassword, InputUserName } from "./Input";
+
+export { Logo } from "./Logo";
 
 export * from "./Modal";
 export { MenuGroup } from "./MenuGroup";
