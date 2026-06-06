@@ -1,9 +1,8 @@
 .text {
-    display: flex;
+    display: inline-flex;    /* inline pour ne pas casser le flux du texte */
     align-items: center;
-    gap: 5px;
+    gap: 5px;                /* espace entre texte et icônes éventuelles */
     font-family: var(--font-sans);
-    
     margin: 0;
 }
 
@@ -21,7 +20,24 @@
 }
 
 .xl {
-    size: 1.25rem;
+    font-size: 1.25rem;      /* était `size` — propriété inexistante */
+}
+
+/* ─── Alignement ─────────────────────────────────────────── */
+.left {
+    text-align: left;
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+.justify {
+    text-align: justify;
 }
 
 /* ─── Variants ───────────────────────────────────────────── */
@@ -30,7 +46,7 @@
 }
 
 .secondary {
-    color: var(--color-text-secondary)
+    color: var(--color-text-secondary); /* manquait le ; */
 }
 
 .muted {

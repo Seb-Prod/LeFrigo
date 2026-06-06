@@ -101,8 +101,8 @@ export function AuthForm({ open, onClose }: Props) {
             />
           )}
 
-          <Link href="" className={styles.link}>
-            {form.label.link}
+          <Link href={form.label.link} className={styles.link}>
+            {form.label.linkLabel}
           </Link>
 
           <Checkbox

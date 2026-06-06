@@ -3,6 +3,7 @@ import { useFormErrors } from "@/hooks";
 import { useState } from "react";
 import { authService } from "../services/auth.service";
 import {
+  forgotPasswordSchema,
   loginSchema,
   registerSchema,
   zodErrorsToRecord,
@@ -19,7 +20,8 @@ const LABELS = {
     button: "Se connecter",
     buttonLoading: "Connexion en cours...",
     checkbox: "Se souvenir de moi",
-    link: "Mot de passe oublié ?",
+    linkLabel: "Mot de passe oublié ?",
+    link: "/forgot-password",
   },
   register: {
     heading: "Créez un compte gratuitement",
@@ -28,7 +30,8 @@ const LABELS = {
     button: "Créer un compte",
     buttonLoading: "Création en cours...",
     checkbox: "Accepter les conditions d'utilisation",
-    link: "Voir les conditions d'utilisation",
+    linkLabel: "Voir les conditions d'utilisation",
+    link: "/terms",
   },
 } as const;
 
@@ -115,7 +118,9 @@ export function useAuthForm(onSuccess?: () => void) {
       login(await authService.login(result.data));
       onSuccess?.();
     } catch (err) {
-      setErrors({ form: [err instanceof Error ? err.message : "Une erreur est survenue"] });
+      setErrors({
+        form: [err instanceof Error ? err.message : "Une erreur est survenue"],
+      });
       setFormState("idle");
     }
   };
@@ -137,7 +142,33 @@ export function useAuthForm(onSuccess?: () => void) {
       await authService.register(result.data);
       setFormState("success");
     } catch (err) {
-      setErrors({ form: [err instanceof Error ? err.message : "Une erreur est survenue"] });
+      setErrors({
+        form: [err instanceof Error ? err.message : "Une erreur est survenue"],
+      });
+      setFormState("idle");
+    }
+  };
+
+  /** Soumet le formulaire de réinitialisation de mot de passe après validation Zod. */
+  const handleForgotPassword = async (e: React.SubmitEvent) => {
+    e.preventDefault();
+    setFormState("loading");
+    setErrors({});
+
+    const result = forgotPasswordSchema.safeParse({ email: fields.email });
+    if (!result.success) {
+      setErrors(zodErrorsToRecord(result.error));
+      setFormState("idle");
+      return;
+    }
+
+    try {
+      await authService.forgotPassword(result.data);
+      setFormState("success");
+    } catch (err) {
+      setErrors({
+        form: [err instanceof Error ? err.message : "Une erreur est survenue"],
+      });
       setFormState("idle");
     }
   };
@@ -157,5 +188,6 @@ export function useAuthForm(onSuccess?: () => void) {
     handleToggleMode,
     handleLogin,
     handleRegister,
+    handleForgotPassword,
   };
 }

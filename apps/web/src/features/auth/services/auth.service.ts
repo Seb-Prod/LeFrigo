@@ -1,6 +1,7 @@
 import { request } from "@/lib/api/request";
 import type {
   AuthResponse,
+  ForgotPasswordDto,
   LoginDto,
   RegisterDto,
   RegisterResponse,
@@ -49,4 +50,11 @@ export const authService = {
       body: JSON.stringify(data),
     });
   },
+
+  forgotPassword(data: ForgotPasswordDto){
+    return request<void>("/auth/forgot-password", {
+      method: "POST",
+      body: JSON.stringify(data)
+    })
+  }
 };

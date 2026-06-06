@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useRef, useSyncExternalStore } from "react";
 
 /**
  * Type représentant la catégorie d'appareil détectée.
@@ -97,8 +97,15 @@ const SSR_DEFAULT: DeviceContextType = {
  * @param {React.ReactNode} children - Les composants enfants qui auront accès au contexte.
  */
 export function DeviceProvider({ children }: { children: React.ReactNode }) {
-  const [deviceInfo] = useState<DeviceContextType>(() =>
-    typeof window === "undefined" ? SSR_DEFAULT : detectDevice(),
+  const cache = useRef<DeviceContextType | null>(null);
+
+  const deviceInfo = useSyncExternalStore(
+    () => () => {},
+    () => {
+      if (!cache.current) cache.current = detectDevice();
+      return cache.current;
+    },
+    () => SSR_DEFAULT,
   );
 
   return (

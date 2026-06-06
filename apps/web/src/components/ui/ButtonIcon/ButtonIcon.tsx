@@ -24,6 +24,7 @@ export function ButtonIcon({
 }: Props) {
   return (
     <button
+      type="button"
       {...props}
       className={clsx(styles.button, styles[size], styles[variant], className)}
     />
