@@ -1,71 +1,58 @@
 "use client";
 
-import {
-  Alert,
-  Button,
-  ButtonPrev,
-  Heading,
-  InputEmail,
-  Text,
-} from "@/components/ui";
-import styles from "./ForgotPassword.module.css";
-import { TbLockQuestion } from "react-icons/tb";
-import { useDevice } from "@/contexts/device.context";
-import { useBack } from "@/hooks";
-import { useAuthForm } from "../../hooks/useAuthForm";
+import { Alert, Heading, Text } from "@/components/ui";
+import styles from "./VerifyEmail.module.css";
+import { TbMailCheck, TbMailX } from "react-icons/tb";
+import { useVerifyEmail } from "../../hooks/useVerifyEmail";
 
-export function ForgotPassword() {
-  const { isMobile } = useDevice();
-  const goBack = useBack();
+type Props = { token: string };
 
-  const form = useAuthForm();
+export function VerifyEmail({ token }: Props) {
+  const { loading, error, errorMessage } = useVerifyEmail(token);
+
+
+  if (loading) {
+    return (
+      <div className={styles.wrapper}>
+        <div className={styles.form}>
+          <TbMailCheck className={styles.icon} />
+          <Heading align="center">Vérification en cours…</Heading>
+          <Text align="center" size="lg">
+            Nous confirmons votre adresse e-mail, cela ne prendra qu&apos;un instant.
+          </Text>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={styles.wrapper}>
+        <div className={styles.form}>
+          <TbMailX className={styles.icon} />
+          <Heading align="center">Lien invalide ou expiré</Heading>
+          <Text align="center" size="lg">
+            Ce lien de vérification n&apos;est plus valide. Veuillez en demander un nouveau.
+          </Text>
+          <Alert variant="error">
+            <ul>
+                <li>{errorMessage}</li>
+            </ul>
+          </Alert>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.wrapper}>
-      <form className={styles.form} onSubmit={form.handleForgotPassword}>
-        {/* ── Bouton retour (mobile uniquement) ── */}
-        {isMobile && (
-          <ButtonPrev
-            onClick={() => {
-              goBack();
-            }}
-          />
-        )}
-
-        {/* ── Icône ── */}
-        <TbLockQuestion className={styles.icon} />
-
-        <Heading align="center">Mot de passe oublié</Heading>
-
+      <div className={styles.form}>
+        <TbMailCheck className={styles.icon} />
+        <Heading align="center">E-mail confirmé !</Heading>
         <Text align="center" size="lg">
-          Après avoir renseigné l&apos;email de votre compte, vous recevrez un
-          message permettant de réinitialiser votre mot de passe.
+          Votre adresse e-mail a bien été vérifiée. Vous pouvez maintenant accéder à votre compte.
         </Text>
-
-        <InputEmail
-          placeholder="Votre email"
-          required
-          error={!!form.errors.email}
-          value={form.fields.email}
-          onChange={form.setField("email")}
-        />
-
-        <Button type="submit" disabled={form.loading}>
-          {form.loading
-            ? "Envoie de l'email en cours..."
-            : "Réinitialiser mon mot de passe"}
-        </Button>
-        {/* ── Erreurs globales ── */}
-        {form.errorMessages.length > 0 && (
-          <Alert variant="error">
-            <ul>
-              {form.errorMessages.map((error) => (
-                <li key={error}>{error}</li>
-              ))}
-            </ul>
-          </Alert>
-        )}
-      </form>
+      </div>
     </div>
   );
 }

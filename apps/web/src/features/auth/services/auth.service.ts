@@ -63,4 +63,10 @@ export const authService = {
       body: JSON.stringify(data),
     });
   },
+
+  verifyEmail(token: string) {
+    return request<void>(`/auth/verify-email?token=${token}`, {
+      method: "GET",
+    });
+  },
 };

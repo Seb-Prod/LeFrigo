@@ -1,4 +1,3 @@
-// app/(auth)/reset-password/page.tsx
 import { notFound } from "next/navigation";
 import { ResetPassword } from "@/features/auth/components/ResetPassword";
 

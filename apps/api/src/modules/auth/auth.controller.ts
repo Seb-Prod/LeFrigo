@@ -40,7 +40,7 @@ export const authController = {
           message: "Token manquant",
         });
       }
-
+      console.log(token)
       const result = await authService.verifyEmail(token);
 
       return res.json(result);
