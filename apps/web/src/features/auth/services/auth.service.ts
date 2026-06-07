@@ -5,6 +5,7 @@ import type {
   LoginDto,
   RegisterDto,
   RegisterResponse,
+  ResetPassordDto,
   UserSession,
 } from "@lefrigo/shared";
 
@@ -27,10 +28,8 @@ export const authService = {
     return request<void>("/auth/logout-all", {
       method: "POST",
       body: JSON.stringify({
-
-      sessionIdentifier,
-
-    }),
+        sessionIdentifier,
+      }),
     });
   },
 
@@ -51,10 +50,17 @@ export const authService = {
     });
   },
 
-  forgotPassword(data: ForgotPasswordDto){
+  forgotPassword(data: ForgotPasswordDto) {
     return request<void>("/auth/forgot-password", {
       method: "POST",
-      body: JSON.stringify(data)
-    })
-  }
+      body: JSON.stringify(data),
+    });
+  },
+
+  resetPassword(data: ResetPassordDto) {
+    return request<void>("/auth/reset-password", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+  },
 };

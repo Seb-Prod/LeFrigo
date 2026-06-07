@@ -6,6 +6,7 @@ import {
   forgotPasswordSchema,
   loginSchema,
   registerSchema,
+  resetPasswordShema,
   zodErrorsToRecord,
 } from "@lefrigo/shared";
 
@@ -173,6 +174,35 @@ export function useAuthForm(onSuccess?: () => void) {
     }
   };
 
+  /** Soumet le formulaire de création d'un nouveau mot de passe après validation Zod. */
+  const handleResetPassword = async (e: React.SubmitEvent, token: string) => {
+    e.preventDefault();
+    setFormState("loading");
+    setErrors({});
+
+    const result = resetPasswordShema.safeParse({
+      token,
+      password: fields.password,
+      confirmPassword: fields.confirmPassword,
+    });
+
+    if (!result.success) {
+      setErrors(zodErrorsToRecord(result.error));
+      setFormState("idle");
+      return;
+    }
+
+    try {
+      await authService.resetPassword(result.data);
+      setFormState("success");
+    } catch (err) {
+      setErrors({
+        form: [err instanceof Error ? err.message : "Une erreur est survenue"],
+      });
+      setFormState("idle");
+    }
+  };
+
   /* ── Retour ─────────────────────────────────────────────── */
 
   return {
@@ -189,5 +219,6 @@ export function useAuthForm(onSuccess?: () => void) {
     handleLogin,
     handleRegister,
     handleForgotPassword,
+    handleResetPassword,
   };
 }
