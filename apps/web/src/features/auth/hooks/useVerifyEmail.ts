@@ -1,16 +1,19 @@
 import { useCallback, useEffect, useState } from "react";
 import { authService } from "../services/auth.service";
 
-type VerifyState = "loading" | "success" | "error";
+type VerifyState =
+  | "loading"
+  | "success"
+  | "already-verified"
+  | "expired"
+  | "invalid";
 
 export function useVerifyEmail(token: string) {
   const [state, setState] = useState<VerifyState>("loading");
-  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const verify = useCallback(async () => {
     if (!token) {
-      setErrorMessage("Lien de vérification invalide.");
-      setState("error");
+      setState("invalid");
       return;
     }
 
@@ -18,8 +21,11 @@ export function useVerifyEmail(token: string) {
       await authService.verifyEmail(token);
       setState("success");
     } catch (err) {
-      setErrorMessage(err instanceof Error ? err.message : "Une erreur est survenue");
-      setState("error");
+      const message = err instanceof Error ? err.message : "";
+
+      if (message === "EMAIL_ALREADY_VERIFIED") setState("already-verified");
+      else if (message === "TOKEN_EXPIRED") setState("expired");
+      else setState("invalid");
     }
   }, [token]);
 
@@ -30,7 +36,8 @@ export function useVerifyEmail(token: string) {
   return {
     loading: state === "loading",
     success: state === "success",
-    error: state === "error",
-    errorMessage,
+    alreadyVerified: state === "already-verified",
+    expired: state === "expired",
+    invalid: state === "invalid",
   };
 }

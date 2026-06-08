@@ -47,10 +47,10 @@ type FormState = "idle" | "loading" | "success";
 /* ── État initial des champs ──────────────────────────────── */
 
 const INITIAL_FIELDS = {
-  userName: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
+  userName: "sebt5656",
+  email: "sebastien.drillaud@gamil.com",
+  password: "123456Az?",
+  confirmPassword: "123456Az?",
   rememberMe: false,
   accept: false,
 };

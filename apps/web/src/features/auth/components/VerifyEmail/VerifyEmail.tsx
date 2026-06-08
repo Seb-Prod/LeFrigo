@@ -1,58 +1,71 @@
 "use client";
 
-import { Alert, Heading, Text } from "@/components/ui";
-import styles from "./VerifyEmail.module.css";
+import { Button, FormCard } from "@/components/ui";
 import { TbMailCheck, TbMailX } from "react-icons/tb";
 import { useVerifyEmail } from "../../hooks/useVerifyEmail";
+import { AuthForm } from "../AuthForm/AuthForm";
+import { useState } from "react";
 
 type Props = { token: string };
 
 export function VerifyEmail({ token }: Props) {
-  const { loading, error, errorMessage } = useVerifyEmail(token);
-
+  const { loading, success, alreadyVerified, expired, invalid } = useVerifyEmail(token);
+  const [authOpen, setAuthOpen] = useState(false);
 
   if (loading) {
     return (
-      <div className={styles.wrapper}>
-        <div className={styles.form}>
-          <TbMailCheck className={styles.icon} />
-          <Heading align="center">Vérification en cours…</Heading>
-          <Text align="center" size="lg">
-            Nous confirmons votre adresse e-mail, cela ne prendra qu&apos;un instant.
-          </Text>
-        </div>
-      </div>
+      <FormCard
+        icon={<TbMailCheck />}
+        title="Vérification en cours…"
+        description="Nous confirmons votre adresse e-mail, cela ne prendra qu'un instant."
+      />
     );
   }
 
-  if (error) {
+  if (success) {
     return (
-      <div className={styles.wrapper}>
-        <div className={styles.form}>
-          <TbMailX className={styles.icon} />
-          <Heading align="center">Lien invalide ou expiré</Heading>
-          <Text align="center" size="lg">
-            Ce lien de vérification n&apos;est plus valide. Veuillez en demander un nouveau.
-          </Text>
-          <Alert variant="error">
-            <ul>
-                <li>{errorMessage}</li>
-            </ul>
-          </Alert>
-        </div>
-      </div>
+      <FormCard
+        icon={<TbMailCheck />}
+        title="E-mail confirmé !"
+        description="Votre adresse e-mail a bien été vérifiée. Vous pouvez maintenant accéder à votre compte."
+      >
+        <Button onClick={() => setAuthOpen(true)}>Se connecter</Button>
+        <AuthForm open={authOpen} onClose={() => setAuthOpen(false)} />
+      </FormCard>
     );
   }
 
+  if (alreadyVerified) {
+    return (
+      <FormCard
+        icon={<TbMailCheck />}
+        title="Adresse déjà vérifiée"
+        description="Votre adresse e-mail a déjà été confirmée. Vous pouvez vous connecter."
+      >
+        <Button onClick={() => setAuthOpen(true)}>Se connecter</Button>
+        <AuthForm open={authOpen} onClose={() => setAuthOpen(false)} />
+      </FormCard>
+    );
+  }
+
+  if (expired) {
+    return (
+      <FormCard
+        icon={<TbMailX />}
+        title="Lien expiré"
+        description="Ce lien de vérification a expiré. Demandez-en un nouveau."
+      >
+        <ResendVerification />
+      </FormCard>
+    );
+  }
+
+  // invalid
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.form}>
-        <TbMailCheck className={styles.icon} />
-        <Heading align="center">E-mail confirmé !</Heading>
-        <Text align="center" size="lg">
-          Votre adresse e-mail a bien été vérifiée. Vous pouvez maintenant accéder à votre compte.
-        </Text>
-      </div>
-    </div>
+    <FormCard
+      icon={<TbMailX />}
+      title="Lien invalide"
+      description="Ce lien de vérification n'est pas valide."
+    />
   );
 }

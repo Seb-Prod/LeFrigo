@@ -69,8 +69,12 @@ export const registerService = {
       throw new AppError(400, "Token de validation invalide");
     }
 
+    if( user.emailVerified){
+      throw new AppError(409, "EMAIL_ALREADY_VERIFIED")
+    }
+
     if (!user.emailVerifyExpires || user.emailVerifyExpires < new Date()) {
-      throw new AppError(400, "Token expiré");
+      throw new AppError(400, "TOKEN_EXPIRED");
     }
 
     await userRepository.verifyEmail(user.id);

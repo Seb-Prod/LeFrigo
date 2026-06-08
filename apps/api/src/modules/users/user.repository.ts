@@ -53,8 +53,6 @@ export const userRepository = {
       data: {
         emailVerified: true,
         status: "ACTIVE",
-        emailVerifyToken: null,
-        emailVerifyExpires: null,
       },
     }),
 

@@ -1,4 +1,3 @@
-import { InputEmail } from "./Input/variants/InputEmail/InputEmail";
 export { Alert } from "./Alert";
 export { Avatar } from "./Avatar";
 
@@ -9,6 +8,8 @@ export * from "./ButtonIcon";
 export { Card } from "./Card";
 export { Carousel } from "./Carousel";
 export * from "./Checkbox";
+
+export { FormCard } from "./FormCard";
 
 export { Heading } from "./Heading";
 
