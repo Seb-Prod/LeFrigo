@@ -1,71 +1,141 @@
 "use client";
 
-import { Button, FormCard } from "@/components/ui";
+import { Alert, Button, FormCard, InputEmail } from "@/components/ui";
 import { TbMailCheck, TbMailX } from "react-icons/tb";
 import { useVerifyEmail } from "../../hooks/useVerifyEmail";
 import { AuthForm } from "../AuthForm/AuthForm";
 import { useState } from "react";
+import { useResendVerification } from "../../hooks/useResendVerification";
+
+/* ── Types ────────────────────────────────────────────────── */
 
 type Props = { token: string };
 
+/**
+ * Page de vérification d'adresse e-mail via token reçu par email.
+ *
+ * États visuels (pilotés par `useVerifyEmail`) :
+ * - `loading`         → vérification API en cours
+ * - `success`         → email confirmé, invite à se connecter
+ * - `alreadyVerified` → compte déjà actif, invite à se connecter
+ * - `expired`         → lien expiré, formulaire de renvoi via `useResendVerification`
+ *   - `resendSuccess` → confirmation d'envoi du nouvel email
+ * - `invalid`         → token introuvable, message d'erreur statique
+ *
+ * @param token - Token de vérification extrait du query param de l'URL
+ */
 export function VerifyEmail({ token }: Props) {
-  const { loading, success, alreadyVerified, expired, invalid } = useVerifyEmail(token);
+  const { loading, success, alreadyVerified, expired, invalid } =
+    useVerifyEmail(token);
+
+  const {
+    email,
+    setEmail,
+    loading: resendLoading,
+    error,
+    errorMessage,
+    success: resendSuccess,
+    handleResend,
+  } = useResendVerification();
+
+  /** Contrôle l'ouverture de la modal de connexion après succès */
   const [authOpen, setAuthOpen] = useState(false);
 
+  {
+    /* ── Vérification en cours ── */
+  }
   if (loading) {
     return (
-      <FormCard
-        icon={<TbMailCheck />}
-        title="Vérification en cours…"
-        description="Nous confirmons votre adresse e-mail, cela ne prendra qu'un instant."
-      />
+      <FormCard icon={<TbMailCheck />} title="Vérification en cours…">
+        <Alert variant="info">
+          Nous confirmons votre adresse e-mail, cela ne prendra qu&apos;un
+          instant.
+        </Alert>
+      </FormCard>
     );
   }
 
+  {
+    /* ── Email confirmé ── */
+  }
   if (success) {
     return (
-      <FormCard
-        icon={<TbMailCheck />}
-        title="E-mail confirmé !"
-        description="Votre adresse e-mail a bien été vérifiée. Vous pouvez maintenant accéder à votre compte."
-      >
+      <FormCard icon={<TbMailCheck />} title="E-mail confirmé !">
+        <Alert variant="success">
+          Votre adresse e-mail a bien été vérifiée. Vous pouvez maintenant
+          accéder à votre compte.
+        </Alert>
         <Button onClick={() => setAuthOpen(true)}>Se connecter</Button>
         <AuthForm open={authOpen} onClose={() => setAuthOpen(false)} />
       </FormCard>
     );
   }
 
+  {
+    /* ── Déjà vérifié ── */
+  }
   if (alreadyVerified) {
     return (
-      <FormCard
-        icon={<TbMailCheck />}
-        title="Adresse déjà vérifiée"
-        description="Votre adresse e-mail a déjà été confirmée. Vous pouvez vous connecter."
-      >
+      <FormCard icon={<TbMailCheck />} title="Adresse déjà vérifiée">
+        <Alert variant="success">
+          Votre adresse e-mail a bien été vérifiée. Vous pouvez maintenant
+          accéder à votre compte.
+        </Alert>
         <Button onClick={() => setAuthOpen(true)}>Se connecter</Button>
         <AuthForm open={authOpen} onClose={() => setAuthOpen(false)} />
       </FormCard>
     );
   }
 
+  {
+    /* ── Lien expiré ── */
+  }
   if (expired) {
+    {
+      /* ── Renvoi confirmé ── */
+    }
+    if (resendSuccess) {
+      return (
+        <FormCard icon={<TbMailCheck />} title="Email envoyé !">
+          <Alert variant="success">
+            Vérifiez votre boîte mail pour confirmer votre adresse e-mail.
+          </Alert>
+        </FormCard>
+      );
+    }
+
     return (
       <FormCard
         icon={<TbMailX />}
         title="Lien expiré"
-        description="Ce lien de vérification a expiré. Demandez-en un nouveau."
+        onSubmit={handleResend}
+        buttonLabel="Renvoyer l'email"
+        buttonLoadingLabel="Envoi en cours..."
+        disabled={resendLoading}
+        errorMessages={error ? [errorMessage] : []}
       >
-        <ResendVerification />
+        <Alert variant="error">
+          Ce lien de vérification a expiré. Renseignez votre email pour en
+          recevoir un nouveau.
+        </Alert>
+        <InputEmail
+          placeholder="Votre email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
       </FormCard>
     );
   }
 
-  // invalid
+  {
+    /* ── Lien invalide ── */
+  }
   return (
-    <FormCard
-      icon={<TbMailX />}
-      title="Lien invalide"
-      description="Ce lien de vérification n'est pas valide."
-    />
+    <FormCard icon={<TbMailX />} title="Lien invalide">
+      <Alert variant="error">
+        Ce lien de vérification n&apos;est pas valide.
+      </Alert>
+    </FormCard>
   );
 }

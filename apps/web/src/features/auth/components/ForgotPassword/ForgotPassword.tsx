@@ -1,71 +1,54 @@
 "use client";
 
-import {
-  Alert,
-  Button,
-  ButtonPrev,
-  Heading,
-  InputEmail,
-  Text,
-} from "@/components/ui";
-import styles from "./ForgotPassword.module.css";
-import { TbLockQuestion } from "react-icons/tb";
+import { Alert, FormCard, InputEmail } from "@/components/ui";
+import { TbLockQuestion, TbMailCheck } from "react-icons/tb";
 import { useDevice } from "@/contexts/device.context";
-import { useBack } from "@/hooks";
 import { useAuthForm } from "../../hooks/useAuthForm";
 
+/**
+ * Page de demande de réinitialisation du mot de passe.
+ *
+ * États visuels :
+ * - `idle`    → formulaire avec champ email et bouton de soumission
+ * - `loading` → bouton désactivé avec label "Envoi en cours..."
+ * - `success` → confirmation d'envoi, invite à consulter la boîte mail
+ */
 export function ForgotPassword() {
   const { isMobile } = useDevice();
-  const goBack = useBack();
-
   const form = useAuthForm();
 
+  {/* ── État succès ── */}
+  if (form.success) {
+    return (
+      <FormCard icon={<TbMailCheck />} title="Email envoyé !">
+        <Alert variant="success">
+          Vérifiez votre boîte mail et cliquez sur le lien pour réinitialiser
+          votre mot de passe.
+        </Alert>
+      </FormCard>
+    );
+  }
+
+  {/* ── Formulaire ── */}
   return (
-    <div className={styles.wrapper}>
-      <form className={styles.form} onSubmit={form.handleForgotPassword}>
-        {/* ── Bouton retour (mobile uniquement) ── */}
-        {isMobile && (
-          <ButtonPrev
-            onClick={() => {
-              goBack();
-            }}
-          />
-        )}
-
-        {/* ── Icône ── */}
-        <TbLockQuestion className={styles.icon} />
-
-        <Heading align="center">Mot de passe oublié</Heading>
-
-        <Text align="center" size="lg">
-          Après avoir renseigné l&apos;email de votre compte, vous recevrez un
-          message permettant de réinitialiser votre mot de passe.
-        </Text>
-
-        <InputEmail
-          placeholder="Votre email"
-          required
-          error={!!form.errors.email}
-          value={form.fields.email}
-          onChange={form.setField("email")}
-        />
-
-        <Button type="submit" disabled={form.loading}>
-          {form.loading
-            ? "Envoie de l'email en cours..."
-            : "Réinitialiser mon mot de passe"}
-        </Button>
-        {/* ── Erreurs globales ── */}
-        {form.errorMessages.length > 0 && (
-          <Alert variant="error">
-            <ul>
-              {form.errorMessages.map((error) => (
-                <li key={error}>{error}</li>
-              ))}
-            </ul>
-          </Alert>
-        )}
-      </form>
-    </div>
+    <FormCard
+      isMobile={isMobile}
+      icon={<TbLockQuestion />}
+      title="Mot de passe oublié"
+      description="Après avoir renseigné l'email de votre compte, vous recevrez un message permettant de réinitialiser votre mot de passe."
+      onSubmit={form.handleForgotPassword}
+      buttonLabel="Réinitialiser mon mot de passe"
+      buttonLoadingLabel="Envoi en cours..."
+      errorMessages={form.errorMessages}
+      disabled={form.loading}
+    >
+      <InputEmail
+        placeholder="Votre email"
+        required
+        error={!!form.errors.email}
+        value={form.fields.email}
+        onChange={form.setField("email")}
+      />
+    </FormCard>
   );
 }

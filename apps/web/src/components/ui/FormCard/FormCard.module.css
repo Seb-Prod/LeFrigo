@@ -1,6 +1,6 @@
 /* ── Wrapper ──────────────────────────────────────────────── */
 
-/* Fond coloré sur desktop, pleine page sur mobile */
+/* Centre la card verticalement sur desktop, pleine page sur mobile */
 .wrapper {
     display: flex;
     align-items: center;
@@ -11,6 +11,7 @@
 
 /* ── Card ─────────────────────────────────────────────────── */
 
+/* Conteneur principal — devient transparent et sans bordure sur mobile */
 .form {
     display: flex;
     flex-direction: column;
@@ -23,13 +24,18 @@
     border: 1px solid var(--color-primary);
 }
 
+/* ── Icône ────────────────────────────────────────────────── */
+
+/* Hérite font-size en cascade vers les icônes React Icons (taille 1em) */
 .icon {
     font-size: 64px;
     color: var(--color-text-secondary);
-    align-self: center;
+    align-self: center; /* centre dans le flex column */
 }
 
-/* Sur mobile : supprime la card et le fond */
+/* ── Mobile ───────────────────────────────────────────────── */
+
+/* Supprime la card et son fond — formulaire pleine page */
 @media (max-width: 768px) {
     .wrapper {
         align-items: flex-start;

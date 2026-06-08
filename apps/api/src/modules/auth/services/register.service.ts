@@ -64,13 +64,12 @@ export const registerService = {
    */
   verifyEmail: async (token: string) => {
     const user = await userRepository.findByEmailVerifyToken(token);
-
     if (!user) {
       throw new AppError(400, "Token de validation invalide");
     }
 
-    if( user.emailVerified){
-      throw new AppError(409, "EMAIL_ALREADY_VERIFIED")
+    if (user.emailVerified) {
+      throw new AppError(409, "EMAIL_ALREADY_VERIFIED");
     }
 
     if (!user.emailVerifyExpires || user.emailVerifyExpires < new Date()) {
@@ -80,5 +79,36 @@ export const registerService = {
     await userRepository.verifyEmail(user.id);
 
     return { message: "Adresse email validée" };
+  },
+
+  /**
+   * Renvoie un email de validation si le compte n'est pas encore validé.
+   */
+  resendVerification: async (email: string) => {
+    console.log("resendVerification", email);
+    const emailLower = email.trim().toLowerCase();
+
+    const user = await userRepository.findByEmailLower(emailLower);
+
+    // Pour éviter l'énumération des comptes :
+    // on renvoie toujours un succès.
+    if (!user) {
+      return;
+    }
+
+    if (user.emailVerified) {
+      throw new AppError(409, "EMAIL_ALREADY_VERIFIED");
+    }
+
+    const emailVerifyToken = crypto.randomBytes(32).toString("hex");
+    const emailVerifyExpires = new Date(Date.now() + 24 * 60 * 60 * 1000);
+
+    await userRepository.updateEmailVerificationToken(
+      user.id,
+      emailVerifyToken,
+      emailVerifyExpires,
+    );
+
+    await mailService.sendVerificationEmail(user.email, emailVerifyToken);
   },
 };

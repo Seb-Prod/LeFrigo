@@ -69,4 +69,11 @@ export const authService = {
       method: "GET",
     });
   },
+
+  resendVerification(email: string) {
+    return request<void>("/auth/resend-verification", {
+      method: "POST",
+      body: JSON.stringify({ email }),
+    });
+  },
 };

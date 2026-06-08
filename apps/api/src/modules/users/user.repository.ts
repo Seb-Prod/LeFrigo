@@ -96,4 +96,20 @@ export const userRepository = {
         lockedUntil: null,
       },
     }),
+
+  updateEmailVerificationToken: async (
+    userId: string,
+    token: string,
+    expires: Date,
+  ) => {
+    return prisma.user.update({
+      where: { id: userId },
+
+      data: {
+        emailVerifyToken: token,
+
+        emailVerifyExpires: expires,
+      },
+    });
+  },
 };

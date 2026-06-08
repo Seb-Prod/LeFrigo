@@ -20,6 +20,9 @@ router.post("/login", authController.login);
 /** Vérification de l'adresse email via un token. */
 router.get("/verify-email", authController.verifyEmail);
 
+/** Renvoi d'un email de vérification. */
+router.post("/resend-verification", authController.resendVerification);
+
 /** Rafraîchissement du token d'accès. */
 router.post("/refresh", authController.refresh);
 

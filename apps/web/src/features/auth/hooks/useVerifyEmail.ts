@@ -19,10 +19,10 @@ export function useVerifyEmail(token: string) {
 
     try {
       await authService.verifyEmail(token);
+
       setState("success");
     } catch (err) {
       const message = err instanceof Error ? err.message : "";
-
       if (message === "EMAIL_ALREADY_VERIFIED") setState("already-verified");
       else if (message === "TOKEN_EXPIRED") setState("expired");
       else setState("invalid");

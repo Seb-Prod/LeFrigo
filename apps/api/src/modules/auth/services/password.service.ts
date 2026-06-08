@@ -57,9 +57,9 @@ export const passwordService = {
     if (!user) {
       throw new AppError(400, "Token invalide");
     }
-
+    
     if (!user.resetPasswordExpires || user.resetPasswordExpires < new Date()) {
-      throw new AppError(400, "tokeb expiré");
+      throw new AppError(400, "TOKEN_EXPIRED");
     }
 
     const hashed = await bcrypt.hash(newPassword, 10);

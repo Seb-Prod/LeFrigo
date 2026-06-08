@@ -42,7 +42,7 @@ type FormMode = "login" | "register";
 
 /** Cycle de vie du formulaire :
  *  idle → loading → idle (erreur) | success (register OK) */
-type FormState = "idle" | "loading" | "success";
+type FormState = "idle" | "loading" | "success" | "expired";
 
 /* ── État initial des champs ──────────────────────────────── */
 
@@ -179,13 +179,11 @@ export function useAuthForm(onSuccess?: () => void) {
     e.preventDefault();
     setFormState("loading");
     setErrors({});
-
     const result = resetPasswordShema.safeParse({
       token,
       password: fields.password,
       confirmPassword: fields.confirmPassword,
     });
-
     if (!result.success) {
       setErrors(zodErrorsToRecord(result.error));
       setFormState("idle");
@@ -196,10 +194,16 @@ export function useAuthForm(onSuccess?: () => void) {
       await authService.resetPassword(result.data);
       setFormState("success");
     } catch (err) {
-      setErrors({
-        form: [err instanceof Error ? err.message : "Une erreur est survenue"],
-      });
-      setFormState("idle");
+      const message = err instanceof Error ? err.message : "";
+
+      if (message === "TOKEN_EXPIRED") {
+        setFormState("expired");
+      } else {
+        setErrors({
+          form: [message || "Une erreur est survenue"],
+        });
+        setFormState("idle");
+      }
     }
   };
 
@@ -214,6 +218,7 @@ export function useAuthForm(onSuccess?: () => void) {
     label: LABELS[mode],
     loading: formState === "loading",
     success: formState === "success",
+    expired: formState === "expired",
     setField,
     handleToggleMode,
     handleLogin,

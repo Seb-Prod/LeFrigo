@@ -34,13 +34,12 @@ export const authController = {
   verifyEmail: async (req: Request, res: Response) => {
     try {
       const token = req.query.token;
-
       if (typeof token !== "string" || !token.trim()) {
         return res.status(400).json({
           message: "Token manquant",
         });
       }
-      console.log(token)
+
       const result = await authService.verifyEmail(token);
 
       return res.json(result);
@@ -244,6 +243,25 @@ export const authController = {
       const sessions = await authService.getSessions(req.user.id);
 
       return res.json(sessions);
+    } catch (error) {
+      return handleError(error, res);
+    }
+  },
+
+  resendVerification: async (req: Request, res: Response) => {
+    try {
+      const result = forgotPasswordSchema.safeParse(req.body);
+
+      if (!result.success) {
+        return res.status(400).json({
+          message: "Données invalides",
+          errors: result.error.issues,
+        });
+      }
+
+      await authService.resendVerification(result.data.email);
+
+      return res.status(204).send();
     } catch (error) {
       return handleError(error, res);
     }
