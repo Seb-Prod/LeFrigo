@@ -6,48 +6,35 @@
 import { Router } from "express";
 import { authController } from "./auth.controller";
 import { authMiddleware } from "../../core/auth/auth.middleware";
-import { mailService } from "../mail/mail.service";
-import { toSafeUser } from "../users/user.types";
+import { authRateLimit, resendRateLimit } from "../../middlewares/rateLimit";
 
 const router = Router();
 
-/** Inscription d'un nouvel utilisateur. */
-router.post("/register", authController.register);
+/* ── Inscription / Connexion ──────────────────────────────── */
 
-/** Connexion d'un utilisateur existant. */
-router.post("/login", authController.login);
-
-/** Vérification de l'adresse email via un token. */
-router.get("/verify-email", authController.verifyEmail);
-
-/** Renvoi d'un email de vérification. */
-router.post("/resend-verification", authController.resendVerification);
-
-/** Rafraîchissement du token d'accès. */
+router.post("/register", authRateLimit, authController.register);
+router.post("/login", authRateLimit, authController.login);
 router.post("/refresh", authController.refresh);
-
-/** Déconnexion et invalidation de la session. */
 router.post("/logout", authController.logout);
+router.post("/logout-all", authMiddleware, authController.logoutAllDevices);
 
-/** Récupération du profil de l'utilisateur connecté. Nécessite un token valide. */
-router.get("/me", authMiddleware, authController.me);
+/* ── Vérification email ───────────────────────────────────── */
 
-/** Envoi d'un email de réinitialisation de mot de passe. */
-router.post("/forgot-password", authController.forgotPassword);
+router.get("/verify-email", authController.verifyEmail);
+router.post("/resend-verification", resendRateLimit, authController.resendVerification);
 
-/** Réinitialisation du mot de passe via un token. */
+/* ── Mot de passe ─────────────────────────────────────────── */
+
+router.post("/forgot-password", authRateLimit, authController.forgotPassword);
 router.post("/reset-password", authController.resetPassword);
 
-router.get("/sessions", authMiddleware, authController.sessions);
-
-router.delete(
-  "/sessions/:sessionId",
-  authMiddleware,
-  authController.revoqueSession,
-);
+/* ── Sessions ─────────────────────────────────────────────── */
 
 router.get("/sessions", authMiddleware, authController.getSessions);
+router.delete("/sessions/:sessionId", authMiddleware, authController.revoqueSession);
 
-router.post("/logout-all", authMiddleware, authController.logoutAllDevices);
+/* ── Profil ───────────────────────────────────────────────── */
+
+router.get("/me", authMiddleware, authController.me);
 
 export default router;

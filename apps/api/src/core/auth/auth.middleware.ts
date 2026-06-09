@@ -28,7 +28,19 @@ export const authMiddleware = async (
 
     if (!user) {
       return res.status(401).json({
-        message: "Utilisateur introuvalbe",
+        message: "Utilisateur introuvablee",
+      });
+    }
+
+    if (!user.emailVerified) {
+      return res.status(403).json({
+        message: "Adresse email non vérifiée",
+      });
+    }
+
+    if (user.status !== "ACTIVE") {
+      return res.status(403).json({
+        message: "Compte inactif ou suspendu",
       });
     }
 
@@ -39,6 +51,6 @@ export const authMiddleware = async (
 
     next();
   } catch {
-    return res.status(401).json({ error: "Token invalid" });
+    return res.status(401).json({ error: "Token invalide" });
   }
 };
