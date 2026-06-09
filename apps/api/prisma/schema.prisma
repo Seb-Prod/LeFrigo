@@ -7,22 +7,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// USER
+// ── USER ───────────────────────────────────────────────────────
+
 model User {
   id String @id @default(uuid())
 
-  email    String @unique
-  userName String @unique
-  password String
-
+  email      String @unique
   emailLower String @unique
+  userName   String @unique
+  password   String
 
   role   UserRole   @default(USER)
   status UserStatus @default(PENDING)
-
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  deletedAt DateTime?
 
   // EMAIL VERIFICATION
   emailVerified      Boolean   @default(false)
@@ -37,21 +33,30 @@ model User {
   failedLoginAttempts Int       @default(0)
   lockedUntil         DateTime?
 
-  // RELATIONS
-  sessions  Session[]
-  auditLogs AuditLog[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 
-  recipes   Recipe[]
-  mealPlans MealPlan[]
+  // RELATIONS
+  sessions        Session[]
+  auditLogs       AuditLog[]
+  recipes         Recipe[]
+  households      HouseholdMember[]
+  votes           Vote[]
+  suggestions     RecipeSuggestion[]
+  invitesSent     HouseholdInvite[]  @relation("InviteSent")
+  invitesReceived HouseholdInvite[]  @relation("InviteReceived")
 
   @@index([email])
   @@index([userName])
   @@index([status])
 }
 
-// SESSION (refresh token / auti-login)
+// ── SESSION ────────────────────────────────────────────────────
+
 model Session {
-  id                String @id @default(uuid())
+  id String @id @default(uuid())
+
   sessionIdentifier String @unique @default(uuid())
 
   userId String
@@ -64,9 +69,8 @@ model Session {
   userAgent String?
   ip        String?
 
-  createdAt DateTime @default(now())
-  expiresAt DateTime
-
+  createdAt      DateTime @default(now())
+  expiresAt      DateTime
   lastActivityAt DateTime @default(now())
 
   revoked Boolean @default(false)
@@ -74,7 +78,8 @@ model Session {
   @@index([userId])
 }
 
-// AUDIT LOGS (sécurité / tracking admin)
+// ── AUDIT LOGS ─────────────────────────────────────────────────
+
 model AuditLog {
   id String @id @default(uuid())
 
@@ -92,35 +97,274 @@ model AuditLog {
   @@index([userId])
 }
 
-// BUSINESS MODELS
+// ── RECIPE ─────────────────────────────────────────────────────
+
 model Recipe {
-  id   String @id @default(uuid())
+  id String @id @default(uuid())
+
   name String
+
+  description String? @db.Text
+
+  preparationTime Int?
+  cookingTime     Int?
+
+  servings Int?
+
+  imageUrl String?
+
+  status RecipeStatus @default(PENDING)
 
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  // RELATIONS
+  ingredients   RecipeIngredient[]
+  steps         RecipeStep[]
+  households    HouseholdRecipe[]
+  candidates    MealPlanCandidate[]
+  suggestions   RecipeSuggestion[]
+  votes         Vote[]
+  mealPlanSlots MealPlanSlot[]
+
+  @@index([status])
+  @@index([userId])
+}
+
+// --
+model RecipeStep {
+  id String @id @default(uuid())
+
+  recipeId String
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+
+  position Int
+
+  instruction String @db.Text
+
+  @@unique([recipeId, position])
+  @@index([recipeId])
+}
+
+model Ingredient {
+  id String @id @default(uuid())
+
+  name String @unique
+
   createdAt DateTime @default(now())
 
+  updatedAt DateTime @updatedAt
+
+  recipes RecipeIngredient[]
+}
+
+model RecipeIngredient {
+  id String @id @default(uuid())
+
+  recipeId String
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+
+  ingredientId String
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
+
+  quantity Float?
+
+  unit String?
+
+  @@unique([recipeId, ingredientId])
+  @@index([recipeId])
+  @@index([ingredientId])
+}
+
+// Suggestion d'un membre — soumise à validation de l'OWNER
+model RecipeSuggestion {
+  id String @id @default(uuid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  recipeId String
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+
+  mealPlanId String
+  mealPlan   MealPlan @relation(fields: [mealPlanId], references: [id], onDelete: Cascade)
+
+  status SuggestionStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+
+  @@index([mealPlanId])
+  @@unique([userId, mealPlanId, recipeId])
+  @@index([status])
+}
+
+// ── HOUSEHOLD ──────────────────────────────────────────────────
+
+model Household {
+  id String @id @default(uuid())
+
+  name String
+
+  restrictedMode Boolean @default(false)
+
+  maxSuggestionsPerPeriod Int @default(0)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  members HouseholdMember[]
+
   mealPlans MealPlan[]
+
+  recipes HouseholdRecipe[]
+
+  invites HouseholdInvite[]
+}
+
+model HouseholdMember {
+  id String @id @default(uuid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  householdId String
+  household   Household @relation(fields: [householdId], references: [id], onDelete: Cascade)
+
+  role HouseholdRole @default(VIEWER)
+
+  joinedAt DateTime @default(now())
+
+  @@unique([userId, householdId])
+  @@index([userId])
+  @@index([householdId])
+}
+
+model HouseholdRecipe {
+  id String @id @default(uuid())
+
+  householdId String
+  household   Household @relation(fields: [householdId], references: [id], onDelete: Cascade)
+
+  recipeId String
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+
+  addedAt DateTime @default(now())
+
+  @@unique([householdId, recipeId])
+  @@index([householdId])
+  @@index([recipeId])
+}
+
+model HouseholdInvite {
+  id String @id @default(uuid())
+
+  householdId String
+  household   Household @relation(fields: [householdId], references: [id], onDelete: Cascade)
+
+  invitedById String
+  invitedBy   User   @relation("InviteSent", fields: [invitedById], references: [id], onDelete: Cascade)
+
+  invitedUserId String
+  invitedUser   User   @relation("InviteReceived", fields: [invitedUserId], references: [id], onDelete: Cascade)
+
+  role HouseholdRole @default(VIEWER)
+
+  status InviteStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([householdId, invitedUserId])
+  @@index([householdId])
+  @@index([invitedUserId])
+  @@index([status])
 }
 
 model MealPlan {
   id String @id @default(uuid())
 
-  date     DateTime
+  householdId String
+  household   Household @relation(fields: [householdId], references: [id], onDelete: Cascade)
+
+  startDate DateTime
+  endDate   DateTime
+
+  maxVotesPerUser Int @default(0)
+
+  status MealPlanStatus @default(VOTING)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  slots MealPlanSlot[]
+
+  candidates MealPlanCandidate[]
+
+  votes Vote[]
+
+  suggestions RecipeSuggestion[]
+
+  @@index([householdId])
+  @@index([status])
+}
+
+model MealPlanSlot {
+  id String @id @default(uuid())
+
+  mealPlanId String
+  mealPlan   MealPlan @relation(fields: [mealPlanId], references: [id], onDelete: Cascade)
+
+  date DateTime
+
   mealType MealType
 
   recipeId String
   recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
 
+  @@unique([mealPlanId, date, mealType])
+  @@index([mealPlanId])
+}
+
+model MealPlanCandidate {
+  id String @id @default(uuid())
+
+  mealPlanId String
+  mealPlan   MealPlan @relation(fields: [mealPlanId], references: [id], onDelete: Cascade)
+
+  recipeId String
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+
+  @@unique([mealPlanId, recipeId])
+  @@index([mealPlanId])
+}
+
+model Vote {
+  id String @id @default(uuid())
+
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  mealPlanId String
+  mealPlan   MealPlan @relation(fields: [mealPlanId], references: [id], onDelete: Cascade)
+
+  recipeId String
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+
   createdAt DateTime @default(now())
+
+  @@unique([userId, mealPlanId, recipeId])
+  @@index([mealPlanId])
+  @@index([userId])
+  @@index([recipeId])
 }
 
-// ENUMS
+// ── ENUMS ──────────────────────────────────────────────────────
 
 enum UserRole {
   USER
@@ -133,6 +377,37 @@ enum UserStatus {
   ACTIVE
   SUSPENDED
   BANNED
+}
+
+enum HouseholdRole {
+  OWNER
+  MEMBER
+  VIEWER
+}
+
+enum InviteStatus {
+  PENDING // en attente de réponse
+  ACCEPTED // membre ajouté au foyer
+  DECLINED // refusé
+  CANCELLED // annulé par l'OWNER
+}
+
+enum RecipeStatus {
+  PENDING // en attente de modération
+  PUBLISHED // visible par tous
+  REJECTED // refusée par un modérateur
+}
+
+enum MealPlanStatus {
+  VOTING // les membres votent
+  CONFIRMED // menu validé par l'OWNER
+  ARCHIVED // période passée
+}
+
+enum SuggestionStatus {
+  PENDING // en attente de validation OWNER
+  APPROVED // intégrée au vote + à la liste du foyer
+  REJECTED // refusée par l'OWNER
 }
 
 enum MealType {
