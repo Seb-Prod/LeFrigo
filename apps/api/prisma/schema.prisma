@@ -197,8 +197,8 @@ model RecipeSuggestion {
 
   createdAt DateTime @default(now())
 
-  @@index([mealPlanId])
   @@unique([userId, mealPlanId, recipeId])
+  @@index([mealPlanId])
   @@index([status])
 }
 
