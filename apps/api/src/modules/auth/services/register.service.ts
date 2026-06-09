@@ -85,7 +85,6 @@ export const registerService = {
    * Renvoie un email de validation si le compte n'est pas encore validé.
    */
   resendVerification: async (email: string) => {
-    console.log("resendVerification", email);
     const emailLower = email.trim().toLowerCase();
 
     const user = await userRepository.findByEmailLower(emailLower);

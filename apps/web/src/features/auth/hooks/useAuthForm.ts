@@ -3,10 +3,8 @@ import { useFormErrors } from "@/hooks";
 import { useState } from "react";
 import { authService } from "../services/auth.service";
 import {
-  forgotPasswordSchema,
   loginSchema,
   registerSchema,
-  resetPasswordShema,
   zodErrorsToRecord,
 } from "@lefrigo/shared";
 
@@ -40,17 +38,17 @@ const LABELS = {
 
 type FormMode = "login" | "register";
 
-/** Cycle de vie du formulaire :
+/** Cycle de vie :
  *  idle → loading → idle (erreur) | success (register OK) */
-type FormState = "idle" | "loading" | "success" | "expired";
+type FormState = "idle" | "loading" | "success";
 
 /* ── État initial des champs ──────────────────────────────── */
 
 const INITIAL_FIELDS = {
-  userName: "sebt5656",
-  email: "sebastien.drillaud@gamil.com",
-  password: "123456Az?",
-  confirmPassword: "123456Az?",
+  userName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
   rememberMe: false,
   accept: false,
 };
@@ -58,11 +56,12 @@ const INITIAL_FIELDS = {
 /* ── Hook ─────────────────────────────────────────────────── */
 
 /**
- * Gère l'état et la logique du formulaire d'authentification.
+ * Gère l'état et la logique de la modal d'authentification (login / register).
  *
- * - Bascule entre les modes `login` et `register`
- * - Valide les champs via les schémas Zod partagés
+ * - Bascule entre les modes `login` et `register` via `handleToggleMode`
+ * - Valide les champs via les schémas Zod partagés (`loginSchema`, `registerSchema`)
  * - Appelle `authService` et propage les erreurs dans `useFormErrors`
+ * - Expose `label` pour piloter les textes UI selon le mode actif
  * - Expose `formState` pour piloter les états visuels (loading, success)
  *
  * @param onSuccess - Callback déclenché après un login réussi (ex: fermer la modal)
@@ -150,63 +149,6 @@ export function useAuthForm(onSuccess?: () => void) {
     }
   };
 
-  /** Soumet le formulaire de réinitialisation de mot de passe après validation Zod. */
-  const handleForgotPassword = async (e: React.SubmitEvent) => {
-    e.preventDefault();
-    setFormState("loading");
-    setErrors({});
-
-    const result = forgotPasswordSchema.safeParse({ email: fields.email });
-    if (!result.success) {
-      setErrors(zodErrorsToRecord(result.error));
-      setFormState("idle");
-      return;
-    }
-
-    try {
-      await authService.forgotPassword(result.data);
-      setFormState("success");
-    } catch (err) {
-      setErrors({
-        form: [err instanceof Error ? err.message : "Une erreur est survenue"],
-      });
-      setFormState("idle");
-    }
-  };
-
-  /** Soumet le formulaire de création d'un nouveau mot de passe après validation Zod. */
-  const handleResetPassword = async (e: React.SubmitEvent, token: string) => {
-    e.preventDefault();
-    setFormState("loading");
-    setErrors({});
-    const result = resetPasswordShema.safeParse({
-      token,
-      password: fields.password,
-      confirmPassword: fields.confirmPassword,
-    });
-    if (!result.success) {
-      setErrors(zodErrorsToRecord(result.error));
-      setFormState("idle");
-      return;
-    }
-
-    try {
-      await authService.resetPassword(result.data);
-      setFormState("success");
-    } catch (err) {
-      const message = err instanceof Error ? err.message : "";
-
-      if (message === "TOKEN_EXPIRED") {
-        setFormState("expired");
-      } else {
-        setErrors({
-          form: [message || "Une erreur est survenue"],
-        });
-        setFormState("idle");
-      }
-    }
-  };
-
   /* ── Retour ─────────────────────────────────────────────── */
 
   return {
@@ -218,12 +160,9 @@ export function useAuthForm(onSuccess?: () => void) {
     label: LABELS[mode],
     loading: formState === "loading",
     success: formState === "success",
-    expired: formState === "expired",
     setField,
     handleToggleMode,
     handleLogin,
     handleRegister,
-    handleForgotPassword,
-    handleResetPassword,
   };
 }

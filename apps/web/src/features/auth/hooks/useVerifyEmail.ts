@@ -1,5 +1,7 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { authService } from "../services/auth.service";
+
+/* ── Types ────────────────────────────────────────────────── */
 
 type VerifyState =
   | "loading"
@@ -8,30 +10,37 @@ type VerifyState =
   | "expired"
   | "invalid";
 
+/* ── Hook ─────────────────────────────────────────────────── */
+
+/**
+ * Vérifie automatiquement l'adresse e-mail via le token reçu par email.
+ *
+ * - Se déclenche au montage via `useEffect`
+ * - Appelle `authService.verifyEmail` et mappe la réponse sur un état typé
+ * - Distingue 5 états : `loading`, `success`, `already-verified`, `expired`, `invalid`
+ * - Les codes d'erreur `EMAIL_ALREADY_VERIFIED` et `TOKEN_EXPIRED` sont émis par le backend
+ *
+ * @param token - Token extrait du query param `?token=` de l'URL
+ */
 export function useVerifyEmail(token: string) {
-  const [state, setState] = useState<VerifyState>("loading");
+  /** Démarre à `"invalid"` si token absent, `"loading"` sinon */
+  const [state, setState] = useState<VerifyState>(
+    token ? "loading" : "invalid"
+  );
 
-  const verify = useCallback(async () => {
-    if (!token) {
-      setState("invalid");
-      return;
-    }
+  useEffect(() => {
+    if (!token) return;
 
-    try {
-      await authService.verifyEmail(token);
-
+    authService.verifyEmail(token).then(() => {
       setState("success");
-    } catch (err) {
+    }).catch((err) => {
       const message = err instanceof Error ? err.message : "";
+
       if (message === "EMAIL_ALREADY_VERIFIED") setState("already-verified");
       else if (message === "TOKEN_EXPIRED") setState("expired");
       else setState("invalid");
-    }
+    });
   }, [token]);
-
-  useEffect(() => {
-    verify();
-  }, [verify]);
 
   return {
     loading: state === "loading",
