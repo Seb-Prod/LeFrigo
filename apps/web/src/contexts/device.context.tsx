@@ -27,6 +27,8 @@ type DeviceContextType = {
   isMobile: boolean;
   /** `true` si l'application est lancée sur tablette */
   isTablet: boolean;
+
+  ready: boolean;
 };
 
 const DeviceContext = createContext<DeviceContextType | null>(null);
@@ -46,6 +48,7 @@ function detectDevice(): DeviceContextType {
   const isTablet = /ipad|tablet/.test(ua);
 
   return {
+    ready: true,
     device: isMobile ? "mobile" : isTablet ? "tablet" : "desktop",
     isMobile: isMobile,
     isTablet: isTablet,
@@ -64,6 +67,8 @@ function detectDevice(): DeviceContextType {
  * Elles seront écrasées dès l'hydratation côté client.
  */
 const SSR_DEFAULT: DeviceContextType = {
+  ready: false,
+
   device: "desktop",
   isIOS: false,
   isAndroid: false,
