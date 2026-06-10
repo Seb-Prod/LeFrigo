@@ -15,18 +15,11 @@ export default function HomePage() {
   const [authOpen, setAuthOpen] = useState(false);
 
   /* Redirige vers le dashboard si déjà connecté */
-  useEffect(() => {
-    if (user) router.replace("/dashboard");
-  }, [user, router]);
+  // useEffect(() => {
+  //   if (user) router.replace("/dashboard");
+  // }, [user, router]);
 
-  if (loading)
-    return (
-      <main
-        style={{ minHeight: "100vh", display: "grid", placeItems: "center" }}
-      >
-        {/* ton composant Spinner ou juste un texte */}
-      </main>
-    );
+
 
   return (
     <main
@@ -56,16 +49,6 @@ export default function HomePage() {
           <Button onClick={() => setAuthOpen(true)}>Se connecter</Button>
         </div>
       </div>
-      {/* ── Modal de test ── */}
-      {/* <button onClick={() => setOpen(true)}>Ouvrir la modal</button>
-      <Modal
-        open={open}
-        onClose={() => setOpen(false)}
-        title="Connexion"
-        animation="slideDown"
-      >
-        <p>Hello 👋</p>
-      </Modal> */}
 
       <AuthForm open={authOpen} onClose={() => setAuthOpen(false)} />
       <InstallPrompt />

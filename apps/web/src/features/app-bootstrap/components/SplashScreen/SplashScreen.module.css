@@ -1,0 +1,207 @@
+/* ── Conteneur ──────────────────────────────────────────────── */
+
+.container {
+    position: relative; /* ancrage pour .credit */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* ── Blob ───────────────────────────────────────────────────── */
+
+.blob {
+    width: 260px;
+    height: 260px;
+
+    border-radius: 50%;
+    box-shadow: var(--shadow-lg);
+    background: var(--color-primary);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    animation:
+        blobMorph 8s ease-in-out infinite,
+        blobFloat 6s ease-in-out infinite;
+
+    will-change: border-radius, transform;
+}
+
+/* Légère pulsation pendant l'absorption du texte */
+.blobAbsorbing {
+    animation:
+        blobMorph 8s ease-in-out infinite,
+        blobFloat 6s ease-in-out infinite,
+        blobPulse 600ms ease-in-out;
+}
+
+/* Phase expand : déclenché avec un délai pour laisser le texte s'absorber */
+.exit .blob {
+    animation: expand 1200ms cubic-bezier(.22, 1, .36, 1) forwards;
+    animation-delay: 700ms; /* attend l'absorption du texte */
+}
+
+/* ── Groupe texte ────────────────────────────────────────────── */
+
+.textGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+    transition:
+        opacity 600ms ease,
+        transform 600ms ease,
+        filter 600ms ease;
+}
+
+/* Le texte se rétracte et se fond dans le blob */
+.textExit {
+    opacity: 0;
+    transform: scale(0.12);
+    filter: blur(6px);
+}
+
+.appName {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--color-accent-solid);
+    line-height: 1;
+}
+
+/* ── Tagline défilante ─────────────────────────────────────── */
+
+.tagline {
+    min-height: 3rem;        
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--color-accent-hover);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+
+    display: flex;            
+    align-items: center;     
+    justify-content: center;
+    text-align: center;        
+    width: 160px;
+    line-height: 1.4;
+
+    transition: opacity 400ms ease, transform 400ms ease;
+}
+
+/* Tagline visible : position normale */
+.taglineVisible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Tagline cachée : glisse légèrement vers le bas en disparaissant */
+.taglineHidden {
+    opacity: 0;
+    transform: translateY(4px);
+}
+
+/* ── Dots de chargement ─────────────────────────────────────── */
+
+.dots {
+    display: flex;
+    gap: 5px;
+    margin-top: 4px;
+}
+
+.dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--color-text);
+    opacity: 0.3;
+}
+
+/* Chaque dot avec un décalage pour l'effet vague */
+.dot:nth-child(1) { animation: dotPulse 1.4s ease-in-out infinite 0s; }
+.dot:nth-child(2) { animation: dotPulse 1.4s ease-in-out infinite 0.2s; }
+.dot:nth-child(3) { animation: dotPulse 1.4s ease-in-out infinite 0.4s; }
+
+/* Les dots s'arrêtent pendant l'absorption */
+.blobAbsorbing .dot { animation: none; }
+
+/* ── Crédit développeur ─────────────────────────────────────── */
+
+.credit {
+    position: absolute;
+    bottom: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+    opacity: 0.45;
+    transition: opacity 400ms ease;
+}
+
+.creditExit {
+    opacity: 0;
+}
+
+/* Nom + sous-ligne empilés et centrés */
+.creditBody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.creditName {
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+/* Métadonnées discrètes : année, version, mention légale */
+.creditSub {
+    font-size: 0.55rem;
+    font-weight: 400;
+    color: var(--color-text-tertiary);
+    letter-spacing: 0.1em;
+}
+
+/* ── Keyframes ──────────────────────────────────────────────── */
+
+@keyframes blobMorph {
+    0%   { border-radius: 42% 58% 61% 39% / 46% 42% 58% 54%; }
+    25%  { border-radius: 54% 46% 38% 62% / 56% 31% 69% 44%; }
+    50%  { border-radius: 62% 38% 47% 53% / 38% 63% 37% 62%; }
+    75%  { border-radius: 44% 56% 61% 39% / 67% 39% 61% 33%; }
+    100% { border-radius: 42% 58% 61% 39% / 46% 42% 58% 54%; }
+}
+
+@keyframes blobFloat {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-12px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes blobPulse {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.06); }
+    100% { transform: scale(1); }
+}
+
+@keyframes expand {
+    0%   { transform: scale(1);  border-radius: 50%; }
+    65%  { transform: scale(14); border-radius: 50%; }
+    100% { transform: scale(24); border-radius: 0; opacity: 0; }
+}
+
+@keyframes dotPulse {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50%       { opacity: 1;   transform: scale(1.5); }
+}
