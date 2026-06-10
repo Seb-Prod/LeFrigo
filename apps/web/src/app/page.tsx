@@ -20,7 +20,6 @@ export default function HomePage() {
   // }, [user, router]);
 
 
-
   return (
     <main
       style={{

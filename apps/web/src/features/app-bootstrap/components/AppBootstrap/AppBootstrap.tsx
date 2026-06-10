@@ -2,30 +2,28 @@
 
 import { useDevice } from "@/contexts/device.context";
 import { SplashScreen } from "../SplashScreen";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-type AppBootstrapProps = {
+type Props = {
   children: React.ReactNode;
 };
 
-export function AppBootstrap({ children }: AppBootstrapProps) {
+export function AppBootstrap({ children }: Props) {
   const { ready } = useDevice();
-  // const [ready, setReady] = useState(false);
-  const [showApp, setShowApp] = useState(false);
+  const [showSplash, setShowSplash] = useState(true);
 
-  // useEffect(() => {
-  //   const duration = 10000 + Math.random() * 30000;
+  return (
+    <>
+      {children}
 
-  //   const timer = setTimeout(() => {
-  //     setReady(true);
-  //   }, duration);
-
-  //   return () => clearTimeout(timer);
-  // }, []);
-
-  if (!showApp) {
-    return <SplashScreen ready={ready} onFinished={() => setShowApp(true)} />;
-  }
-
-  return <>{children}</>;
+      {showSplash && (
+        <SplashScreen
+          ready={ready}
+          onFinished={() => {
+            setShowSplash(false);
+          }}
+        />
+      )}
+    </>
+  );
 }

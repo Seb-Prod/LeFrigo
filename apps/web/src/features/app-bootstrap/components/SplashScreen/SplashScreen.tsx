@@ -78,7 +78,7 @@ export function SplashScreen({ ready, onFinished }: Props) {
   useEffect(() => {
     if (!exiting) return;
     /** absorption (700ms) + expand (1200ms) */
-    const timer = setTimeout(onFinished, 700 + 1200);
+    const timer = setTimeout(onFinished, 100 + 100);
     return () => clearTimeout(timer);
   }, [exiting, onFinished]);
 
