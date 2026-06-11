@@ -22,5 +22,6 @@ export { MenuGroup } from "./MenuGroup";
 export { MenuItem } from "./MenuItem";
 
 export { Select } from "./Select/Select";
+export { Surface } from "./Surface";
 
 export { Text } from "./Text";

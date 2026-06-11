@@ -1,0 +1,43 @@
+/* ── Wrapper ──────────────────────────────────────────────── */
+
+/* Centre la card sur desktop, pleine page sur mobile */
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--space-sm);
+}
+
+/* ── Card ─────────────────────────────────────────────────── */
+
+/* Conteneur principal avec fond et bordure */
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+  gap: 22px;
+  background: var(--color-surface);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-primary-solid);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ── Mobile ───────────────────────────────────────────────── */
+
+/* Supprime la card — formulaire pleine page */
+@media (max-width: 768px) {
+  .wrapper {
+    align-items: flex-start;
+    padding: var(--space-md);
+  }
+
+  .card {
+    border: none;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+  }
+}

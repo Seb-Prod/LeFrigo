@@ -17,7 +17,7 @@
 /* ── Zone scrollable ──────────────────────────────────────── */
 .main {
   flex: 1;
-  padding: 24px;
+  padding: 0px;
   overflow-y: auto; /* scroll uniquement ici, Topbar reste fixe */
   min-height: 0;    /* nécessaire dans un contexte flex column */
 }

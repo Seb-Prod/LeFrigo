@@ -1,4 +1,4 @@
-/* MenuGroup.module.css */
+/* ── Titre de section ─────────────────────────────────────── */
 
 .title {
   font-size: 11px;
@@ -9,9 +9,29 @@
   margin: 0 0 5px 4px;
 }
 
+/* ── Conteneur ────────────────────────────────────────────── */
+
 .group {
-  background: var(--color-primary-background);
+  display: flex;
+  flex-direction: column;
+  background: var(--color-neutral-background);
   border-radius: 12px;
   overflow: hidden;
-  border: 0.5px solid var(--color-primary-border);
+  border: 0.5px solid var(--color-neutral-border);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Séparateur indenté — absent sur le dernier item */
+.group > *:not(:last-child) {
+  position: relative;
+}
+
+.group > *:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 16px;  /* retrait à gauche — ajuste selon ton padding d'item */
+  right: 0;
+  height: 0.5px;
+  background: var(--color-neutral-border);
 }

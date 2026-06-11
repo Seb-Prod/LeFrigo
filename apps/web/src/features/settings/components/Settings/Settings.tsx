@@ -1,31 +1,34 @@
-import { Button } from "@/components/ui";
+import { Button, MenuGroup, Surface } from "@/components/ui";
 import { useAuth } from "@/contexts/auth.context";
 import { AuthForm } from "@/features/auth";
 import { useState } from "react";
+import { ProfileCard } from "../ProfileCard";
+import { GuestCard } from "../GuestCard";
 
 export function Settings() {
   const { user, loading, logout } = useAuth();
   const [authOpen, setAuthOpen] = useState(false);
 
-  const handleAuthAction = () => {
-    if (user) {
-      logout();
-    } else {
-      setAuthOpen(true);
-    }
-  };
-
   return (
     <>
-      <div>
-        <Button
-          variant={user ? "danger" : "primary"}
-          appearance="solid"
-          onClick={handleAuthAction}
-        >
-          {user ? "Se déconnecter" : "Connexion"}
-        </Button>
-      </div>
+      <Surface>
+        {user ? <ProfileCard/> : <GuestCard/>}
+        <MenuGroup title="mes appreils">
+          <span>d</span>
+        </MenuGroup>
+        <MenuGroup title="foyer">
+          <span>d</span>
+        </MenuGroup>
+        <MenuGroup title="recette">
+          <span>d</span>
+        </MenuGroup>
+        <MenuGroup title="apparence">
+          <span>d</span>
+        </MenuGroup>
+        <MenuGroup title="compte">
+          <Button variant="danger">Se déconnecter</Button>
+        </MenuGroup>
+      </Surface>
       <AuthForm open={authOpen} onClose={() => setAuthOpen(false)} />
     </>
   );
