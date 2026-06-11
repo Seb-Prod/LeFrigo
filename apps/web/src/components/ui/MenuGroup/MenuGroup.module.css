@@ -17,7 +17,6 @@
   background: var(--color-neutral-background);
   border-radius: 12px;
   overflow: hidden;
-  border: 0.5px solid var(--color-neutral-border);
   box-shadow: var(--shadow-lg);
 }
 
@@ -31,7 +30,7 @@
   position: absolute;
   bottom: 0;
   left: 16px;  /* retrait à gauche — ajuste selon ton padding d'item */
-  right: 0;
+  right: 16px;
   height: 0.5px;
   background: var(--color-neutral-border);
 }
