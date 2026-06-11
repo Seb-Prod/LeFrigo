@@ -20,6 +20,7 @@ export { Logo } from "./Logo";
 export * from "./Modal";
 export { MenuGroup } from "./MenuGroup";
 export { MenuItem } from "./MenuItem";
+export { MenuItemIcon } from "./MenuItemIcon";
 
 export { Select } from "./Select/Select";
 export { Surface } from "./Surface";

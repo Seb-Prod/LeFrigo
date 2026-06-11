@@ -15,9 +15,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: color-mix(in srgb, var(--color-primary) 20%, transparent);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: color-mix(in srgb, var(--color-primary-solid) 20%, transparent);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(2px);
   border-radius: var(--radius-lg);
 }
 

@@ -9,6 +9,7 @@
   width: 100%;
   background: none;
   border: none;
+  border-radius: var(--radius-md);
   cursor: pointer;
   text-align: left;
   text-decoration: none;

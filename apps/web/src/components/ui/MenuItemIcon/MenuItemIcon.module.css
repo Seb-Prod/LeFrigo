@@ -1,0 +1,60 @@
+/* ── Base ─────────────────────────────────────────────────── */
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+/* ── Tailles ──────────────────────────────────────────────── */
+
+.sm {
+  width: 28px;
+  height: 28px;
+  font-size: 14px;
+}
+
+.md {
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+}
+
+/* ── Couleurs ─────────────────────────────────────────────── */
+
+.primary {
+  background: var(--color-primary-background);
+  color: var(--color-primary-solid);
+}
+
+.accent {
+  background: var(--color-accent-background);
+  color: var(--color-accent-solid);
+}
+
+.success {
+  background: var(--color-success-background);
+  color: var(--color-success-solid);
+}
+
+.warning {
+  background: var(--color-warning-background);
+  color: var(--color-warning-solid);
+}
+
+.danger {
+  background: var(--color-danger-background);
+  color: var(--color-danger-solid);
+}
+
+.info {
+  background: var(--color-info-background);
+  color: var(--color-info-solid);
+}
+
+.neutral {
+  background: var(--color-neutral-background);
+  color: var(--color-neutral-solid);
+}
