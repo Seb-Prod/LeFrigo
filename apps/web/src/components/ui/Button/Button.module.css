@@ -1,47 +1,284 @@
+/* ── Variables internes ───────────────────────────────────── */
+
+/* Chaque variante surcharge uniquement les props qu'elle concerne. */
 .button {
-  border: none;
+  --bg: var(--color-primary-solid);
+  --color: var(--color-primary-solid-text);
+  --shadow-color: rgba(83, 74, 183, 0.35);
+  --ripple: rgba(255, 255, 255, 0.22);
+
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+
+  border: 1.5px solid transparent;
+  /* réservé pour ghost, invisible ailleurs */
   cursor: pointer;
-  padding: 12px 20px;
+
+  padding: 10px 22px;
   border-radius: var(--radius-md);
+
+  background: var(--bg);
+  color: var(--color);
+
+  font-size: 14px;
   font-weight: 600;
-  transition: background 0.2s ease, transform 0.1s ease, opacity 0.2s ease;
+
+  transition:
+    transform 0.2s cubic-bezier(0.34, 1.4, 0.64, 1),
+    box-shadow 0.25s ease;
 }
 
-.button:hover:not(:disabled) {
-  transform: translateY(-1px);
+/* ── Blobs ────────────────────────────────────────────────── */
+
+/* Deux pseudo-éléments décalés pour un effet liquide bicouche */
+.button::before,
+.button::after {
+  content: "";
+
+  position: absolute;
+
+  width: 200%;
+  height: 200%;
+  left: -50%;
+  top: 110%;
+  /* part du bas, invisible au repos */
+
+  background: var(--ripple);
+  z-index: 0;
+  pointer-events: none;
+
+  /* Blobs ronds : ratio x/y proche de 1 pour éviter l'effet anguleux */
+  border-radius: 45% 55% 60% 40% / 50% 45% 55% 50%;
+  transition:
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    border-radius 0.7s ease;
 }
+
+/* Second blob légèrement décalé en opacité et timing */
+.button::after {
+  opacity: 0.6;
+  border-radius: 55% 45% 40% 60% / 45% 55% 50% 50%;
+  transition-duration: 0.9s;
+}
+
+/* Le contenu reste au-dessus des blobs */
+.button>* {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Hover ────────────────────────────────────────────────── */
+
+.button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -8px var(--shadow-color);
+}
+
+/* Blob avant : monte presque jusqu'en haut avec légère rotation */
+.button:hover:not(:disabled)::before {
+  transform: translateY(-88%) rotate(8deg);
+  border-radius: 50% 50% 45% 55% / 48% 52% 50% 50%;
+}
+
+/* Blob arrière : couvre tout + animation flottante au repos */
+.button:hover:not(:disabled)::after {
+  transform: translateY(-98%) rotate(-10deg);
+  border-radius: 52% 48% 55% 45% / 50% 48% 52% 50%;
+  animation: blobFloat 3.5s ease-in-out infinite;
+}
+
+/* ── Press ────────────────────────────────────────────────── */
 
 .button:active:not(:disabled) {
   transform: scale(0.97);
+  transition-duration: 0.08s;
 }
 
-.primary {
-  background: var(--color-primary);
-  color: white;
-}
-
-.primary:hover {
-  background: var(--color-primary-hover);
-}
-
-.secondary {
-  background: var(--color-accent);
-  color: var(--color-text);
-}
-
-.secondary:hover{
-  background: var(--color-accent-hover);
-}
-
-.danger {
-  background: var(--color-danger);
-  color: white;
-}
+/* ── Disabled ─────────────────────────────────────────────── */
 
 .button:disabled {
-
-  opacity: 0.6;
-
+  opacity: 0.42;
   cursor: not-allowed;
+}
 
+/* ── Appearance : no-blob ─────────────────────────────────── */
+
+/* Supprime les pseudo-éléments quand l'animation est désactivée */
+.noBlob::before,
+.noBlob::after {
+  display: none;
+}
+
+/* ── Animation flottante post-hover ──────────────────────── */
+
+@keyframes blobFloat {
+  0% {
+    transform: translateY(-98%) rotate(-10deg);
+  }
+
+  50% {
+    transform: translateY(-103%) rotate(-4deg);
+  }
+
+  100% {
+    transform: translateY(-98%) rotate(-10deg);
+  }
+}
+
+/* ── Appearance : solid (défaut) ─────────────────────────── */
+
+/* Fond plein — ripple blanc semi-transparent */
+.solid {
+  --ripple: rgba(255, 255, 255, 0.22);
+}
+
+/* ── Appearance : soft ────────────────────────────────────── */
+
+/* Fond pastel — ripple teinté dans la même couleur */
+.soft {
+  --ripple: color-mix(in srgb, var(--bg) 30%, transparent);
+}
+
+/* ── Appearance : ghost ───────────────────────────────────── */
+
+/* Fond transparent + bordure colorée */
+.ghost {
+  --ripple: color-mix(in srgb, var(--color) 10%, transparent);
+  background: transparent;
+  border-color: var(--color);
+}
+
+/* ── Color : primary ─────────────────────────────────────── */
+
+.primary {
+  --bg: var(--color-primary-solid);
+  --color: var(--color-primary-solid-text);
+  --shadow-color: rgba(83, 74, 183, 0.35);
+}
+
+.primary.soft {
+  --bg: var(--color-primary-soft);
+  --color: var(--color-primary-soft-text);
+}
+
+.primary.ghost {
+  --bg: transparent;
+  --color: var(--color-primary-solid);
+}
+
+/* ── Color : accent ──────────────────────────────────────── */
+
+.accent {
+  --bg: var(--color-accent-solid);
+  --color: var(--color-accent-solid-text);
+  --shadow-color: rgba(29, 158, 117, 0.35);
+}
+
+.accent.soft {
+  --bg: var(--color-accent-soft);
+  --color: var(--color-accent-soft-text);
+}
+
+.accent.ghost {
+  --bg: transparent;
+  --color: var(--color-accent-solid);
+}
+
+/* ── Color : danger ──────────────────────────────────────── */
+
+.danger {
+  --bg: var(--color-danger-solid);
+  --color: var(--color-danger-solid-text);
+  --shadow-color: rgba(216, 90, 48, 0.35);
+}
+
+.danger.soft {
+  --bg: var(--color-danger-soft);
+  --color: var(--color-danger-soft-text);
+}
+
+.danger.ghost {
+  --bg: transparent;
+  --color: var(--color-danger-solid);
+}
+
+.success {
+  --bg: var(--color-success-solid);
+  --color: var(--color-success-solid-text);
+  --shadow-color: var(--shadow-color-success);
+}
+
+.success.soft {
+  --bg: var(--color-success-soft);
+  --color: var(--color-success-soft-text);
+}
+
+.success.ghost {
+  --bg: transparent;
+  --color: var(--color-success-solid);
+}
+
+.warning {
+  --bg: var(--color-warning-solid);
+  --color: var(--color-warning-solid-text);
+  --shadow-color: var(--shadow-color-warning);
+}
+
+.warning.soft {
+  --bg: var(--color-warning-soft);
+  --color: var(--color-warning-soft-text);
+}
+
+.warning.ghost {
+  --bg: transparent;
+  --color: var(--color-warning-solid);
+}
+
+.info {
+  --bg: var(--color-info-solid);
+  --color: var(--color-info-solid-text);
+  --shadow-color: var(--shadow-color-info);
+}
+
+.info.soft {
+  --bg: var(--color-info-soft);
+  --color: var(--color-info-soft-text);
+}
+
+.info.ghost {
+  --bg: transparent;
+  --color: var(--color-info-solid);
+}
+
+.accent {
+  --bg: var(--color-accent-solid);
+  --color: var(--color-accent-solid-text);
+  --shadow-color: var(--shadow-color-accent);
+}
+
+.accent.soft {
+  --bg: var(--color-accent-soft);
+  --color: var(--color-accent-soft-text);
+}
+
+.accent.ghost {
+  --bg: transparent;
+  --color: var(--color-accent-solid);
+}
+
+.neutral {
+  --bg: var(--color-neutral-solid);
+  --color: var(--color-neutral-solid-text);
+  --shadow-color: var(--shadow-color-neutral);
+}
+
+.neutral.soft {
+  --bg: var(--color-neutral-soft);
+  --color: var(--color-neutral-soft-text);
+}
+
+.neutral.ghost {
+  --bg: transparent;
+  --color: var(--color-neutral-solid);
 }

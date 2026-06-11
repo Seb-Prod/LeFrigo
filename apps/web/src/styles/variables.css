@@ -1,128 +1,137 @@
 :root {
-   /* BRAND */
-   --color-primary: #009B4D;
-   --color-primary-text: white;
-   --color-primary-hover: #12732d;
 
-   --color-accent: #f9cf15;
-   --color-accent-hover: #fbf48f;
+  /* ── Primary ──────────────────────────────────────────────── */
 
+  --color-primary-solid:      #009B4D;
+  --color-primary-solid-text: #ffffff;
+  --color-primary-hover:      #12732d;
+  --color-primary-border:     #99d9b8;
+  --color-primary-background: #e6f5ee;
+  --color-primary-text:       #009B4D;  /* texte teinté sur fond clair */
+  --color-primary-soft:       var(--color-primary-background);
+  --color-primary-soft-text:  var(--color-primary-text);
 
-   --color-primary-background: #e6f5ee;
-   --color-primary-text: #009B4D;
-   --color-primary-border: #99d9b8;
-   --color-primary-solid: #009B4D;
-   --color-primary-solid-text: #ffffff;
-   --color-primary-hover: #12732d;
+  /* ── Accent ───────────────────────────────────────────────── */
 
-   --color-accent-background: #fffde6;
-   --color-accent-text: #a07c00;
-   --color-accent-border: #fce97a;
-   --color-accent-solid-text: #000;
-   --color-accent-solid: #f9cf15;
-   --color-accent-hover: #fbf48f;
+  --color-accent-solid:       #f9cf15;
+  --color-accent-solid-text:  #000000;
+  --color-accent-hover:       #fbf48f;
+  --color-accent-border:      #fce97a;
+  --color-accent-background:  #fffde6;
+  --color-accent-text:        #a07c00;
+  --color-accent-soft:        var(--color-accent-background);
+  --color-accent-soft-text:   var(--color-accent-text);
 
-   /* STATUS */
+  /* ── Success ──────────────────────────────────────────────── */
 
-   --color-success-background: #ecfdf3;
-   --color-success-text: #027a48;
-   --color-success-border: #abefc6;
-   --color-success-solid: #009B4D;
-   --color-success-solid-text: #ffffff;
-   --color-success-hover: #027a48;
+  --color-success-solid:      #009B4D;
+  --color-success-solid-text: #ffffff;
+  --color-success-hover:      #027a48;
+  --color-success-border:     #abefc6;
+  --color-success-background: #ecfdf3;
+  --color-success-text:       #027a48;
+  --color-success-soft:       var(--color-success-background);
+  --color-success-soft-text:  var(--color-success-text);
 
-   --color-warning-background: #fffaeb;
-   --color-warning-text: #b54708;
-   --color-warning-border: #fedf89;
-   --color-warning-solid: #FFCC00;
-   --color-warning-solid-text: #7a3a00;
-   --color-warning-hover: #e6b800;
+  /* ── Warning ──────────────────────────────────────────────── */
 
-   --color-danger-background: #fef3f2;
-   --color-danger-text: #b42318;
-   --color-danger-border: #fecdca;
-   --color-danger-solid: #ef4444;
-   --color-danger-solid-text: #ffffff;
-   --color-danger-hover: #b91c1c;
+  --color-warning-solid:      #FFCC00;
+  --color-warning-solid-text: #7a3a00;
+  --color-warning-hover:      #e6b800;
+  --color-warning-border:     #fedf89;
+  --color-warning-background: #fffaeb;
+  --color-warning-text:       #b54708;
+  --color-warning-soft:       var(--color-warning-background);
+  --color-warning-soft-text:  var(--color-warning-text);
 
-   --color-info-background: #eff8ff;
-   --color-info-text: #175cd3;
-   --color-info-border: #b2ddff;
-   --color-info-solid: #2e90fa;
-   --color-info-solid-text: #ffffff;
-   --color-info-hover: #175cd3;
+  /* ── Danger ───────────────────────────────────────────────── */
 
-   --color-neutral-background: #f9fafb;
-   --color-neutral-text: #374151;
-   --color-neutral-border: #e5e7eb;
-   --color-neutral-solid: #4b5563;
-   --color-neutral-solid-text: #ffffff;
-   --color-neutral-hover: #374151;
+  --color-danger-solid:       #ef4444;
+  --color-danger-solid-text:  #ffffff;
+  --color-danger-hover:       #b91c1c;
+  --color-danger-border:      #fecdca;
+  --color-danger-background:  #fef3f2;
+  --color-danger-text:        #b42318;
+  --color-danger-soft:        var(--color-danger-background);
+  --color-danger-soft-text:   var(--color-danger-text);
 
+  /* ── Info ─────────────────────────────────────────────────── */
 
-   /* BACKGROUND */
+  --color-info-solid:         #2e90fa;
+  --color-info-solid-text:    #ffffff;
+  --color-info-hover:         #175cd3;
+  --color-info-border:        #b2ddff;
+  --color-info-background:    #eff8ff;
+  --color-info-text:          #175cd3;
+  --color-info-soft:          var(--color-info-background);
+  --color-info-soft-text:     var(--color-info-text);
 
-   --color-background: #f9f5e9;
+  /* ── Neutral ──────────────────────────────────────────────── */
 
-   --color-surface: #f9ecce;
-   --color-surface-hover: #f1ea8f;
+  --color-neutral-solid:      #4b5563;
+  --color-neutral-solid-text: #ffffff;
+  --color-neutral-hover:      #374151;
+  --color-neutral-border:     #e5e7eb;
+  --color-neutral-background: #f9fafb;
+  --color-neutral-text:       #374151;
+  --color-neutral-soft:       var(--color-neutral-background);
+  --color-neutral-soft-text:  var(--color-neutral-text);
 
-   /* TEXT */
+  /* ── Shadow colors (utilisées par Button et composants) ───── */
 
-   --color-text: #2f4933;
-   --color-text-secondary: #145711;
-   --color-text-hover: #169d4c;
-   --color-text-muted: #626262;
+  --shadow-color-primary: rgba(0,   155, 77,  0.35);
+  --shadow-color-accent:  rgba(249, 207, 21,  0.40);
+  --shadow-color-success: rgba(0,   155, 77,  0.35);
+  --shadow-color-warning: rgba(255, 204, 0,   0.40);
+  --shadow-color-danger:  rgba(239, 68,  68,  0.35);
+  --shadow-color-info:    rgba(46,  144, 250, 0.35);
+  --shadow-color-neutral: rgba(75,  85,  99,  0.25);
 
-   /* BORDERS */
+  /* ── Surfaces & fond global ───────────────────────────────── */
 
-   --color-border: #169d4c;
+  --color-background:    #f9f5e9; /* fond de page */
+  --color-surface:       #f9ecce; /* cartes, panneaux */
+  --color-surface-hover: #f1ea8f;
 
-   /* WHITE & BLACK */
+  /* ── Texte global ─────────────────────────────────────────── */
 
-   --color-white: #fff;
-   --color-black: #000;
+  --color-text:           #2f4933;
+  --color-text-secondary: #145711;
+  --color-text-hover:     #169d4c;
+  --color-text-muted:     #626262; /* légendes, placeholders */
 
-   /* ==========
-       SHADOWS
-    ========== */
+  /* ── Bordures globales ────────────────────────────────────── */
 
-   --shadow-sm:
-      0 1px 2px rgba(0, 0, 0, 0.04);
+  --color-border: #169d4c;
 
-   --shadow-md:
-      0 4px 12px rgba(0, 0, 0, 0.08);
+  /* ── Utilitaires ──────────────────────────────────────────── */
 
-   --shadow-lg:
-      0 10px 30px rgba(0, 0, 0, 0.12);
+  --color-white: #ffffff;
+  --color-black: #000000;
 
-   /* ==========
-       RADIUS
-    ========== */
+  /* ── Ombres ───────────────────────────────────────────────── */
 
-   --radius-sm: 6px;
+  --shadow-sm: 0 1px 2px  rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.12);
 
-   --radius-md: 12px;
+  /* ── Rayons ───────────────────────────────────────────────── */
 
-   --radius-lg: 20px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 32px;
 
-   --radius-xl: 32px;
+  /* ── Espacements ──────────────────────────────────────────── */
 
-   /* ==========
-       SPACING
-    ========== */
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  32px;
+  --space-2xl: 48px;
 
-   --space-xs: 4px;
+  /* ── Layout ───────────────────────────────────────────────── */
 
-   --space-sm: 8px;
-
-   --space-md: 16px;
-
-   --space-lg: 24px;
-
-   --space-xl: 32px;
-
-   --space-2xl: 48px;
-
-   --container-max-width: 1400px;
+  --container-max-width: 1400px;
 }
