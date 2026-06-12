@@ -9,6 +9,37 @@
   padding: var(--space-sm);
 }
 
+/* ── Header ───────────────────────────────────────────────── */
+
+/* Ligne sticky contenant le bouton retour et le titre centré */
+.header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  /* bouton | titre centré | espace miroir */
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: color-mix(in srgb, var(--color-background) 20%, transparent);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(2px);
+  padding-block: var(--space-sm);
+  border-radius: var(--radius-md);
+}
+
+/* Colonne 1, ligne 1 */
+.backButton {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+/* Span sur toute la largeur, même ligne (1), centré */
+.title {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  justify-self: center;
+}
+
 /* ── Card ─────────────────────────────────────────────────── */
 
 /* Conteneur principal avec fond et bordure */
@@ -25,6 +56,27 @@
   box-shadow: var(--shadow-lg);
 }
 
+/* ── Header ───────────────────────────────────────────────── */
+
+/* Ligne contenant le bouton retour et le titre centré */
+.header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  /* bouton | titre centré | espace miroir */
+  align-items: center;
+}
+
+/* Place le bouton dans la 1re colonne */
+.backButton {
+  grid-column: 1;
+}
+
+/* Titre centré sur toute la largeur, par-dessus le bouton */
+.title {
+  grid-column: 1 / -1;
+  justify-self: center;
+}
+
 /* ── Mobile ───────────────────────────────────────────────── */
 
 /* Supprime la card — formulaire pleine page */
@@ -32,7 +84,6 @@
   .wrapper {
     align-items: flex-start;
     padding: var(--space-md);
-    
   }
 
   .card {
@@ -41,5 +92,10 @@
     background: none;
     box-shadow: none;
     padding-bottom: 100px;
+  }
+
+  /* Header réduit au seul bouton retour */
+  .header {
+    grid-template-columns: auto;
   }
 }

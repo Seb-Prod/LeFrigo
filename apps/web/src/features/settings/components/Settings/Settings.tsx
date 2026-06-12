@@ -38,11 +38,6 @@ export function Settings() {
 
   return (
     <>
-      <Surface>
-        {/* ── Titre ── */}
-        {device === "mobile" && (
-          <Heading align="center">Réglages</Heading>
-        )}
         {/* ── Profil ── */}
         {user ? (
           <MenuGroup>
@@ -144,7 +139,6 @@ export function Settings() {
             />
           </MenuGroup>
         )}
-      </Surface>
     </>
   );
 }

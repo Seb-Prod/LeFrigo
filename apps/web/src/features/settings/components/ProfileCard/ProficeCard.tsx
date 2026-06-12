@@ -11,6 +11,7 @@ export function ProfileCard({ user}: Props) {
       label={user.userName}
       description={user.email}
       icon={<Avatar username={user.userName} />}
+      href="/settings/profile"
     />
   );
 }
