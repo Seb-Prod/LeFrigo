@@ -1,16 +1,17 @@
+import clsx from "clsx";
 import styles from "./Badge.module.css";
 
-type BadgeVariant = "default" | "success" | "warning" | "danger" | "info";
+type BadgeColor = "default" | "success" | "warning" | "danger" | "info";
 
 type Props = {
   children: React.ReactNode;
-  variant?: BadgeVariant;
+  color?: BadgeColor;
   className?: string;
 };
 
-export function Badge({ children, variant = "default", className = "" }: Props) {
+export function Badge({ children, color = "default", className }: Props) {
   return (
-    <span className={`${styles.badge} ${styles[variant]} ${className}`}>
+    <span className={clsx(styles.badge, styles[color], className)}>
       {children}
     </span>
   );

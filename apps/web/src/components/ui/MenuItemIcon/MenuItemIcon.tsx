@@ -3,8 +3,15 @@ import styles from "./MenuItemIcon.module.css";
 
 /* ── Types ── */
 
-type Color = "primary" | "accent" | "success" | "warning" | "danger" | "info" | "neutral";
-type Size  = "sm" | "md";
+type Color =
+  | "primary"
+  | "accent"
+  | "success"
+  | "warning"
+  | "danger"
+  | "info"
+  | "neutral";
+type Size = "sm" | "md" | "lg";
 
 type Props = {
   /** Couleur sémantique du fond. */
@@ -30,16 +37,14 @@ type Props = {
  * />
  * ```
  */
-export function MenuItemIcon({ color = "neutral", size = "md", className, children }: Props) {
+export function MenuItemIcon({
+  color = "neutral",
+  size = "md",
+  className,
+  children,
+}: Props) {
   return (
-    <div
-      className={clsx(
-        styles.icon,
-        styles[color],
-        styles[size],
-        className,
-      )}
-    >
+    <div className={clsx(styles.icon, styles[color], styles[size], className)}>
       {children}
     </div>
   );

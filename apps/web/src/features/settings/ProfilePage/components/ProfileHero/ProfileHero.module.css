@@ -1,0 +1,15 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    padding: 32px;
+    gap: 8px;
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    align-items: center;
+}
+
+.badges{
+    display: flex;
+    gap: 16px;
+}
