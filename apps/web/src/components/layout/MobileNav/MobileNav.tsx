@@ -11,6 +11,7 @@ import {
   MdSettings,
 } from "react-icons/md";
 import clsx from "clsx";
+import { NAVIGATION } from "@/lib/navigation/navigation";
 
 /* ── Définition des liens de navigation ──────────────────── */
 const links = [
@@ -20,42 +21,36 @@ const links = [
   { label: "Paramètres", href: "/settings", icon: <MdSettings /> },
 ];
 
+function isActivePath(pathname: string, href: string) {
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
 /**
  * Barre de navigation mobile fixée en bas d'écran.
  * - Met en surbrillance l'item correspondant à la route active.
- * - Joue une animation organique (rebond élastique) au clic.
  */
 export function MobileNav() {
   const pathname = usePathname();
 
-  /* Href du dernier item cliqué — déclenche l'animation */
-  const [pressing, setPressing] = useState<string | null>(null);
-
-  /** Lance l'animation et la retire après qu'elle soit terminée. */
-  function handlePress(href: string) {
-    setPressing(href);
-    setTimeout(() => setPressing(null), 450); /* durée = animation CSS */
-  }
-
   return (
     <nav className={styles.navigation}>
       <ul>
-        {links.map((link) => {
-          const isActive = pathname === link.href;
-          const isPressing = pressing === link.href;
+        {NAVIGATION.map((link) => {
+          const Icon = link.icon;
 
           return (
             <li
               key={link.href}
               className={clsx(
                 styles.list,
-                isActive && styles.active,
-                isPressing && styles.pressing,
+
+                isActivePath(pathname, link.href) && styles.active,
               )}
             >
-              {/* ── Lien avec déclenchement de l'animation ── */}
-              <Link href={link.href} onMouseDown={() => handlePress(link.href)}>
-                <span className={styles.icon}>{link.icon}</span>
+              <Link href={link.href}>
+                <span className={styles.icon}>
+                  <Icon />
+                </span>
               </Link>
             </li>
           );

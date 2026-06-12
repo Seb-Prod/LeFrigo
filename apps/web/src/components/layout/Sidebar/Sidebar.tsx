@@ -8,6 +8,8 @@ import { LogoutButton } from "@/features/auth";
 import { authStorage } from "@/lib/auth";
 import { authService } from "@/features/auth/services/auth.service";
 import { useRouter } from "next/navigation";
+import { isActivePath, NAVIGATION } from "@/lib/navigation/navigation";
+import clsx from "clsx";
 
 type Props = {
   mobile?: boolean;
@@ -51,19 +53,17 @@ export function Sidebar({ mobile, onClose }: Props) {
 
       <nav>
         <ul className={styles.menu}>
-          {links.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className={
-                  pathname === link.href
-                    ? `${styles.link} ${styles.active}`
-                    : styles.link
-                }
-              >
-                {link.label}
-              </Link>
-            </li>
+          {NAVIGATION.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={clsx(
+                styles.link,
+                isActivePath(pathname, link.href) && styles.active,
+              )}
+            >
+              {link.label}
+            </Link>
           ))}
         </ul>
       </nav>

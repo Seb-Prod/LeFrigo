@@ -1,0 +1,1 @@
+export { getPageConfig } from "./navigation";
