@@ -1,23 +1,24 @@
 /* ── Conteneur racine ─────────────────────────────────────── */
 .container {
   display: flex;
-  height: 100vh; /* hauteur fixe pour contenir le scroll enfant */
+  height: 100vh;
   overflow: hidden;
 }
 
 /* ── Zone de contenu principal ───────────────────────────── */
 .content {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-height: 0; /* permet au flex enfant de scroller correctement */
+  display: grid;
+  grid-template-rows: auto 1fr; /* Topbar hauteur naturelle, main prend le reste */
+  min-height: 0;
   overflow: hidden;
 }
 
 /* ── Zone scrollable ──────────────────────────────────────── */
 .main {
   flex: 1;
-  padding: 0px;
-  overflow-y: auto; /* scroll uniquement ici, Topbar reste fixe */
-  min-height: 0;    /* nécessaire dans un contexte flex column */
+  padding: 0;
+  overflow-y: auto;
+  min-height: 0;
+  overscroll-behavior: none;
 }

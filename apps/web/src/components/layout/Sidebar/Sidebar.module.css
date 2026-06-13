@@ -2,8 +2,8 @@
 
 .burger {
   position: fixed;
-  top: 6px;
-  left: 0px;
+  top: 11px;
+  left: 8px;
   z-index: 10001;
 
   transition: left 0.3s ease;
@@ -230,7 +230,7 @@
 }
 
 /* ── Responsive : mobile uniquement ──────────────────────── */
-@media (min-width: 769px) {
+@media (min-width: 1040px) {
   .burger,
   .sidebarWrap,
   .overlay {

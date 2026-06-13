@@ -3,13 +3,12 @@
 import { MobileNav, Sidebar, Topbar } from "@/components/layout";
 import styles from "./DashboardLayout.module.css";
 import { useDevice } from "@/contexts/device.context";
-import { useState } from "react";
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
   const { isMobile, isPWA } = useDevice();
   const isMobilePWA = isMobile && isPWA;
 
-  const [menuOpen, setMenuOpen] = useState(false);
+
 
   return (
     <div className={styles.container}>
@@ -18,8 +17,6 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
           <>
             <Sidebar />
             <Topbar
-              onMenuClick={() => setMenuOpen((prev) => !prev)}
-              sidebarOpen={menuOpen}
             />
           </>
         )}
