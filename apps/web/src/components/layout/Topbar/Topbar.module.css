@@ -1,9 +1,132 @@
+/* ── Conteneur principal ──────────────────────────────────── */
+
 .topbar {
-    height: 64px;
-    background: var(--color-background);
+    height: 72px;
 
     display: flex;
     align-items: center;
+    justify-content: space-between;
 
-    padding: 0 20px;
+    padding: 0 24px;
+
+    background: color-mix(in srgb, var(--color-background) 20%, transparent);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(2px);
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.04),
+        0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+/* ── Zones de mise en page ────────────────────────────────── */
+
+.left,
+.center,
+.right {
+    display: flex;
+    align-items: center;
+}
+
+.left {
+    gap: 12px;
+}
+
+.center {
+    flex: 1;
+    justify-content: center;
+    gap: 8px;
+}
+
+.right {
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+/* ── Titre de page (icône + heading) ──────────────────────── */
+/* Masqué par défaut sur desktop, sauf si .pageInfo contient un bouton retour
+   (ajusté via :has, voir media query pour le fallback mobile) */
+.pageInfo {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.pageInfo:has(.backButton) {
+    display: flex;
+}
+
+/* ── Bouton retour ────────────────────────────────────────── */
+.backButton {
+    margin-right: 4px;
+}
+
+/* ── Masque un bloc sur mobile (ex: logo si retour présent) ── */
+.hideOnMobile {
+    /* visible par défaut (desktop), voir media query */
+}
+
+/* ── Navigation desktop ───────────────────────────────────── */
+
+.nav {
+    display: flex;
+}
+
+.menu {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+}
+
+/* ── Bouton burger (mobile) ───────────────────────────────── */
+
+.menuButton {
+    width: 40px;
+    height: 40px;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+
+    font-size: 1.25rem;
+    cursor: pointer;
+
+    transition: background 0.2s ease;
+}
+
+.menuButton:hover {
+    background: var(--color-surface);
+}
+
+/* ── Responsive : mobile ──────────────────────────────────── */
+@media (max-width: 768px) {
+    .topbar {
+        padding: 0 16px;
+    }
+
+    /* Titre de page visible sur mobile */
+    .pageInfo {
+        display: flex;
+    }
+
+    /* Menu horizontal masqué, remplacé par le burger */
+    .nav {
+        display: none;
+    }
+
+    .menuButton {
+        display: flex;
+    }
+
+    .hideOnMobile {
+        display: none;
+    }
 }

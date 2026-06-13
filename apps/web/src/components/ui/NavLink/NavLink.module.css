@@ -1,0 +1,118 @@
+/* ── Conteneur du lien ────────────────────────────────────── */
+
+.link {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+
+    padding: 10px 16px;
+
+    border-radius: 14px;
+    overflow: hidden;
+    isolation: isolate; /* évite que le blob ne déborde visuellement */
+
+    text-decoration: none;
+    color: var(--color-text-secondary);
+
+    transition: color 0.25s ease;
+}
+
+.label {
+    position: relative;
+    z-index: 2;
+}
+
+/* ── Blob organique de fond ───────────────────────────────── */
+/* Caché par défaut, scale + opacité animées au hover/actif */
+.blob {
+    position: absolute;
+    inset: -20%;
+    z-index: 1;
+
+    background: var(--color-surface);
+    border-radius: 42% 58% 65% 35% / 45% 40% 60% 55%;
+
+    opacity: 0;
+    transform: scale(0.6);
+    transform-origin: center;
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* léger overshoot "organique" */
+
+    animation: blob-morph 6s ease-in-out infinite;
+}
+
+/* ── Hover ────────────────────────────────────────────────── */
+.link:hover {
+    color: var(--color-text);
+}
+
+.link:hover .blob {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ── État actif ───────────────────────────────────────────── */
+.active {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.active .blob {
+    opacity: 1;
+    transform: scale(1);
+    background: var(--color-primary-light);
+}
+
+/* ── Morph continu du blob (idle breathing) ──────────────── */
+@keyframes blob-morph {
+    0%,
+    100% {
+        border-radius: 42% 58% 65% 35% / 45% 40% 60% 55%;
+    }
+    33% {
+        border-radius: 60% 40% 35% 65% / 55% 60% 40% 45%;
+    }
+    66% {
+        border-radius: 48% 52% 58% 42% / 40% 55% 45% 60%;
+    }
+}
+
+/* ── Onde de clic (ripple) ────────────────────────────────── */
+.ripple {
+    position: absolute;
+    z-index: 1;
+
+    width: 12px;
+    height: 12px;
+
+    background: color-mix(in srgb, var(--color-primary) 35%, transparent);
+    border-radius: 50%;
+
+    transform: translate(-50%, -50%) scale(0);
+    pointer-events: none;
+
+    animation: ripple-expand 0.6s ease-out forwards;
+}
+
+@keyframes ripple-expand {
+    to {
+        transform: translate(-50%, -50%) scale(12);
+        opacity: 0;
+    }
+}
+
+/* ── Accessibilité : réduction des animations ─────────────── */
+@media (prefers-reduced-motion: reduce) {
+    .blob {
+        animation: none;
+        transition: opacity 0.2s ease;
+    }
+
+    .ripple {
+        animation: none;
+        display: none;
+    }
+}

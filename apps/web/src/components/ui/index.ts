@@ -22,6 +22,8 @@ export { MenuGroup } from "./MenuGroup";
 export { MenuItem } from "./MenuItem";
 export { MenuItemIcon } from "./MenuItemIcon";
 
+export { NavLink } from "./NavLink";
+
 export { Select } from "./Select/Select";
 export { Surface } from "./Surface";
 
