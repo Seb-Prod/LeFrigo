@@ -43,12 +43,7 @@ export function Sidebar({ mobile, onClose }: Props) {
   };
 
   return (
-    <aside className={`${styles.sidebar} ${mobile ? styles.mobile : ""}`}>
-      {mobile && (
-        <button className={styles.closeButton} onClick={onClose}>
-          x
-        </button>
-      )}
+    <aside className={`${styles.sidebar}`}>
       <h2 className={styles.logo}>LeFrigo</h2>
 
       <nav>

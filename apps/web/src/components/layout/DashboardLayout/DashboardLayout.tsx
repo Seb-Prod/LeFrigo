@@ -18,7 +18,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
       )}
 
       <div className={styles.content}>
-        {!isMobilePWA &&  <Topbar onMenuClick={() => setMenuOpen(true)} sidebarOpen={menuOpen} />}
+        {!isMobilePWA &&  <Topbar onMenuClick={() => setMenuOpen((prev) => !prev)} sidebarOpen={menuOpen} />}
         <main className={styles.main}>{children}</main>
         {isMobilePWA && <MobileNav />}
       </div>
