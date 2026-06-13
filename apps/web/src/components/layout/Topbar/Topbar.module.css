@@ -43,31 +43,18 @@
 
 .right {
     justify-content: flex-end;
-    gap: 8px;
 }
 
-/* ── Titre de page (icône + heading) ──────────────────────── */
-/* Masqué par défaut sur desktop, sauf si .pageInfo contient un bouton retour
-   (ajusté via :has, voir media query pour le fallback mobile) */
+/* ── Titre de page (retour + icône + heading) ─────────────── */
 .pageInfo {
-    display: none;
+    display: flex;
     align-items: center;
     gap: 8px;
     font-weight: 600;
 }
 
-.pageInfo:has(.backButton) {
-    display: flex;
-}
-
-/* ── Bouton retour ────────────────────────────────────────── */
 .backButton {
     margin-right: 4px;
-}
-
-/* ── Masque un bloc sur mobile (ex: logo si retour présent) ── */
-.hideOnMobile {
-    /* visible par défaut (desktop), voir media query */
 }
 
 /* ── Navigation desktop ───────────────────────────────────── */
@@ -82,28 +69,78 @@
     list-style: none;
 }
 
-/* ── Bouton burger (mobile) ───────────────────────────────── */
-
+/* ── Burger (mobile, côté sidebar) ────────────────────────── */
+/* Masqué sur desktop par défaut, voir media query plus bas */
 .menuButton {
+    position: relative;
+
     width: 40px;
     height: 40px;
 
     display: none;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    gap: 5px;
 
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
     background: transparent;
 
-    font-size: 1.25rem;
     cursor: pointer;
+    overflow: hidden;
+    isolation: isolate;
 
     transition: background 0.2s ease;
 }
 
-.menuButton:hover {
+/* Fond organique au hover, cohérent avec NavLink */
+.menuButton::before {
+    content: "";
+    position: absolute;
+    inset: -20%;
+    z-index: -1;
+
     background: var(--color-surface);
+    border-radius: 42% 58% 65% 35% / 45% 40% 60% 55%;
+
+    opacity: 0;
+    transform: scale(0.6);
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.menuButton:hover::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ── Barres du burger ─────────────────────────────────────── */
+.burgerBar {
+    width: 18px;
+    height: 2px;
+
+    background: var(--color-text);
+    border-radius: 2px;
+
+    transition:
+        transform 0.3s ease,
+        opacity 0.2s ease;
+}
+
+/* ── État ouvert : transformation en croix ────────────────── */
+.open .burgerBar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.open .burgerBar:nth-child(2) {
+    opacity: 0;
+}
+
+.open .burgerBar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
 }
 
 /* ── Responsive : mobile ──────────────────────────────────── */
@@ -112,21 +149,12 @@
         padding: 0 16px;
     }
 
-    /* Titre de page visible sur mobile */
-    .pageInfo {
-        display: flex;
-    }
-
-    /* Menu horizontal masqué, remplacé par le burger */
+    /* Menu horizontal masqué, le burger ouvre la sidebar */
     .nav {
         display: none;
     }
 
     .menuButton {
         display: flex;
-    }
-
-    .hideOnMobile {
-        display: none;
     }
 }

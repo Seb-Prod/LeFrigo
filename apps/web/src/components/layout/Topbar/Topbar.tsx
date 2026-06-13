@@ -16,11 +16,11 @@ type Props = {
 /**
  * Topbar
  * Barre de navigation supérieure, sticky et translucide.
- * - Desktop : logo + menu de navigation horizontal (+ bouton retour si la page n'est pas dans le menu)
- * - Mobile : [retour ou logo] + titre de page (avec icône) + bouton burger
- *   (le bouton burger est masqué quand la sidebar est déjà ouverte)
- * Le bouton retour remplace le logo sur mobile (pattern "navigation iOS"),
- * et reste à côté du logo sur desktop.
+ * - Desktop : logo/retour à gauche + menu de navigation horizontal à droite
+ * - Mobile : burger à gauche (côté d'apparition de la sidebar, animé en croix
+ *   quand ouvert) + logo ou [retour + titre de page] au centre
+ * Le bouton retour remplace le logo (pattern "navigation iOS") quand la page
+ * n'appartient pas au menu principal.
  * La bascule mobile/desktop est gérée entièrement en CSS (media queries),
  * sans dépendre du contexte device.
  */
@@ -33,34 +33,35 @@ export function Topbar({ onMenuClick, sidebarOpen }: Props) {
 
   return (
     <header className={styles.topbar}>
-      {/* ── Logo (masqué sur mobile si bouton retour) ── */}
-      <div className={clsx(styles.left, page.showBackButton && styles.hideOnMobile)}>
-        <Logo />
+      {/* ── Burger (mobile uniquement, côté sidebar) ── */}
+      <div className={styles.left}>
+        <button
+          className={clsx(styles.menuButton, sidebarOpen && styles.open)}
+          onClick={onMenuClick}
+          aria-label={sidebarOpen ? "Fermer le menu" : "Ouvrir le menu"}
+          aria-expanded={sidebarOpen}
+        >
+          <span className={styles.burgerBar} />
+          <span className={styles.burgerBar} />
+          <span className={styles.burgerBar} />
+        </button>
       </div>
 
-      {/* ── Retour + titre de page ── */}
+      {/* ── Logo ou [retour + titre de page] ── */}
       <div className={styles.center}>
-        <div className={styles.pageInfo}>
-          {page.showBackButton && (
+        {page.showBackButton ? (
+          <div className={styles.pageInfo}>
             <ButtonPrev className={styles.backButton} onClick={goBack} />
-          )}
-          <Icon />
-          <Heading>{page.title}</Heading>
-        </div>
+            <Icon />
+            <Heading>{page.title}</Heading>
+          </div>
+        ) : (
+          <Logo />
+        )}
       </div>
 
-      {/* ── Navigation (desktop) / burger (mobile) ── */}
+      {/* ── Navigation (desktop) ── */}
       <div className={styles.right}>
-        {!sidebarOpen && (
-          <button
-            className={styles.menuButton}
-            onClick={onMenuClick}
-            aria-label="Ouvrir le menu"
-          >
-            ☰
-          </button>
-        )}
-
         <nav className={styles.nav}>
           <ul className={styles.menu}>
             {NAVIGATION.map((link) => (
