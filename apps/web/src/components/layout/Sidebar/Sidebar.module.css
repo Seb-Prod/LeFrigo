@@ -43,14 +43,15 @@
 
 .sidebarWrap {
   --color-primary: var(--color-surface);
-  --color-secondary: var(--color-primary-background);
+  --color-secondary: var(--color-primary-solid);
   --radius-size: var(--radius-lg);
+  --curve-size: calc(2 * var(--radius-size));
 
   position: fixed;
-  top: 1vh;
-  left: 1vh;
+  top: 0vh;
+  left: 0vh;
 
-  height: 98vh;
+  height: 100vh;
   z-index: 10000;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -81,8 +82,7 @@
 }
 
 /* ── Zone logo (header courbé) ── */
-.sideBar .logoArea {
-  --curve-size: calc(2 * var(--radius-size));
+.logoArea {
   position: relative;
   display: flex;
   justify-content: center;
@@ -91,11 +91,11 @@
   min-height: var(--curve-size);
   background-color: var(--color-secondary);
   border-radius: 0 var(--radius-size) var(--radius-size) 0;
-  box-shadow: var(--radius-size) 0 var(--color-secondary); /* prolonge la courbe vers la gauche */
+  box-shadow: var(--radius-size) 0 var(--color-secondary);
 }
 
 /* Cercle de raccord sous la zone logo */
-.sideBar .logoArea::after {
+.logoArea::after {
   content: '';
   width: var(--curve-size);
   height: var(--curve-size);
@@ -105,12 +105,6 @@
   bottom: calc(-1 * var(--curve-size));
   left: 0;
   box-shadow: calc(-1 * var(--curve-size) * 0.5) calc(-1 * var(--curve-size) * 0.5) var(--color-secondary);
-}
-
-.sideBar .logoArea img {
-  position: absolute;
-  max-height: 75%;
-  transition-duration: 1s;
 }
 
 /* Logo "réduit" : disparaît au survol du panneau */
@@ -167,7 +161,7 @@
 
 .sideBar ul li.active::before,
 .sideBar ul li.active::after {
-  --curve-size: calc(2 * var(--radius-size));
+  
   content: '';
   width: var(--curve-size);
   height: var(--curve-size);
@@ -191,7 +185,7 @@
 }
 
 .sideBar ul li.active .navLink{
-  color: var(--color-primary-text);
+  color: var(--color-primary-solid-text);
 }
 
 .navLink {
@@ -207,37 +201,46 @@
 /* ── Pied de sidebar ──────────────────────────────────────── */
 
 .sidebarFooter {
-  margin-top: auto; /* colle le footer en bas si .sideBar est en flex column */
+  position: relative;
+  margin-top: auto;
   padding: var(--radius-size);
   display: flex;
+  align-items: center;
   flex-direction: column;
   gap: 10px;
+  background-color: var(--color-secondary);
+  border-radius: 0 var(--radius-size) var(--radius-size) 0;
+  box-shadow: var(--radius-size) 0 var(--color-secondary);
 }
 
-.userInfo {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+.sidebarFooter::before{
+  content: '';
+  width: var(--curve-size);
+  height: var(--curve-size);
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  position: absolute;
+  top: calc(-1 * var(--curve-size));
+  left: 0px;
+  box-shadow: calc(-1 * var(--curve-size) * 0.5) calc(var(--curve-size) * 0.5) var(--color-secondary);
 }
 
-.userName {
-  font-weight: 600;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.logout{
+  background: red;
 }
 
-.logoutButton {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: inherit;
-  font-size: 0.85rem;
-}
+/* ── Responsive : mobile uniquement ──────────────────────── */
+@media (min-width: 769px) {
+  .burger,
+  .sidebarWrap,
+  .overlay {
+    display: none; /* sidebar + burger invisibles sur desktop */
+  }
 
-.devCredit {
-  font-size: 0.75rem;
-  opacity: 0.6;
-  text-align: center;
+  .burger{
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  
 }

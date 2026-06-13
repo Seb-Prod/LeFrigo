@@ -1,0 +1,31 @@
+.credit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 1;
+}
+
+/* Nom + sous-ligne empilés et centrés */
+.creditBody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.creditName {
+    font-size: 0.55rem;
+    font-weight: 500;
+    color: var(--color-primary-solid-text);
+    letter-spacing: 0.8em;
+    text-transform: uppercase;
+}
+
+/* Métadonnées discrètes : année, version, mention légale */
+.creditSub {
+    font-size: 0.45rem;
+    font-weight: 400;
+    color: var(--color-primary-solid-text);
+    letter-spacing: 0.4em;
+}

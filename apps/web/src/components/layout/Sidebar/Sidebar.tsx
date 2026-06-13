@@ -7,7 +7,14 @@ import clsx from "clsx";
 
 import styles from "./Sidebar.module.css";
 import { NAVIGATION, isActivePath } from "@/lib/navigation/navigation";
-import { ButtonBurger, Heading, Logo } from "@/components/ui";
+import {
+  ButtonBurger,
+  DevCredit,
+  Heading,
+  Logo,
+} from "@/components/ui";
+import { LogoutButton } from "@/features/auth";
+import { useAuth } from "@/contexts/auth.context";
 
 /**
  * Sidebar
@@ -27,6 +34,7 @@ import { ButtonBurger, Heading, Logo } from "@/components/ui";
 export function Sidebar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(true);
+  const { user, logout } = useAuth();
 
   /** Bloque le scroll du body tant que le panneau est ouvert. */
   useEffect(() => {
@@ -79,13 +87,9 @@ export function Sidebar() {
           {/* ── Pied de sidebar ── */}
           <div className={styles.sidebarFooter}>
             {/* ── Utilisateur connecté ── */}
-            <div className={styles.userInfo}>
-              <span className={styles.userName}>seb</span>
-              <button className={styles.logoutButton}>Déconnexion</button>
-            </div>
-
+            {user && <LogoutButton size="sm" onClick={logout} className={styles.button} open/>}
             {/* ── Crédit développeur ── */}
-            <p className={styles.devCredit}>by Seb-Prod</p>
+            <DevCredit />
           </div>
         </nav>
       </aside>

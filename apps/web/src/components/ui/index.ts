@@ -10,6 +10,8 @@ export { Card } from "./Card";
 export { Carousel } from "./Carousel";
 export * from "./Checkbox";
 
+export { DevCredit } from "./DevCredit";
+
 export { FormCard } from "./FormCard";
 
 export { Heading } from "./Heading";

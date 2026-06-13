@@ -9,21 +9,34 @@ const SIZE_MAP = {
 
 type LogoSize = keyof typeof SIZE_MAP;
 
-interface Props {
-  size?: LogoSize;
-}
+/** Variante du logo affiché : application ou développeur (crédit). */
+type LogoVariant = "app" | "dev";
 
-export function Logo({ size = "md" }: Props) {
+const SRC_MAP: Record<LogoVariant, { src: string; alt: string }> = {
+  app: { src: "/images/logos/app.png", alt: "Logo de l'application" },
+  dev: { src: "/images/logos/sebprod.png", alt: "Logo du développeur" },
+};
+
+type Props = {
+  size?: LogoSize;
+  variant?: LogoVariant;
+};
+
+/**
+ * Logo
+ *
+ * Affiche le logo de l'application ou celui du développeur,
+ * dans un cercle de taille configurable.
+ */
+export function Logo({ size = "md", variant = "app" }: Props) {
   const px = SIZE_MAP[size];
+  const { src, alt } = SRC_MAP[variant];
 
   return (
-    <div
-      className={styles.circle}
-      style={{ width: px, height: px }}
-    >
+    <div className={styles.circle} style={{ width: px, height: px }}>
       <Image
-        src="/images/logos/app.png"
-        alt="Logo de l'application"
+        src={src}
+        alt={alt}
         fill
         style={{ objectFit: "contain" }}
         className={styles.logo}
