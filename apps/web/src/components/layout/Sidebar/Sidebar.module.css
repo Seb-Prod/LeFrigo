@@ -1,82 +1,56 @@
+.burger {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 10001;
+
+  transition: left 0.3s ease;
+}
+
+/* Quand ouverte, le burger se colle au bord droit de la sidebar (260px) */
+.burgerOpen {
+  left: 276px; /* largeur sidebar (260px) + 16px de marge */
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  background: color-mix(in srgb, var(--color-background) 50%, transparent);
+  backdrop-filter: blur(2px);
+
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+.overlayHidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .sidebar {
-    display: flex;
-    flex-direction: column;
-    width: 260px;
-    min-height: 100vh;
-    background: white;
-    border-right: 1px solid var(--color-border);
-    box-shadow: var(--shadow-sm);
-    padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
 
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 280px; /* largeur fixe, indépendante du parent */
-    z-index: 200; /* au-dessus de l'overlay (199) */
+  width: 260px;
+  height: 100vh;
+  z-index: 10000;
 
-    transform: translateX(0);
-    transition: transform 0.3s ease;
+  background: white;
+  border-right: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  padding: 20px;
+
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
 }
 
-.logo {
-    margin-bottom: 30px;
-}
-
-.menu {
-    list-style: none;
-
-    padding: 0;
-    margin: 0;
-
-    display: flex;
-    flex-direction: column;
-
-    gap: 16px;
-}
-
-.mobile {
-    position: fixed;
-
-    top: 0;
-    left: 0;
-
-    z-index: 1000;
-
-    background: var(--color-background);
-
-    width: 260px;
-    height: 100vh;
-}
-
-.closeButton {
-    margin-bottom: 20px;
-    cursor: pointer;
-}
-
-.link {
-    display: block;
-    padding: 12px;
-    border-radius: 12px;
-    text-decoration: none;
-    color: var(--color-text);
-}
-
-.link:hover {
-    background: var(--color-surface-hover);
-}
-
-.active {
-    background: var(--color-primary-light);
-    color: var(--color-primary);
-    font-weight: 600;
-}
-
-.hidden {
-  display: none;
-}
-
-.logoutButton {
-    margin-left: auto;
-  margin-top: auto;
+.sidebarOpen {
+  transform: translateX(0);
 }

@@ -13,12 +13,16 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className={styles.container}>
-      {(!isMobilePWA &&  menuOpen) && (
-        <Sidebar mobile={isMobile} onClose={() => setMenuOpen(false)} />
-      )}
-
       <div className={styles.content}>
-        {!isMobilePWA &&  <Topbar onMenuClick={() => setMenuOpen((prev) => !prev)} sidebarOpen={menuOpen} />}
+        {!isMobilePWA && (
+          <>
+            <Sidebar />
+            <Topbar
+              onMenuClick={() => setMenuOpen((prev) => !prev)}
+              sidebarOpen={menuOpen}
+            />
+          </>
+        )}
         <main className={styles.main}>{children}</main>
         {isMobilePWA && <MobileNav />}
       </div>

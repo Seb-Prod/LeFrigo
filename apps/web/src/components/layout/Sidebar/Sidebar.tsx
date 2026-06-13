@@ -1,68 +1,69 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import styles from "./Sidebar.module.css";
 import { usePathname } from "next/navigation";
-import { useAuth } from "@/contexts/auth.context";
-import { LogoutButton } from "@/features/auth";
-import { authStorage } from "@/lib/auth";
-import { authService } from "@/features/auth/services/auth.service";
-import { useRouter } from "next/navigation";
-import { isActivePath, NAVIGATION } from "@/lib/navigation/navigation";
 import clsx from "clsx";
 
-type Props = {
-  mobile?: boolean;
-  onClose?: () => void;
-};
+import styles from "./Sidebar.module.css";
+import { NAVIGATION, isActivePath } from "@/lib/navigation/navigation";
+import { Button, ButtonBurger, ButtonInfo } from "@/components/ui";
 
-export function Sidebar({ mobile, onClose }: Props) {
-  const router = useRouter();
+export function Sidebar() {
   const pathname = usePathname();
-  const { logout } = useAuth();
+  const [isOpen, setIsOpen] = useState(true);
 
-  const links = [
-    { label: "Dashboard", href: "/dashboard" },
-    { label: "Recettes", href: "/recipes" },
-    { label: "Planning", href: "/planning" },
-    { label: "Paramètres", href: "/settings" },
-  ];
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
 
-  const handleClose = async () => {
-    try {
-      const refreshToken = authStorage.getRefreshToken();
-      if (refreshToken) {
-        await authService.logout(refreshToken);
-      }
-    } catch (err) {
-      console.log(err);
-    } finally {
-      logout();
-      router.push("/");
-    }
-  };
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   return (
-    <aside className={`${styles.sidebar}`}>
-      <h2 className={styles.logo}>LeFrigo</h2>
+    <>
+      {/* ── Overlay (visible uniquement quand ouvert) ── */}
+      <div
+        className={clsx(styles.overlay, !isOpen && styles.overlayHidden)}
+        onClick={() => setIsOpen(false)}
+      />
 
-      <nav>
-        <ul className={styles.menu}>
-          {NAVIGATION.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={clsx(
-                styles.link,
-                isActivePath(pathname, link.href) && styles.active,
-              )}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </ul>
-      </nav>
-      <LogoutButton className={styles.logoutButton} onClick={handleClose} />
-    </aside>
+      {/* ── Panneau latéral ── */}
+      <aside className={clsx(styles.sidebar, isOpen && styles.sidebarOpen)}>
+        <h2 className={styles.logo}>LeFrigo</h2>
+
+        <nav>
+          <ul className={styles.menu}>
+            {NAVIGATION.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={clsx(
+                  styles.link,
+                  isActivePath(pathname, link.href) && styles.active,
+                )}
+                onClick={() => setIsOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+
+      {/* ── Burger : toujours visible, suit le bord de la sidebar ── */}
+      {/* <ButtonInfo
+        className={clsx(styles.burger, isOpen && styles.burgerOpen)}
+        onClick={() => setIsOpen((prev) => !prev)}
+      >
+        
+      </ButtonInfo> */}
+      <ButtonBurger
+        className={clsx(styles.burger, isOpen && styles.burgerOpen)}
+        onClick={() => setIsOpen((prev) => !prev)}
+        isOpen={isOpen}
+      />
+    </>
   );
 }
