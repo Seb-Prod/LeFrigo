@@ -35,16 +35,7 @@ export function Topbar({ onMenuClick, sidebarOpen }: Props) {
     <header className={styles.topbar}>
       {/* ── Burger (mobile uniquement, côté sidebar) ── */}
       <div className={styles.left}>
-        <button
-          className={clsx(styles.menuButton, sidebarOpen && styles.open)}
-          onClick={onMenuClick}
-          aria-label={sidebarOpen ? "Fermer le menu" : "Ouvrir le menu"}
-          aria-expanded={sidebarOpen}
-        >
-          <span className={styles.burgerBar} />
-          <span className={styles.burgerBar} />
-          <span className={styles.burgerBar} />
-        </button>
+        
       </div>
 
       {/* ── Logo ou [retour + titre de page] ── */}

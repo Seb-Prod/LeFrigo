@@ -1,7 +1,9 @@
+/* ── Burger ───────────────────────────────────────────────── */
+
 .burger {
   position: fixed;
-  top: 16px;
-  left: 16px;
+  top: 6px;
+  left: 0px;
   z-index: 10001;
 
   transition: left 0.3s ease;
@@ -9,8 +11,11 @@
 
 /* Quand ouverte, le burger se colle au bord droit de la sidebar (260px) */
 .burgerOpen {
-  left: 276px; /* largeur sidebar (260px) + 16px de marge */
+  left: 240px; /* largeur sidebar (260px) + 16px de marge */
 }
+
+
+/* ── Overlay ──────────────────────────────────────────────── */
 
 .overlay {
   position: fixed;
@@ -33,24 +38,206 @@
   pointer-events: none;
 }
 
-.sidebar {
+
+/* ── Panneau latéral (wrapper) ───────────────────────────────── */
+
+.sidebarWrap {
+  --color-primary: var(--color-surface);
+  --color-secondary: var(--color-primary-background);
+  --radius-size: var(--radius-lg);
+
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 1vh;
+  left: 1vh;
 
-  width: 260px;
-  height: 100vh;
+  height: 98vh;
   z-index: 10000;
-
-  background: white;
-  border-right: 1px solid var(--color-border);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  padding: 20px;
+  padding-right: 2px;
 
-  transform: translateX(-100%);
+  transform: translateX(-110%); /* hors écran par défaut */
   transition: transform 0.3s ease;
 }
 
-.sidebarOpen {
+.sidebarWrapOpen {
   transform: translateX(0);
+}
+
+
+/* ── Bloc navigation (forme courbée) ─────────────────────────── */
+
+.sideBar {
+  min-height: 100%;
+  background-color: var(--color-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-left: var(--radius-size) solid var(--color-secondary);
+  border-right: var(--radius-size) solid var(--color-primary);
+  border-radius: var(--radius-size);
+}
+
+/* ── Zone logo (header courbé) ── */
+.sideBar .logoArea {
+  --curve-size: calc(2 * var(--radius-size));
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  min-height: var(--curve-size);
+  background-color: var(--color-secondary);
+  border-radius: 0 var(--radius-size) var(--radius-size) 0;
+  box-shadow: var(--radius-size) 0 var(--color-secondary); /* prolonge la courbe vers la gauche */
+}
+
+/* Cercle de raccord sous la zone logo */
+.sideBar .logoArea::after {
+  content: '';
+  width: var(--curve-size);
+  height: var(--curve-size);
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  position: absolute;
+  bottom: calc(-1 * var(--curve-size));
+  left: 0;
+  box-shadow: calc(-1 * var(--curve-size) * 0.5) calc(-1 * var(--curve-size) * 0.5) var(--color-secondary);
+}
+
+.sideBar .logoArea img {
+  position: absolute;
+  max-height: 75%;
+  transition-duration: 1s;
+}
+
+/* Logo "réduit" : disparaît au survol du panneau */
+.sidebarWrap:hover .sideBar .logoArea img.min {
+  max-height: 0;
+  opacity: 0;
+}
+
+/* Logo "étendu" : masqué par défaut, apparaît au survol du panneau */
+.sideBar .logoArea img.max {
+  max-width: 0;
+  opacity: 0;
+  transition-duration: 1s;
+}
+
+.sidebarWrap:hover .sideBar .logoArea img.max {
+  max-width: 90%;
+  opacity: 1;
+}
+
+
+/* ── Liste de navigation ─────────────────────────────────────── */
+
+.sideBar ul {
+  padding: 0;
+  margin: calc(2 * var(--radius-size)) 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sideBar ul li {
+  height: 50px;
+  padding: 10px var(--radius-size);
+  list-style: none;
+  border-radius: var(--radius-size);
+  margin-bottom: var(--radius-size);
+  z-index: 1;
+}
+
+.sideBar ul li:not(.active) {
+  z-index: 2;
+}
+
+.sideBar ul li:not(.active):hover {
+  backdrop-filter: brightness(0.85);
+}
+
+/* ── Item actif (avec encoches courbées haut/bas) ── */
+.sideBar ul li.active {
+  position: relative;
+  background-color: var(--color-secondary);
+  border-radius: 0 var(--radius-size) var(--radius-size) 0;
+}
+
+.sideBar ul li.active::before,
+.sideBar ul li.active::after {
+  --curve-size: calc(2 * var(--radius-size));
+  content: '';
+  width: var(--curve-size);
+  height: var(--curve-size);
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  position: absolute;
+}
+
+/* Encoche supérieure */
+.sideBar ul li.active::before {
+  top: calc(-1 * var(--curve-size));
+  left: 0;
+  box-shadow: calc(-1 * var(--curve-size) * 0.5) calc(var(--curve-size) * 0.5) var(--color-secondary);
+}
+
+/* Encoche inférieure */
+.sideBar ul li.active::after {
+  bottom: calc(-1 * var(--curve-size));
+  left: 0;
+  box-shadow: calc(-1 * var(--curve-size) * 0.5) calc(-1 * var(--curve-size) * 0.5) var(--color-secondary);
+}
+
+.sideBar ul li.active .navLink{
+  color: var(--color-primary-text);
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 100%;
+  color: var(--color-accent-text);
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+/* ── Pied de sidebar ──────────────────────────────────────── */
+
+.sidebarFooter {
+  margin-top: auto; /* colle le footer en bas si .sideBar est en flex column */
+  padding: var(--radius-size);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.userName {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.logoutButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  font-size: 0.85rem;
+}
+
+.devCredit {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  text-align: center;
 }

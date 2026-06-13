@@ -7,12 +7,28 @@ import clsx from "clsx";
 
 import styles from "./Sidebar.module.css";
 import { NAVIGATION, isActivePath } from "@/lib/navigation/navigation";
-import { Button, ButtonBurger, ButtonInfo } from "@/components/ui";
+import { ButtonBurger, Heading, Logo } from "@/components/ui";
 
+/**
+ * Sidebar
+ *
+ * Panneau de navigation latéral, responsive (mobile-first).
+ *
+ * États visuels :
+ * - Fermé (défaut sur mobile) : panneau hors écran, overlay invisible
+ * - Ouvert : panneau visible, overlay affiché derrière, scroll du body bloqué
+ *
+ * Comportements dynamiques :
+ * - Le clic sur l'overlay ferme le panneau
+ * - Le clic sur un lien de nav ferme le panneau (utile sur mobile)
+ * - Le bouton burger bascule l'état ouvert/fermé
+ * - Le lien actif est mis en évidence via `isActivePath`
+ */
 export function Sidebar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(true);
 
+  /** Bloque le scroll du body tant que le panneau est ouvert. */
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
 
@@ -30,35 +46,51 @@ export function Sidebar() {
       />
 
       {/* ── Panneau latéral ── */}
-      <aside className={clsx(styles.sidebar, isOpen && styles.sidebarOpen)}>
-        <h2 className={styles.logo}>LeFrigo</h2>
+      <aside
+        className={clsx(styles.sidebarWrap, isOpen && styles.sidebarWrapOpen)}
+      >
+        <nav className={styles.sideBar}>
+          {/* ── Logo + titre ── */}
+          <div className={styles.logoArea}>
+            <Logo />
+            <Heading>LeFrigo</Heading>
+          </div>
 
-        <nav>
-          <ul className={styles.menu}>
-            {NAVIGATION.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={clsx(
-                  styles.link,
-                  isActivePath(pathname, link.href) && styles.active,
-                )}
-                onClick={() => setIsOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
+          {/* ── Liens de navigation ── */}
+          <ul>
+            {NAVIGATION.map((link) => {
+              const Icon = link.icon;
+              const active = isActivePath(pathname, link.href);
+
+              return (
+                <li key={link.href} className={clsx(active && styles.active)}>
+                  <Link
+                    href={link.href}
+                    className={styles.navLink}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <Icon />
+                    {link.label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
+          {/* ── Pied de sidebar ── */}
+          <div className={styles.sidebarFooter}>
+            {/* ── Utilisateur connecté ── */}
+            <div className={styles.userInfo}>
+              <span className={styles.userName}>seb</span>
+              <button className={styles.logoutButton}>Déconnexion</button>
+            </div>
+
+            {/* ── Crédit développeur ── */}
+            <p className={styles.devCredit}>by Seb-Prod</p>
+          </div>
         </nav>
       </aside>
 
-      {/* ── Burger : toujours visible, suit le bord de la sidebar ── */}
-      {/* <ButtonInfo
-        className={clsx(styles.burger, isOpen && styles.burgerOpen)}
-        onClick={() => setIsOpen((prev) => !prev)}
-      >
-        
-      </ButtonInfo> */}
+      {/* ── Bouton burger (mobile) ── */}
       <ButtonBurger
         className={clsx(styles.burger, isOpen && styles.burgerOpen)}
         onClick={() => setIsOpen((prev) => !prev)}
