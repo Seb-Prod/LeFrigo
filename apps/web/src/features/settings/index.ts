@@ -1,2 +1,2 @@
-export { Settings } from "./components/Settings";
-export { Profile } from "./ProfilePage/Profile";
+export { Settings } from "./Settings";
+export { Profile } from "./components/ProfilePage/Profile";

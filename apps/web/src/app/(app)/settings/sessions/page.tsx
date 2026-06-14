@@ -1,12 +1,11 @@
 "use client";
 
 import { Surface } from "@/components/ui";
-import { Profile } from "@/features/settings";
 
-export default function ProfilePage() {
+export default function SessionsPage() {
   return (
     <Surface title="Profile" backButton>
-      <Profile/>
+      <span>sessions</span>
     </Surface>
   );
 }

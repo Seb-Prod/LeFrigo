@@ -27,9 +27,9 @@ export function parseBrowser(ua: string): {
  * Retourne l'icône du type d'appareil (mobile ou desktop)
  * en se basant sur le user-agent.
  */
-export function parseDevice(ua: string, size = 18): React.ReactNode {
-  if (/Mobile/i.test(ua)) return <MdOutlinePhoneAndroid size={size} />;
-  return <MdOutlineDesktopWindows size={size} />;
+export function parseDevice(ua: string): React.ReactNode {
+  if (/Mobile/i.test(ua)) return <MdOutlinePhoneAndroid/>;
+  return <MdOutlineDesktopWindows />;
 }
 
 /** Supprime le préfixe IPv6 `::ffff:` d'une adresse IP. */
@@ -47,4 +47,19 @@ export function formatLastActivity(date: Date): string {
   if (diffMin < 60) return `Il y a ${diffMin} min`;
   if (diffHours < 24) return `Il y a ${diffHours}h`;
   return `Il y a ${diffDays}j`;
+}
+
+/** Formate le temps restant avant expiration de la session (ex: "Expire dans 2h"). */
+export function formatSessionExpiry(expiresAt: Date): string {
+  const diffMs = expiresAt.getTime() - Date.now();
+
+  if (diffMs <= 0) return "Session expirée";
+
+  const diffMin = Math.floor(diffMs / 1000 / 60);
+  const diffHours = Math.floor(diffMin / 60);
+  const diffDays = Math.floor(diffHours / 24);
+
+  if (diffMin < 60) return `Expire dans ${diffMin} min`;
+  if (diffHours < 24) return `Expire dans ${diffHours}h`;
+  return `Expire dans ${diffDays}j`;
 }
