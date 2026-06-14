@@ -22,7 +22,7 @@ export function RecipeCard({ recipe, onDelete }: Props) {
       <div className={styles.content}>
         <h3>{recipe.name}</h3>
 
-        <Button variant="danger" onClick={handleDelete}>
+        <Button color="danger" onClick={handleDelete}>
           Supprimer
         </Button>
       </div>

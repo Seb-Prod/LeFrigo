@@ -282,3 +282,21 @@
   --bg: transparent;
   --color: var(--color-neutral-solid);
 }
+
+/* ── Sizes ────────────────────────────────────────────────── */
+
+.sm {
+  padding: 6px 14px;
+  font-size: 12px;
+  border-radius: var(--radius-sm);
+}
+
+.md {
+  padding: 10px 22px; /* déjà défini sur .button, redondant mais explicite */
+  font-size: 14px;
+}
+
+.lg {
+  padding: 13px 28px;
+  font-size: 16px;
+}

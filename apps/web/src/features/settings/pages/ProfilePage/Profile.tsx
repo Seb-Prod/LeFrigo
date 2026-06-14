@@ -2,7 +2,7 @@
 
 import { Badge, MenuGroup, MenuItem, MenuItemIcon } from "@/components/ui";
 import { useAuth } from "@/contexts/auth.context";
-import { ProfileHero } from "./components/ProfileHero";
+import { ProfileHero } from "../../components/ProfileHero";
 import {
   MdModeEditOutline,
   MdOutlineAlternateEmail,

@@ -10,7 +10,7 @@ import styles from "./MenuItem.module.css";
 type Props = {
   label: string;
   icon?: React.ReactNode;
-  description?: string;
+  description?: React.ReactNode
   /** Élément affiché à droite — badge, toggle, texte... Masque le chevron. */
   right?: React.ReactNode;
   /** Masque le chevron sans fournir d'élément right. */

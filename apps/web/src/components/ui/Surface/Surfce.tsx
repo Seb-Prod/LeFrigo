@@ -10,10 +10,8 @@ import { usePathname } from "next/navigation";
 import { getPageConfig } from "@/lib/navigation";
 
 type Props = {
-  title?: string;
   className?: string;
   children: React.ReactNode;
-  backButton?: boolean;
 };
 
 /**
@@ -31,7 +29,7 @@ type Props = {
  * - Le titre et le bouton retour ne s'affichent qu'en mode PWA
  * - `getPageConfig` détermine le titre et si le bouton retour est pertinent
  */
-export function Surface({ title, backButton, className, children }: Props) {
+export function Surface({ className, children }: Props) {
   const { isPWA, isMobile } = useDevice();
   const pathname = usePathname();
   const page = getPageConfig(pathname);

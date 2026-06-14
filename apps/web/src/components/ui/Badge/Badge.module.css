@@ -33,3 +33,8 @@
   background-color: var(--color-info-solid);
   color: var(--color-info-solid-text);
 }
+
+.neutral {
+  background-color: var(--color-neutral-solid);
+  color: var(--color-neutral-solid-text);
+}

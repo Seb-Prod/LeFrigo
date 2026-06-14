@@ -90,6 +90,7 @@ export function SplashScreen({ ready, onFinished }: Props) {
 
         {/* ── Groupe texte ── */}
         <div className={clsx(styles.textGroup, exiting && styles.textExit)}>
+          <Logo/>
           <span className={styles.appName}>LeFrigo</span>
 
           {/* ── Tagline défilante ── */}
@@ -109,7 +110,7 @@ export function SplashScreen({ ready, onFinished }: Props) {
 
       {/* ── Crédit développeur ── */}
       <div className={clsx(styles.credit, exiting && styles.creditExit)}>
-        <Logo />
+        <Logo variant="dev"/>
         <div className={styles.creditBody}>
           <span className={styles.creditName}>Seb-Prod</span>
           <span className={styles.creditSub}>© {new Date().getFullYear()} · v1.0.0 · Tous droits réservés</span>

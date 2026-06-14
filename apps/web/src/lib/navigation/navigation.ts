@@ -9,6 +9,7 @@ import {
   MdMenuBook,
 } from "react-icons/md";
 import { IconType } from "react-icons";
+import { TbDevicesQuestion } from "react-icons/tb";
 
 type PageConfig = {
   path: string;
@@ -20,7 +21,7 @@ type PageConfig = {
 export const PAGE_CONFIG: PageConfig[] = [
   {
     path: "/settings/profile/change-email",
-    title: "Changer l'email",
+    title: "Changer l'e-mail",
     icon: MdOutlineAlternateEmail,
     showBackButton: true,
   },
@@ -32,8 +33,14 @@ export const PAGE_CONFIG: PageConfig[] = [
   },
   {
     path: "/settings/profile",
-    title: "Profil",
+    title: "Profile",
     icon: MdPerson,
+    showBackButton: true,
+  },
+  {
+    path: "/settings/sessions",
+    title: "Sessions",
+    icon: TbDevicesQuestion,
     showBackButton: true,
   },
   {

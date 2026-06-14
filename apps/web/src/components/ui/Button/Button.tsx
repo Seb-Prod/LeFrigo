@@ -3,16 +3,18 @@ import styles from "./Button.module.css";
 
 /* ── Types ── */
 
-type Variant = "primary" | "accent" | "danger" | "info" | "warning" | "neutral";
-type Appearance = "solid" | "soft" | "ghost";
+type Colors = "primary" | "accent" | "danger" | "info" | "warning" | "neutral";
+type Variants = "solid" | "soft" | "ghost";
+type Sizes = "sm" | "md" | "lg";
 
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   /** Couleur sémantique du bouton. @default "primary" */
-  variant?: Variant;
+  color?: Colors;
   /** Apparence visuelle. @default "solid" */
-  appearance?: Appearance;
+  variant?: Variants;
   /** Désactive l'animation blob. @default false */
   animate?: boolean;
+  size?: Sizes;
 };
 
 /**
@@ -27,9 +29,10 @@ type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
  * - Active → scale press (0.08s)
  */
 export function Button({
-  variant = "primary",
-  appearance = "solid",
+  color = "primary",
+  variant = "solid",
   animate = true,
+  size = "md",
   className,
   ...props
 }: Props) {
@@ -38,7 +41,8 @@ export function Button({
       className={clsx(
         styles.button,
         styles[variant],
-        styles[appearance],
+        styles[color],
+        styles[size],
         !animate && styles.noBlob,
         className,
       )}

@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import styles from "./Badge.module.css";
 
-type BadgeColor = "default" | "success" | "warning" | "danger" | "info";
+type BadgeColor = "default" | "success" | "warning" | "danger" | "info" | "neutral";
 
 type Props = {
   children: React.ReactNode;

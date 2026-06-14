@@ -22,7 +22,6 @@ import {
   FiShare2,
   FiUsers,
 } from "react-icons/fi";
-import { useDevice } from "@/contexts/device.context";
 import { UserSession } from "@lefrigo/shared";
 import { authService } from "../auth/services/auth.service";
 import { authStorage } from "@/lib/auth";
@@ -39,7 +38,6 @@ import { SessionCard } from "./components/SessionCard";
  */
 export function Settings() {
   const { user, logout } = useAuth();
-  const { device } = useDevice();
 
   const [sessions, setSessions] = useState<UserSession[]>([]);
 

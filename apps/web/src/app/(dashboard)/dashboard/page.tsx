@@ -14,45 +14,11 @@ import { useEffect, useState } from "react";
 import styles from "./DashboardPage.module.css";
 
 export default function DashboardPage() {
-  const { user } = useAuth();
-  const { device } = useDevice();
-  const [sessions, setSessions] = useState<UserSession[]>([]);
 
-  useEffect(() => {
-    if (!user) return;
-    authService.getSessions().then(setSessions);
-  }, [user]);
-
-  if (!user) {
-    return <p>Utilisateur non connecté</p>;
-  }
-
-  const currentIdentifier = authStorage.getSessionIdentifier();
-  const currentSession = sessions.find(
-    (s) => s.sessionIdentifier === currentIdentifier,
-  );
-  const otherSessions = sessions.filter(
-    (s) => s.sessionIdentifier !== currentIdentifier,
-  );
-
-  const handleRevoke = (id: string) => {
-    authService.revokeSession(id);
-    setSessions((prev) => prev.filter((s) => s.id !== id));
-  };
-
-  const handleRevokeAll = async () => {
-    await authService.logoutAllDevices(currentIdentifier!);
-    setSessions((prev) =>
-      prev.filter((s) => s.sessionIdentifier === currentIdentifier),
-    );
-  };
 
   return (
     <main className={styles.main}>
-      <UserProfileCard user={user} device={device} />
-
-      <CurrentSessionCard session={currentSession} />
-      <OtherSessionsList sessions={otherSessions} onRevoke={handleRevoke} onRevokeAll={handleRevokeAll} />
+     
     </main>
   );
 }
