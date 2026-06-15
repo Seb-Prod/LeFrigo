@@ -1,4 +1,6 @@
 @import "./variables.css";
+@import "./themes/light.css";
+@import "./themes/dark.css";
 @import "./reset.css";
 
 * {
@@ -10,8 +12,8 @@ body {
   margin: 0;
   padding: 0;
 
-  height: 100%;  
-  overflow: hidden; 
+  height: 100%;
+  overflow: hidden;
 
   background: var(--color-background);
   color: var(--color-text);

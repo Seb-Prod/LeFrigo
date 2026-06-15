@@ -1,0 +1,122 @@
+:root.dark {
+
+  /* ── Primary ──────────────────────────────────────────────── */
+
+  --color-primary-solid: #00c060;
+  /* plus lumineux sur fond sombre */
+  --color-primary-solid-text: #002d18;
+  --color-primary-hover: #00d96b;
+  --color-primary-border: #005c2e;
+  --color-primary-background: #001f12;
+  --color-primary-text: #4ddb96;
+  --color-primary-soft: var(--color-primary-background);
+  --color-primary-soft-text: var(--color-primary-text);
+
+  /* ── Accent ───────────────────────────────────────────────── */
+
+  --color-accent-solid: #ffd93d;
+  --color-accent-solid-text: #3d2e00;
+  --color-accent-hover: #ffe566;
+  --color-accent-border: #7a5c00;
+  --color-accent-background: #2a2000;
+  --color-accent-text: #ffd93d;
+  --color-accent-soft: var(--color-accent-background);
+  --color-accent-soft-text: var(--color-accent-text);
+
+  /* ── Success ──────────────────────────────────────────────── */
+
+  --color-success-solid: #22c55e;
+  --color-success-solid-text: #052e16;
+  --color-success-hover: #4ade80;
+  --color-success-border: #14532d;
+  --color-success-background: #052e16;
+  --color-success-text: #4ade80;
+  --color-success-soft: var(--color-success-background);
+  --color-success-soft-text: var(--color-success-text);
+
+  /* ── Warning ──────────────────────────────────────────────── */
+
+  --color-warning-solid: #fbbf24;
+  --color-warning-solid-text: #1c0f00;
+  --color-warning-hover: #fcd34d;
+  --color-warning-border: #78350f;
+  --color-warning-background: #1c1000;
+  --color-warning-text: #fcd34d;
+  --color-warning-soft: var(--color-warning-background);
+  --color-warning-soft-text: var(--color-warning-text);
+
+  /* ── Danger ───────────────────────────────────────────────── */
+
+  --color-danger-solid: #f87171;
+  --color-danger-solid-text: #1f0000;
+  --color-danger-hover: #fca5a5;
+  --color-danger-border: #7f1d1d;
+  --color-danger-background: #1f0000;
+  --color-danger-text: #fca5a5;
+  --color-danger-soft: var(--color-danger-background);
+  --color-danger-soft-text: var(--color-danger-text);
+
+  /* ── Info ─────────────────────────────────────────────────── */
+
+  --color-info-solid: #60a5fa;
+  --color-info-solid-text: #0a1628;
+  --color-info-hover: #93c5fd;
+  --color-info-border: #1e3a5f;
+  --color-info-background: #0a1628;
+  --color-info-text: #93c5fd;
+  --color-info-soft: var(--color-info-background);
+  --color-info-soft-text: var(--color-info-text);
+
+  /* ── Neutral ──────────────────────────────────────────────── */
+
+  --color-neutral-solid: #9ca3af;
+  --color-neutral-solid-text: #111827;
+  --color-neutral-hover: #d1d5db;
+  --color-neutral-border: #374151;
+  --color-neutral-background: #1f2937;
+  --color-neutral-text: #d1d5db;
+  --color-neutral-soft: var(--color-neutral-background);
+  --color-neutral-soft-text: var(--color-neutral-text);
+
+  /* ── Inputs ───────────────────────────────────────────────── */
+
+  --color-input-background: #1f2d24;
+  --color-input-border: var(--color-border);
+  --color-input-text: var(--color-text);
+  --color-input-placeholder: var(--color-text-muted);
+
+  /* ── Shadow colors ────────────────────────────────────────── */
+
+  --shadow-color-primary: rgba(0, 192, 96, 0.25);
+  --shadow-color-accent: rgba(255, 217, 61, 0.25);
+  --shadow-color-success: rgba(34, 197, 94, 0.25);
+  --shadow-color-warning: rgba(251, 191, 36, 0.25);
+  --shadow-color-danger: rgba(248, 113, 113, 0.25);
+  --shadow-color-info: rgba(96, 165, 250, 0.25);
+  --shadow-color-neutral: rgba(156, 163, 175, 0.15);
+
+  /* ── Surfaces & fond global ───────────────────────────────── */
+
+  --color-background: #0f1a13;
+  /* vert très sombre, identité LeFrigo */
+  --color-surface: #1a2620;
+  /* cartes légèrement surélevées       */
+  --color-surface-hover: #243320;
+
+  /* ── Texte global ─────────────────────────────────────────── */
+
+  --color-text: #e8f5ec;
+  --color-text-secondary: #a3c4ab;
+  --color-text-muted: #6b7e70;
+
+  /* ── Bordures globales ────────────────────────────────────── */
+
+  --color-border: #2a3d30;
+  --color-border-strong: #3d5445;
+
+  /* ── Ombres (plus opaques sur fond sombre) ────────────────── */
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.30);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.40);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.50);
+}

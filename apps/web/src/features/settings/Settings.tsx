@@ -1,14 +1,10 @@
 import {
   Badge,
-  Button,
-  Heading,
   MenuGroup,
   MenuItem,
   MenuItemIcon,
-  Surface,
 } from "@/components/ui";
 import { useAuth } from "@/contexts/auth.context";
-import { AuthForm } from "@/features/auth";
 import { useEffect, useState } from "react";
 import { ProfileCard } from "./components/ProfileCard";
 import { GuestCard } from "./components/GuestCard";

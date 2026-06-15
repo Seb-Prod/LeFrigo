@@ -9,8 +9,7 @@ import {
   getExpiryColor,
 } from "@/features/settings/utils/session.utils";
 import { UserSession } from "@lefrigo/shared";
-import { FaCrown } from "react-icons/fa";
-import { IoHourglassOutline } from "react-icons/io5";
+import { IoHourglassOutline, IoShield } from "react-icons/io5";
 import { MdAccessTime } from "react-icons/md";
 
 /**
@@ -54,7 +53,7 @@ export function SessionCard({ session }: { session: UserSession }) {
             </Badge>
             {session.rememberMe && (
               <Badge color="warning">
-                <FaCrown />
+                <IoShield />
                 Remember me
               </Badge>
             )}

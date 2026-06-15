@@ -19,7 +19,7 @@
     transform: translate(-50%, -50%);
     width: 95vw;
     max-width: 500px;
-    background: var(--color-white);
+    background: var(--color-surface);
     border-radius: var(--radius-lg);
     padding: var(--space-md);
     box-shadow: var(--shadow-md);

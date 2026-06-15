@@ -18,7 +18,7 @@
 }
 
 .item:hover:not(.disabled) {
-  background: var(--color-neutral-hover);
+  background: var(--color-surface-hover);
 }
 
 /* ── Gauche ───────────────────────────────────────────────── */

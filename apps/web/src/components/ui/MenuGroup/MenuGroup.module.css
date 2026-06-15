@@ -14,7 +14,7 @@
 .group {
   display: flex;
   flex-direction: column;
-  background: var(--color-neutral-background);
+  background: var(--color-surface);
   border-radius: var(--radius-md);
   overflow: hidden;
   padding: 4px;

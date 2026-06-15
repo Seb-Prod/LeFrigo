@@ -11,9 +11,8 @@ import {
   parseDevice,
 } from "@/features/settings/utils/session.utils";
 import { UserSession } from "@lefrigo/shared";
-import { FaCrown } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
-import { IoHourglassOutline } from "react-icons/io5";
+import { IoHourglassOutline, IoShield } from "react-icons/io5";
 import { MdAccessTime } from "react-icons/md";
 
 /**
@@ -67,7 +66,7 @@ export function OtherSessionCard({
               </Badge>
               {session.rememberMe && (
                 <Badge color="warning">
-                  <FaCrown />
+                  <IoShield />
                   Remember me
                 </Badge>
               )}
@@ -79,7 +78,7 @@ export function OtherSessionCard({
       <Button
         size="sm"
         color="danger"
-        variant="solid"
+        variant="soft"
         onClick={() => onRevoke(session.id)}
         animate={false}
         style={{ flexShrink: 0, marginRight: 12 }}
