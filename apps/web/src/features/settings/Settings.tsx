@@ -26,6 +26,7 @@ import { UserSession } from "@lefrigo/shared";
 import { authService } from "../auth/services/auth.service";
 import { authStorage } from "@/lib/auth";
 import { SessionCard } from "./components/SessionCard";
+import { ThemeSelector } from "./components/ThemeSelector";
 
 /**
  * Page de réglages.
@@ -158,7 +159,7 @@ export function Settings() {
 
       {/* ── Apparence ── */}
       <MenuGroup title="Apparence">
-        <MenuItem label="ThemeSelector à venir" locked />
+        <ThemeSelector />
       </MenuGroup>
 
       {/* ── Compte ── */}

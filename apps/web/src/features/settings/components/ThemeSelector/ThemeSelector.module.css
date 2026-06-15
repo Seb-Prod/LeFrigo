@@ -1,0 +1,50 @@
+/* ── Wrapper ──────────────────────────────────────────────── */
+
+/* Flex horizontal — les 3 options se partagent la largeur */
+.wrapper {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+}
+
+/* ── Option ───────────────────────────────────────────────── */
+
+.option {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 4px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid transparent;
+  background: var(--color-neutral-background);
+  color: var(--color-neutral-text);
+  font-size: 12px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+/* ── Icône ────────────────────────────────────────────────── */
+
+.icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+/* ── Label ────────────────────────────────────────────────── */
+
+.label {
+  font-size: 12px;
+}
+
+/* ── Active ───────────────────────────────────────────────── */
+
+/* Option sélectionnée : fond et bordure primary */
+.active {
+  background: var(--color-primary-soft);
+  border-color: var(--color-primary-solid);
+  color: var(--color-primary-text);
+}
