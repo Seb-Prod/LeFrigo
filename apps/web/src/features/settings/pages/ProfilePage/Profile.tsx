@@ -63,6 +63,7 @@ export function Profile() {
       href: "/settings/profile/change-email",
       color: "info" as const,
       icon: MdOutlineAlternateEmail,
+      locked:true,
     },
     {
       label: "Nom d'utilisateur",
@@ -70,6 +71,7 @@ export function Profile() {
       href: "/settings/profile/change-username",
       color: "primary" as const,
       icon: MdOutlinePerson,
+      locked:true,
     },
     {
       label: "Mot de passe",
@@ -77,6 +79,7 @@ export function Profile() {
       href: "/settings/profile/change-password",
       color: "warning" as const,
       icon: MdOutlineLock,
+      locked:false
     },
   ];
 
@@ -110,6 +113,7 @@ export function Profile() {
               href={field.href}
               right={EDIT_ICON}
               icon={<MenuItemIcon color={field.color} size="md"><Icon /></MenuItemIcon>}
+              locked={field.locked}
             />
           );
         })}

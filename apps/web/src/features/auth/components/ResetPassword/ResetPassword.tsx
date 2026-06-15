@@ -2,7 +2,6 @@
 
 import { Alert, Button, FormCard, InputPassword } from "@/components/ui";
 import { TbLockCheck, TbLockCog, TbLockQuestion } from "react-icons/tb";
-import { useAuthForm } from "../../hooks/useAuthForm";
 import { AuthForm } from "../AuthForm/AuthForm";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -34,7 +33,7 @@ export function ResetPassword({ token }: Props) {
   if (success) {
     return (
       <FormCard icon={<TbLockCheck />} title="Mot de passe modifié !">
-        <Alert variant="success">
+        <Alert color="success">
           Votre mot de passe a bien été réinitialisé. Vous pouvez maintenant
           vous connecter.
         </Alert>
@@ -48,7 +47,7 @@ export function ResetPassword({ token }: Props) {
   if (expired) {
     return (
       <FormCard icon={<TbLockQuestion />} title="Lien expiré">
-        <Alert variant="error">
+        <Alert color="error">
           Ce lien de réinitialisation a expiré. Demandez-en un nouveau.
         </Alert>
         <Button onClick={() => router.push("/forgot-password")}>

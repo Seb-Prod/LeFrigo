@@ -9,6 +9,37 @@
     padding: var(--space-lg);
 }
 
+/* ── Header ───────────────────────────────────────────────── */
+
+/* Ligne sticky contenant le bouton retour et le titre centré */
+.header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  /* bouton | titre centré | espace miroir */
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: color-mix(in srgb, var(--color-background) 20%, transparent);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(2px);
+  padding-block: var(--space-sm);
+  border-radius: var(--radius-md);
+}
+
+/* Colonne 1, ligne 1 */
+.backButton {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+/* Span sur toute la largeur, même ligne (1), centré */
+.title {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  justify-self: center;
+}
+
 /* ── Card ─────────────────────────────────────────────────── */
 
 /* Conteneur principal — devient transparent et sans bordure sur mobile */

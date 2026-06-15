@@ -20,6 +20,12 @@ type PageConfig = {
 
 export const PAGE_CONFIG: PageConfig[] = [
   {
+    path:"/forgot-password",
+    title:"Mot de passe oublié",
+    icon: MdOutlineAlternateEmail,
+    showBackButton:true,
+  },
+  {
     path: "/settings/profile/change-email",
     title: "Changer l'e-mail",
     icon: MdOutlineAlternateEmail,

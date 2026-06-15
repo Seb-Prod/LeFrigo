@@ -5,6 +5,9 @@ import { Text } from "../Text";
 import { Button } from "../Button/Button";
 import { Alert } from "../Alert";
 import styles from "./FormCard.module.css";
+import { useDevice } from "@/contexts/device.context";
+import { usePathname } from "next/navigation";
+import { getPageConfig } from "@/lib/navigation";
 
 /* ── Types ────────────────────────────────────────────────── */
 
@@ -24,7 +27,6 @@ type Props = {
   /** Messages d'erreur globaux affichés sous le bouton */
   errorMessages?: string[];
   /** Affiche le bouton retour — à passer depuis `useDevice().isMobile` */
-  isMobile?: boolean;
 };
 
 /* ── Composant ────────────────────────────────────────────── */
@@ -47,15 +49,33 @@ export function FormCard({
   buttonLoadingLabel,
   disabled,
   errorMessages,
-  isMobile,
 }: Props) {
+  const { isPWA, isMobile } = useDevice();
+  const pathname = usePathname();
+  const page = getPageConfig(pathname);
   const goBack = useBack();
 
-  {/* ── Contenu partagé form / div ── */}
+  /** Header visible sur mobile et PWA uniquement */
+  const showHeader = isPWA || isMobile;
+
+  {
+    /* ── Contenu partagé form / div ── */
+  }
   const content = (
     <>
-      {/* ── Bouton retour (mobile uniquement) ── */}
-      {isMobile && <ButtonPrev onClick={goBack} />}
+      {/* ── Header (mobile/PWA uniquement) ── */}
+        {showHeader && (
+          <div className={styles.header}>
+            {/* ── Titre + retour (PWA uniquement — la Topbar web gère déjà ça) ── */}
+            {isPWA && (
+              <>
+                {page.showBackButton && (
+                  <ButtonPrev onClick={goBack} className={styles.backButton} />
+                )}
+              </>
+            )}
+          </div>
+        )}
 
       {/* ── Icône ── */}
       {icon && <div className={styles.icon}>{icon}</div>}
@@ -80,7 +100,7 @@ export function FormCard({
 
       {/* ── Erreurs globales ── */}
       {errorMessages && errorMessages.length > 0 && (
-        <Alert variant="error">
+        <Alert color="error">
           <ul>
             {errorMessages.map((error) => (
               <li key={error}>{error}</li>
@@ -91,7 +111,9 @@ export function FormCard({
     </>
   );
 
-  {/* ── Wrapper : form si soumission, div sinon ── */}
+  {
+    /* ── Wrapper : form si soumission, div sinon ── */
+  }
   return (
     <div className={styles.wrapper}>
       {onSubmit ? (

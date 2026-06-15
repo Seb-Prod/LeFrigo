@@ -1,13 +1,7 @@
 "use client";
 
-import { FormCard } from "@/components/ui";
-import { TbLockQuestion } from "react-icons/tb";
+import { ChangeEmail } from "@/features/settings";
 
 export default function ChangePasswordPage() {
-  return (
-    <FormCard
-      title="Changer d'adresse e-mail"
-      icon={<TbLockQuestion />}
-    ></FormCard>
-  );
+  return <ChangeEmail />;
 }

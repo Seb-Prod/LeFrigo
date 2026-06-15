@@ -53,7 +53,7 @@ export function AuthForm({ open, onClose }: Props) {
 
       {/* ── Succès register ── */}
       {form.success ? (
-        <Alert variant="success">
+        <Alert color="success">
           Votre compte a bien été créé ! Vérifiez votre boîte mail et cliquez
           sur le lien de confirmation pour activer votre compte.
         </Alert>
@@ -119,7 +119,7 @@ export function AuthForm({ open, onClose }: Props) {
 
           {/* ── Erreurs globales ── */}
           {form.errorMessages.length > 0 && (
-            <Alert variant="error">
+            <Alert color="error">
               <ul>
                 {form.errorMessages.map((error) => (
                   <li key={error}>{error}</li>

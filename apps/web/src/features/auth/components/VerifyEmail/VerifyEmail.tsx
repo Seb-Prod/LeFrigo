@@ -47,7 +47,7 @@ export function VerifyEmail({ token }: Props) {
   if (loading) {
     return (
       <FormCard icon={<TbMailCheck />} title="Vérification en cours…">
-        <Alert variant="info">
+        <Alert color="info">
           Nous confirmons votre adresse e-mail, cela ne prendra qu&apos;un
           instant.
         </Alert>
@@ -61,7 +61,7 @@ export function VerifyEmail({ token }: Props) {
   if (success) {
     return (
       <FormCard icon={<TbMailCheck />} title="E-mail confirmé !">
-        <Alert variant="success">
+        <Alert color="success">
           Votre adresse e-mail a bien été vérifiée. Vous pouvez maintenant
           accéder à votre compte.
         </Alert>
@@ -77,7 +77,7 @@ export function VerifyEmail({ token }: Props) {
   if (alreadyVerified) {
     return (
       <FormCard icon={<TbMailCheck />} title="Adresse déjà vérifiée">
-        <Alert variant="success">
+        <Alert color="success">
           Votre adresse e-mail a bien été vérifiée. Vous pouvez maintenant
           accéder à votre compte.
         </Alert>
@@ -97,7 +97,7 @@ export function VerifyEmail({ token }: Props) {
     if (resendSuccess) {
       return (
         <FormCard icon={<TbMailCheck />} title="Email envoyé !">
-          <Alert variant="success">
+          <Alert color="success">
             Vérifiez votre boîte mail pour confirmer votre adresse e-mail.
           </Alert>
         </FormCard>
@@ -114,7 +114,7 @@ export function VerifyEmail({ token }: Props) {
         disabled={resendLoading}
         errorMessages={error ? [errorMessage] : []}
       >
-        <Alert variant="error">
+        <Alert color="error">
           Ce lien de vérification a expiré. Renseignez votre email pour en
           recevoir un nouveau.
         </Alert>
@@ -133,7 +133,7 @@ export function VerifyEmail({ token }: Props) {
   }
   return (
     <FormCard icon={<TbMailX />} title="Lien invalide">
-      <Alert variant="error">
+      <Alert color="error">
         Ce lien de vérification n&apos;est pas valide.
       </Alert>
     </FormCard>

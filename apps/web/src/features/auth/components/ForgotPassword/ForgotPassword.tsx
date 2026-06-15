@@ -31,7 +31,7 @@ export function ForgotPassword() {
   if (success) {
     return (
       <FormCard icon={<TbMailCheck />} title="Email envoyé !">
-        <Alert variant="success">
+        <Alert color="success">
           Vérifiez votre boîte mail et cliquez sur le lien pour réinitialiser
           votre mot de passe.
         </Alert>
@@ -44,7 +44,6 @@ export function ForgotPassword() {
   }
   return (
     <FormCard
-      isMobile={isMobile}
       icon={<TbLockQuestion />}
       title="Mot de passe oublié"
       description="Après avoir renseigné l'email de votre compte, vous recevrez un message permettant de réinitialiser votre mot de passe."
