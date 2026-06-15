@@ -21,17 +21,26 @@ router.post("/logout-all", authMiddleware, authController.logoutAllDevices);
 /* ── Vérification email ───────────────────────────────────── */
 
 router.get("/verify-email", authController.verifyEmail);
-router.post("/resend-verification", resendRateLimit, authController.resendVerification);
+router.post(
+  "/resend-verification",
+  resendRateLimit,
+  authController.resendVerification,
+);
 
 /* ── Mot de passe ─────────────────────────────────────────── */
 
 router.post("/forgot-password", authRateLimit, authController.forgotPassword);
 router.post("/reset-password", authController.resetPassword);
+router.post("/change-password", authMiddleware, authController.changePassword);
 
 /* ── Sessions ─────────────────────────────────────────────── */
 
 router.get("/sessions", authMiddleware, authController.getSessions);
-router.delete("/sessions/:sessionId", authMiddleware, authController.revoqueSession);
+router.delete(
+  "/sessions/:sessionId",
+  authMiddleware,
+  authController.revoqueSession,
+);
 
 /* ── Profil ───────────────────────────────────────────────── */
 

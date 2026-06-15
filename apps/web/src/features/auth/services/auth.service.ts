@@ -1,11 +1,12 @@
 import { request } from "@/lib/api/request";
 import type {
   AuthResponse,
+  ChangePasswordDto,
   ForgotPasswordDto,
   LoginDto,
   RegisterDto,
   RegisterResponse,
-  ResetPassordDto,
+  ResetPasswordDto,
   UserSession,
 } from "@lefrigo/shared";
 
@@ -57,7 +58,7 @@ export const authService = {
     });
   },
 
-  resetPassword(data: ResetPassordDto) {
+  resetPassword(data: ResetPasswordDto) {
     return request<void>("/auth/reset-password", {
       method: "POST",
       body: JSON.stringify(data),
@@ -74,6 +75,13 @@ export const authService = {
     return request<void>("/auth/resend-verification", {
       method: "POST",
       body: JSON.stringify({ email }),
+    });
+  },
+
+  changePassword(data: ChangePasswordDto) {
+    return request<void>("/auth/change-password", {
+      method: "POST",
+      body: JSON.stringify(data),
     });
   },
 };

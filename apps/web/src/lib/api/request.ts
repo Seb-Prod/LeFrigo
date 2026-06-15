@@ -4,6 +4,13 @@ import { getRefreshPromise, setRefreshPromise } from "@/lib/auth/tokenManager";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
+const AUTH_ROUTES = ["/auth/login", "/auth/register", "/auth/forgot-password"];
+
+/** Retourne true si l'endpoint ne doit pas déclencher un refresh sur 401. */
+function isAuthRoute(endpoint: string): boolean {
+  return AUTH_ROUTES.some((route) => endpoint.includes(route));
+}
+
 export class ApiError extends Error {
   constructor(
     message: string,
@@ -36,6 +43,16 @@ export async function request<T>(
   let response = await executeRequest(authStorage.getAccessToken());
 
   if (response.status === 401) {
+    /* ── Routes d'auth : on ne tente pas de refresh ── */
+    if (isAuthRoute(endpoint)) {
+      const data = await response.json().catch(() => null);
+      throw new ApiError(
+        data?.message ?? "Identifiants incorrects",
+        401,
+        data?.errors,
+      );
+    }
+    /* ── Autres routes : tentative de refresh ── */
     try {
       let refreshPromise = getRefreshPromise();
 
@@ -51,7 +68,7 @@ export async function request<T>(
     } catch {
       authStorage.clear();
       window.location.href = "/";
-      return Promise.reject(new ApiError("Session expirée", 401));
+      return new Promise(() => {});
     }
   }
 

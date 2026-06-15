@@ -57,7 +57,7 @@ export const passwordService = {
     if (!user) {
       throw new AppError(400, "Token invalide");
     }
-    
+
     if (!user.resetPasswordExpires || user.resetPasswordExpires < new Date()) {
       throw new AppError(400, "TOKEN_EXPIRED");
     }
@@ -69,5 +69,56 @@ export const passwordService = {
     await sessionRepository.revokeAllUserSessions(user.id);
 
     return { message: "Mot de passe réinitialisé" };
+  },
+
+  /**
+   * Change le mot de passe d'un utilisateur connecté.
+   *
+   * - Vérifie que le mot de passe actuel est correct avant tout changement.
+   * - Rejette si le nouveau mot de passe est identique à l'ancien.
+   * - Hache le nouveau mot de passe avant persistance.
+   * - Révoque toutes les sessions actives pour forcer une reconnexion
+   *   sur tous les appareils.
+   *
+   * @param userId          - ID de l'utilisateur connecté (depuis le token JWT).
+   * @param currentPassword - Mot de passe actuel en clair (pour vérification).
+   * @param newPassword     - Nouveau mot de passe en clair (sera haché).
+   * @returns Message de confirmation.
+   * @throws {AppError} 400 `INVALID_PASSWORD` si le mot de passe actuel est incorrect.
+   * @throws {AppError} 400 `SAME_PASSWORD` si le nouveau mot de passe est identique à l'ancien.
+   * @throws {AppError} 404 si l'utilisateur n'existe pas (ne devrait pas arriver en production).
+   */
+  changePassword: async (
+    userId: string,
+    currentSessionIdentifier: string,
+    currentPassword: string,
+    newPassword: string,
+  ) => {
+    const user = await userRepository.findById(userId);
+
+    if (!user) {
+      throw new AppError(404, "USER_NOT_FOUND");
+    }
+
+    /** Vérifie que le mot de passe actuel correspond au hash stocké */
+    const isValid = await bcrypt.compare(currentPassword, user.password);
+    if (!isValid) {
+      throw new AppError(400, "INVALID_PASSWORD");
+    }
+
+    /** Rejette si le nouveau mot de passe est identique à l'ancien */
+    const isSame = await bcrypt.compare(newPassword, user.password);
+    if (isSame) {
+      throw new AppError(400, "SAME_PASSWORD");
+    }
+
+    const hashed = await bcrypt.hash(newPassword, 10);
+
+    await userRepository.updatePassword(user.id, hashed);
+
+    /** Révoque toutes les sessions — force la reconnexion sur tous les appareils */
+    await sessionRepository.revokeAllExceptCurrent(user.id, currentSessionIdentifier);
+
+    return { message: "Mot de passe changé" };
   },
 };

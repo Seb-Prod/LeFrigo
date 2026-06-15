@@ -10,7 +10,8 @@ import mealPlanRoutes from "apps/api/src/modules/meal-plans/meal-plan.routes";
 import { startSessionCleanupJob } from "./jobs/session-cleanup.job";
 
 const app = express();
-app.set("trust proxy", true);
+app.set("trust proxy", false);
+// app.set("trust proxy", 1);
 app.use(cors());
 app.use(express.json());
 

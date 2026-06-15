@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { authService } from "../services/auth.service";
-import { resetPasswordShema, zodErrorsToRecord } from "@lefrigo/shared";
+import { resetPasswordSchema, zodErrorsToRecord } from "@lefrigo/shared";
 import { useFormErrors } from "@/hooks";
 
 /* ── Types ────────────────────────────────────────────────── */
@@ -61,7 +61,7 @@ export function useResetPassword() {
       setState("loading");
       setErrors({});
 
-      const result = resetPasswordShema.safeParse({
+      const result = resetPasswordSchema.safeParse({
         token,
         password: fields.password,
         confirmPassword: fields.confirmPassword,

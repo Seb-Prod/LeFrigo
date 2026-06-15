@@ -1,13 +1,6 @@
-"use client"
+"use client";
 
-import { FormCard } from "@/components/ui"
-import { TbLockQuestion} from "react-icons/tb"
-
+import { ChangePassword } from "@/features/settings";
 export default function ChangePasswordPage() {
-    return(
-        <FormCard title="Changer de mot de passe" icon={<TbLockQuestion />
-} >
-
-        </FormCard>
-    )
+  return <ChangePassword />;
 }

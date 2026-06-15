@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
 import {
+  changePasswordSchema,
   forgotPasswordSchema,
   loginSchema,
   registerSchema,
-  resetPasswordShema,
+  resetPasswordSchema,
 } from "@lefrigo/shared";
 
 import { authService } from "./auth.service";
@@ -174,7 +175,7 @@ export const authController = {
 
   resetPassword: async (req: Request, res: Response) => {
     try {
-      const result = resetPasswordShema.safeParse(req.body);
+      const result = resetPasswordSchema.safeParse(req.body);
 
       if (!result.success) {
         return res.status(400).json({
@@ -186,6 +187,34 @@ export const authController = {
       const response = await authService.resetPassword(
         result.data.token,
         result.data.password,
+      );
+
+      return res.json(response);
+    } catch (error) {
+      return handleError(error, res);
+    }
+  },
+
+  changePassword: async (req: Request, res: Response) => {
+    try {
+      if (!req.user) {
+        return res.status(401).json({ message: "Non authentifié" });
+      }
+      const { sessionIdentifier } = req.body;
+      const result = changePasswordSchema.safeParse(req.body);
+
+      if (!result.success) {
+        return res.status(400).json({
+          messages: "Données invalide",
+          errors: result.error.issues,
+        });
+      }
+
+      const response = await authService.changePassword(
+        req.user.id,
+        sessionIdentifier,
+        result.data.password,
+        result.data.newPassword,
       );
 
       return res.json(response);
