@@ -1,13 +1,12 @@
 import { MenuGroup, MenuItem, MenuItemIcon } from "@/components/ui";
 import { useAuth } from "@/contexts/auth.context";
-import { authService } from "@/features/auth/services/auth.service";
 import { authStorage } from "@/lib/auth";
 import { UserSession } from "@lefrigo/shared";
 import { useEffect, useState } from "react";
 import { FiLogOut } from "react-icons/fi";
 import { TbDevicesQuestion } from "react-icons/tb";
-import { OtherSessionCard } from "../../components/OtherSessionCard";
-import { SessionCard } from "../../components/SessionCard";
+import { OtherSessionCard, SessionCard } from "../../components";
+import { authService } from "@/features/auth";
 
 /**
  * Page de gestion des sessions actives.

@@ -6,8 +6,6 @@ import {
 } from "@/components/ui";
 import { useAuth } from "@/contexts/auth.context";
 import { useEffect, useState } from "react";
-import { ProfileCard } from "./components/ProfileCard";
-import { GuestCard } from "./components/GuestCard";
 import { TbDevicesQuestion } from "react-icons/tb";
 import {
   FiBook,
@@ -19,10 +17,9 @@ import {
   FiUsers,
 } from "react-icons/fi";
 import { UserSession } from "@lefrigo/shared";
-import { authService } from "../auth/services/auth.service";
 import { authStorage } from "@/lib/auth";
-import { SessionCard } from "./components/SessionCard";
-import { ThemeSelector } from "./components/ThemeSelector";
+import { authService } from "../auth";
+import { GuestCard, ProfileCard, SessionCard, ThemeSelector } from "./components";
 
 /**
  * Page de réglages.

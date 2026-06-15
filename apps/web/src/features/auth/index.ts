@@ -3,3 +3,4 @@ export { ForgotPassword } from "./components/ForgotPassword";
 export { LogoutButton } from "./components/LogoutButton/LogoutButton";
 export { ResetPassword } from "./components/ResetPassword";
 export { VerifyEmail } from "./components/VerifyEmail";
+export { authService } from "./services/auth.service";
