@@ -82,7 +82,7 @@ export type RegisterDto = z.infer<typeof registerSchema>;
 /**
  * Schéma de validation du formulaire de réinitialisation de mot de passe.
  */
-export const resetPasswordShema = z
+export const resetPasswordSchema = z
   .object({
     token: z.string().min(1),
     password: z
@@ -119,7 +119,7 @@ export const resetPasswordShema = z
  * @property {string} password        - Nouveau mot de passe fort (min. 6, max. 128 caractères).
  * @property {string} confirmPassword - Doit correspondre à `password`.
  */
-export type ResetPassordDto = z.infer<typeof resetPasswordShema>;
+export type ResetPasswordDto = z.infer<typeof resetPasswordSchema>;
 
 /**
  * Schéma de validation du formulaire de demande de réinitialisation de mot de passe.
@@ -135,3 +135,49 @@ export const forgotPasswordSchema = z.object({
  * @property {string} email - Adresse email associée au compte à récupérer.
  */
 export type ForgotPasswordDto = z.infer<typeof forgotPasswordSchema>;
+
+/**
+ * Schéma de validation du formulaire de changement de mot de passe.
+ *
+ * Règles appliquées sur `newPassword` :
+ * - Minimum 6 caractères, maximum 128
+ * - Au moins une majuscule, une minuscule, un chiffre, un caractère spécial
+ * - Doit correspondre à `confirmNewPassword`
+ */
+export const changePasswordSchema = z
+  .object({
+    /** Mot de passe actuel — vérifié côté serveur contre le hash stocké. */
+    password: z.string().min(1, "Le mot de passe actuel est requis."),
+
+    newPassword: z
+      .string()
+      .min(6, AUTH_MESSAGES.password.min)
+      .max(128, AUTH_MESSAGES.password.tooLong) /* ← corrigé : était 17 */
+      .superRefine((val, ctx) => {
+        const rules = [
+          { test: /[A-Z]/, message: AUTH_MESSAGES.password.uppercase },
+          { test: /[a-z]/, message: AUTH_MESSAGES.password.lowercase },
+          { test: /[0-9]/, message: AUTH_MESSAGES.password.digit },
+          { test: /[^A-Za-z0-9]/, message: AUTH_MESSAGES.password.special },
+        ];
+        rules.forEach(({ test, message }) => {
+          if (!test.test(val)) ctx.addIssue({ code: "custom", message });
+        });
+      }),
+
+    confirmNewPassword: z.string(),
+  })
+  .refine((data) => data.newPassword === data.confirmNewPassword, {
+    message: AUTH_MESSAGES.confirmPassword.mismatch,
+    path: ["confirmNewPassword"],
+  });
+
+/**
+ * Type inféré depuis {@link changePasswordSchema}.
+ *
+ * @typedef {Object} ChangePasswordDto
+ * @property {string} password           - Mot de passe actuel (vérifié côté serveur).
+ * @property {string} newPassword        - Nouveau mot de passe fort (min. 6, max. 128 caractères).
+ * @property {string} confirmNewPassword - Doit correspondre à `newPassword`.
+ */
+export type ChangePasswordDto = z.infer<typeof changePasswordSchema>;
