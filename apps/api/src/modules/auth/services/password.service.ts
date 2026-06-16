@@ -96,6 +96,19 @@ export const passwordService = {
   ) => {
     const user = await userRepository.findById(userId);
 
+    if (!currentSessionIdentifier) {
+      throw new AppError(400, "SESSION_IDENTIFIER_REQUIRED");
+    }
+
+    const session = await sessionRepository.verifySessionValid(
+      currentSessionIdentifier,
+      userId,
+    );
+
+    if (!session) {
+      throw new AppError(401, "SESSION_INVALID");
+    }
+
     if (!user) {
       throw new AppError(404, "USER_NOT_FOUND");
     }
@@ -117,7 +130,10 @@ export const passwordService = {
     await userRepository.updatePassword(user.id, hashed);
 
     /** Révoque toutes les sessions — force la reconnexion sur tous les appareils */
-    await sessionRepository.revokeAllExceptCurrent(user.id, currentSessionIdentifier);
+    await sessionRepository.revokeAllExceptCurrent(
+      user.id,
+      currentSessionIdentifier,
+    );
 
     return { message: "Mot de passe changé" };
   },

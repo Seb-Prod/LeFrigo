@@ -39,7 +39,7 @@ router.get("/sessions", authMiddleware, authController.getSessions);
 router.delete(
   "/sessions/:sessionId",
   authMiddleware,
-  authController.revoqueSession,
+  authController.revokeSession,
 );
 
 /* ── Profil ───────────────────────────────────────────────── */

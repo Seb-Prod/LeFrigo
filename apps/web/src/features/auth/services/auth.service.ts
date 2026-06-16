@@ -1,4 +1,5 @@
 import { request } from "@/lib/api/request";
+import { authStorage } from "@/lib/auth";
 import type {
   AuthResponse,
   ChangePasswordDto,
@@ -81,7 +82,10 @@ export const authService = {
   changePassword(data: ChangePasswordDto) {
     return request<void>("/auth/change-password", {
       method: "POST",
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        ...data,
+        sessionIdentifier: authStorage.getSessionIdentifier(),
+      }),
     });
   },
 };

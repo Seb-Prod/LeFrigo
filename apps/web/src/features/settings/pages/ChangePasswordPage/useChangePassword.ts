@@ -76,14 +76,11 @@ export function useChangePassword() {
         const message = err instanceof Error ? err.message : "";
 
         if (message === "INVALID_PASSWORD") {
-          setErrors({ form: [message || "Mot de passe actuel incorrect."] });
+          setErrors({ form: ["Mot de passe actuel incorrect."] });
           setStatus("idle");
         } else if (message === "SAME_PASSWORD") {
           setErrors({
-            form: [
-              message ||
-                "Le nouveau mot de passe doit être différent de l'ancien.",
-            ],
+            form: ["Le nouveau mot de passe doit être différent de l'ancien."],
           });
           setStatus("idle");
         } else {

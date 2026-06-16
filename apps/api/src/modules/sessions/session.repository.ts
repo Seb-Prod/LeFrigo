@@ -99,4 +99,16 @@ export const sessionRepository = {
         revoked: true,
       },
     }),
+
+  verifySessionValid: (sessionIdentifier: string, userId: string) =>
+    prisma.session.findFirst({
+      where: {
+        sessionIdentifier,
+        userId,
+        revoked: false,
+        expiresAt: {
+          gt: new Date(),
+        },
+      },
+    }),
 };
