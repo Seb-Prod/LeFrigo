@@ -38,6 +38,7 @@ export function Logo({ size = "md", variant = "app" }: Props) {
         src={src}
         alt={alt}
         fill
+        sizes={`${px}px`}
         style={{ objectFit: "contain" }}
         className={styles.logo}
       />
