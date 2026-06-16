@@ -10,6 +10,7 @@ import {
 } from "react-icons/md";
 import { IconType } from "react-icons";
 import { TbDevicesQuestion } from "react-icons/tb";
+import { FaUser } from "react-icons/fa";
 
 type PageConfig = {
   path: string;
@@ -20,15 +21,21 @@ type PageConfig = {
 
 export const PAGE_CONFIG: PageConfig[] = [
   {
-    path:"/forgot-password",
-    title:"Mot de passe oublié",
+    path: "/forgot-password",
+    title: "Mot de passe oublié",
     icon: MdOutlineAlternateEmail,
-    showBackButton:true,
+    showBackButton: true,
   },
   {
     path: "/settings/profile/change-email",
     title: "Changer l'e-mail",
     icon: MdOutlineAlternateEmail,
+    showBackButton: true,
+  },
+  {
+    path: "/settings/profile/change-username",
+    title: "Changer de nom d'utilisateur",
+    icon: FaUser,
     showBackButton: true,
   },
   {

@@ -13,7 +13,10 @@ export const usernameController = {
       const result = changeUsernameSchema.safeParse(req.body);
 
       if (!result.success) {
+        console.log(req.body)
+        console.log(result)
         return res.status(400).json({
+    
           message: "Données invalides",
           errors: result.error.issues,
         });

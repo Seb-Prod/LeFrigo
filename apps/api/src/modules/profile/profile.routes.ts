@@ -10,7 +10,7 @@ import { profileController } from "./profile.controller";
 const router = Router();
 
 router.post(
-  "/profile/username",
+  "/username",
   authMiddleware,
   profileController.changeUsername,
 );

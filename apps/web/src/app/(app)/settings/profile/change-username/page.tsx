@@ -1,13 +1,7 @@
-"use client"
+"use client";
 
-import { FormCard } from "@/components/ui"
-import { TbLockQuestion} from "react-icons/tb"
+import { ChangeUsername } from "@/features/settings";
 
 export default function ChangeUserNamePage() {
-    return(
-        <FormCard title="Changer de nom d'utilisateur" icon={<TbLockQuestion />
-} >
-
-        </FormCard>
-    )
+  return <ChangeUsername />;
 }

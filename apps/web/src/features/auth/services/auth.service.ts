@@ -3,6 +3,7 @@ import { authStorage } from "@/lib/auth";
 import type {
   AuthResponse,
   ChangePasswordDto,
+  ChangeUsernameDto,
   ForgotPasswordDto,
   LoginDto,
   RegisterDto,
@@ -88,4 +89,11 @@ export const authService = {
       }),
     });
   },
+
+  changeUsername(data: ChangeUsernameDto){
+    return request<void>("/profile/username",{
+      method: "POST",
+      body: JSON.stringify(data)
+    })
+  }
 };

@@ -33,7 +33,7 @@ app.get("/test-error", async () => {
 
 // Modules
 app.use("/auth", authRoutes);
-app.use("profile", profileRoutes);
+app.use("/profile", profileRoutes);
 
 app.use("/recipes", recipeRoutes);
 app.use("/meal-plans", mealPlanRoutes);

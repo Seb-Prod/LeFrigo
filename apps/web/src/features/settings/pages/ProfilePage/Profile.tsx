@@ -71,7 +71,7 @@ export function Profile() {
       href: "/settings/profile/change-username",
       color: "primary" as const,
       icon: MdOutlinePerson,
-      locked:true,
+      locked:false,
     },
     {
       label: "Mot de passe",
