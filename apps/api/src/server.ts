@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import userRoutes from "./modules/users/user.routes";
 import authRoutes from "./modules/auth/auth.routes";
 import { authMiddleware } from "./core/auth/auth.middleware";
 import recipeRoutes from "./modules/recipes/recipe.routes";
@@ -33,7 +32,7 @@ app.get("/test-error", async () => {
 
 // Modules
 app.use("/auth", authRoutes);
-app.use("/users", userRoutes);
+
 app.use("/recipes", recipeRoutes);
 app.use("/meal-plans", mealPlanRoutes);
 
