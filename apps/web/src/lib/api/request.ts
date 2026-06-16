@@ -4,7 +4,7 @@ import { getRefreshPromise, setRefreshPromise } from "@/lib/auth/tokenManager";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-const AUTH_ROUTES = ["/auth/login", "/auth/register", "/auth/forgot-password"];
+const AUTH_ROUTES = ["/auth/login", "/auth/register", "/auth/forgot-password", "/session-expired"];
 
 /** Retourne true si l'endpoint ne doit pas déclencher un refresh sur 401. */
 function isAuthRoute(endpoint: string): boolean {
@@ -67,7 +67,7 @@ export async function request<T>(
       response = await executeRequest(newToken);
     } catch {
       authStorage.clear();
-      window.location.href = "/";
+      window.location.href = "/session-expired";
       return new Promise(() => {});
     }
   }

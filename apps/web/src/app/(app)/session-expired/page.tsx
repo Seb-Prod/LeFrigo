@@ -8,11 +8,11 @@ export default function SessionExpiredPage() {
   return (
     <FormCard
       icon={<TbClockExclamation />}
-      title="404"
-      description="Page non trouvé"
+      title="Session expirée"
+      description="Votre session a expiré ou a été révoquée. Veuillez vous reconnecter."
     >
       <Button>
-        <Link href="/login">retour</Link>
+        <Link href="/login">Se reconnecter</Link>
       </Button>
     </FormCard>
   );
