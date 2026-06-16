@@ -112,4 +112,13 @@ export const userRepository = {
       },
     });
   },
+
+  updateUsername: async (userId: string, username: string) => {
+    return prisma.user.update({
+      where: { id: userId },
+      data: {
+        userName: username,
+      },
+    });
+  },
 };

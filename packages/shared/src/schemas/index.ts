@@ -13,3 +13,5 @@ export type {
   ChangePasswordDto,
 } from "./auth.schemas";
 export { createMealPlanSchema } from "./meal-plan.shemas";
+
+export * from "./profile.schemas"

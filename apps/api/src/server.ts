@@ -7,6 +7,7 @@ import { errorMiddleware } from "./middlewares/error.middleware";
 import { AppError } from "./core/errors/AppError";
 import mealPlanRoutes from "apps/api/src/modules/meal-plans/meal-plan.routes";
 import { startSessionCleanupJob } from "./jobs/session-cleanup.job";
+import profileRoutes from "./modules/profile/profile.routes";
 
 const app = express();
 app.set("trust proxy", false);
@@ -32,6 +33,7 @@ app.get("/test-error", async () => {
 
 // Modules
 app.use("/auth", authRoutes);
+app.use("profile", profileRoutes);
 
 app.use("/recipes", recipeRoutes);
 app.use("/meal-plans", mealPlanRoutes);
