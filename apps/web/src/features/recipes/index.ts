@@ -1,1 +1,1 @@
-export {RecipeFormStep1} from "./components/RecipeFormStep1"
+export { CreateRecipePage } from "./pages/CreateRecipePage";

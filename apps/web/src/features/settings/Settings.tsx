@@ -129,6 +129,7 @@ export function Settings() {
             </MenuItemIcon>
           }
           locked={!user}
+          href="/recipes/create"
         />
         <MenuItem
           label="Mes recettes partagées"

@@ -1,0 +1,42 @@
+/* CreateRecipePage.module.css */
+
+/* ── Conteneur ─────────────────────────────────────────────── */
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+/* ── Stepper ───────────────────────────────────────────────── */
+
+.stepper {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* ── Point d'étape ─────────────────────────────────────────── */
+
+.stepDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-input-border);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+/* ── Étape courante ────────────────────────────────────────── */
+
+.stepDot.active {
+  background: var(--color-primary);
+  transform: scale(1.3);
+}
+
+/* ── Étape complétée ───────────────────────────────────────── */
+
+.stepDot.done {
+  background: var(--color-primary);
+  opacity: 0.4;
+}

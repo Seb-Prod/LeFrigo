@@ -21,6 +21,12 @@ type PageConfig = {
 
 export const PAGE_CONFIG: PageConfig[] = [
   {
+    path: "/recipes/create",
+    title: "Partager une recette",
+    icon: MdOutlineAlternateEmail,
+    showBackButton: true,
+  },
+  {
     path: "/forgot-password",
     title: "Mot de passe oublié",
     icon: MdOutlineAlternateEmail,

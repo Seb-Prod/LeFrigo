@@ -33,7 +33,7 @@ app.get("/test-error", async () => {
 // Modules
 app.use("/auth", authRoutes);
 app.use("/profile", profileRoutes);
-app.use("/recipe", recipeRoutes);
+app.use("/recipes", recipeRoutes);
 
 
 // Error middleware — toujours en dernier

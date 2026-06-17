@@ -98,20 +98,22 @@ export function useCreateRecipe() {
   /** Étape 3 → valide les étapes et soumet la recette complète. */
   const submitStep3 = useCallback(
     async (data: RecipeStepsDto) => {
+      
       const result = recipeStepsSchema.safeParse(data);
-
+      
       if (!result.success) {
         setErrors(zodErrorsToRecord(result.error));
         return;
       }
 
       const finalDraft = { ...draft, ...result.data } as CreateRecipeDto;
-
+      
       setStatus("loading");
       setErrors({});
 
       try {
         await recipeService.createRecipe(finalDraft);
+        console.log("c'est bon")
         setStatus("success");
       } catch (err) {
         const message = err instanceof Error ? err.message : "";
