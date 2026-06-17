@@ -9,6 +9,7 @@ import type {
   RegisterDto,
   RegisterResponse,
   ResetPasswordDto,
+  SafeUser,
   UserSession,
 } from "@lefrigo/shared";
 
@@ -90,10 +91,14 @@ export const authService = {
     });
   },
 
-  changeUsername(data: ChangeUsernameDto){
-    return request<void>("/profile/username",{
+  changeUsername(data: ChangeUsernameDto) {
+    return request<void>("/profile/username", {
       method: "POST",
-      body: JSON.stringify(data)
-    })
-  }
+      body: JSON.stringify(data),
+    });
+  },
+
+  me() {
+    return request<SafeUser>("/auth/me");
+  },
 };

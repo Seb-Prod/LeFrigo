@@ -34,8 +34,8 @@ export function ChangeUsername() {
     return (
         <FormCard
           icon={<TbLockQuestion />}
-          title="Changer de mot de passe"
-          description="Une fois modifié, toutes vos sessions sur les autres appareils seront révoquées."
+          title="Changer de nom d'utilisateur"
+          description="Une fois modifié, ..."
           buttonLabel="Changer de mot de passe"
           buttonLoadingLabel="Changement en cours..."
           onSubmit={handleSubmit}

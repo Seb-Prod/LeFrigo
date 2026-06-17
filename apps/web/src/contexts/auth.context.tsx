@@ -13,6 +13,8 @@ type AuthContextType = {
 
   logout: () => void;
 
+  updateUser: (user: SafeUser) => void;
+
   // setSession: (accessToken: string, user: any) => void;
 };
 
@@ -28,7 +30,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const storedAccessToken = authStorage.getAccessToken();
-    const storedRefreshToken = authStorage.getRefreshToken();
+    // const storedRefreshToken = authStorage.getRefreshToken();
     const storedUser = authStorage.getUser();
 
     if (storedAccessToken && storedUser) {
@@ -42,7 +44,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     authStorage.setAccessToken(data.accessToken);
     authStorage.setRefreshToken(data.refreshToken);
     authStorage.setUser(data.user);
-    authStorage.setSessionIdentifier(data.sessionIdentifier)
+    authStorage.setSessionIdentifier(data.sessionIdentifier);
 
     setAccessToken(data.accessToken);
     setUser(data.user);
@@ -55,6 +57,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(null);
   };
 
+  const updateUser = (user: SafeUser) => {
+    authStorage.setUser(user);
+    setUser(user);
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -63,6 +70,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         loading,
         login,
         logout,
+        updateUser,
       }}
     >
       {children}
