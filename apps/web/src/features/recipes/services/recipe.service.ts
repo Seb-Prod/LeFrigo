@@ -1,51 +1,33 @@
-import { Recipe } from "@shared/types/recipe.types";
+import { request } from "@/lib/api/request";
+import type { CreateRecipeDto } from "@lefrigo/shared";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+/* ── Types ─────────────────────────────────────────────────── */
 
+export type IngredientSuggestion = {
+  id:   string;
+  name: string;
+};
+
+/* ── Service ────────────────────────────────────────────────── */
+
+/**
+ * Service front des recettes.
+ *
+ * Regroupe :
+ * - `createRecipe`      → soumet la recette complète à l'API
+ * - `searchIngredients` → recherche les ingrédients existants pour l'autocomplete
+ */
 export const recipeService = {
-  async getAll(token: string): Promise<Recipe[]> {
-    const response = await fetch(`${API_URL}/recipes`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error("Impossible de charger les recettes");
-    }
-
-    return response.json();
-  },
-
-  async create(name: string, token: string): Promise<Recipe> {
-    const response = await fetch(`${API_URL}/recipes`, {
+  /** Crée une recette complète — appelé à la soumission finale de l'étape 3. */
+  createRecipe: (data: CreateRecipeDto) =>
+    request<void>("/recipes", {
       method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-      }),
-    });
+      body:   JSON.stringify(data),
+    }),
 
-    if (!response.ok) {
-      throw new Error("Impossible de créer la recette");
-    }
-
-    return response.json();
-  },
-
-  async delete(id: string, token: string):Promise<void> {
-    const response = await fetch(`${API_URL}/recipes/${id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error("Impossible de supprimer la recette");
-    }
-  },
+  /** Recherche les ingrédients dont le nom contient `query` (min. 1 caractère). */
+  searchIngredients: (query: string) =>
+    request<IngredientSuggestion[]>(
+      `/recipes/ingredients/search?q=${encodeURIComponent(query)}`,
+    ),
 };

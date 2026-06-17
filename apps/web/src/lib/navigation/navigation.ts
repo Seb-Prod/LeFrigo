@@ -91,7 +91,7 @@ export const NAVIGATION = [
 
   {
     label: "Recettes",
-    href: "/recipes",
+    href: "/recipe",
     icon: MdMenuBook,
   },
 

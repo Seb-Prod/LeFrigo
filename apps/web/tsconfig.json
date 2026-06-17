@@ -28,6 +28,6 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-, "next.config.ts"  ],
+, "next.config.ts", "src/components/ui/IngredientAutocomplete"  ],
   "exclude": ["node_modules"]
 }
