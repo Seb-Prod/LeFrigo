@@ -20,7 +20,7 @@ export function ChangePassword() {
     setField,
     loading,
     success,
-    handleChangePassword,
+    handleSubmit,
   } = useChangePassword();
 
   const goBack = useBack();
@@ -46,7 +46,7 @@ export function ChangePassword() {
       description="Une fois modifié, toutes vos sessions sur les autres appareils seront révoquées."
       buttonLabel="Changer de mot de passe"
       buttonLoadingLabel="Changement en cours..."
-      onSubmit={handleChangePassword}
+      onSubmit={handleSubmit}
       errorMessages={errorMessages}
       disabled={loading}
     >

@@ -13,7 +13,7 @@ export function ChangeUsername() {
     setField,
     loading,
     success,
-    handleChangeUsername,
+    handleSubmit,
   } = useChangeUsername();
 
   const goBack = useBack();
@@ -38,7 +38,7 @@ export function ChangeUsername() {
           description="Une fois modifié, toutes vos sessions sur les autres appareils seront révoquées."
           buttonLabel="Changer de mot de passe"
           buttonLoadingLabel="Changement en cours..."
-          onSubmit={handleChangeUsername}
+          onSubmit={handleSubmit}
           errorMessages={errorMessages}
           disabled={loading}
         >

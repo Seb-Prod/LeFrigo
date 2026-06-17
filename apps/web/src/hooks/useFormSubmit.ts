@@ -57,7 +57,7 @@ export function useFormSubmit<TFields extends Record<string, string>, TData>({
         setStatus("idle");
       }
     },
-    [fields, setErrors, onSubmit],
+    [setErrors, schema, fields, onSubmit, errorMap],
   );
 
   return {
