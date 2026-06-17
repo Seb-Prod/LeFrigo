@@ -14,4 +14,5 @@ export type {
 } from "./auth.schemas";
 export { createMealPlanSchema } from "./meal-plan.shemas";
 
-export * from "./profile.schemas"
+export * from "./profile.schemas";
+export * from "./recipe.schemas";
