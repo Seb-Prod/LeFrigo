@@ -1,0 +1,11 @@
+.content{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.actions{
+    display: flex;
+    margin-left: auto;
+    gap: 8px;
+}

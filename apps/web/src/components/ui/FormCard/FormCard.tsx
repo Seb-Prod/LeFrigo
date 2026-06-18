@@ -8,6 +8,9 @@ import styles from "./FormCard.module.css";
 import { useDevice } from "@/contexts/device.context";
 import { usePathname } from "next/navigation";
 import { getPageConfig } from "@/lib/navigation";
+import { Modal } from "../Modal";
+import { useState } from "react";
+import { ConfirmDialog } from "../ConfirmDialog";
 
 /* ── Types ────────────────────────────────────────────────── */
 
@@ -53,7 +56,10 @@ export function FormCard({
   const { isPWA, isMobile } = useDevice();
   const pathname = usePathname();
   const page = getPageConfig(pathname);
+  const confirmationModal = page.confirmationModal;
   const goBack = useBack();
+
+  const [confirmBackOpen, setConfirmBackOpen] = useState(false);
 
   /** Header visible sur mobile et PWA uniquement */
   const showHeader = isPWA || isMobile;
@@ -64,18 +70,27 @@ export function FormCard({
   const content = (
     <>
       {/* ── Header (mobile/PWA uniquement) ── */}
-        {showHeader && (
-          <div className={styles.header}>
-            {/* ── Titre + retour (PWA uniquement — la Topbar web gère déjà ça) ── */}
-            {isPWA && (
-              <>
-                {page.showBackButton && (
-                  <ButtonPrev onClick={goBack} className={styles.backButton} />
-                )}
-              </>
-            )}
-          </div>
-        )}
+      {showHeader && (
+        <div className={styles.header}>
+          {/* ── Titre + retour (PWA uniquement — la Topbar web gère déjà ça) ── */}
+          {isPWA && (
+            <>
+              {page.showBackButton && (
+                <ButtonPrev
+                  className={styles.backButton}
+                  onClick={() => {
+                    if (confirmationModal) {
+                      setConfirmBackOpen(true);
+                    } else {
+                      goBack();
+                    }
+                  }}
+                />
+              )}
+            </>
+          )}
+        </div>
+      )}
 
       {/* ── Icône ── */}
       {icon && <div className={styles.icon}>{icon}</div>}
@@ -107,6 +122,23 @@ export function FormCard({
             ))}
           </ul>
         </Alert>
+      )}
+
+      {/* –– Modal de confirmation (backButtun) –– */}
+      {confirmationModal && (
+        <ConfirmDialog
+          open={confirmBackOpen}
+          title={confirmationModal.title}
+          description={confirmationModal.description}
+          confirmLabel={confirmationModal.confirmLabel}
+          cancelLabel={confirmationModal.cancelLabel}
+          onClose={() => setConfirmBackOpen(false)}
+          onConfirm={() => {
+            setConfirmBackOpen(false);
+
+            goBack();
+          }}
+        />
       )}
     </>
   );

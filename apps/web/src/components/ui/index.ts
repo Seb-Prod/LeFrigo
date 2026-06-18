@@ -9,6 +9,7 @@ export * from "./ButtonIcon";
 export { Card } from "./Card";
 export { Carousel } from "./Carousel";
 export * from "./Checkbox";
+export { ConfirmDialog } from "./ConfirmDialog";
 
 export { DevCredit } from "./DevCredit";
 

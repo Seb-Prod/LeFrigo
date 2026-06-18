@@ -3,11 +3,18 @@
 import { usePathname } from "next/navigation";
 import styles from "./Topbar.module.css";
 import { getPageConfig } from "@/lib/navigation";
-import { ButtonPrev, Text, Logo, NavLink } from "@/components/ui";
+import {
+  ButtonPrev,
+  Text,
+  Logo,
+  NavLink,
+  ConfirmDialog,
+} from "@/components/ui";
 import { useBack } from "@/hooks";
 import { NAVIGATION } from "@/lib/navigation/navigation";
 import { LogoutButton } from "@/features/auth";
 import { useAuth } from "@/contexts/auth.context";
+import { useState } from "react";
 
 /**
  * Topbar
@@ -29,6 +36,9 @@ export function Topbar() {
   const { user, logout } = useAuth();
 
   const page = getPageConfig(pathname);
+  const confirmationModal = page.confirmationModal;
+
+  const [confirmBackOpen, setConfirmBackOpen] = useState(false);
 
   return (
     <header className={styles.topbar}>
@@ -36,7 +46,16 @@ export function Topbar() {
       <div className={styles.center}>
         {page.showBackButton ? (
           <div className={styles.pageInfo}>
-            <ButtonPrev className={styles.backButton} onClick={goBack} />
+            <ButtonPrev
+              className={styles.backButton}
+              onClick={() => {
+                if (confirmationModal) {
+                  setConfirmBackOpen(true);
+                } else {
+                  goBack();
+                }
+              }}
+            />{" "}
             <Text>{page.title}</Text>
           </div>
         ) : (
@@ -66,6 +85,23 @@ export function Topbar() {
           </ul>
         </nav>
       </div>
+
+      {/* –– Modal de confirmation (backButtun) –– */}
+      {confirmationModal && (
+        <ConfirmDialog
+          open={confirmBackOpen}
+          title={confirmationModal.title}
+          description={confirmationModal.description}
+          confirmLabel={confirmationModal.confirmLabel}
+          cancelLabel={confirmationModal.cancelLabel}
+          onClose={() => setConfirmBackOpen(false)}
+          onConfirm={() => {
+            setConfirmBackOpen(false);
+
+            goBack();
+          }}
+        />
+      )}
     </header>
   );
 }

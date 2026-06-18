@@ -12,11 +12,19 @@ import { IconType } from "react-icons";
 import { TbDevicesQuestion } from "react-icons/tb";
 import { FaUser } from "react-icons/fa";
 
+type ConfirmationModalConfig = {
+  title: string;
+  description: string;
+  confirmLabel?: string;
+  cancelLabel?: string;
+};
+
 type PageConfig = {
   path: string;
   title: string;
   icon: IconType;
   showBackButton?: boolean;
+  confirmationModal?: ConfirmationModalConfig;
 };
 
 export const PAGE_CONFIG: PageConfig[] = [
@@ -25,6 +33,12 @@ export const PAGE_CONFIG: PageConfig[] = [
     title: "Partager une recette",
     icon: MdOutlineAlternateEmail,
     showBackButton: true,
+    confirmationModal: {
+      title: "Quitter la création de recette ?",
+      description: "Les modifications non enregistrées seront perdues.",
+      confirmLabel: "Quitter",
+      cancelLabel: "Continuer",
+    },
   },
   {
     path: "/forgot-password",
@@ -114,12 +128,18 @@ export const NAVIGATION = [
   },
 ];
 
+const DEFAULT_PAGE_CONFIG: PageConfig = {
+  path: "",
+  title: "LeFrigo",
+  icon: MdDashboard,
+  showBackButton: false,
+  confirmationModal: undefined,
+};
+
 export function getPageConfig(pathname: string) {
   return (
     PAGE_CONFIG.find(({ path }) => pathname.startsWith(path)) ?? {
-      title: "LeFrigo",
-      icon: MdDashboard,
-      showBackButton: false,
+      ...DEFAULT_PAGE_CONFIG
     }
   );
 }
