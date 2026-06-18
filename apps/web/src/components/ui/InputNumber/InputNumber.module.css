@@ -1,0 +1,145 @@
+.center {
+    perspective: 1000px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-input-background);
+    border-radius: var(--radius-md);
+    box-sizing: border-box;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transform-style: preserve-3d;
+    border: 1px solid var(--color-input-border);
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, .15),
+        0 2px 5px rgba(0, 0, 0, .1);
+    transform-style: preserve-3d;
+    transition: transform 0.25s ease;
+}
+
+.content:focus-within {
+  border-color: var(--color-primary-solid);
+  box-shadow: 0 0 0 3px rgba(107, 142, 35, 0.15);
+}
+
+.numberInput{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--color-success-solid);
+    color: var(--color-success-solid-text);
+    outline: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-size: 32px;
+}
+
+.btn:active::before {
+    position: absolute;
+    content: '';
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--color-text);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.8;
+    animation: ripple 0.25s ease-out;
+}
+
+.decrement{
+    background: var(--color-danger-solid);
+    color: var(--color-danger-solid-text);
+}
+
+.value {
+    flex-grow: 1;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.number {
+    width: 80px;
+    border: none;
+    background: transparent;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    outline: none;
+    color: var(--color-input-text);
+}
+
+
+/* Masquer les flèches natives */
+
+.number::-webkit-outer-spin-button,
+.number::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.number[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.text {
+    font-size: 1rem;
+    color: var(--color-input-placeholder);
+    text-align: center;
+}
+
+.rotateAdd {
+    animation: pushLeft 0.25s ease;
+}
+
+.rotateRemove {
+    animation: pushRight 0.25s ease;
+}
+
+@keyframes pushRight {
+    50% {
+        transform:
+            perspective(1000px) rotateY(-9deg) rotateX(2deg) translateZ(-15px);
+    }
+
+}
+
+@keyframes pushLeft {
+    50% {
+        transform:
+            perspective(1000px) rotateY(9deg) rotateX(2deg) translateZ(-15px);
+
+    }
+}
+
+@keyframes ripple {
+    0% {
+        width: 32px;
+        height: 32px;
+        opacity: 0.4;
+    }
+
+    100% {
+        width: 100px;
+        height: 100px;
+        opacity: 0.1;
+    }
+}

@@ -19,6 +19,7 @@ export { Heading } from "./Heading";
 
 export { IngredientAutocomplete } from "./IngredientAutocomplete";
 export { Input, InputEmail, InputPassword, InputUserName } from "./Input";
+export { InputNumber } from "./InputNumber";
 
 export { Logo } from "./Logo";
 

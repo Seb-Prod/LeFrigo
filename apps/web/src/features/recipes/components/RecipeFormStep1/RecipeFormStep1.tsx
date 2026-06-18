@@ -1,4 +1,4 @@
-import { FormCard, Input } from "@/components/ui";
+import { FormCard, Input, InputNumber } from "@/components/ui";
 import { TbChefHat } from "react-icons/tb";
 import {
   recipeInfoSchema,
@@ -7,6 +7,7 @@ import {
 } from "@lefrigo/shared";
 import { useState } from "react";
 import { useFormErrors } from "@/hooks";
+import styles from "./RecipeFormStep1.module.css";
 
 type Props = {
   defaultValues: Partial<RecipeInfoDto>;
@@ -44,6 +45,18 @@ export function RecipeFormStep1({ defaultValues, onSubmit, onBack }: Props) {
             : Number(raw)
           : raw;
       setFields((prev) => ({ ...prev, [key]: value }));
+      clearFieldError(key);
+    };
+
+  const setNumberField =
+    <K extends keyof RecipeInfoDto>(key: K) =>
+    (value: number | undefined) => {
+      setFields((prev) => ({
+        ...prev,
+
+        [key]: value,
+      }));
+
       clearFieldError(key);
     };
 
@@ -90,28 +103,29 @@ export function RecipeFormStep1({ defaultValues, onSubmit, onBack }: Props) {
       />
 
       {/* ── Temps ── */}
-      <Input
-        type="number"
-        placeholder="Temps de préparation (min)"
-        value={fields.preparationTime ?? ""}
-        error={!!errors.preparationTime}
-        onChange={setField("preparationTime")}
-      />
-      <Input
-        type="number"
-        placeholder="Temps de cuisson (min)"
-        value={fields.cookingTime ?? ""}
-        error={!!errors.cookingTime}
-        onChange={setField("cookingTime")}
-      />
+      <div className={styles.row}>
+        <InputNumber
+          placeholder="Temps de préparation (min)"
+          value={fields.preparationTime ?? 0}
+          min={0}
+          step={5}
+          onChange={setNumberField("preparationTime")}
+        />
+
+        <InputNumber
+          placeholder="Temps de cuisson (min)"
+          value={fields.cookingTime ?? 0}
+          min={0}
+          step={5}
+          onChange={setNumberField("cookingTime")}
+        />
+      </div>
 
       {/* ── Portions ── */}
-      <Input
-        type="number"
+      <InputNumber
         placeholder="Nombre de portions"
-        value={fields.servings ?? ""}
-        error={!!errors.servings}
-        onChange={setField("servings")}
+        value={fields.servings ?? 0}
+        onChange={setNumberField("servings")}
       />
     </FormCard>
   );
