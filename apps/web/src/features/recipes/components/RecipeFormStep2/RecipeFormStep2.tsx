@@ -4,11 +4,9 @@ import { useState, useEffect, useCallback } from "react";
 import { TbTrash } from "react-icons/tb";
 import { FormCard, Input, Button } from "@/components/ui";
 import { IngredientAutocomplete } from "@/components/ui/IngredientAutocomplete";
-import { useDebounce } from "@/hooks";
+import { useDebounce, useFormErrors } from "@/hooks";
 import { recipeService, IngredientSuggestion } from "@/features/recipes/services/recipe.service";
-import type { RecipeIngredientDto, RecipeIngredientsDto } from "@lefrigo/shared";
-import { recipeIngredientsSchema, zodErrorsToRecord } from "@lefrigo/shared";
-import { useFormErrors } from "@/hooks";
+import { recipeIngredientsSchema, RecipeIngredientDto, RecipeIngredientsDto, zodErrorsToRecord } from "@lefrigo/shared";
 import styles from "./RecipeFormStep2.module.css";
 
 /* ── Types ─────────────────────────────────────────────────── */
@@ -19,39 +17,39 @@ type Props = {
   onBack: () => void;
 };
 
-/** Ingrédient en cours de saisie dans le formulaire d'ajout */
-type DraftIngredient = {
+/** État du mini-formulaire de confirmation */
+type PendingIngredient = {
   name:     string;
-  quantity: string; /* string pour l'input, converti en number à la soumission */
+  quantity: string;
   unit:     string;
-};
-
-const INITIAL_DRAFT: DraftIngredient = {
-  name:     "",
-  quantity: "",
-  unit:     "",
 };
 
 /**
  * Étape 2 du formulaire de création de recette.
  *
- * Permet d'ajouter des ingrédients via autocomplete (existants ou créés à la volée).
- * Chaque ingrédient ajouté apparaît dans une liste avec possibilité de suppression.
- * Valide via `recipeIngredientsSchema` avant d'appeler `onSubmit`.
+ * États visuels :
+ * - `pending: null`    → autocomplete seul
+ * - `pending: { name }` → mini-formulaire qts/unité sous l'autocomplete
+ *
+ * Flow :
+ * 1. L'utilisateur tape → suggestions en dropdown
+ * 2. Il clique une suggestion ou "Créer X" → mini-formulaire apparaît
+ * 3. Il saisit qts/unité et confirme → ingrédient ajouté à la liste
  */
 export function RecipeFormStep2({ defaultValues, onSubmit, onBack }: Props) {
   const [ingredients, setIngredients] = useState<RecipeIngredientDto[]>(
     defaultValues.ingredients ?? [],
   );
-  const [draft, setDraft]             = useState<DraftIngredient>(INITIAL_DRAFT);
+  const [query, setQuery]             = useState("");
   const [suggestions, setSuggestions] = useState<IngredientSuggestion[]>([]);
   const [searching, setSearching]     = useState(false);
+  const [pending, setPending]         = useState<PendingIngredient | null>(null);
 
   const { errors, setErrors, clearFieldError, errorMessages } = useFormErrors();
 
   /* ── Autocomplete ── */
 
-  const debouncedQuery = useDebounce(draft.name, 300);
+  const debouncedQuery = useDebounce(query, 300);
 
   useEffect(() => {
     if (!debouncedQuery.trim()) {
@@ -77,35 +75,35 @@ export function RecipeFormStep2({ defaultValues, onSubmit, onBack }: Props) {
     return () => { cancelled = true; };
   }, [debouncedQuery]);
 
-  /* ── Ajout d'un ingrédient ── */
+  /* ── Sélection → mini-formulaire ── */
 
-  /** Ajoute l'ingrédient courant à la liste et réinitialise le draft. */
-  const addIngredient = useCallback((name: string) => {
-    if (!name.trim()) return;
+  const handlePick = useCallback((name: string) => {
+    setPending({ name, quantity: "", unit: "" });
+    setQuery("");
+    setSuggestions([]);
+  }, []);
+
+  /* ── Confirmation du mini-formulaire ── */
+
+  const handleConfirm = useCallback(() => {
+    if (!pending) return;
 
     setIngredients((prev) => [
       ...prev,
       {
-        name:     name.trim(),
-        quantity: draft.quantity ? Number(draft.quantity) : undefined,
-        unit:     draft.unit.trim() || undefined,
+        name:     pending.name,
+        quantity: pending.quantity ? Number(pending.quantity) : undefined,
+        unit:     pending.unit.trim() || undefined,
       },
     ]);
 
-    setDraft(INITIAL_DRAFT);
-    setSuggestions([]);
+    setPending(null);
     clearFieldError("ingredients");
-  }, [draft, clearFieldError]);
+  }, [pending, clearFieldError]);
 
-  const handleSelect = useCallback(
-    (ingredient: IngredientSuggestion) => addIngredient(ingredient.name),
-    [addIngredient],
-  );
-
-  const handleCreate = useCallback(
-    (name: string) => addIngredient(name),
-    [addIngredient],
-  );
+  const handleCancelPending = useCallback(() => {
+    setPending(null);
+  }, []);
 
   /* ── Suppression ── */
 
@@ -132,38 +130,62 @@ export function RecipeFormStep2({ defaultValues, onSubmit, onBack }: Props) {
     <FormCard
       icon={<span>🥕</span>}
       title="Ingrédients"
-      description="Ajoutez les ingrédients de votre recette."
+      description="Recherchez et ajoutez les ingrédients de votre recette."
       buttonLabel="Suivant"
       onSubmit={handleSubmit}
       errorMessages={errorMessages}
     >
-      {/* ── Formulaire d'ajout ── */}
-      <div className={styles.addRow}>
+      {/* ── Autocomplete ── */}
+      {!pending && (
         <IngredientAutocomplete
-          value={draft.name}
+          value={query}
           suggestions={suggestions}
           loading={searching}
-          onChange={(value) => setDraft((prev) => ({ ...prev, name: value }))}
-          onSelect={handleSelect}
-          onCreate={handleCreate}
+          onChange={setQuery}
+          onPick={handlePick}
           error={!!errors.ingredients}
         />
-        <Input
-          type="number"
-          placeholder="Quantité"
-          value={draft.quantity}
-          onChange={(e) => setDraft((prev) => ({ ...prev, quantity: e.target.value }))}
-          className={styles.quantity}
-        />
-        <Input
-          placeholder="Unité (g, ml…)"
-          value={draft.unit}
-          onChange={(e) => setDraft((prev) => ({ ...prev, unit: e.target.value }))}
-          className={styles.unit}
-        />
-      </div>
+      )}
 
-      {/* ── Liste des ingrédients ajoutés ── */}
+      {/* ── Mini-formulaire ── */}
+      {pending && (
+        <div className={styles.miniForm}>
+          {/* ── Nom sélectionné ── */}
+          <p className={styles.pendingName}>{pending.name}</p>
+
+          {/* ── Quantité + unité ── */}
+          <div className={styles.miniRow}>
+            <Input
+              type="number"
+              placeholder="Quantité"
+              value={pending.quantity}
+              onChange={(e) =>
+                setPending((prev) => prev && ({ ...prev, quantity: e.target.value }))
+              }
+              className={styles.quantityInput}
+            />
+            <Input
+              placeholder="Unité (g, ml, pièce…)"
+              value={pending.unit}
+              onChange={(e) =>
+                setPending((prev) => prev && ({ ...prev, unit: e.target.value }))
+              }
+            />
+          </div>
+
+          {/* ── Actions ── */}
+          <div className={styles.miniActions}>
+            <Button type="button" variant="ghost" onClick={handleCancelPending}>
+              Annuler
+            </Button>
+            <Button type="button" onClick={handleConfirm}>
+              Confirmer
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {/* ── Liste des ingrédients ── */}
       {ingredients.length > 0 && (
         <ul className={styles.list}>
           {ingredients.map((ingredient, index) => (
