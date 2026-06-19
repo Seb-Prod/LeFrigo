@@ -59,7 +59,7 @@ export const recipeQueryRepository = {
       FROM Recipe r 
       WHERE r.status = 'PUBLISHED'
         AND r.deletedAt IS null
-      ORDER BY RAN()
+      ORDER BY RAND()
       LIMIT ${limit}
     `;
 

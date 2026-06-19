@@ -57,7 +57,7 @@ export const recipeRepository = {
 
       /** Suppression et recréation des steps */
       await tx.recipeStep.deleteMany({ where: { recipeId } });
-      await createSteps(tx, recipe.id, data.steps);
+      await createSteps(tx, recipeId, data.steps);
 
       /** Suppresion et recréation des ingrédients */
       await tx.recipeIngredient.deleteMany({ where: { recipeId } });

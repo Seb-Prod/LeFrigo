@@ -2,6 +2,7 @@ import { AppError } from "../../../core/errors/AppError";
 import type { CreateRecipeDto } from "@lefrigo/shared";
 import { userRepository } from "../../users/user.repository";
 import { recipeRepository } from "../repositories";
+import { recipeQueryRepository } from "../repositories/recipe.query.repository";
 
 export const recipeService = {
   /**
@@ -29,4 +30,54 @@ export const recipeService = {
 
     return recipeRepository.create(userId, data);
   },
+
+  update: async (recipeId: string, userId: string, data: CreateRecipeDto) => {
+    const recipe = await recipeQueryRepository.findById(recipeId);
+
+    if (!recipe) {
+      throw new AppError(404, "RECIPE_NOT_FOUND");
+    }
+
+    if (recipe.user.id !== userId) {
+      throw new AppError(403, "FORBIDDEN");
+    }
+    return recipeRepository.update(recipeId, data);
+  },
+
+  getById: async (recipeId: string) => {
+    const recipe = await recipeQueryRepository.findById(recipeId);
+
+    if (!recipe) {
+      throw new AppError(404, "RECIPE_NOT_FOUND");
+    }
+
+    return recipe;
+  },
+
+  getUserRecipes: async (userId: string, page = 1, limit = 10) => {
+    const [recipes, total] = await Promise.all([
+      recipeQueryRepository.findByUser(userId, page, limit),
+      recipeQueryRepository.countByUser(userId),
+    ]);
+
+    return {
+      recipes,
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+    };
+  },
+
+  /** Retourne uniquement le nombre de recettes de l'utilisateur. */
+  getUserRecipeCount: (userId: string) =>
+    recipeQueryRepository.countByUser(userId),
+
+  /** Retourne les N dernières recettes publiées tous utilisateurs confondus. */
+  getRecentRecipes: (limit?: number) =>
+    recipeQueryRepository.findRecent(limit),
+
+  /** Retourne N recettes aléatoires publiées. */
+  getRandomRecipes: (limit?: number) =>
+    recipeQueryRepository.findRandom(limit),
 };
