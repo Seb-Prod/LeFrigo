@@ -6,7 +6,8 @@ import { errorMiddleware } from "./middlewares/error.middleware";
 import { AppError } from "./core/errors/AppError";
 import { startSessionCleanupJob } from "./jobs/session-cleanup.job";
 import profileRoutes from "./modules/profile/profile.routes";
-import recipeRoutes from "./modules/recipe/recipe.routes";
+import recipeRoutes from "./modules/recipe/routes/recipe.routes";
+import ingredientRoutes from "./modules/recipe/routes/ingredient.routes";
 
 const app = express();
 app.set("trust proxy", false);
@@ -34,6 +35,7 @@ app.get("/test-error", async () => {
 app.use("/auth", authRoutes);
 app.use("/profile", profileRoutes);
 app.use("/recipes", recipeRoutes);
+app.use("/ingredients", ingredientRoutes)
 
 
 // Error middleware — toujours en dernier

@@ -28,6 +28,6 @@ export const recipeService = {
   /** Recherche les ingrédients dont le nom contient `query` (min. 1 caractère). */
   searchIngredients: (query: string) =>
     request<IngredientSuggestion[]>(
-      `/recipes/ingredients/search?q=${encodeURIComponent(query)}`,
+      `/ingredients/search?q=${encodeURIComponent(query)}`,
     ),
 };
