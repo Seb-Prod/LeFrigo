@@ -4,6 +4,14 @@ import { recipeController } from "../controllers";
 
 const router = Router();
 
+/* ── Lecture authentifiée ──────────────────────────────────── */
+
+/** Liste paginée des recettes de l'utilisateur connecté */
+router.get("/me", authMiddleware, recipeController.getMyRecipes);
+
+/** Nombre de recettes de l'utilisateur connecté */
+router.get("/me/count", authMiddleware, recipeController.getMyCount);
+
 /* ── Lecture publique ──────────────────────────────────────── */
 
 /** N dernières recettes publiées */
@@ -15,13 +23,7 @@ router.get("/random", recipeController.getRandom);
 /** Recette complète par ID */
 router.get("/:id", recipeController.getById);
 
-/* ── Lecture authentifiée ──────────────────────────────────── */
 
-/** Liste paginée des recettes de l'utilisateur connecté */
-router.get("/me", authMiddleware, recipeController.getMyRecipes);
-
-/** Nombre de recettes de l'utilisateur connecté */
-router.get("/me/count", authMiddleware, recipeController.getMyCount);
 
 /* ── Écriture authentifiée ─────────────────────────────────── */
 

@@ -89,6 +89,7 @@ export const recipeController = {
     req: Request<{}, {}, {}, PaginationQuery>,
     res: Response,
   ) => {
+    
     try {
       if (!req.user) {
         return res.status(401).json({ message: "Non authentifié" });

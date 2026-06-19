@@ -1,9 +1,4 @@
-import {
-  Badge,
-  MenuGroup,
-  MenuItem,
-  MenuItemIcon,
-} from "@/components/ui";
+import { Badge, MenuGroup, MenuItem, MenuItemIcon } from "@/components/ui";
 import { useAuth } from "@/contexts/auth.context";
 import { useEffect, useState } from "react";
 import { TbDevicesQuestion } from "react-icons/tb";
@@ -19,7 +14,13 @@ import {
 import { UserSession } from "@lefrigo/shared";
 import { authStorage } from "@/lib/auth";
 import { authService } from "../auth";
-import { GuestCard, ProfileCard, SessionCard, ThemeSelector } from "./components";
+import {
+  GuestCard,
+  ProfileCard,
+  SessionCard,
+  ThemeSelector,
+} from "./components";
+import { recipeService } from "../recipes/services/recipe.service";
 
 /**
  * Page de réglages.
@@ -34,10 +35,12 @@ export function Settings() {
   const { user, logout } = useAuth();
 
   const [sessions, setSessions] = useState<UserSession[]>([]);
+  const [recipeCount, setRecipeCount] = useState<number | null>(null);
 
   useEffect(() => {
     if (!user) return;
     authService.getSessions().then(setSessions);
+    recipeService.getMyCount().then(({ count }) => setRecipeCount(count));
   }, [user]);
 
   // ── Calculs nullsafe (pas de guard brutal) ──────────────────
@@ -139,6 +142,13 @@ export function Settings() {
             </MenuItemIcon>
           }
           locked={!user}
+          right={
+            recipeCount !== null ? (
+              <Badge color="danger">{recipeCount}</Badge>
+            ) : undefined
+          }
+          href="/recipes/my"
+          hideChevron
         />
         <MenuItem
           label="Ma liste de recettes"
