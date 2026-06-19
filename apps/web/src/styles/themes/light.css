@@ -1,68 +1,68 @@
 :root {
 
-  /* ── Primary ──────────────────────────────────────────────── */
+  /* ── Primary — Aubergine ──────────────────────────────────── */
 
-  --color-primary-solid: #009B4D;
+  --color-primary-solid: #7D409E;
   --color-primary-solid-text: #ffffff;
-  --color-primary-hover: #007a3d;
-  --color-primary-border: #99d9b8;
-  --color-primary-background: #e6f5ee;
-  --color-primary-text: #007a3d;
+  --color-primary-hover: #6a3287;
+  --color-primary-border: #d8c2e2;
+  --color-primary-background: #f3eef5;
+  --color-primary-text: #3b1248;
   --color-primary-soft: var(--color-primary-background);
   --color-primary-soft-text: var(--color-primary-text);
 
-  /* ── Accent ───────────────────────────────────────────────── */
+  /* ── Accent — Miel ────────────────────────────────────────── */
 
-  --color-accent-solid: #f9cf15;
-  --color-accent-solid-text: #5c4200;
-  --color-accent-hover: #e6bb00;
-  --color-accent-border: #fce97a;
-  --color-accent-background: #fffde6;
-  --color-accent-text: #7a5700;
+  --color-accent-solid: #c48e14;
+  --color-accent-solid-text: #ffffff;
+  --color-accent-hover: #a87810;
+  --color-accent-border: #f8e4b0;
+  --color-accent-background: #fdf8ee;
+  --color-accent-text: #5a3600;
   --color-accent-soft: var(--color-accent-background);
   --color-accent-soft-text: var(--color-accent-text);
 
   /* ── Success ──────────────────────────────────────────────── */
 
-  --color-success-solid: #16a34a;
+  --color-success-solid: #4A9E43;
   --color-success-solid-text: #ffffff;
-  --color-success-hover: #15803d;
-  --color-success-border: #abefc6;
-  --color-success-background: #ecfdf5;
-  --color-success-text: #166534;
+  --color-success-hover: #3B8235;
+  --color-success-border: #C2E0BC;
+  --color-success-background: #EEF6EC;
+  --color-success-text: #1C4F18;
   --color-success-soft: var(--color-success-background);
   --color-success-soft-text: var(--color-success-text);
 
   /* ── Warning ──────────────────────────────────────────────── */
 
-  --color-warning-solid: #f59e0b;
+  --color-warning-solid: #D4A00A;
   --color-warning-solid-text: #ffffff;
-  --color-warning-hover: #d97706;
-  --color-warning-border: #fde68a;
-  --color-warning-background: #fffbeb;
-  --color-warning-text: #92400e;
+  --color-warning-hover: #B88A08;
+  --color-warning-border: #FAE9A0;
+  --color-warning-background: #FDF8E6;
+  --color-warning-text: #6E5005;
   --color-warning-soft: var(--color-warning-background);
   --color-warning-soft-text: var(--color-warning-text);
 
   /* ── Danger ───────────────────────────────────────────────── */
 
-  --color-danger-solid: #ef4444;
+  --color-danger-solid: #C43318;
   --color-danger-solid-text: #ffffff;
-  --color-danger-hover: #dc2626;
-  --color-danger-border: #fecaca;
-  --color-danger-background: #fef2f2;
-  --color-danger-text: #991b1b;
+  --color-danger-hover: #A82910;
+  --color-danger-border: #f29880;   /* ← corrigé : border plus clair que background */
+  --color-danger-background: #fdf0ee; /* ← corrigé : background très léger */
+  --color-danger-text: #8F2410;
   --color-danger-soft: var(--color-danger-background);
   --color-danger-soft-text: var(--color-danger-text);
 
-  /* ── Info ─────────────────────────────────────────────────── */
+  /* ── Info — Ardoise ───────────────────────────────────────── */
 
-  --color-info-solid: #3b82f6;
+  --color-info-solid: #3A6FA8;
   --color-info-solid-text: #ffffff;
-  --color-info-hover: #2563eb;
-  --color-info-border: #bfdbfe;
-  --color-info-background: #eff6ff;
-  --color-info-text: #1e40af;
+  --color-info-hover: #234f82;      /* ← corrigé : hover cohérent avec l'ardoise */
+  --color-info-border: #bed0e8;     /* ← corrigé : issu de la ramp ardoise */
+  --color-info-background: #eef2f7; /* ← corrigé : issu de la ramp ardoise */
+  --color-info-text: #1A3A5C;
   --color-info-soft: var(--color-info-background);
   --color-info-soft-text: var(--color-info-text);
 
@@ -86,12 +86,12 @@
 
   /* ── Shadow colors ────────────────────────────────────────── */
 
-  --shadow-color-primary: rgba(0, 155, 77, 0.30);
-  --shadow-color-accent: rgba(249, 207, 21, 0.35);
-  --shadow-color-success: rgba(22, 163, 74, 0.30);
-  --shadow-color-warning: rgba(245, 158, 11, 0.35);
-  --shadow-color-danger: rgba(239, 68, 68, 0.30);
-  --shadow-color-info: rgba(59, 130, 246, 0.30);
+  --shadow-color-primary: rgba(125, 64, 158, 0.28); /* ← corrigé : aubergine */
+  --shadow-color-accent: rgba(196, 142, 20, 0.30);  /* ← corrigé : miel */
+  --shadow-color-success: rgba(74, 158, 67, 0.28);  /* ← corrigé : cohérent avec #4A9E43 */
+  --shadow-color-warning: rgba(212, 160, 10, 0.30); /* ← corrigé : cohérent avec #D4A00A */
+  --shadow-color-danger: rgba(196, 51, 24, 0.28);   /* ← corrigé : cohérent avec #C43318 */
+  --shadow-color-info: rgba(58, 111, 168, 0.28);    /* ← corrigé : ardoise */
   --shadow-color-neutral: rgba(107, 114, 128, 0.20);
 
   /* ── Surfaces & fond global ───────────────────────────────── */
@@ -102,8 +102,8 @@
 
   /* ── Texte global ─────────────────────────────────────────── */
 
-  --color-text: #1a2e22;
-  --color-text-secondary: #2f4933;
+  --color-text: #1a2e22;           /* ⚠ vert sombre — à neutraliser si souhaité */
+  --color-text-secondary: #2f4933; /* ⚠ vert sombre — idem */
   --color-text-muted: #6b7280;
 
   /* ── Bordures globales ────────────────────────────────────── */

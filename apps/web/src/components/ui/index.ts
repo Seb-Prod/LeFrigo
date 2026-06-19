@@ -34,3 +34,4 @@ export { Select } from "./Select/Select";
 export { Surface } from "./Surface";
 
 export { Text } from "./Text";
+export { TextArea } from "./TextArea";

@@ -24,8 +24,7 @@
 /* ── Ligne quantité + unité ────────────────────────────────── */
 
 .miniRow {
-  display: grid;
-  grid-template-columns: 100px 1fr;
+  display: flex;
   gap: 8px;
 }
 

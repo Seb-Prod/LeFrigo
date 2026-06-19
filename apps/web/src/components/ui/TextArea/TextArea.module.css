@@ -1,0 +1,75 @@
+/* ── Champ textarea ───────────────────────────────────────── */
+
+/* Reprend exactement les tokens visuels de Input */
+.textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-input-border);
+  background: var(--color-input-background);
+  font-size: 1rem;
+  color: var(--color-input-text);
+  resize: vertical;                /* redimensionnement vertical uniquement */
+  min-height: 96px;               /* hauteur minimale : ~3 lignes */
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.15),
+    0 2px 5px rgba(0, 0, 0, 0.1);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--color-primary-solid);
+  box-shadow: 0 0 0 3px rgba(107, 142, 35, 0.15);
+}
+
+.textarea::placeholder {
+  color: var(--color-input-placeholder);
+}
+
+/* ── Wrapper avec icônes ──────────────────────────────────── */
+
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: flex-start; /* icônes ancrées en haut, pas centrées */
+}
+
+/* ── Icônes ───────────────────────────────────────────────── */
+
+.iconLeft,
+.iconRight {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  color: var(--color-input-text);
+  top: 14px;                      /* alignement vertical avec la première ligne */
+}
+
+.iconLeft {
+  left: 0.75rem;
+  pointer-events: none;
+}
+
+.iconRight {
+  right: 0.75rem;
+}
+
+/* Décalage du texte pour ne pas chevaucher les icônes */
+.hasIconLeft  { padding-left: 2.25rem; }
+.hasIconRight { padding-right: 2.25rem; }
+
+/* ── État erreur ──────────────────────────────────────────── */
+
+.hasError .iconLeft,
+.hasError .iconRight {
+  color: var(--color-danger-text);
+}
+
+.hasError .textarea {
+  border-color: var(--color-danger-border);
+  color: var(--color-danger-text);
+  background: var(--color-danger-background);
+}

@@ -1,4 +1,4 @@
-import { FormCard, Input, InputNumber } from "@/components/ui";
+import { FormCard, Input, InputNumber, TextArea } from "@/components/ui";
 import { TbChefHat } from "react-icons/tb";
 import {
   recipeInfoSchema,
@@ -12,7 +12,6 @@ import styles from "./RecipeFormStep1.module.css";
 type Props = {
   defaultValues: Partial<RecipeInfoDto>;
   onSubmit: (data: RecipeInfoDto) => void;
-  onBack?: () => void;
 };
 
 /**
@@ -21,7 +20,7 @@ type Props = {
  * Champs : nom, description, temps de préparation, temps de cuisson, portions.
  * Valide via `recipeInfoSchema` avant d'appeler `onSubmit`.
  */
-export function RecipeFormStep1({ defaultValues, onSubmit, onBack }: Props) {
+export function RecipeFormStep1({ defaultValues, onSubmit }: Props) {
   const [fields, setFields] = useState<RecipeInfoDto>({
     name: defaultValues.name ?? "",
     description: defaultValues.description ?? "",
@@ -94,8 +93,7 @@ export function RecipeFormStep1({ defaultValues, onSubmit, onBack }: Props) {
       />
 
       {/* ── Description ── */}
-      <Input
-        type="text"
+      <TextArea
         placeholder="Description (optionnel)"
         value={fields.description ?? ""}
         error={!!errors.description}

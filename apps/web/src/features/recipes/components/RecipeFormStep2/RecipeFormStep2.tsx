@@ -2,11 +2,19 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { TbTrash } from "react-icons/tb";
-import { FormCard, Input, Button } from "@/components/ui";
+import { FormCard, Input, Button, InputNumber } from "@/components/ui";
 import { IngredientAutocomplete } from "@/components/ui/IngredientAutocomplete";
 import { useDebounce, useFormErrors } from "@/hooks";
-import { recipeService, IngredientSuggestion } from "@/features/recipes/services/recipe.service";
-import { recipeIngredientsSchema, RecipeIngredientDto, RecipeIngredientsDto, zodErrorsToRecord } from "@lefrigo/shared";
+import {
+  recipeService,
+  IngredientSuggestion,
+} from "@/features/recipes/services/recipe.service";
+import {
+  recipeIngredientsSchema,
+  RecipeIngredientDto,
+  RecipeIngredientsDto,
+  zodErrorsToRecord,
+} from "@lefrigo/shared";
 import styles from "./RecipeFormStep2.module.css";
 
 /* ── Types ─────────────────────────────────────────────────── */
@@ -19,9 +27,9 @@ type Props = {
 
 /** État du mini-formulaire de confirmation */
 type PendingIngredient = {
-  name:     string;
-  quantity: string;
-  unit:     string;
+  name: string;
+  quantity: number | undefined;
+  unit: string;
 };
 
 /**
@@ -40,10 +48,10 @@ export function RecipeFormStep2({ defaultValues, onSubmit, onBack }: Props) {
   const [ingredients, setIngredients] = useState<RecipeIngredientDto[]>(
     defaultValues.ingredients ?? [],
   );
-  const [query, setQuery]             = useState("");
+  const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState<IngredientSuggestion[]>([]);
-  const [searching, setSearching]     = useState(false);
-  const [pending, setPending]         = useState<PendingIngredient | null>(null);
+  const [searching, setSearching] = useState(false);
+  const [pending, setPending] = useState<PendingIngredient | null>(null);
 
   const { errors, setErrors, clearFieldError, errorMessages } = useFormErrors();
 
@@ -72,13 +80,15 @@ export function RecipeFormStep2({ defaultValues, onSubmit, onBack }: Props) {
     };
 
     search();
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [debouncedQuery]);
 
   /* ── Sélection → mini-formulaire ── */
 
   const handlePick = useCallback((name: string) => {
-    setPending({ name, quantity: "", unit: "" });
+    setPending({ name, quantity: 0, unit: "" });
     setQuery("");
     setSuggestions([]);
   }, []);
@@ -91,9 +101,9 @@ export function RecipeFormStep2({ defaultValues, onSubmit, onBack }: Props) {
     setIngredients((prev) => [
       ...prev,
       {
-        name:     pending.name,
+        name: pending.name,
         quantity: pending.quantity ? Number(pending.quantity) : undefined,
-        unit:     pending.unit.trim() || undefined,
+        unit: pending.unit.trim() || undefined,
       },
     ]);
 
@@ -155,20 +165,26 @@ export function RecipeFormStep2({ defaultValues, onSubmit, onBack }: Props) {
 
           {/* ── Quantité + unité ── */}
           <div className={styles.miniRow}>
-            <Input
-              type="number"
+            <InputNumber
               placeholder="Quantité"
               value={pending.quantity}
-              onChange={(e) =>
-                setPending((prev) => prev && ({ ...prev, quantity: e.target.value }))
+              min={0}
+              onChange={(value) =>
+                setPending((prev) =>
+                  prev
+                    ? {
+                        ...prev,
+                        quantity: value,
+                      }
+                    : null,
+                )
               }
-              className={styles.quantityInput}
             />
             <Input
               placeholder="Unité (g, ml, pièce…)"
               value={pending.unit}
               onChange={(e) =>
-                setPending((prev) => prev && ({ ...prev, unit: e.target.value }))
+                setPending((prev) => prev && { ...prev, unit: e.target.value })
               }
             />
           </div>
@@ -193,7 +209,8 @@ export function RecipeFormStep2({ defaultValues, onSubmit, onBack }: Props) {
               <span className={styles.name}>{ingredient.name}</span>
               {ingredient.quantity && (
                 <span className={styles.meta}>
-                  {ingredient.quantity}{ingredient.unit ? ` ${ingredient.unit}` : ""}
+                  {ingredient.quantity}
+                  {ingredient.unit ? ` ${ingredient.unit}` : ""}
                 </span>
               )}
               <button
