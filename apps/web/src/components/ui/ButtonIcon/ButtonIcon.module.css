@@ -36,6 +36,7 @@
   color: var(--_color);
 
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: center;
   /* résiste à la compression flex */
@@ -70,6 +71,20 @@
 .button:active:not(:disabled) {
   transform: scale(0.92);
   border-radius: 50% 40% 45% 55% / 55% 45% 60% 40%;
+}
+
+.button:active::before {
+  position: absolute;
+  content: '';
+  width: var(--btn-icon-size);
+  height: var(--btn-icon-size);
+  border-radius: 50% 40% 45% 55% / 55% 45% 60% 40%;
+  background: var(--color-text);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.8;
+  animation: ripple 0.25s ease-out
 }
 
 /* ── Variants ─────────────────────────────────────────────── */
@@ -109,4 +124,19 @@
   --_bg: var(--color-info-solid);
   --_bg-hover: var(--color-info-hover);
   --_color: var(--color-info-solid-text);
+}
+
+
+@keyframes ripple {
+  0% {
+    width: var(--btn-icon-size);
+    height: var(--btn-icon-size);
+    opacity: 0.4;
+  }
+
+  100% {
+    width: calc(3 * var(--btn-icon-size));
+    height: calc(3 * var(--btn-icon-size));
+    opacity: 0.1;
+  }
 }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { IoIosAdd, IoIosRemove } from "react-icons/io";
 import styles from "./InputNumber.module.css";
 import clsx from "clsx";
+import { ButtonAdd, ButtonRemove } from "../ButtonIcon";
 
 type Props = {
   placeholder: string;
@@ -59,14 +60,11 @@ export function InputNumber({
         <span className={styles.text}>{placeholder}</span>
 
         <div className={styles.numberInput}>
-          <button
-            type="button"
-            className={clsx(styles.btn, styles.decrement)}
+          <ButtonRemove
             onClick={handleDecrement}
-            disabled={disabled}
-          >
-            <IoIosRemove />
-          </button>
+            size="sm"
+            disabled={disabled || (value !== undefined && value <= min)}
+          />
 
           <div className={styles.value}>
             <input
@@ -89,15 +87,14 @@ export function InputNumber({
               }}
             />
           </div>
-
-          <button
-            type="button"
-            className={clsx(styles.btn, styles.increment)}
+          <ButtonAdd
             onClick={handleIncrement}
-            disabled={disabled}
-          >
-            <IoIosAdd />
-          </button>
+            size="sm"
+            disabled={
+              disabled ||
+              (max !== undefined && value !== undefined && value >= max)
+            }
+          />
         </div>
       </div>
     </div>
