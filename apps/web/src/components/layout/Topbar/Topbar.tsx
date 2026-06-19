@@ -41,51 +41,52 @@ export function Topbar() {
   const [confirmBackOpen, setConfirmBackOpen] = useState(false);
 
   return (
-    <header className={styles.topbar}>
-      {/* ── Logo ou [retour + titre de page] ── */}
-      <div className={styles.center}>
-        {page.showBackButton ? (
-          <div className={styles.pageInfo}>
-            <ButtonPrev
-              className={styles.backButton}
-              onClick={() => {
-                if (confirmationModal) {
-                  setConfirmBackOpen(true);
-                } else {
-                  goBack();
-                }
-              }}
-            />{" "}
-            <Text>{page.title}</Text>
-          </div>
-        ) : (
-          <Logo />
-        )}
-      </div>
+    <>
+      <header className={styles.topbar}>
+        {/* ── Logo ou [retour + titre de page] ── */}
+        <div className={styles.center}>
+          {page.showBackButton ? (
+            <div className={styles.pageInfo}>
+              <ButtonPrev
+                className={styles.backButton}
+                onClick={() => {
+                  if (confirmationModal) {
+                    setConfirmBackOpen(true);
+                  } else {
+                    goBack();
+                  }
+                }}
+              />{" "}
+              <Text>{page.title}</Text>
+            </div>
+          ) : (
+            <Logo />
+          )}
+        </div>
 
-      {/* ── Navigation (desktop uniquement) ── */}
-      <div className={styles.right}>
-        <nav className={styles.nav}>
-          <ul className={styles.menu}>
-            {NAVIGATION.map((link) => (
-              <li key={link.href}>
-                <NavLink href={link.href} label={link.label} />
-              </li>
-            ))}
-            {user && (
-              <li>
-                <LogoutButton
-                  size="sm"
-                  onClick={logout}
-                  className={styles.button}
-                  open
-                />
-              </li>
-            )}
-          </ul>
-        </nav>
-      </div>
-
+        {/* ── Navigation (desktop uniquement) ── */}
+        <div className={styles.right}>
+          <nav className={styles.nav}>
+            <ul className={styles.menu}>
+              {NAVIGATION.map((link) => (
+                <li key={link.href}>
+                  <NavLink href={link.href} label={link.label} />
+                </li>
+              ))}
+              {user && (
+                <li>
+                  <LogoutButton
+                    size="sm"
+                    onClick={logout}
+                    className={styles.button}
+                    open
+                  />
+                </li>
+              )}
+            </ul>
+          </nav>
+        </div>
+      </header>
       {/* –– Modal de confirmation (backButtun) –– */}
       {confirmationModal && (
         <ConfirmDialog
@@ -102,6 +103,6 @@ export function Topbar() {
           }}
         />
       )}
-    </header>
+    </>
   );
 }
