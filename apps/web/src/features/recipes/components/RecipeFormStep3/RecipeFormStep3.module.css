@@ -19,3 +19,9 @@
   min-width: 48px;
   flex-shrink: 0;
 }
+
+.editActions{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

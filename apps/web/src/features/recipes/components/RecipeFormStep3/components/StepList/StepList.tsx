@@ -5,7 +5,6 @@ import { StepActions } from "../StepActions";
 import styles from "./StepList.module.css";
 import { Badge, Text } from "@/components/ui";
 
-
 /* ── Types ─────────────────────────────────────────────────── */
 
 type Props = {
@@ -13,6 +12,9 @@ type Props = {
   onMoveUp: (index: number) => void;
   onMoveDown: (index: number) => void;
   onRemove: (index: number) => void;
+  editingIndex: number | null;
+  onEdit: (index: number) => void;
+  disabled: boolean;
 };
 
 /**
@@ -21,13 +23,26 @@ type Props = {
  * Purement présentationnel — la logique de réordonnancement
  * et de suppression reste dans RecipeFormStep3.
  */
-export function StepList({ steps, onMoveUp, onMoveDown, onRemove }: Props) {
+export function StepList({
+  steps,
+  onMoveUp,
+  onMoveDown,
+  onRemove,
+  editingIndex,
+  onEdit,
+  disabled,
+}: Props) {
   if (steps.length === 0) return null;
 
   return (
     <ol className={styles.list}>
       {steps.map((step, index) => (
-        <li key={index} className={styles.item}>
+        <li
+          key={index}
+          className={[styles.item, editingIndex === index && styles.itemEditing]
+            .filter(Boolean)
+            .join(" ")}
+        >
           {/* ── Numéro ── */}
           <Badge color="danger">{step.position}</Badge>
 
@@ -42,6 +57,8 @@ export function StepList({ steps, onMoveUp, onMoveDown, onRemove }: Props) {
             onMoveUp={() => onMoveUp(index)}
             onMoveDown={() => onMoveDown(index)}
             onRemove={() => onRemove(index)}
+            onEdit={() => onEdit(index)}
+            disabled={disabled}
           />
         </li>
       ))}

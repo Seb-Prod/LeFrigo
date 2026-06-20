@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./StepActions.module.css";
-import { RowActionDelete, RowActionMoveDown, RowActionMoveUp } from "@/components/ui";
+import { RowActionDelete, RowActionEdit, RowActionMoveDown, RowActionMoveUp } from "@/components/ui";
 
 /* ── Types ─────────────────────────────────────────────────── */
 
@@ -12,6 +12,8 @@ type Props = {
   onMoveUp: () => void;
   onMoveDown: () => void;
   onRemove: () => void;
+  onEdit: () => void;
+  disabled: boolean;
 };
 
 /**
@@ -21,13 +23,14 @@ type Props = {
  * - Flèche haut désactivée sur le premier item
  * - Flèche bas désactivée sur le dernier item
  */
-export function StepActions({ position, isFirst, isLast, onMoveUp, onMoveDown, onRemove }: Props) {
+export function StepActions({ position, isFirst, isLast, onMoveUp, onMoveDown, onRemove, onEdit, disabled }: Props) {
   return (
     <div className={styles.actions}>
       {/* ── Monter ── */}
-      <RowActionMoveUp onClick={onMoveUp} disabled={isFirst}/>
-      <RowActionMoveDown onClick={onMoveDown} disabled={isLast}/>
-      <RowActionDelete onClick={onRemove} ariaLabel={`Supprimer l'étape ${position}`}/>
+      <RowActionMoveUp onClick={onMoveUp} disabled={isFirst || disabled}/>
+      <RowActionMoveDown onClick={onMoveDown} disabled={isLast || disabled}/>
+      <RowActionEdit onClick={onEdit} ariaLabel={`Editer l'étape ${position}`} disabled={disabled}/>
+      <RowActionDelete onClick={onRemove} ariaLabel={`Supprimer l'étape ${position}`} disabled={disabled}/>
     </div>
   );
 }
