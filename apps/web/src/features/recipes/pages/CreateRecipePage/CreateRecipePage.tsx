@@ -7,7 +7,7 @@ import { useCreateRecipe } from "../../hooks/useCreateRecipe";
 import { Alert, Button, FormCard } from "@/components/ui";
 import { TbChefHat } from "react-icons/tb";
 import { useBack } from "@/hooks";
-import styles from "./CreateRecipePage.module.css";
+import { RecipeStepper } from "../../components/RecipeStepper";
 
 /**
  * Page de création de recette multi-étapes.
@@ -32,9 +32,19 @@ export function CreateRecipePage() {
     submitStep1,
     submitStep2,
     submitStep3,
+    goToStep,
   } = useCreateRecipe();
 
   const goBackPage = useBack();
+
+  const stepper = (
+    <RecipeStepper
+      currentStep={step}
+      totalSteps={3}
+      labels={["Infos", "Ingrédients", "Étapes"]}
+      onStepClick={goToStep}
+    />
+  );
 
   /* ── État succès ── */
   if (success) {
@@ -49,29 +59,13 @@ export function CreateRecipePage() {
   }
 
   return (
-    <div className={styles.wrapper}>
-      {/* ── Indicateur d'étapes ── */}
-      <div className={styles.stepper} aria-label="Progression">
-        {[1, 2, 3].map((s) => (
-          <div
-            key={s}
-            className={[
-              styles.stepDot,
-              step === s && styles.active,
-              step > s  && styles.done,
-            ]
-              .filter(Boolean)
-              .join(" ")}
-            aria-current={step === s ? "step" : undefined}
-          />
-        ))}
-      </div>
-
+    <>
       {/* ── Étapes ── */}
       {step === 1 && (
         <RecipeFormStep1
           defaultValues={{ ...draft }}
           onSubmit={submitStep1}
+          stepper={stepper}
         />
       )}
 
@@ -80,6 +74,7 @@ export function CreateRecipePage() {
           defaultValues={{ ingredients: draft.ingredients ?? [] }}
           onSubmit={submitStep2}
           onBack={goBack}
+          stepper={stepper}
         />
       )}
 
@@ -89,8 +84,9 @@ export function CreateRecipePage() {
           onSubmit={submitStep3}
           onBack={goBack}
           loading={loading}
+          stepper={stepper}
         />
       )}
-    </div>
+    </>
   );
 }

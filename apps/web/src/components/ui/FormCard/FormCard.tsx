@@ -8,7 +8,6 @@ import styles from "./FormCard.module.css";
 import { useDevice } from "@/contexts/device.context";
 import { usePathname } from "next/navigation";
 import { getPageConfig } from "@/lib/navigation";
-import { Modal } from "../Modal";
 import { useState } from "react";
 import { ConfirmDialog } from "../ConfirmDialog";
 import clsx from 'clsx';
@@ -35,6 +34,8 @@ type Props = {
   backLabel?: string;
   /** Handler du bouton retour inline */
   onBack?: () => void;
+   /** Slot optionnel affiché en haut du formulaire, avant l'icône */
+  stepper?: React.ReactNode;
 };
 
 /* ── Composant ────────────────────────────────────────────── */
@@ -59,6 +60,7 @@ export function FormCard({
   errorMessages,
   backLabel,
   onBack,
+  stepper
 }: Props) {
   const { isPWA, isMobile } = useDevice();
   const pathname = usePathname();
@@ -98,6 +100,9 @@ export function FormCard({
           )}
         </div>
       )}
+
+      {/* –– Stepper –– */}
+      {stepper}
 
       {/* ── Icône ── */}
       {icon && <div className={styles.icon}>{icon}</div>}

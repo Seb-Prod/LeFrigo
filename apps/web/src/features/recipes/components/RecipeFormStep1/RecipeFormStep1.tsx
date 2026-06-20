@@ -13,6 +13,7 @@ import { FaAlignLeft, FaUtensils } from "react-icons/fa";
 type Props = {
   defaultValues: Partial<RecipeInfoDto>;
   onSubmit: (data: RecipeInfoDto) => void;
+  stepper: React.ReactNode;
 };
 
 /**
@@ -21,7 +22,7 @@ type Props = {
  * Champs : nom, description, temps de préparation, temps de cuisson, portions.
  * Valide via `recipeInfoSchema` avant d'appeler `onSubmit`.
  */
-export function RecipeFormStep1({ defaultValues, onSubmit }: Props) {
+export function RecipeFormStep1({ defaultValues, onSubmit,stepper }: Props) {
   const [fields, setFields] = useState<RecipeInfoDto>({
     name: defaultValues.name ?? "",
     description: defaultValues.description ?? "",
@@ -83,6 +84,7 @@ export function RecipeFormStep1({ defaultValues, onSubmit }: Props) {
       buttonLabel="Suivant"
       onSubmit={handleSubmit}
       errorMessages={errorMessages}
+      stepper={stepper}
     >
       {/* ── Nom ── */}
       <Input

@@ -1,0 +1,131 @@
+/* ── Stepper ────────────────────────────────────────────────── */
+
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding-bottom: var(--space-2);
+}
+
+/* ── Wrapper par step ───────────────────────────────────────── */
+
+.stepWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ── Label ──────────────────────────────────────────────────── */
+
+.label {
+  font-size: 0.7rem;
+  color: var(--color-input-placeholder);
+  opacity: 0.5;
+  transition: opacity 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.labelActive {
+  color: var(--color-primary-solid);
+  opacity: 1;
+  font-weight: 600;
+}
+
+.labelDone {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+/* ── Dot de base ────────────────────────────────────────────── */
+
+.dot {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: none;
+  padding: 0;
+  background: var(--color-neutral-solid);
+  opacity: 0.5;
+  transition:
+    width 0.25s ease,
+    background 0.2s ease,
+    opacity 0.2s ease,
+    scale 0.15s ease;
+  cursor: default;
+}
+
+/* ── Étape courante ─────────────────────────────────────────── */
+
+.active {
+  background: var(--color-primary-solid);
+  opacity: 1;
+  animation: glow 2s infinite;
+}
+
+.active::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: inherit;
+  background: var(--color-primary-solid);
+  opacity: 0.35;
+  z-index: -1;
+  animation: pulseHalo 1.8s infinite ease-out;
+}
+
+/* ── Étape passée — cliquable ───────────────────────────────── */
+
+.done {
+  background: var(--color-primary-solid);
+  opacity: 0.4;
+  cursor: pointer;
+}
+
+.done:hover {
+  opacity: 0.75;
+  scale: 1.2;
+}
+
+.done:active {
+  scale: 0.9;
+}
+
+/* ── Étape courante annimation ───────────────────────────────── */
+
+
+@keyframes pulseHalo {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+
+  70% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+@keyframes glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4);
+  }
+
+  50% {
+
+    box-shadow:
+      0 0 0 8px rgba(99, 102, 241, 0),
+      0 0 12px 4px rgba(99, 102, 241, 0.4);
+  }
+
+}

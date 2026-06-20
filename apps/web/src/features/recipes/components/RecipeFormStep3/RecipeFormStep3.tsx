@@ -15,6 +15,7 @@ type Props = {
   onSubmit: (data: RecipeStepsDto) => void;
   onBack: () => void;
   loading?: boolean;
+  stepper: React.ReactNode;
 };
 
 /**
@@ -24,7 +25,7 @@ type Props = {
  * Les positions sont recalculées automatiquement à chaque modification.
  * Valide via `recipeStepsSchema` avant d'appeler `onSubmit`.
  */
-export function RecipeFormStep3({ defaultValues, onSubmit, onBack, loading }: Props) {
+export function RecipeFormStep3({ defaultValues, onSubmit, onBack, loading,stepper }: Props) {
   const [steps, setSteps]       = useState<RecipeStepDto[]>(
     defaultValues.steps ?? [],
   );
@@ -107,6 +108,7 @@ export function RecipeFormStep3({ defaultValues, onSubmit, onBack, loading }: Pr
       onSubmit={handleSubmit}
       errorMessages={errorMessages}
       disabled={loading}
+      stepper={stepper}
     >
       {/* ── Zone de saisie ── */}
       <div className={styles.addRow}>

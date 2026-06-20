@@ -21,6 +21,7 @@ type Props = {
   defaultValues: Partial<RecipeIngredientsDto>;
   onSubmit: (data: RecipeIngredientsDto) => void;
   onBack: () => void;
+  stepper: React.ReactNode;
 };
 
 /**
@@ -34,7 +35,7 @@ type Props = {
  * - la liste confirmée (`ingredients`)
  * - la validation Zod au submit
  */
-export function RecipeFormStep2({ defaultValues, onSubmit, onBack }: Props) {
+export function RecipeFormStep2({ defaultValues, onSubmit, onBack,stepper }: Props) {
   const [ingredients, setIngredients] = useState<RecipeIngredientDto[]>(
     defaultValues.ingredients ?? [],
   );
@@ -111,6 +112,7 @@ export function RecipeFormStep2({ defaultValues, onSubmit, onBack }: Props) {
       onSubmit={handleSubmit}
       errorMessages={errorMessages}
       disabled={!!pending}
+      stepper={stepper}
     >
       {/* ── Autocomplete — masqué pendant une édition ── */}
       {!pending && (

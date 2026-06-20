@@ -25,13 +25,13 @@ type RecipeDraft = Partial<CreateRecipeDto>;
 /* ── Constantes ─────────────────────────────────────────────── */
 
 const INITIAL_DRAFT: RecipeDraft = {
-  name:            "",
-  description:     undefined,
+  name: "",
+  description: undefined,
   preparationTime: undefined,
-  cookingTime:     undefined,
-  servings:        undefined,
-  ingredients:     [],
-  steps:           [],
+  cookingTime: undefined,
+  servings: undefined,
+  ingredients: [],
+  steps: [],
 };
 
 /* ── Hook ───────────────────────────────────────────────────── */
@@ -47,9 +47,9 @@ const INITIAL_DRAFT: RecipeDraft = {
  * La soumission finale n'est déclenchée qu'à la validation de l'étape 3.
  */
 export function useCreateRecipe() {
-  const [step, setStep]     = useState<Step>(1);
+  const [step, setStep] = useState<Step>(1);
   const [status, setStatus] = useState<Status>("idle");
-  const [draft, setDraft]   = useState<RecipeDraft>(INITIAL_DRAFT);
+  const [draft, setDraft] = useState<RecipeDraft>(INITIAL_DRAFT);
   const { errors, setErrors, clearFieldError, errorMessages } = useFormErrors();
 
   /* ── Navigation ── */
@@ -58,6 +58,16 @@ export function useCreateRecipe() {
     setErrors({});
     setStep((prev) => (prev > 1 ? ((prev - 1) as Step) : prev));
   }, [setErrors]);
+
+  const goToStep = useCallback(
+    (target: number) => {
+      if (target < step) {
+        setErrors({});
+        setStep(target as Step);
+      }
+    },
+    [step, setErrors],
+  );
 
   /* ── Soumission par étape ── */
 
@@ -98,22 +108,21 @@ export function useCreateRecipe() {
   /** Étape 3 → valide les étapes et soumet la recette complète. */
   const submitStep3 = useCallback(
     async (data: RecipeStepsDto) => {
-      
       const result = recipeStepsSchema.safeParse(data);
-      
+
       if (!result.success) {
         setErrors(zodErrorsToRecord(result.error));
         return;
       }
 
       const finalDraft = { ...draft, ...result.data } as CreateRecipeDto;
-      
+
       setStatus("loading");
       setErrors({});
 
       try {
         await recipeService.createRecipe(finalDraft);
-        console.log("c'est bon")
+        console.log("c'est bon");
         setStatus("success");
       } catch (err) {
         const message = err instanceof Error ? err.message : "";
@@ -137,5 +146,6 @@ export function useCreateRecipe() {
     submitStep1,
     submitStep2,
     submitStep3,
+    goToStep
   };
 }
