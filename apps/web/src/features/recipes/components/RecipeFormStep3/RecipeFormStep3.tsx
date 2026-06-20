@@ -118,8 +118,10 @@ export function RecipeFormStep3({
       title="Étapes de préparation"
       description="Décrivez chaque étape dans l'ordre. Appuyez sur Entrée pour ajouter."
       buttonLabel="Créer la recette"
+      backLabel="Retour"
       buttonLoadingLabel="Création en cours..."
       onSubmit={handleSubmit}
+      onBack={onBack}
       errorMessages={errorMessages}
       disabled={loading}
       stepper={stepper}
@@ -151,11 +153,6 @@ export function RecipeFormStep3({
         onMoveDown={moveDown}
         onRemove={removeStep}
       />
-
-      {/* ── Retour ── */}
-      <Button type="button" variant="ghost" onClick={onBack}>
-        Retour
-      </Button>
     </FormCard>
   );
 }

@@ -10,7 +10,7 @@ import { usePathname } from "next/navigation";
 import { getPageConfig } from "@/lib/navigation";
 import { useState } from "react";
 import { ConfirmDialog } from "../ConfirmDialog";
-import clsx from 'clsx';
+import clsx from "clsx";
 
 /* ── Types ────────────────────────────────────────────────── */
 
@@ -34,7 +34,7 @@ type Props = {
   backLabel?: string;
   /** Handler du bouton retour inline */
   onBack?: () => void;
-   /** Slot optionnel affiché en haut du formulaire, avant l'icône */
+  /** Slot optionnel affiché en haut du formulaire, avant l'icône */
   stepper?: React.ReactNode;
 };
 
@@ -60,7 +60,7 @@ export function FormCard({
   errorMessages,
   backLabel,
   onBack,
-  stepper
+  stepper,
 }: Props) {
   const { isPWA, isMobile } = useDevice();
   const pathname = usePathname();
@@ -96,13 +96,14 @@ export function FormCard({
                   }}
                 />
               )}
+              {stepper}
             </>
           )}
         </div>
       )}
 
       {/* –– Stepper –– */}
-      {stepper}
+      {!isPWA && <>{stepper}</>}
 
       {/* ── Icône ── */}
       {icon && <div className={styles.icon}>{icon}</div>}
@@ -120,9 +121,7 @@ export function FormCard({
 
       {/* ── Bouton(s) de soumission ── */}
       {buttonLabel && (
-        <div
-          className={clsx(styles.actions, onBack && styles.actionsWithBack)}
-        >
+        <div className={clsx(styles.actions, onBack && styles.actionsWithBack)}>
           {onBack && backLabel && (
             <Button type="button" variant="ghost" onClick={onBack}>
               {backLabel}
