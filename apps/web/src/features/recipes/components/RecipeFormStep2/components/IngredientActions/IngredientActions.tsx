@@ -3,6 +3,7 @@
 import { TbTrash, TbPencil } from "react-icons/tb";
 import styles from "./IngredientActions.module.css";
 import clsx from "clsx";
+import { RowAction, RowActionDelete, RowActionEdit } from "@/components/ui";
 
 /* ── Types ─────────────────────────────────────────────────── */
 
@@ -25,27 +26,16 @@ type Props = {
 export function IngredientActions({ name, onEdit, onRemove, disabled }: Props) {
   return (
     <div className={styles.actions}>
-      {/* ── Édition ── */}
-      <button
-        type="button"
-        className={clsx(styles.actionBtn, styles.edit)}
+      <RowActionEdit
         onClick={onEdit}
-        aria-label={`Modifier ${name}`}
         disabled={disabled}
-      >
-        <TbPencil />
-      </button>
-
-      {/* ── Suppression ── */}
-      <button
-        type="button"
-        className={clsx(styles.actionBtn, styles.remove)}
+        ariaLabel={`Modifier ${name}`}
+      />
+      <RowActionDelete
         onClick={onRemove}
-        aria-label={`Supprimer ${name}`}
         disabled={disabled}
-      >
-        <TbTrash />
-      </button>
+        ariaLabel={`Supprimer ${name}`}
+      />
     </div>
   );
 }

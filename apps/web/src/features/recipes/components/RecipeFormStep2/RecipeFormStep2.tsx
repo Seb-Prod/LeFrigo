@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { FormCard, Button } from "@/components/ui";
+import { FormCard } from "@/components/ui";
 import { IngredientAutocomplete } from "@/components/ui/IngredientAutocomplete";
 import { useFormErrors } from "@/hooks";
 import {

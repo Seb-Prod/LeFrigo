@@ -2,11 +2,16 @@
 
 import { useState, useCallback } from "react";
 import { TbTrash, TbArrowUp, TbArrowDown, TbPlus } from "react-icons/tb";
-import { FormCard, Button } from "@/components/ui";
+import { FormCard, Button, TextArea } from "@/components/ui";
 import { useFormErrors } from "@/hooks";
-import { recipeStepsSchema, RecipeStepsDto, zodErrorsToRecord } from "@lefrigo/shared";
+import {
+  recipeStepsSchema,
+  RecipeStepsDto,
+  zodErrorsToRecord,
+} from "@lefrigo/shared";
 import type { RecipeStepDto } from "@lefrigo/shared";
 import styles from "./RecipeFormStep3.module.css";
+import { StepList } from "./components";
 
 /* ── Types ─────────────────────────────────────────────────── */
 
@@ -25,11 +30,17 @@ type Props = {
  * Les positions sont recalculées automatiquement à chaque modification.
  * Valide via `recipeStepsSchema` avant d'appeler `onSubmit`.
  */
-export function RecipeFormStep3({ defaultValues, onSubmit, onBack, loading,stepper }: Props) {
-  const [steps, setSteps]       = useState<RecipeStepDto[]>(
+export function RecipeFormStep3({
+  defaultValues,
+  onSubmit,
+  onBack,
+  loading,
+  stepper,
+}: Props) {
+  const [steps, setSteps] = useState<RecipeStepDto[]>(
     defaultValues.steps ?? [],
   );
-  const [draft, setDraft]       = useState("");
+  const [draft, setDraft] = useState("");
   const { errors, setErrors, clearFieldError, errorMessages } = useFormErrors();
 
   /* ── Recalcul des positions ── */
@@ -44,7 +55,10 @@ export function RecipeFormStep3({ defaultValues, onSubmit, onBack, loading,stepp
     if (!draft.trim()) return;
 
     setSteps((prev) =>
-      reorder([...prev, { position: prev.length + 1, instruction: draft.trim() }]),
+      reorder([
+        ...prev,
+        { position: prev.length + 1, instruction: draft.trim() },
+      ]),
     );
     setDraft("");
     clearFieldError("steps");
@@ -94,7 +108,7 @@ export function RecipeFormStep3({ defaultValues, onSubmit, onBack, loading,stepp
       setErrors(zodErrorsToRecord(result.error));
       return;
     }
-    
+
     onSubmit(result.data);
   };
 
@@ -112,15 +126,14 @@ export function RecipeFormStep3({ defaultValues, onSubmit, onBack, loading,stepp
     >
       {/* ── Zone de saisie ── */}
       <div className={styles.addRow}>
-        <textarea
-          className={styles.textarea}
+        <TextArea
           placeholder="Décrivez une étape..."
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
           onKeyDown={handleKeyDown}
           rows={2}
         />
-        <button
+        <Button
           type="button"
           className={styles.addButton}
           onClick={addStep}
@@ -128,53 +141,16 @@ export function RecipeFormStep3({ defaultValues, onSubmit, onBack, loading,stepp
           aria-label="Ajouter l'étape"
         >
           <TbPlus />
-        </button>
+        </Button>
       </div>
 
       {/* ── Liste des étapes ── */}
-      {steps.length > 0 && (
-        <ol className={styles.list}>
-          {steps.map((step, index) => (
-            <li key={index} className={styles.item}>
-              {/* ── Numéro ── */}
-              <span className={styles.position}>{step.position}</span>
-
-              {/* ── Instruction ── */}
-              <span className={styles.instruction}>{step.instruction}</span>
-
-              {/* ── Actions ── */}
-              <div className={styles.actions}>
-                <button
-                  type="button"
-                  onClick={() => moveUp(index)}
-                  disabled={index === 0}
-                  className={styles.actionButton}
-                  aria-label="Monter"
-                >
-                  <TbArrowUp />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => moveDown(index)}
-                  disabled={index === steps.length - 1}
-                  className={styles.actionButton}
-                  aria-label="Descendre"
-                >
-                  <TbArrowDown />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => removeStep(index)}
-                  className={[styles.actionButton, styles.remove].join(" ")}
-                  aria-label={`Supprimer l'étape ${step.position}`}
-                >
-                  <TbTrash />
-                </button>
-              </div>
-            </li>
-          ))}
-        </ol>
-      )}
+      <StepList
+        steps={steps}
+        onMoveUp={moveUp}
+        onMoveDown={moveDown}
+        onRemove={removeStep}
+      />
 
       {/* ── Retour ── */}
       <Button type="button" variant="ghost" onClick={onBack}>

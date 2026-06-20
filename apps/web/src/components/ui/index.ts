@@ -30,6 +30,8 @@ export { MenuItemIcon } from "./MenuItemIcon";
 
 export { NavLink } from "./NavLink";
 
+export * from "./RowAction";
+
 export { Select } from "./Select/Select";
 export { Surface } from "./Surface";
 

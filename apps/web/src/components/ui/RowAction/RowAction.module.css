@@ -1,0 +1,67 @@
+.actionBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  font-size: 1.1rem;
+  color: var(--color-input-placeholder);
+  background: transparent;
+  transition:
+    color 0.15s ease,
+    background 0.15s ease,
+    scale 0.15s ease,
+    opacity 0.15s ease;
+}
+
+/* ── États ──────────────────────────────────────────────────── */
+
+.actionBtn:hover:not(:disabled) {
+  color: var(--color);
+  background: var(--bg);
+  scale: 1.1;
+}
+
+.actionBtn:active:not(:disabled) {
+  scale: 0.95;
+}
+
+.actionBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
+/* ── Variantes couleur ──────────────────────────────────────── */
+
+.primary {
+  --color: var(--color-primary-text);
+  --bg: var(--color-primary-background);
+}
+
+.accent {
+  --color: var(--color-accent-text);
+  --bg: var(--color-accent-background);
+}
+
+.danger {
+  --color: var(--color-danger-text);
+  --bg: var(--color-danger-background);
+}
+
+.info {
+  --color: var(--color-info-text);
+  --bg: var(--color-info-background);
+}
+
+.warning {
+  --color: var(--color-warning-text);
+  --bg: var(--color-warning-background);
+}
+
+.neutral {
+  --color: var(--color-neutral-text);
+  --bg: var(--color-neutral-background);
+}
+

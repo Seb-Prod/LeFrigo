@@ -1,0 +1,25 @@
+/* ── Liste des étapes ───────────────────────────────────────── */
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--color-surface-secondary, rgba(0, 0, 0, 0.03));
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-input-border);
+}
+
+.instruction{
+    flex: 1;
+  color: var(--color-input-text);
+}
