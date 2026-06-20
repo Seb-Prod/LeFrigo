@@ -3,14 +3,14 @@ import { z } from "zod";
 /* ── Sous-schémas ──────────────────────────────────────────── */
 
 export const recipeIngredientSchema = z.object({
-  name:     z.string().min(1, "Le nom de l'ingrédient est requis."),
+  name:     z.string().trim().toLowerCase().min(1, "Le nom de l'ingrédient est requis."),
   quantity: z.number().positive("La quantité doit être positive.").optional(),
-  unit:     z.string().max(20).optional(),
+  unit:     z.string().trim().toLowerCase().max(20).optional(),
 });
 
 export const recipeStepSchema = z.object({
   position:    z.number().int().positive(),
-  instruction: z.string().min(1, "L'instruction est requise."),
+  instruction: z.string().trim().min(1, "L'instruction est requise."),
 });
 
 /* ── Schémas par étape ─────────────────────────────────────── */
@@ -19,10 +19,11 @@ export const recipeStepSchema = z.object({
 export const recipeInfoSchema = z.object({
   name: z
     .string()
+    .trim()
     .min(2, "Le nom est trop court.")
     .max(100, "Le nom est trop long."),
 
-  description:     z.string().max(1000).optional(),
+  description:     z.string().trim().max(1000).optional(),
   preparationTime: z.number().int().nonnegative().optional(),
   cookingTime:     z.number().int().nonnegative().optional(),
   servings:        z.number().int().positive().optional(),
