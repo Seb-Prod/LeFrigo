@@ -2,9 +2,6 @@
 
 import { useState, useCallback } from "react";
 import {
-  TbTrash,
-  TbArrowUp,
-  TbArrowDown,
   TbPlus,
   TbPencilPlus,
 } from "react-icons/tb";
@@ -47,7 +44,7 @@ export function RecipeFormStep3({
     defaultValues.steps ?? [],
   );
   const [draft, setDraft] = useState("");
-  const { errors, setErrors, clearFieldError, errorMessages } = useFormErrors();
+  const { setErrors, clearFieldError, errorMessages } = useFormErrors();
 
   /* ── Recalcul des positions ── */
 
