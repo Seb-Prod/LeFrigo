@@ -22,7 +22,7 @@ type Props = {
  * Champs : nom, description, temps de préparation, temps de cuisson, portions.
  * Valide via `recipeInfoSchema` avant d'appeler `onSubmit`.
  */
-export function RecipeFormStep1({ defaultValues, onSubmit,stepper }: Props) {
+export function RecipeFormStep1({ defaultValues, onSubmit, stepper }: Props) {
   const [fields, setFields] = useState<RecipeInfoDto>({
     name: defaultValues.name ?? "",
     description: defaultValues.description ?? "",
@@ -85,6 +85,7 @@ export function RecipeFormStep1({ defaultValues, onSubmit,stepper }: Props) {
       onSubmit={handleSubmit}
       errorMessages={errorMessages}
       stepper={stepper}
+      disabled={!fields.name}
     >
       {/* ── Nom ── */}
       <Input
@@ -111,6 +112,7 @@ export function RecipeFormStep1({ defaultValues, onSubmit,stepper }: Props) {
           placeholder="Temps de préparation (min)"
           value={fields.preparationTime ?? 0}
           min={0}
+          max={480}
           step={5}
           onChange={setNumberField("preparationTime")}
         />
@@ -119,6 +121,7 @@ export function RecipeFormStep1({ defaultValues, onSubmit,stepper }: Props) {
           placeholder="Temps de cuisson (min)"
           value={fields.cookingTime ?? 0}
           min={0}
+          max={600}
           step={5}
           onChange={setNumberField("cookingTime")}
         />
@@ -126,8 +129,10 @@ export function RecipeFormStep1({ defaultValues, onSubmit,stepper }: Props) {
 
       {/* ── Portions ── */}
       <InputNumber
+        min={1}
+        max={12}
         placeholder="Nombre de portions"
-        value={fields.servings ?? 0}
+        value={fields.servings ?? 1}
         onChange={setNumberField("servings")}
       />
     </FormCard>

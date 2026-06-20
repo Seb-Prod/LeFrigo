@@ -1,10 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import {
-  TbPlus,
-  TbPencilPlus,
-} from "react-icons/tb";
+import { TbPlus, TbPencilPlus } from "react-icons/tb";
 import { FormCard, Button, TextArea } from "@/components/ui";
 import { useFormErrors } from "@/hooks";
 import {
@@ -126,7 +123,7 @@ export function RecipeFormStep3({
       onSubmit={handleSubmit}
       onBack={onBack}
       errorMessages={errorMessages}
-      disabled={loading}
+      disabled={loading || steps.length === 0}
       stepper={stepper}
     >
       {/* ── Zone de saisie ── */}

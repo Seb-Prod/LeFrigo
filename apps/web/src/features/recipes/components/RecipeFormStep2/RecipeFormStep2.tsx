@@ -111,7 +111,7 @@ export function RecipeFormStep2({ defaultValues, onSubmit, onBack,stepper }: Pro
       onBack={onBack}
       onSubmit={handleSubmit}
       errorMessages={errorMessages}
-      disabled={!!pending}
+      disabled={!!pending || ingredients.length === 0}
       stepper={stepper}
     >
       {/* ── Autocomplete — masqué pendant une édition ── */}
