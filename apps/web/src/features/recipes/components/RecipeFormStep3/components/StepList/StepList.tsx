@@ -4,6 +4,7 @@ import type { RecipeStepDto } from "@lefrigo/shared";
 import { StepActions } from "../StepActions";
 import styles from "./StepList.module.css";
 import { Badge, Text } from "@/components/ui";
+import { useEffect, useRef } from "react";
 
 /* ── Types ─────────────────────────────────────────────────── */
 
@@ -32,36 +33,50 @@ export function StepList({
   onEdit,
   disabled,
 }: Props) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  /** Scroll automatique vers le bas à chaque nouvel ajout */
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [steps.length]);
+
   if (steps.length === 0) return null;
 
   return (
-    <ol className={styles.list}>
-      {steps.map((step, index) => (
-        <li
-          key={index}
-          className={[styles.item, editingIndex === index && styles.itemEditing]
-            .filter(Boolean)
-            .join(" ")}
-        >
-          {/* ── Numéro ── */}
-          <Badge color="danger">{step.position}</Badge>
+    <div className={styles.scrollContainer} ref={scrollRef}>
+      <ol className={styles.list}>
+        {steps.map((step, index) => (
+          <li
+            key={index}
+            className={[
+              styles.item,
+              editingIndex === index && styles.itemEditing,
+            ]
+              .filter(Boolean)
+              .join(" ")}
+          >
+            {/* ── Numéro ── */}
+            <Badge color="danger">{step.position}</Badge>
 
-          {/* ── Instruction ── */}
-          <Text className={styles.instruction}>{step.instruction}</Text>
+            {/* ── Instruction ── */}
+            <Text className={styles.instruction}>{step.instruction}</Text>
 
-          {/* ── Actions ── */}
-          <StepActions
-            position={step.position}
-            isFirst={index === 0}
-            isLast={index === steps.length - 1}
-            onMoveUp={() => onMoveUp(index)}
-            onMoveDown={() => onMoveDown(index)}
-            onRemove={() => onRemove(index)}
-            onEdit={() => onEdit(index)}
-            disabled={disabled}
-          />
-        </li>
-      ))}
-    </ol>
+            {/* ── Actions ── */}
+            <StepActions
+              position={step.position}
+              isFirst={index === 0}
+              isLast={index === steps.length - 1}
+              onMoveUp={() => onMoveUp(index)}
+              onMoveDown={() => onMoveDown(index)}
+              onRemove={() => onRemove(index)}
+              onEdit={() => onEdit(index)}
+              disabled={disabled}
+            />
+          </li>
+        ))}
+      </ol>
+    </div>
   );
 }

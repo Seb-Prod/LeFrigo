@@ -1,3 +1,15 @@
+/* ── Conteneur scrollable ──────────────────────────────────── */
+
+.scrollContainer {
+  max-height: 260px;
+  overflow-y: auto;
+  border-radius: var(--radius-md);
+
+  /* Scrollbar discrète */
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-input-border) transparent;
+}
+
 /* ── Liste des étapes ───────────────────────────────────────── */
 
 .list {
