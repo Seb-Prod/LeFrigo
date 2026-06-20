@@ -71,7 +71,7 @@ export function InputNumber({
               value={value ?? ""}
               min={min}
               max={max}
-              step={step}
+              step="any"
               disabled={disabled}
               onChange={(e) => {
                 const raw = e.target.value;
