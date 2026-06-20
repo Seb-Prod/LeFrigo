@@ -1,7 +1,13 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { TbTrash, TbArrowUp, TbArrowDown, TbPlus } from "react-icons/tb";
+import {
+  TbTrash,
+  TbArrowUp,
+  TbArrowDown,
+  TbPlus,
+  TbPencilPlus,
+} from "react-icons/tb";
 import { FormCard, Button, TextArea } from "@/components/ui";
 import { useFormErrors } from "@/hooks";
 import {
@@ -129,7 +135,9 @@ export function RecipeFormStep3({
       {/* ── Zone de saisie ── */}
       <div className={styles.addRow}>
         <TextArea
+          className={styles.textArea}
           placeholder="Décrivez une étape..."
+          iconLeft={<TbPencilPlus />}
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
           onKeyDown={handleKeyDown}

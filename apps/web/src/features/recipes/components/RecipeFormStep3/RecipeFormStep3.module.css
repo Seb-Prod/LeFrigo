@@ -1,5 +1,3 @@
-/* RecipeFormStep3.module.css */
-
 /* ── Zone de saisie ────────────────────────────────────────── */
 
 .addRow {
@@ -8,10 +6,16 @@
   align-items: stretch;
 }
 
+/* Force le wrapper généré par TextArea à prendre tout l'espace disponible */
+.addRow > :first-child {
+  flex: 1;
+  min-width: 0;
+}
+
 /* ── Bouton ajout ───────────────────────────────────────────── */
 
 .addButton {
   align-self: stretch;
   min-width: 48px;
+  flex-shrink: 0;
 }
-
