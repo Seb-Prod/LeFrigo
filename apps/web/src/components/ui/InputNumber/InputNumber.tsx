@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { IoIosAdd, IoIosRemove } from "react-icons/io";
 import styles from "./InputNumber.module.css";
-import clsx from "clsx";
 import { ButtonAdd, ButtonRemove } from "../ButtonIcon";
 
 type Props = {
