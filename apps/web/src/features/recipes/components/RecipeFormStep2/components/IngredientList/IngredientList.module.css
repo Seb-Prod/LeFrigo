@@ -1,14 +1,14 @@
-/* RecipeFormStep2.module.css */
+/* ── Conteneur scrollable ──────────────────────────────────── */
 
+.scrollContainer {
+  max-height: 280px;
+  overflow-y: auto;
+  border-radius: var(--radius-md);
 
-
-
-
-.quantityInput {
-  width: 100%;
+  /* Scrollbar discrète */
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-input-border) transparent;
 }
-
-
 
 /* ── Liste des ingrédients ─────────────────────────────────── */
 
@@ -35,7 +35,6 @@
 
 .name {
   flex: 1;
-  font-size: 0.95rem;
   color: var(--color-input-text);
 }
 
@@ -46,20 +45,3 @@
   color: var(--color-input-placeholder);
 }
 
-/* ── Bouton suppression ────────────────────────────────────── */
-
-.remove {
-  display: flex;
-  align-items: center;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--color-input-placeholder);
-  padding: 4px;
-  border-radius: var(--radius-sm);
-  transition: color 0.15s ease;
-}
-
-.remove:hover {
-  color: var(--color-danger-text);
-}

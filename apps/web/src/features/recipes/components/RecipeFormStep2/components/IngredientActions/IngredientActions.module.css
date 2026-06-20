@@ -1,0 +1,55 @@
+/* ── Actions ────────────────────────────────────────────────── */
+
+.actions {
+  display: flex;
+  gap: 4px;
+}
+
+/* ── Bouton de base ─────────────────────────────────────────── */
+
+.actionBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  font-size: 1.1rem;
+  color: var(--color-input-placeholder);
+  background: transparent;
+  transition:
+    color 0.15s ease,
+    background 0.15s ease,
+    scale 0.15s ease,
+    opacity 0.15s ease;
+}
+
+/* ── Variantes couleur ──────────────────────────────────────── */
+
+.edit {
+  --color: var(--color-warning-text);
+  --bg: var(--color-warning-background);
+}
+
+.remove {
+  --color: var(--color-danger-text);
+  --bg: var(--color-danger-background);
+}
+
+/* ── États ──────────────────────────────────────────────────── */
+
+.actionBtn:hover:not(:disabled) {
+  color: var(--color);
+  background: var(--bg);
+  scale: 1.1;
+}
+
+.actionBtn:active:not(:disabled) {
+  scale: 0.95;
+}
+
+.actionBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}

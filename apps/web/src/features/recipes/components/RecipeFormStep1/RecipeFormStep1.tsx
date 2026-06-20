@@ -8,6 +8,7 @@ import {
 import { useState } from "react";
 import { useFormErrors } from "@/hooks";
 import styles from "./RecipeFormStep1.module.css";
+import { FaAlignLeft, FaUtensils } from "react-icons/fa";
 
 type Props = {
   defaultValues: Partial<RecipeInfoDto>;
@@ -85,6 +86,7 @@ export function RecipeFormStep1({ defaultValues, onSubmit }: Props) {
     >
       {/* ── Nom ── */}
       <Input
+        iconLeft={<FaUtensils />}
         placeholder="Nom de la recette"
         required
         value={fields.name}
@@ -94,6 +96,7 @@ export function RecipeFormStep1({ defaultValues, onSubmit }: Props) {
 
       {/* ── Description ── */}
       <TextArea
+        iconLeft={<FaAlignLeft />}
         placeholder="Description (optionnel)"
         value={fields.description ?? ""}
         error={!!errors.description}

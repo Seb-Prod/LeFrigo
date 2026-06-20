@@ -28,6 +28,7 @@
 
 .option {
   padding: 10px 16px;
+  
   cursor: pointer;
   font-size: 0.95rem;
   color: var(--color-input-text);

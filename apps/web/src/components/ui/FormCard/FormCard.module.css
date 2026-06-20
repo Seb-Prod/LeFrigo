@@ -13,31 +13,31 @@
 
 /* Ligne sticky contenant le bouton retour et le titre centré */
 .header {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  /* bouton | titre centré | espace miroir */
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: color-mix(in srgb, var(--color-background) 20%, transparent);
-  backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(2px);
-  padding-block: var(--space-sm);
-  border-radius: var(--radius-md);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    /* bouton | titre centré | espace miroir */
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: color-mix(in srgb, var(--color-background) 20%, transparent);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(2px);
+    padding-block: var(--space-sm);
+    border-radius: var(--radius-md);
 }
 
 /* Colonne 1, ligne 1 */
 .backButton {
-  grid-column: 1;
-  grid-row: 1;
+    grid-column: 1;
+    grid-row: 1;
 }
 
 /* Span sur toute la largeur, même ligne (1), centré */
 .title {
-  grid-column: 1 / -1;
-  grid-row: 1;
-  justify-self: center;
+    grid-column: 1 / -1;
+    grid-row: 1;
+    justify-self: center;
 }
 
 /* ── Card ─────────────────────────────────────────────────── */
@@ -61,7 +61,26 @@
 .icon {
     font-size: 64px;
     color: var(--color-text-secondary);
-    align-self: center; /* centre dans le flex column */
+    align-self: center;
+    /* centre dans le flex column */
+}
+
+/* ── Actions ────────────────────────────────────────────────── */
+
+/* Conteneur du ou des boutons de soumission */
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    width: 100%;
+}
+
+/* Disposition côte à côte quand un bouton retour est présent */
+.actionsWithBack {
+    display: flex;
+    gap: 8px;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 
 /* ── Mobile ───────────────────────────────────────────────── */

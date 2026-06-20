@@ -11,6 +11,7 @@ import { getPageConfig } from "@/lib/navigation";
 import { Modal } from "../Modal";
 import { useState } from "react";
 import { ConfirmDialog } from "../ConfirmDialog";
+import clsx from 'clsx';
 
 /* ── Types ────────────────────────────────────────────────── */
 
@@ -30,6 +31,10 @@ type Props = {
   /** Messages d'erreur globaux affichés sous le bouton */
   errorMessages?: string[];
   /** Affiche le bouton retour — à passer depuis `useDevice().isMobile` */
+  /** Texte du bouton retour inline — si absent, le bouton n'est pas rendu */
+  backLabel?: string;
+  /** Handler du bouton retour inline */
+  onBack?: () => void;
 };
 
 /* ── Composant ────────────────────────────────────────────── */
@@ -52,6 +57,8 @@ export function FormCard({
   buttonLoadingLabel,
   disabled,
   errorMessages,
+  backLabel,
+  onBack,
 }: Props) {
   const { isPWA, isMobile } = useDevice();
   const pathname = usePathname();
@@ -106,11 +113,20 @@ export function FormCard({
       {/* ── Contenu variable (inputs, boutons custom…) ── */}
       {children}
 
-      {/* ── Bouton de soumission ── */}
+      {/* ── Bouton(s) de soumission ── */}
       {buttonLabel && (
-        <Button type="submit" disabled={disabled}>
-          {disabled && buttonLoadingLabel ? buttonLoadingLabel : buttonLabel}
-        </Button>
+        <div
+          className={clsx(styles.actions, onBack && styles.actionsWithBack)}
+        >
+          {onBack && backLabel && (
+            <Button type="button" variant="ghost" onClick={onBack}>
+              {backLabel}
+            </Button>
+          )}
+          <Button type="submit" disabled={disabled}>
+            {disabled && buttonLoadingLabel ? buttonLoadingLabel : buttonLabel}
+          </Button>
+        </div>
       )}
 
       {/* ── Erreurs globales ── */}

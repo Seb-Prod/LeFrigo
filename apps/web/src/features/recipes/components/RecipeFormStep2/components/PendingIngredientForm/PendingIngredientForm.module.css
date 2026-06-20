@@ -1,0 +1,33 @@
+.miniForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  background: var(--color-surface-secondary, rgba(0, 0, 0, 0.03));
+  border: 0.5px solid var(--color-input-border);
+  border-radius: var(--radius-md);
+}
+
+/* ── Nom de l'ingrédient sélectionné ──────────────────────── */
+
+.pendingName {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-input-text);
+  margin: 0;
+}
+
+/* ── Ligne quantité + unité ────────────────────────────────── */
+
+.miniRow {
+  display: flex;
+  gap: 8px;
+}
+
+/* ── Actions du mini-formulaire ────────────────────────────── */
+
+.miniActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
