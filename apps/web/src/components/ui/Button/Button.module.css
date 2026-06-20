@@ -68,31 +68,20 @@
   z-index: 1;
 }
 
-/* ── Hover ────────────────────────────────────────────────── */
-
-.button:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px -8px var(--shadow-color);
-}
-
-/* Blob avant : monte presque jusqu'en haut avec légère rotation */
-.button:hover:not(:disabled)::before {
-  transform: translateY(-88%) rotate(8deg);
-  border-radius: 50% 50% 45% 55% / 48% 52% 50% 50%;
-}
-
-/* Blob arrière : couvre tout + animation flottante au repos */
-.button:hover:not(:disabled)::after {
-  transform: translateY(-98%) rotate(-10deg);
-  border-radius: 52% 48% 55% 45% / 50% 48% 52% 50%;
-  animation: blobFloat 3.5s ease-in-out infinite;
-}
 
 /* ── Press ────────────────────────────────────────────────── */
 
 .button:active:not(:disabled) {
   transform: scale(0.97);
   transition-duration: 0.08s;
+}
+
+/* Repousse les blobs vers le bas au press pour annuler l'effet hover */
+.button:active:not(:disabled)::before,
+.button:active:not(:disabled)::after {
+  transform: translateY(0%) rotate(0deg);
+  transition-duration: 0.08s;
+  animation: none; /* stoppe blobFloat si actif */
 }
 
 /* ── Disabled ─────────────────────────────────────────────── */
@@ -299,4 +288,24 @@
 .lg {
   padding: 13px 28px;
   font-size: 16px;
+}
+
+/* ── Blobs — uniquement sur devices avec hover réel ─────────── */
+
+@media (hover: hover) {
+  .button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px -8px var(--shadow-color);
+  }
+
+  .button:hover:not(:disabled)::before {
+    transform: translateY(-88%) rotate(8deg);
+    border-radius: 50% 50% 45% 55% / 48% 52% 50% 50%;
+  }
+
+  .button:hover:not(:disabled)::after {
+    transform: translateY(-98%) rotate(-10deg);
+    border-radius: 52% 48% 55% 45% / 50% 48% 52% 50%;
+    animation: blobFloat 3.5s ease-in-out infinite;
+  }
 }

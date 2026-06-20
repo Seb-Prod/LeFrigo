@@ -2,6 +2,7 @@ import { DashboardLayout } from "@/components/layout";
 import { AuthProvider } from "@/contexts/auth.context";
 import { DeviceProvider } from "@/contexts/device.context";
 import { ThemeProvider } from "@/contexts/theme.context";
+import { TouchStartFix } from "@/contexts/TouchStartFix";
 import { AppBootstrap } from "@/features/app-bootstrap";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
@@ -19,6 +20,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="fr">
       <body>
+        <TouchStartFix />
         <AuthProvider>
           <DeviceProvider>
             <AppBootstrap>

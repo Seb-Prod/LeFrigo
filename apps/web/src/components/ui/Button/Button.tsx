@@ -47,6 +47,10 @@ export function Button({
         className,
       )}
       {...props}
+      onMouseUp={(e) => {
+        e.currentTarget.blur();
+        props.onMouseUp?.(e);
+      }}
     />
   );
 }
