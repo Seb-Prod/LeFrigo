@@ -51,6 +51,8 @@ touch-action: none;
   margin-right: 4px;
 }
 
+
+
 /* ── Navigation desktop ───────────────────────────────────── */
 
 .nav {
@@ -69,6 +71,10 @@ touch-action: none;
 /* ── Responsive : mobile ──────────────────────────────────── */
 
 @media (max-width: 1040px) {
+  .logoOnly{
+    margin: auto;
+  }
+
   .topbar {
     padding: 0 16px;
   }

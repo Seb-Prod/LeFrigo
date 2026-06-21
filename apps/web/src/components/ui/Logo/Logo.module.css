@@ -7,3 +7,8 @@
   /* évite l'écrasement dans un flex parent */
   flex-shrink: 0;
 }
+
+.logo{
+  display: flex;
+  align-items: center;
+}

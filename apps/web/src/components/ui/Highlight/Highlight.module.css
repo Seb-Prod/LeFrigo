@@ -1,0 +1,15 @@
+.highlight {
+    font: inherit;
+}
+
+.primary {
+    color: var(--color-primary-solid);
+}
+
+.accent {
+    color: var(--color-accent-solid);
+}
+
+.success {
+    color: var(--color-success-solid);
+}

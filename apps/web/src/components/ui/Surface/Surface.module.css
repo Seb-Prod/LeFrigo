@@ -3,41 +3,40 @@
 /* Centre la card sur desktop, pleine page sur mobile */
 .wrapper {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
-  min-height: 100vh;
+  min-height: 100%;
   padding: var(--space-sm);
 }
 
 /* ── Header ───────────────────────────────────────────────── */
 
-/* Ligne sticky contenant le bouton retour et le titre centré */
 .header {
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  /* bouton | titre centré | espace miroir */
+  grid-template-columns: auto 1fr auto; /* bouton | espace | miroir */
   align-items: center;
   position: sticky;
   top: 0;
   z-index: 10;
-  background: color-mix(in srgb, var(--color-background) 20%, transparent);
+  background: color-mix(in srgb, var(--color-background) 80%, transparent);
   backdrop-filter: blur(1px);
   -webkit-backdrop-filter: blur(2px);
   padding-block: var(--space-sm);
   border-radius: var(--radius-md);
 }
 
-/* Colonne 1, ligne 1 */
+/* Colonne 1 — bouton retour */
 .backButton {
   grid-column: 1;
   grid-row: 1;
 }
 
-/* Span sur toute la largeur, même ligne (1), centré */
+/* Titre centré sur toute la largeur, même ligne que le bouton */
 .title {
   grid-column: 1 / -1;
   grid-row: 1;
   justify-self: center;
+  pointer-events: none; /* évite de bloquer le clic sur le bouton */
 }
 
 /* ── Card ─────────────────────────────────────────────────── */
@@ -67,32 +66,13 @@
   padding: var(--space-lg);
 }
 
-/* ── Header ───────────────────────────────────────────────── */
-
-/* Ligne contenant le bouton retour et le titre centré */
-.header {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  /* bouton | titre centré | espace miroir */
-  align-items: center;
-}
-
-/* Place le bouton dans la 1re colonne */
-.backButton {
-  grid-column: 1;
-}
-
-/* Titre centré sur toute la largeur, par-dessus le bouton */
-.title {
-  grid-column: 1 / -1;
-  justify-self: center;
-}
 
 /* ── Mobile ───────────────────────────────────────────────── */
 
 /* Supprime la card — formulaire pleine page */
 @media (max-width: 768px) {
   .wrapper {
+    
     align-items: flex-start;
     padding: var(--space-md);
   }

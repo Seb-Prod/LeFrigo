@@ -60,7 +60,9 @@ export function Topbar() {
               <Text>{page.title}</Text>
             </div>
           ) : (
-            <Logo />
+            <div className={styles.logoOnly}>
+              <Logo display="both"/>
+            </div>
           )}
         </div>
 

@@ -1,3 +1,14 @@
+import { Heading, Highlight } from "@/components/ui";
+
 export function DiscoverHero() {
-  return <span>DiscoverHero</span>;
+  return (
+    <Heading size="lg">
+      <>
+        Planifiez vos repas, 
+        <br/>
+        <Highlight variant="primary">simplifiez</Highlight>{" "}
+        votre quotidien.
+      </>
+    </Heading>
+  );
 }

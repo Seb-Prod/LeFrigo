@@ -16,6 +16,7 @@ export { DevCredit } from "./DevCredit";
 export { FormCard } from "./FormCard";
 
 export { Heading } from "./Heading";
+export { Highlight } from "./Highlight";
 
 export { IngredientAutocomplete } from "./IngredientAutocomplete";
 export { Input, InputEmail, InputPassword, InputUserName } from "./Input";

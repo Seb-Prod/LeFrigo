@@ -8,6 +8,7 @@ import { ButtonPrev } from "../ButtonIcon";
 import { useBack } from "@/hooks";
 import { usePathname } from "next/navigation";
 import { getPageConfig } from "@/lib/navigation";
+import { Logo } from "../Logo";
 
 type Props = {
   fullScreen?: boolean;
@@ -37,7 +38,7 @@ export function Surface({ className, children, fullScreen }: Props) {
   const goBack = useBack();
 
   /** Header visible sur mobile et PWA uniquement */
-  const showHeader = isPWA || isMobile;
+  const showHeader = isPWA;
 
   return (
     <div className={styles.wrapper}>
@@ -53,7 +54,7 @@ export function Surface({ className, children, fullScreen }: Props) {
                   <ButtonPrev onClick={goBack} className={styles.backButton} />
                 )}
                 <Heading align="center" className={styles.title}>
-                  {page.title}
+                  {page.title === "LeFrigo" ? <Logo display="both"/> : page.title}
                 </Heading>
               </>
             )}
