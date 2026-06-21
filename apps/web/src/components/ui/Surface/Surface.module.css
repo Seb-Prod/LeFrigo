@@ -55,6 +55,18 @@
   box-shadow: var(--shadow-lg);
 }
 
+/* ── Plein écran ────────────────────────────────────────────── */
+
+/* Supprime la card et étend sur toute la largeur, tous devices */
+.fullScreen {
+  max-width: 100%;
+  border: none;
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: var(--space-lg);
+}
+
 /* ── Header ───────────────────────────────────────────────── */
 
 /* Ligne contenant le bouton retour et le titre centré */

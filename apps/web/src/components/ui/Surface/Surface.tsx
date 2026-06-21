@@ -10,6 +10,7 @@ import { usePathname } from "next/navigation";
 import { getPageConfig } from "@/lib/navigation";
 
 type Props = {
+  fullScreen?: boolean;
   className?: string;
   children: React.ReactNode;
 };
@@ -29,7 +30,7 @@ type Props = {
  * - Le titre et le bouton retour ne s'affichent qu'en mode PWA
  * - `getPageConfig` détermine le titre et si le bouton retour est pertinent
  */
-export function Surface({ className, children }: Props) {
+export function Surface({ className, children, fullScreen }: Props) {
   const { isPWA, isMobile } = useDevice();
   const pathname = usePathname();
   const page = getPageConfig(pathname);
@@ -40,7 +41,7 @@ export function Surface({ className, children }: Props) {
 
   return (
     <div className={styles.wrapper}>
-      <div className={clsx(styles.card, className)}>
+      <div className={clsx(styles.card, fullScreen && styles.fullScreen, className)}>
 
         {/* ── Header (mobile/PWA uniquement) ── */}
         {showHeader && (

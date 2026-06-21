@@ -96,7 +96,7 @@ export const PAGE_CONFIG: PageConfig[] = [
   },
   {
     path: "/dashboard",
-    title: "Dashboard",
+    title: "Accueil",
     icon: MdDashboard,
     showBackButton: false,
   },
@@ -104,7 +104,7 @@ export const PAGE_CONFIG: PageConfig[] = [
 
 export const NAVIGATION = [
   {
-    label: "Dashboard",
+    label: "Accueil",
     href: "/dashboard",
     icon: MdDashboard,
   },
