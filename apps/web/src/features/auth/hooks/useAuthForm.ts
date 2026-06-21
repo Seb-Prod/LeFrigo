@@ -66,10 +66,10 @@ const INITIAL_FIELDS = {
  *
  * @param onSuccess - Callback déclenché après un login réussi (ex: fermer la modal)
  */
-export function useAuthForm(onSuccess?: () => void) {
+export function useAuthForm(onSuccess?: () => void, initialMode: FormMode = "login") {
   const { login } = useAuth();
 
-  const [mode, setMode] = useState<FormMode>("login");
+  const [mode, setMode] = useState<FormMode>(initialMode);
   const [formState, setFormState] = useState<FormState>("idle");
   const [fields, setFields] = useState(INITIAL_FIELDS);
   const { errors, setErrors, clearFieldError, errorMessages } = useFormErrors();

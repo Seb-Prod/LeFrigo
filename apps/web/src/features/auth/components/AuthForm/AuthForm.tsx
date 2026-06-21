@@ -19,6 +19,7 @@ import { useAuthForm } from "../../hooks/useAuthForm";
 interface Props {
   open: boolean;
   onClose: () => void;
+  initialMode?: "login" | "register";
 }
 
 /**
@@ -29,8 +30,8 @@ interface Props {
  * - Affiche une alerte de succès après un register confirmé
  * - Affiche les erreurs Zod par champ et les erreurs globales en bas de formulaire
  */
-export function AuthForm({ open, onClose }: Props) {
-  const form = useAuthForm(onClose);
+export function AuthForm({ open, onClose, initialMode = "login", }: Props) {
+  const form = useAuthForm(onClose, initialMode);
 
   const isLogin = form.mode === "login";
 

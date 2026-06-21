@@ -12,11 +12,11 @@ export function DiscoverPage() {
     <Surface fullScreen>
       <>
         <DiscoverHero />
-        <RecipeHighlight />
+        {/* <RecipeHighlight />
         <div className={styles.body}>
           <MemberPerks />
           <RecipeSpotlight />
-        </div>
+        </div> */}
       </>
     </Surface>
   );

@@ -1,5 +1,5 @@
 .text {
-    display: inline-flex;    /* inline pour ne pas casser le flux du texte */
+    display: block;    /* inline pour ne pas casser le flux du texte */
     align-items: center;
     gap: 5px;                /* espace entre texte et icônes éventuelles */
     font-family: var(--font-sans);
