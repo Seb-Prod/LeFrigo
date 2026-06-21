@@ -3,7 +3,7 @@
 import { TbChefHat, TbPlus } from "react-icons/tb";
 import { Button } from "@/components/ui";
 import { useMyRecipes } from "../../hooks/useMyRecipes";
-import { RecipeCard } from "../../components/RecipeCard";
+import { RecipeCard } from "../../components/RecipeCard2";
 import styles from "./MyRecipesPage.module.css";
 import Link from "next/link";
 

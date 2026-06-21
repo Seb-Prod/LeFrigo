@@ -30,6 +30,19 @@ export function toSafeRecipe(recipe: any): SafeRecipe {
 }
 
 export function toSafeRecipeSummary(recipe: any): SafeRecipeSummary {
-  const { ingredients, steps, ...rest } = toSafeRecipe(recipe);
-  return rest;
+  return {
+    id:              recipe.id,
+    name:            recipe.name,
+    description:     recipe.description ?? null,
+    preparationTime: recipe.preparationTime ?? null,
+    cookingTime:     recipe.cookingTime ?? null,
+    servings:        recipe.servings ?? null,
+    status:          recipe.status,
+    createdAt:       recipe.createdAt.toISOString(),
+    updatedAt:       recipe.updatedAt.toISOString(),
+    user: {
+      id:       recipe.user.id,
+      userName: recipe.user.userName,
+    },
+  };
 }

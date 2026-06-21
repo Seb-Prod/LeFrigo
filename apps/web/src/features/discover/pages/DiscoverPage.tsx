@@ -6,17 +6,18 @@ import {
   RecipeSpotlight,
 } from "../components";
 import styles from "./DiscoverPage.module.css";
+import { useRecentRecipes } from "@/features/recipes/hooks/useRecentRecipes";
 
 export function DiscoverPage() {
   return (
     <Surface fullScreen>
       <>
         <DiscoverHero />
-        {/* <RecipeHighlight />
+        <RecipeHighlight  />
         <div className={styles.body}>
           <MemberPerks />
           <RecipeSpotlight />
-        </div> */}
+        </div>
       </>
     </Surface>
   );
