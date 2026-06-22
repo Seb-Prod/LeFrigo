@@ -7,7 +7,7 @@ import {
   RecipeCard,
   RecipeCardSkeleton,
 } from "@/features/recipes";
-import { useRecentRecipes } from "@/features/recipes/hooks/useRecentRecipes";
+import { useRecentRecipes } from "@/features/recipes/";
 
 import styles from "./RecipeHighlight.module.css";
 

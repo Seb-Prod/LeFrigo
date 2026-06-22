@@ -1,0 +1,21 @@
+/* ── Body ───────────────────────────────────────────────────── */
+
+.body {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+.right{ 
+    width: 280px;
+}
+
+/* ── Mobile ─────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+}

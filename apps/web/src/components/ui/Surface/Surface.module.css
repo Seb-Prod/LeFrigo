@@ -58,7 +58,7 @@
 
 /* Supprime la card et étend sur toute la largeur, tous devices */
 .fullScreen {
-  max-width: 100%;
+  max-width:1180px;
   border: none;
   background: none;
   box-shadow: none;

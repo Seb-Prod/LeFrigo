@@ -1,0 +1,1 @@
+export {RecipeCardCompact} from "./RecipeCardCompact"
