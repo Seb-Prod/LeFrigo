@@ -1,0 +1,61 @@
+.right {
+  width: 280px;
+  flex-shrink: 0;
+}
+
+/* ── Liste statique (desktop) ───────────────────────────────── */
+
+.featureList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── Carrousel infini (mobile uniquement) ───────────────────── */
+
+.carousel {
+  display: none;
+  /* masqué sur desktop */
+  overflow: hidden;
+  width: 100%;
+}
+
+.carouselTrack {
+  display: flex;
+  gap: 10px;
+  animation: scrollTrack 15s linear infinite;
+}
+
+
+/* ── Animation ──────────────────────────────────────────────── */
+
+@keyframes scrollTrack {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    /* Déplace exactement la moitié — les items dupliqués reprennent seamlessly */
+    transform: translateX(calc(-3 * 240px - 3 * 10px));
+  }
+}
+
+/* ── Mobile ─────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+
+  .right {
+    width: 100%;
+  }
+
+  /* Cache la liste statique, affiche le carrousel */
+  .featureList {
+    display: none;
+  }
+
+  .carousel {
+    display: block;
+  }
+
+
+}

@@ -7,93 +7,6 @@
   gap: 48px;
 }
 
-/* ── Colonne gauche ─────────────────────────────────────────── */
-
-.left {
-  flex: 1;
-  max-width: 550px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-/* ── CTA ────────────────────────────────────────────────────── */
-
-.auth {
-  display: flex;
-  gap: 8px;
-  margin-top: 8px;
-}
-
-/* ── Colonne droite ─────────────────────────────────────────── */
-
-.right {
-  width: 280px;
-  flex-shrink: 0;
-}
-
-/* ── Liste statique (desktop) ───────────────────────────────── */
-
-.featureList {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-/* ── Carrousel infini (mobile uniquement) ───────────────────── */
-
-.carousel {
-  display: none; /* masqué sur desktop */
-  overflow: hidden;
-  width: 100%;
-}
-
-.carouselTrack {
-  display: flex;
-  gap: 10px;
-  animation: scrollTrack 15s linear infinite;
-}
-
-/* ── Feature card ───────────────────────────────────────────── */
-
-.featureCard {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 14px 16px;
-  border: 1px solid var(--color-input-border);
-  border-radius: var(--radius-md);
-  background: var(--color-surface-secondary);
-}
-
-.featureIcon {
-  font-size: 1.4rem;
-  color: var(--color-primary-solid);
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.featureLabel {
-  font-weight: 600;
-  color: var(--color-text-primary);
-}
-
-.featureDescription {
-  color: var(--color-input-placeholder);
-  margin-top: 2px;
-}
-
-/* ── Animation ──────────────────────────────────────────────── */
-
-@keyframes scrollTrack {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    /* Déplace exactement la moitié — les items dupliqués reprennent seamlessly */
-    transform: translateX(calc(-3 * 240px - 3 * 10px));
-  }
-}
 
 /* ── Mobile ─────────────────────────────────────────────────── */
 
@@ -101,28 +14,5 @@
   .hero {
     flex-direction: column;
     gap: 24px;
-  }
-
-  .auth{
-    justify-content: space-around;
-  }
-
-  .right {
-    width: 100%;
-  }
-
-  /* Cache la liste statique, affiche le carrousel */
-  .featureList {
-    display: none;
-  }
-
-  .carousel {
-    display: block;
-  }
-
-  /* Largeur fixe pour chaque card dans le carrousel */
-  .carousel .featureCard {
-    width: 240px;
-    flex-shrink: 0;
   }
 }

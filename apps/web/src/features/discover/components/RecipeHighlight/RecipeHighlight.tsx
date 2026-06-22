@@ -1,44 +1,62 @@
 "use client";
 
-import styles from "./RecipeHighlight.module.css";
-import { Heading, Text } from "@/components/ui";
-import Image from "next/image";
 import Link from "next/link";
-import { TbClock, TbUsers } from "react-icons/tb";
+
+import { Heading } from "@/components/ui";
+import {
+  RecipeCard,
+  RecipeCardSkeleton,
+} from "@/features/recipes";
 import { useRecentRecipes } from "@/features/recipes/hooks/useRecentRecipes";
-import { RecipeCard, RecipeCardSkeleton } from "@/features/recipes";
+
+import styles from "./RecipeHighlight.module.css";
 
 /**
- * Section "Dernières recettes" de la page découverte.
+ * Met en avant les dernières recettes publiées sur la plateforme.
+ *
+ * Affiche un aperçu des recettes récentes avec un accès rapide
+ * vers la liste complète des recettes.
  *
  * États visuels :
- * - `loading` → squelettes de chargement
- * - `error`   → silencieux (section masquée)
- * - `vide`    → section masquée
- * - `succès`  → grille de cards cliquables
+ * - `loading` → affichage des squelettes de chargement.
+ * - `error` → section masquée.
+ * - `vide` → section masquée.
+ * - `succès` → affichage des recettes récentes.
  */
 export function RecipeHighlight() {
   const { recipes, loading, error } = useRecentRecipes(5);
 
-  if (error || (!loading && recipes.length === 0)) return null;
+  /* ── Gestion des états sans contenu ─────────────────────── */
+
+  if (error || (!loading && recipes.length === 0)) {
+    return null;
+  }
 
   return (
     <section className={styles.section}>
       {/* ── En-tête ── */}
       <div className={styles.header}>
-        <Heading size="sm" as="h2">Dernières recettes</Heading>
-        <Link href="/recipes" className={styles.seeAll}>Voir tout</Link>
+        <Heading size="sm" as="h2">
+          Dernières recettes
+        </Heading>
+
+        <Link href="/recipes" className={styles.seeAll}>
+          Voir tout
+        </Link>
       </div>
 
-      {/* ── Grille ── */}
+      {/* ── Grille des recettes ── */}
       <div className={styles.grid}>
         {loading
           ? Array.from({ length: 5 }).map((_, i) => (
               <RecipeCardSkeleton key={i} />
             ))
-          : recipes.map((recipe) => {
-              return <RecipeCard key={recipe.id} recipe={recipe}/>
-            })}
+          : recipes.map((recipe) => (
+              <RecipeCard
+                key={recipe.id}
+                recipe={recipe}
+              />
+            ))}
       </div>
     </section>
   );

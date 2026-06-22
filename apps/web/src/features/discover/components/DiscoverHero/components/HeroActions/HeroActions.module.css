@@ -1,0 +1,13 @@
+.actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+/* ── Mobile ─────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+    .actions {
+        justify-content: space-around;
+    }
+}
