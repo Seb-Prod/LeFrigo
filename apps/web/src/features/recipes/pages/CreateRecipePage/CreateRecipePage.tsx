@@ -1,13 +1,13 @@
 "use client";
 
-import { RecipeFormStep1 } from "../../components/RecipeFormStep1";
-import { RecipeFormStep2 } from "../../components/RecipeFormStep2";
-import { RecipeFormStep3 } from "../../components/RecipeFormStep3";
+import { RecipeFormStep1 } from "../../components/forms/RecipeFormStep1";
+import { RecipeFormStep2 } from "../../components/forms/RecipeFormStep2";
+import { RecipeFormStep3 } from "../../components/forms/RecipeFormStep3";
 import { useCreateRecipe } from "../../hooks/useCreateRecipe";
 import { Alert, Button, FormCard } from "@/components/ui";
 import { TbChefHat } from "react-icons/tb";
 import { useBack } from "@/hooks";
-import { RecipeStepper } from "../../components/RecipeStepper";
+import { RecipeStepper } from "../../components/forms/RecipeStepper";
 
 /**
  * Page de création de recette multi-étapes.
