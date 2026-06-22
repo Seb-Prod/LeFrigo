@@ -10,9 +10,8 @@
   padding: 0 24px;
 
   /* Même recette que la sidebar : fond semi-transparent + flou */
-  background: color-mix(in srgb, var(--color-surface) 80%, transparent);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: var(--color-background);
+  
 
   /* Séparation subtile vers le bas */
   border-bottom: 1px solid color-mix(in srgb, var(--color-primary-solid) 20%, transparent);

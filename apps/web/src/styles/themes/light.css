@@ -102,8 +102,8 @@
 
   /* ── Texte global ─────────────────────────────────────────── */
 
-  --color-text: #1a2e22;           /* ⚠ vert sombre — à neutraliser si souhaité */
-  --color-text-secondary: #2f4933; /* ⚠ vert sombre — idem */
+  --color-text: #281631;
+  --color-text-secondary: #1c0b2e;
   --color-text-muted: #6b7280;
 
   /* ── Bordures globales ────────────────────────────────────── */

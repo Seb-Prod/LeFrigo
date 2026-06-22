@@ -1,6 +1,7 @@
 /* ── Conteneur racine ─────────────────────────────────────── */
 .container {
   display: flex;
+  flex-direction: column;
   height: 100vh;
   overflow: hidden;
 }
@@ -21,4 +22,10 @@
   overflow-y: auto;
   min-height: 0;
   overscroll-behavior: none;
+}
+
+.footer {
+
+  margin-top: 2rem;
+
 }

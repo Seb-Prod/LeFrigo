@@ -1,0 +1,78 @@
+/* ── Bouton principal ───────────────────────────────────── */
+.link {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+  padding: 0;
+
+  border-radius: 999px;
+  background: var(--color-white);
+
+  overflow: hidden;
+
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+
+  transition:
+    width 0.3s ease,
+    background-color 0.3s ease,
+    transform 0.2s ease;
+}
+
+/* ── Effet au survol ────────────────────────────────────── */
+.link:hover {
+    justify-content: space-between;
+  width: 160px;
+  background-color: var(--social-color);
+  transform: translateY(-2px);
+}
+
+/* ── Icône ──────────────────────────────────────────────── */
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  color: var(--social-color);
+
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+/* Déplace légèrement l'icône vers la gauche au hover */
+.link:hover .icon {
+  color: var(--color-white);
+}
+
+/* ── Libellé ────────────────────────────────────────────── */
+.label {
+  position: absolute;
+  left: 48px;
+
+  opacity: 0;
+
+  color: var(--color-white);
+  font-weight: 600;
+  white-space: nowrap;
+
+  transform: translateX(10px);
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.3s ease;
+}
+
+/* ── Apparition du texte ────────────────────────────────── */
+.link:hover .label {
+  opacity: 1;
+  transform: translateX(0);
+}

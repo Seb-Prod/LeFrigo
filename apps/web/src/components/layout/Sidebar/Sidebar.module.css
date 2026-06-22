@@ -42,7 +42,7 @@
 /* ── Panneau latéral (wrapper) ───────────────────────────────── */
 
 .sidebarWrap {
-  --color-primary: var(--color-surface);
+  --color-primary: var(--color-background);
   --color-secondary: var(--color-primary-solid);
   --radius-size: var(--radius-lg);
   --curve-size: calc(2 * var(--radius-size));
