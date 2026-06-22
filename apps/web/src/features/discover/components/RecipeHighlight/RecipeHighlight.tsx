@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { TbClock, TbUsers } from "react-icons/tb";
 import { useRecentRecipes } from "@/features/recipes/hooks/useRecentRecipes";
-import { RecipeCard } from "@/features/recipes";
+import { RecipeCard, RecipeCardSkeleton } from "@/features/recipes";
 
 /**
  * Section "Dernières recettes" de la page découverte.
@@ -34,7 +34,7 @@ export function RecipeHighlight() {
       <div className={styles.grid}>
         {loading
           ? Array.from({ length: 5 }).map((_, i) => (
-              <div key={i} className={styles.skeleton} />
+              <RecipeCardSkeleton key={i} />
             ))
           : recipes.map((recipe) => {
               return <RecipeCard key={recipe.id} recipe={recipe}/>
