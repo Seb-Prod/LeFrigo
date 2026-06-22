@@ -3,7 +3,7 @@
 import { TbChefHat, TbPlus } from "react-icons/tb";
 import { Button } from "@/components/ui";
 import { useMyRecipes } from "../../hooks/useMyRecipes";
-import { RecipeCard } from "../../components/RecipeCard2";
+import { RecipeCard2 } from "../../components/RecipeCard2";
 import styles from "./MyRecipesPage.module.css";
 import Link from "next/link";
 
@@ -70,7 +70,7 @@ export function MyRecipesPage() {
       {/* ── Grille ── */}
       <div className={styles.grid}>
         {recipes.map((recipe) => (
-          <RecipeCard key={recipe.id} recipe={recipe} />
+          <RecipeCard2 key={recipe.id} recipe={recipe} />
         ))}
       </div>
 

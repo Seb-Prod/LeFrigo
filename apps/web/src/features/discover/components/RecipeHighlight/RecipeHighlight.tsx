@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { TbClock, TbUsers } from "react-icons/tb";
 import { useRecentRecipes } from "@/features/recipes/hooks/useRecentRecipes";
+import { RecipeCard } from "@/features/recipes";
 
 /**
  * Section "Dernières recettes" de la page découverte.
@@ -36,40 +37,7 @@ export function RecipeHighlight() {
               <div key={i} className={styles.skeleton} />
             ))
           : recipes.map((recipe) => {
-              const totalTime =
-                (recipe.preparationTime ?? 0) + (recipe.cookingTime ?? 0);
-
-              return (
-                <Link
-                  key={recipe.id}
-                  href={`/recipes/${recipe.id}`}
-                  className={styles.card}
-                >
-                  {/* ── Thumbnail ── */}
-                  <div className={styles.thumb}>
-                      <div className={styles.placeholder}>
-                        <span className={styles.placeholderIcon}>🍽️</span>
-                      </div>
-                  </div>
-
-                  {/* ── Infos ── */}
-                  <div className={styles.info}>
-                    <Text className={styles.name}>{recipe.name}</Text>
-                    <div className={styles.meta}>
-                      {totalTime > 0 && (
-                        <span className={styles.metaItem}>
-                          <TbClock /> {totalTime} min
-                        </span>
-                      )}
-                      {recipe.servings && (
-                        <span className={styles.metaItem}>
-                          <TbUsers /> {recipe.servings}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </Link>
-              );
+              return <RecipeCard key={recipe.id} recipe={recipe}/>
             })}
       </div>
     </section>

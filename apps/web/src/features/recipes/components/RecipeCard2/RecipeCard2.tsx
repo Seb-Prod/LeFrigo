@@ -12,7 +12,7 @@ type Props = {
  *
  * Affiche : nom, description, temps de cuisson, portions, auteur.
  */
-export function RecipeCard({ recipe }: Props) {
+export function RecipeCard2({ recipe }: Props) {
   const totalTime = (recipe.preparationTime ?? 0) + (recipe.cookingTime ?? 0);
 
   return (

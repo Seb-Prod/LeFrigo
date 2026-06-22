@@ -27,6 +27,7 @@ export const recipeInfoSchema = z.object({
   preparationTime: z.number().int().nonnegative().optional(),
   cookingTime:     z.number().int().nonnegative().optional(),
   servings:        z.number().int().positive().optional(),
+  imageUrl:     z.string().trim().max(1000).optional(),
 });
 
 /** Étape 2 — Ingrédients */
