@@ -10,3 +10,4 @@ export { RecipeCardCompact } from "./components/cards/RecipeCardCompact";
 
 /** Skeleton Cards */
 export { RecipeCardSkeleton } from "./components/cards/RecipeCardSkeleton";
+export { RecipeCardCompactSkeleton} from "./components/cards/RecipeCardCompactSkeleton"

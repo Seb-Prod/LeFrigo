@@ -1,0 +1,1 @@
+export { RecipeCardCompactSkeleton } from "./RecipeCardCompactSkeleton";

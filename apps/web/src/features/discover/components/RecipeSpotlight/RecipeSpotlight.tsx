@@ -1,7 +1,7 @@
 "use client";
 
 import { Heading } from "@/components/ui";
-import { RecipeCardCompact, RecipeCardSkeleton } from "@/features/recipes";
+import { RecipeCardCompact, RecipeCardCompactSkeleton } from "@/features/recipes";
 import { useRandomRecipes } from "@/features/recipes/";
 
 import styles from "./RecipeSpotlight.module.css";
@@ -41,7 +41,7 @@ export function RecipeSpotlight() {
       <div className={styles.grid}>
         {loading
           ? Array.from({ length: 5 }).map((_, i) => (
-              <RecipeCardSkeleton key={i} />
+              <RecipeCardCompactSkeleton key={i} />
             ))
           : recipes.map((recipe) => (
               <RecipeCardCompact key={recipe.id} recipe={recipe} />
