@@ -1,0 +1,52 @@
+/* ── Skeleton ─────────────────────────────────────────────── */
+
+/* Hero en attente — même hauteur que le vrai hero */
+.heroSkeleton {
+  background: var(--color-surface-sunken);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+/* Barre de méta skeleton */
+.skeletonMeta {
+  height: 2.5rem;
+  width: 60%;
+  border-radius: var(--radius-md, 8px);
+  background: var(--color-surface-raised);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+/* Bloc texte skeleton (description / ingrédients) */
+.skeletonBlock {
+  height: 6rem;
+  border-radius: var(--radius-md, 8px);
+  background: var(--color-surface-raised);
+  animation: pulse 1.4s ease-in-out infinite;
+  animation-delay: 0.1s;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.45; }
+}
+
+/* ── Erreur ───────────────────────────────────────────────── */
+
+.errorText {
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}
+
+.errorBack {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1rem;
+  color: var(--color-aubergine, var(--color-accent));
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.errorBack:hover {
+  text-decoration: underline;
+}

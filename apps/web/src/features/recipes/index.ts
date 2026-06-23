@@ -1,4 +1,6 @@
+/** Pages */
 export { CreateRecipePage } from "./pages/CreateRecipePage";
+export { RecipePage } from "./pages/RecipePage";
 
 /** Hooks */
 export { useRandomRecipes } from "./hooks/useRandomRecipes";
@@ -10,4 +12,4 @@ export { RecipeCardCompact } from "./components/cards/RecipeCardCompact";
 
 /** Skeleton Cards */
 export { RecipeCardSkeleton } from "./components/cards/RecipeCardSkeleton";
-export { RecipeCardCompactSkeleton} from "./components/cards/RecipeCardCompactSkeleton"
+export { RecipeCardCompactSkeleton } from "./components/cards/RecipeCardCompactSkeleton";
