@@ -2,7 +2,7 @@ import clsx from "clsx";
 import styles from "./Text.module.css";
 
 type Props = {
-  as?: "p" | "span" | "label";
+  as?: "p" | "span" | "label" | "div";
   size?: "sm" | "md" | "lg" | "xl";
   variant?: "default" | "secondary" | "muted" | "danger";
   align?: "left" | "center" | "right" | "justify";

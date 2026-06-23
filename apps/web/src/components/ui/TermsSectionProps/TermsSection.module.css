@@ -1,0 +1,37 @@
+/* ── Section principale (h2) ────────────────────────────────── */
+
+.sectionTop {
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);  /* séparateur visuel entre articles */
+}
+
+/* ── Sous-section (h3) ───────────────────────────────────────── */
+
+.sectionSub {
+  padding-left: 1rem;                          /* indentation hiérarchique */
+  border-left: 2px solid var(--color-border);  /* repère visuel de niveau */
+  margin-top: 1rem;
+}
+
+/* ── Titre ───────────────────────────────────────────────────── */
+
+.title {
+  margin-bottom: 0.5rem;
+}
+
+/* ── Corps ───────────────────────────────────────────────────── */
+
+/* div plutôt que p pour accepter ul/ol imbriqués sans erreur HTML */
+.body {
+  line-height: 1.7;
+}
+
+/* Listes imbriquées dans le contenu juridique */
+.body ul,
+.body ol {
+  margin-top: 0.5rem;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}

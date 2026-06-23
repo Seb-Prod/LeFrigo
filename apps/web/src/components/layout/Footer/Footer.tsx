@@ -5,6 +5,7 @@ import { Logo, Text, Highlight, SocialLink } from "@/components/ui";
 import styles from "./Footer.module.css";
 import { Heading } from "../../ui/Heading/Heading";
 import { NAVIGATION } from "@/lib/navigation";
+import { GoLaw } from "react-icons/go";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -44,6 +45,12 @@ export function Footer() {
                   </li>
                 );
               })}
+              <li>
+                <Link href={"/terms"} className={styles.links}>
+                  <GoLaw />
+                  Conditions Générales d'Utilisation
+                </Link>
+              </li>
             </ul>
           </nav>
         </section>
@@ -55,13 +62,12 @@ export function Footer() {
           <Heading>Développeur</Heading>
 
           <Text>Sébatien Drillaud</Text>
-          
+
           <nav className={styles.socialLinks}>
             <SocialLink social="gitHub" />
             <SocialLink social="linkedin" />
             <SocialLink social="youtube" />
           </nav>
-          
         </section>
       </footer>
 

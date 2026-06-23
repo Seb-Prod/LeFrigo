@@ -11,6 +11,7 @@ import {
 import { TbDevicesQuestion } from "react-icons/tb";
 import { FaUser } from "react-icons/fa";
 import { IconType } from "react-icons";
+import { GoLaw } from "react-icons/go";
 
 /* ── Types ──────────────────────────────────────────────────── */
 
@@ -122,6 +123,13 @@ export const PAGE_CONFIG: PageConfig[] = [
     icon: MdDashboard,
     showBackButton: false,
   },
+  {
+    path: "/terms",
+    title: "CGU",
+    icon: GoLaw,
+    showBackButton: true,
+  }
+
 ];
 
 /* ── Fallback ───────────────────────────────────────────────── */
