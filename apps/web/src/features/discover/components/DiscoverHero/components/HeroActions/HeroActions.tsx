@@ -6,6 +6,8 @@ import { Button } from "@/components/ui";
 import { AuthForm } from "@/features/auth";
 
 import styles from "./HeroActions.module.css";
+import { useDevice } from "@/contexts/device.context";
+import { InstallPrompt } from "@/features/pwa";
 
 /* ── Types ─────────────────────────────────────────────────── */
 
@@ -57,6 +59,9 @@ export function HeroActions() {
         onClose={() => setAuthOpen(false)}
         initialMode={authMode}
       />
+
+      {/* –– Modal d'installation PWA –– */}
+      <InstallPrompt/>
     </>
   );
 }

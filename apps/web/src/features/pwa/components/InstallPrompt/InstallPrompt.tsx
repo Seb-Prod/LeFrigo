@@ -14,11 +14,8 @@ import { InstallPromptOther } from "./InstallPromptOther";
  * - Délègue la logique de détection et de persistance du dismiss à `usePwaInstall`
  */
 export function InstallPrompt() {
-  // TODO: retirer avant merge
-  const FORCE_OS: Os | null = "ios";
-
   const { os: detectedOs, showPrompt, dismiss } = usePwaInstall();
-  const os = FORCE_OS ?? detectedOs;
+  const os = detectedOs;
 
   const OS_CONFIG: Record<
     Os,
