@@ -25,7 +25,7 @@
   inset: -20%;
   z-index: 1;
 
-  background: var(--color-accent-solid);
+  background: var(--color-primary-border);
   border-radius: 42% 58% 65% 35% / 45% 40% 60% 55%;
 
   opacity: 0;
@@ -40,7 +40,7 @@
 /* ── Hover ────────────────────────────────────────────────── */
 
 .link:hover {
-  color: var(--color-text);
+  /* color: var(--color-text); */
 }
 
 .link:hover .blob {

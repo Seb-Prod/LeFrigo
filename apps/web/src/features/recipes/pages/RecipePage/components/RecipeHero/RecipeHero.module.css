@@ -1,0 +1,71 @@
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Image container ───────────────────────────── */
+
+.thumb {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+/* ── Placeholder ─────────────────────────────────────────── */
+
+.placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-neutral-soft);
+}
+
+.placeholderIcon {
+    font-size: 2.5rem;
+    opacity: 0.8;
+}
+
+/* ── Overlay du titre ─────────────────────────── */
+
+.titleOverlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    padding: 1rem;
+
+    display: flex;
+    justify-content: center;
+
+    z-index: 2;
+}
+
+/* effet glassmorphism */
+.titleOverlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: rgba(255, 255, 255, 0.15);
+    background: color-mix(in srgb, var(--color-primary-solid) 20%, transparent);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    z-index: -1;
+}
+
+/* ── Titre ─────────────────────────────────────── */
+
+.name {
+    color: white;
+    font-size: clamp(1.5rem, 2vw + 1rem, 2.5rem);
+    font-weight: 700;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+    margin: 0;
+}

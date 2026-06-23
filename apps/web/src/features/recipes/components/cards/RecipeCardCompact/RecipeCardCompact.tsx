@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./RecipeCardCompact.module.css";
 import { Text } from "@/components/ui";
+import { getRandomDevImage } from "@/helpers/getRandomDevImage";
 
 /* ── Types ─────────────────────────────────────────────────── */
 
@@ -20,13 +21,16 @@ type Props = {
  * Cliquable — navigue vers `/recipes/:id`.
  */
 export function RecipeCardCompact({ recipe }: Props) {
+
+  const imageSrc = recipe.imageUrl || getRandomDevImage();
+
   return (
     <Link href={`/recipes/${recipe.id}`} className={styles.card}>
       {/* ── Thumbnail ── */}
       <div className={styles.thumb}>
-        {recipe.imageUrl ? (
+        {imageSrc ? (
           <Image
-            src={recipe.imageUrl}
+            src={imageSrc}
             alt={recipe.name}
             fill
             sizes="(max-width: 768px) 100vw, 200px"

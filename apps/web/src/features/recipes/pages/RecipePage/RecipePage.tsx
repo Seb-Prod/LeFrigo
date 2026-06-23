@@ -3,9 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { TbArrowLeft, TbClock, TbFlame, TbUsers } from "react-icons/tb";
-import { ErrorState, Text } from "@/components/ui";
+import { ErrorState, Surface, Text } from "@/components/ui";
 import { useRecipe } from "@/features/recipes/hooks/useRecipe";
 import styles from "./RecipePage.module.css";
+import { RecipeHero } from "./components";
+import { getRandomDevImage } from "@/helpers/getRandomDevImage";
 
 /* ── Types ─────────────────────────────────────────────────── */
 
@@ -59,33 +61,12 @@ export function RecipePage({ recipeId }: Props) {
   /** Temps total : préparation + cuisson */
   const totalTime = (recipe.preparationTime ?? 0) + (recipe.cookingTime ?? 0);
 
+  const imageSrc = recipe.imageUrl || getRandomDevImage();
+
   return (
-    <div className={styles.page}>
+    <Surface fullScreen>
       {/* ── Hero ── */}
-      <div className={styles.hero}>
-        {recipe.imageUrl ? (
-          <Image
-            src={recipe.imageUrl}
-            alt={recipe.name}
-            fill
-            priority
-            sizes="100vw"
-            style={{ objectFit: "cover" }}
-          />
-        ) : (
-          <div className={styles.heroPlaceholder}>
-            <span className={styles.heroEmoji}>🍽️</span>
-          </div>
-        )}
-        <div className={styles.heroOverlay} />
-
-        <Link href="/recipes" className={styles.back}>
-          <TbArrowLeft />
-          <span>Retour</span>
-        </Link>
-
-        <h1 className={styles.heroTitle}>{recipe.name}</h1>
-      </div>
+      <RecipeHero imageUrl={imageSrc} name={recipe.name} />
 
       {/* ── Contenu ── */}
       <div className={styles.content}>
@@ -173,6 +154,6 @@ export function RecipePage({ recipeId }: Props) {
           </Text>
         </footer>
       </div>
-    </div>
+    </Surface>
   );
 }

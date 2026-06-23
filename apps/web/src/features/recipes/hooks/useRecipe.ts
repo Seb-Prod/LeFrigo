@@ -17,7 +17,7 @@ type DevState = "normal" | "loading" | "error";
 /* ── Constante de développement ──────────────────────────────── */
 
 /** Changer cette valeur pour simuler un état particulier en dev */
-const DEV_STATE: DevState = "error";
+const DEV_STATE: DevState = "normal";
 
 /* ── Hook ───────────────────────────────────────────────────── */
 

@@ -4,6 +4,7 @@ import Image from "next/image";
 import styles from "./RecipeCard.module.css";
 import { TbClock, TbUsers } from "react-icons/tb";
 import { Text } from "@/components/ui";
+import { getRandomDevImage } from "@/helpers/getRandomDevImage";
 
 /* ── Types ─────────────────────────────────────────────────── */
 
@@ -23,13 +24,15 @@ type Props = {
 export function RecipeCard({ recipe }: Props) {
   const totalTime = (recipe.preparationTime ?? 0) + (recipe.cookingTime ?? 0);
 
+  const imageSrc = recipe.imageUrl || getRandomDevImage();
+
   return (
     <Link href={`/recipes/${recipe.id}`} className={styles.card}>
       {/* ── Thumbnail ── */}
       <div className={styles.thumb}>
-        {recipe.imageUrl ? (
+        {imageSrc ? (
           <Image
-            src={recipe.imageUrl}
+            src={imageSrc}
             alt={recipe.name}
             fill
             sizes="(max-width: 768px) 100vw, 200px"

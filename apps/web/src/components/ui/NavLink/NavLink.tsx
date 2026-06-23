@@ -10,6 +10,7 @@ import styles from "./NavLink.module.css";
 type Props = {
   href: string;
   label: string;
+  activeStyle?: boolean;
 };
 
 /** Représente une vague de clic positionnée au point de contact */
@@ -27,9 +28,9 @@ type Ripple = {
  * - Click : une onde (ripple) se propage depuis le point de contact
  * Utilisé par Topbar et Sidebar.
  */
-export function NavLink({ href, label }: Props) {
+export function NavLink({ href, label, activeStyle = false }: Props) {
   const pathname = usePathname();
-  const active = isActivePath(pathname, href);
+  const active = isActivePath(pathname, href) || activeStyle;
 
   const [ripples, setRipples] = useState<Ripple[]>([]);
   /** Compteur pour générer des clés uniques de ripple */

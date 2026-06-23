@@ -1,7 +1,12 @@
-import Link from "next/link";
 import { Text } from "../Text";
 import styles from "./ErrorState.module.css";
 import { Surface } from "../Surface";
+import { TbError404 } from "react-icons/tb";
+import { Logo } from "../Logo";
+import { Heading } from "../Heading/Heading";
+import { NavLink } from "../NavLink";
+
+/* ── Types ──────────────────────────────────────────────────── */
 
 type Props = {
   title?: string;
@@ -10,23 +15,40 @@ type Props = {
   actionHref?: string;
 };
 
+/**
+ * Écran d'erreur plein écran.
+ *
+ * États visuels :
+ * - Titre absent     : fallback "Une erreur est survenue"
+ * - Action absente   : lien retour vers "/"  avec label "Accueil"
+ * - Action présente  : lien et label personnalisés
+ */
 export function ErrorState({
   title = "Une erreur est survenue",
   message,
-  actionLabel,
-  actionHref,
+  actionLabel = "Accueil",
+  actionHref = "/",
 }: Props) {
   return (
     <Surface fullScreen>
-      <span className={styles.icon}>⚠️</span>
+      <div className={styles.content}>
 
-      <h2 className={styles.title}>{title}</h2>
+        {/* ── En-tête ── */}
+        <div className={styles.header}>
+          <Logo size="lg" display="both" />
+          <span className={styles.icon} aria-hidden="true">
+            <TbError404 />
+          </span>
+        </div>
 
-      <Text>{message}</Text>
+        {/* ── Message ── */}
+        <Heading size="lg" className={styles.title}>{title}</Heading>
+        <Text size="lg">{message}</Text>
 
-      {actionLabel && actionHref && (
-        <Link href={actionHref}>{actionLabel}</Link>
-      )}
+        {/* ── Action ── */}
+        <NavLink href={actionHref} label={actionLabel} activeStyle/>
+
+      </div>
     </Surface>
   );
 }
