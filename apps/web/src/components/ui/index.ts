@@ -1,3 +1,4 @@
+import { ErrorState } from "./ErrorState/ErrorState";
 export { Alert } from "./Alert";
 export { Avatar } from "./Avatar";
 
@@ -12,6 +13,8 @@ export * from "./Checkbox";
 export { ConfirmDialog } from "./ConfirmDialog";
 
 export { DevCredit } from "./DevCredit";
+
+export { ErrorState } from "./ErrorState";
 
 export { FormCard } from "./FormCard";
 

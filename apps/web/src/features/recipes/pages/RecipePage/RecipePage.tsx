@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { TbArrowLeft, TbClock, TbFlame, TbUsers } from "react-icons/tb";
-import { Text } from "@/components/ui";
+import { ErrorState, Text } from "@/components/ui";
 import { useRecipe } from "@/features/recipes/hooks/useRecipe";
 import styles from "./RecipePage.module.css";
 
@@ -45,14 +45,12 @@ export function RecipePage({ recipeId }: Props) {
   /* ── État erreur ── */
   if (state.status === "error") {
     return (
-      <div className={styles.page}>
-        <div className={styles.content}>
-          <Text className={styles.errorText}>{state.message}</Text>
-          <Link href="/recipes" className={styles.errorBack}>
-            <TbArrowLeft /> Retour aux recettes
-          </Link>
-        </div>
-      </div>
+      <ErrorState
+        title="Recette introuvable"
+        message={state.message}
+        actionLabel="Retour aux recettes"
+        actionHref="/recipes"
+      />
     );
   }
 
@@ -63,7 +61,6 @@ export function RecipePage({ recipeId }: Props) {
 
   return (
     <div className={styles.page}>
-
       {/* ── Hero ── */}
       <div className={styles.hero}>
         {recipe.imageUrl ? (
@@ -92,14 +89,15 @@ export function RecipePage({ recipeId }: Props) {
 
       {/* ── Contenu ── */}
       <div className={styles.content}>
-
         {/* ── Méta-infos ── */}
         <div className={styles.meta}>
           {recipe.preparationTime != null && recipe.preparationTime > 0 && (
             <div className={styles.metaItem}>
               <TbClock className={styles.metaIcon} />
               <span className={styles.metaLabel}>Préparation</span>
-              <span className={styles.metaValue}>{recipe.preparationTime} min</span>
+              <span className={styles.metaValue}>
+                {recipe.preparationTime} min
+              </span>
             </div>
           )}
           {recipe.cookingTime != null && recipe.cookingTime > 0 && (
@@ -174,7 +172,6 @@ export function RecipePage({ recipeId }: Props) {
             Recette ajoutée par <strong>{recipe.user.userName}</strong>
           </Text>
         </footer>
-
       </div>
     </div>
   );
