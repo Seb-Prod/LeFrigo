@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDebounce } from "@/hooks";
+import { useDebounce } from "@/hooks/useDebounce";
 import {
   recipeService,
   IngredientSuggestion,

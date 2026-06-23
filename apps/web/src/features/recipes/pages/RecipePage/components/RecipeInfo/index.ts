@@ -1,2 +1,1 @@
-export { RecipeHero } from "./RecipeHero";
 export { RecipeInfo } from "./RecipeInfo";

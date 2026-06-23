@@ -5,7 +5,7 @@ import styles from "./Surface.module.css";
 import { Heading } from "../Heading";
 import { useDevice } from "@/contexts/device.context";
 import { ButtonPrev } from "../ButtonIcon";
-import { useBack } from "@/hooks";
+import { useBack } from "@/hooks/useBack";
 import { usePathname } from "next/navigation";
 import { getPageConfig } from "@/lib/navigation";
 import { Logo } from "../Logo";

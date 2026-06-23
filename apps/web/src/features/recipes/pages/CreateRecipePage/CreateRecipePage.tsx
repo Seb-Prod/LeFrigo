@@ -6,7 +6,7 @@ import { RecipeFormStep3 } from "../../components/forms/RecipeFormStep3";
 import { useCreateRecipe } from "../../hooks/useCreateRecipe";
 import { Alert, Button, FormCard } from "@/components/ui";
 import { TbChefHat } from "react-icons/tb";
-import { useBack } from "@/hooks";
+import { useBack } from "@/hooks/useBack";
 import { RecipeStepper } from "../../components/forms/RecipeStepper";
 
 /**

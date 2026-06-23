@@ -1,0 +1,88 @@
+/* ── Conteneur principal ───────────────────────────────── */
+
+.meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+    gap: var(--space-sm);
+}
+
+/* ── Carte d'information ──────────────────────────────── */
+
+.metaItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+
+    padding: var(--space-xs);
+
+    background: var(--color-surface);
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: var(--radius-lg);
+
+    box-shadow:var(--shadow-lg);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.metaItem:hover {
+    transform: translateY(-2px);
+    box-shadow:var(--shadow-md);
+}
+
+/* ── Variante temps total ────────────────────────────── */
+
+.metaItemTotal {
+    background: var(--color-primary-border);
+
+    border-color: transparent;
+}
+
+/* ── Icône ───────────────────────────────────────────── */
+
+.metaIcon {
+    font-size: 1.5rem;
+    color: var(--color-primary);
+}
+
+/* ── Libellé ─────────────────────────────────────────── */
+
+.metaLabel {
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+
+    color: var(--color-text-secondary);
+}
+
+/* ── Valeur ──────────────────────────────────────────── */
+
+.metaValue {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-text);
+}
+
+/* ── Responsive mobile ───────────────────────────────── */
+
+@media (max-width: 640px) {
+    .meta {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .metaItem {
+        padding: var(--space-xs);
+    }
+
+    .metaIcon {
+        font-size: 1rem;
+    }
+
+    .metaValue {
+        font-size: 1rem;
+    }
+}

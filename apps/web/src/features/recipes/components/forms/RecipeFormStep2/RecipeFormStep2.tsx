@@ -3,7 +3,7 @@
 import { useState, useCallback } from "react";
 import { FormCard } from "@/components/ui";
 import { IngredientAutocomplete } from "@/components/ui/IngredientAutocomplete";
-import { useFormErrors } from "@/hooks";
+import { useFormErrors } from "@/hooks/useFormErrors";
 import {
   recipeIngredientsSchema,
   RecipeIngredientDto,

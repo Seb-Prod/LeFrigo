@@ -1,5 +1,5 @@
 import { useAuth } from "@/contexts/auth.context";
-import { useFormErrors } from "@/hooks";
+import { useFormErrors } from "@/hooks/useFormErrors";
 import { useState } from "react";
 import { authService } from "../services/auth.service";
 import {

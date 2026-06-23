@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { useFormErrors } from "@/hooks";
+import { useFormErrors } from "@/hooks/useFormErrors";
 import { ZodSchema, zodErrorsToRecord } from "@lefrigo/shared";
 
 type Status = "idle" | "loading" | "success";

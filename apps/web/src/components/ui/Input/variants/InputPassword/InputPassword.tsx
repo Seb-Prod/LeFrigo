@@ -1,3 +1,5 @@
+"use client"
+
 import { useState } from "react";
 import { Input } from "../../Input";
 import { FiLock, FiEye, FiEyeOff } from "react-icons/fi";

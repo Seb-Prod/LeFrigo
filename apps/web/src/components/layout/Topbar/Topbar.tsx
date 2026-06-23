@@ -10,7 +10,7 @@ import {
   NavLink,
   ConfirmDialog,
 } from "@/components/ui";
-import { useBack } from "@/hooks";
+import { useBack } from "@/hooks/useBack";
 import { NAVIGATION } from "@/lib/navigation";
 import { LogoutButton } from "@/features/auth";
 import { useAuth } from "@/contexts/auth.context";

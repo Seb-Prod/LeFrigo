@@ -1,3 +1,5 @@
+"use client"
+
 import { useState } from "react";
 import styles from "./InputNumber.module.css";
 import { ButtonAdd, ButtonRemove } from "../ButtonIcon";

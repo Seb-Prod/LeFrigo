@@ -6,7 +6,7 @@ import {
   zodErrorsToRecord,
 } from "@lefrigo/shared";
 import { useState } from "react";
-import { useFormErrors } from "@/hooks";
+import { useFormErrors } from "@/hooks/useFormErrors";
 import styles from "./RecipeFormStep1.module.css";
 import { FaAlignLeft, FaUtensils } from "react-icons/fa";
 

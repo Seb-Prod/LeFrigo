@@ -1,4 +1,6 @@
-import { useBack } from "@/hooks";
+"use client"
+
+import { useBack } from "@/hooks/useBack";
 import { ButtonPrev } from "../ButtonIcon";
 import { Heading } from "../Heading";
 import { Text } from "../Text";

@@ -1,7 +1,7 @@
 import { Alert, Button, FormCard, InputPassword } from "@/components/ui";
 import { TbLockCheck, TbLockQuestion } from "react-icons/tb";
 import { useChangePassword } from "./useChangePassword";
-import { useBack } from "@/hooks";
+import { useBack } from "@/hooks/useBack";
 
 /**
  * Formulaire de changement de mot de passe pour un utilisateur connecté.

@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { authService } from "../services/auth.service";
 import { resetPasswordSchema, zodErrorsToRecord } from "@lefrigo/shared";
-import { useFormErrors } from "@/hooks";
+import { useFormErrors } from "@/hooks/useFormErrors";
 
 /* ── Types ────────────────────────────────────────────────── */
 

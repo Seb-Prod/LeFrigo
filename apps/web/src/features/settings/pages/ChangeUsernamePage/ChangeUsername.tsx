@@ -3,7 +3,7 @@
 import { Alert, Button, FormCard, InputUserName } from "@/components/ui";
 import { TbLockCheck, TbLockQuestion, TbUserQuestion } from "react-icons/tb";
 import { useChangeUsername } from "./useChangeUsername";
-import { useBack } from "@/hooks";
+import { useBack } from "@/hooks/useBack";
 
 export function ChangeUsername() {
   const {

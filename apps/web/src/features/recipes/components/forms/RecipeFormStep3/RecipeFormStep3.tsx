@@ -3,7 +3,7 @@
 import { useState, useCallback } from "react";
 import { TbPlus, TbPencilPlus } from "react-icons/tb";
 import { FormCard, Button, TextArea } from "@/components/ui";
-import { useFormErrors } from "@/hooks";
+import { useFormErrors } from "@/hooks/useFormErrors";
 import {
   recipeStepsSchema,
   RecipeStepsDto,

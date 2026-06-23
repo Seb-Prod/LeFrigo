@@ -6,7 +6,7 @@ import { TbArrowLeft, TbClock, TbFlame, TbUsers } from "react-icons/tb";
 import { ErrorState, Surface, Text } from "@/components/ui";
 import { useRecipe } from "@/features/recipes/hooks/useRecipe";
 import styles from "./RecipePage.module.css";
-import { RecipeHero } from "./components";
+import { RecipeHero, RecipeInfo } from "./components";
 import { getRandomDevImage } from "@/helpers/getRandomDevImage";
 
 /* ── Types ─────────────────────────────────────────────────── */
@@ -65,43 +65,12 @@ export function RecipePage({ recipeId }: Props) {
 
   return (
     <Surface fullScreen>
-      {/* ── Hero ── */}
       <RecipeHero imageUrl={imageSrc} name={recipe.name} />
+      <RecipeInfo preparationTime={recipe.preparationTime} cookingTime={recipe.cookingTime} servings={recipe.servings}/>
 
       {/* ── Contenu ── */}
       <div className={styles.content}>
-        {/* ── Méta-infos ── */}
-        <div className={styles.meta}>
-          {recipe.preparationTime != null && recipe.preparationTime > 0 && (
-            <div className={styles.metaItem}>
-              <TbClock className={styles.metaIcon} />
-              <span className={styles.metaLabel}>Préparation</span>
-              <span className={styles.metaValue}>
-                {recipe.preparationTime} min
-              </span>
-            </div>
-          )}
-          {recipe.cookingTime != null && recipe.cookingTime > 0 && (
-            <div className={styles.metaItem}>
-              <TbFlame className={styles.metaIcon} />
-              <span className={styles.metaLabel}>Cuisson</span>
-              <span className={styles.metaValue}>{recipe.cookingTime} min</span>
-            </div>
-          )}
-          {recipe.servings != null && (
-            <div className={styles.metaItem}>
-              <TbUsers className={styles.metaIcon} />
-              <span className={styles.metaLabel}>Portions</span>
-              <span className={styles.metaValue}>{recipe.servings}</span>
-            </div>
-          )}
-          {totalTime > 0 && (
-            <div className={[styles.metaItem, styles.metaItemTotal].join(" ")}>
-              <span className={styles.metaLabel}>Total</span>
-              <span className={styles.metaValue}>{totalTime} min</span>
-            </div>
-          )}
-        </div>
+        
 
         {/* ── Description ── */}
         {recipe.description && (
