@@ -11,7 +11,7 @@ import {
   MdSettings,
 } from "react-icons/md";
 import clsx from "clsx";
-import { NAVIGATION } from "@/lib/navigation/navigation";
+import { NAVIGATION } from "@/lib/navigation";
 
 /* ── Définition des liens de navigation ──────────────────── */
 const links = [

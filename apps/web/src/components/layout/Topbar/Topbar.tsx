@@ -11,7 +11,7 @@ import {
   ConfirmDialog,
 } from "@/components/ui";
 import { useBack } from "@/hooks";
-import { NAVIGATION } from "@/lib/navigation/navigation";
+import { NAVIGATION } from "@/lib/navigation";
 import { LogoutButton } from "@/features/auth";
 import { useAuth } from "@/contexts/auth.context";
 import { useState } from "react";

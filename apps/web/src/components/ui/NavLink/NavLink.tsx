@@ -4,7 +4,7 @@ import Link from "next/link";
 import clsx from "clsx";
 import { useState, useRef } from "react";
 import { usePathname } from "next/navigation";
-import { isActivePath } from "@/lib/navigation/navigation";
+import { isActivePath } from "@/lib/navigation";
 import styles from "./NavLink.module.css";
 
 type Props = {

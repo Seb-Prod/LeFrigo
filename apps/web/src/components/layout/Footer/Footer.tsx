@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Logo, Text, Highlight, SocialLink } from "@/components/ui";
 import styles from "./Footer.module.css";
 import { Heading } from "../../ui/Heading/Heading";
-import { NAVIGATION } from "@/lib/navigation/navigation";
+import { NAVIGATION } from "@/lib/navigation";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();

@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import clsx from "clsx";
 
 import styles from "./Sidebar.module.css";
-import { NAVIGATION, isActivePath } from "@/lib/navigation/navigation";
+import { NAVIGATION, isActivePath } from "@/lib/navigation";
 import {
   ButtonBurger,
   DevCredit,
