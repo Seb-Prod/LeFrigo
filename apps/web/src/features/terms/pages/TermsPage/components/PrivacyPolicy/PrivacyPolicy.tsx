@@ -191,7 +191,16 @@ export function PrivacyPolicy() {
         <TermsList>
           <li>
             <Highlight>Token de session</Highlight> — maintenir la connexion de
-            l'utilisateur (7 jours)
+            l'utilisateur (cookie, 7 jours)
+          </li>
+          <li>
+            <Highlight>Préférence de thème</Highlight> — mémoriser le mode
+            clair/sombre choisi par l'utilisateur (localStorage, persistant)
+          </li>
+          <li>
+            <Highlight>Invite d'installation</Highlight> — ne pas afficher à
+            nouveau la bannière d'installation de l'application (localStorage,
+            persistant)
           </li>
         </TermsList>
         Aucun cookie publicitaire ou analytique tiers n'est utilisé.
