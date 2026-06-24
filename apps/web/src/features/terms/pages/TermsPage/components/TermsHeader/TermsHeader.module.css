@@ -1,0 +1,14 @@
+/* ── En-tête ─────────────────────────────────────────────────── */
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid var(--color-primary-solid);
+}
+
+.meta {
+  color: var(--color-text-muted);
+}

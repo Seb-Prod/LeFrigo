@@ -1,0 +1,1 @@
+export { TermsFooter } from "./TermsFooter";

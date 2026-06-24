@@ -39,6 +39,5 @@ export { Select } from "./Select/Select";
 export { SocialLink } from "./SocialLink";
 export { Surface } from "./Surface";
 
-export { TermsSection } from "./TermsSectionProps";
 export { Text } from "./Text";
 export { TextArea } from "./TextArea";

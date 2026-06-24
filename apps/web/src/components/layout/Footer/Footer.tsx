@@ -48,7 +48,7 @@ export function Footer() {
               <li>
                 <Link href={"/terms"} className={styles.links}>
                   <GoLaw />
-                  Conditions Générales d'Utilisation
+                  Conditions Générales d&apos;Utilisation
                 </Link>
               </li>
             </ul>

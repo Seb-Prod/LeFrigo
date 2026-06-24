@@ -1,0 +1,1 @@
+export { TermsHeader } from "./TermsHeader";

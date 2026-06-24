@@ -1,0 +1,16 @@
+.document {
+  display: flex;
+  flex-direction: column;
+  padding-block: 2rem;
+}
+
+/* Titre de chaque document (CGU / Confidentialité) */
+.documentTitle {
+  margin-bottom: 0.25rem;
+}
+
+/* Note RGPD sous le titre de la politique de confidentialité */
+.rgpdNote {
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+}

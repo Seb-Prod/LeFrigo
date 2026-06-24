@@ -1,0 +1,7 @@
+/* –– Note –––––––––––––––––––––––––––––––––––––––––––––––––––––– */
+.note {
+  background-color: var(--color-accent-solid);
+  padding: var(--space-md);
+  color: var(--color-accent-solid-text);
+  border-radius: var(--radius-md);
+}

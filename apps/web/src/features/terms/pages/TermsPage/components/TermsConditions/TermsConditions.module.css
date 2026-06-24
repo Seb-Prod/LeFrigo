@@ -1,0 +1,10 @@
+.document {
+  display: flex;
+  flex-direction: column;
+  padding-block: 2rem;
+}
+
+/* Titre de chaque document (CGU / Confidentialité) */
+.documentTitle {
+  margin-bottom: 0.25rem;
+}

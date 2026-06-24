@@ -1,15 +1,16 @@
 /* ── Section principale (h2) ────────────────────────────────── */
 
 .sectionTop {
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--color-border);  /* séparateur visuel entre articles */
+  margin-top: var(--space-md);
+  padding-top: var(--space-xs);
+  border-top: 1px solid var(--color-primary-border);  /* séparateur visuel entre articles */
 }
 
 /* ── Sous-section (h3) ───────────────────────────────────────── */
 
 .sectionSub {
   padding-left: 1rem;                          /* indentation hiérarchique */
-  border-left: 2px solid var(--color-border);  /* repère visuel de niveau */
+  border-left: 4px solid var(--color-primary-solid);  /* repère visuel de niveau */
   margin-top: 1rem;
 }
 

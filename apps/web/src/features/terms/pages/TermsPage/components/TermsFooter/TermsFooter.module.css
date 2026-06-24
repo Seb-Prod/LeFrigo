@@ -1,0 +1,11 @@
+/* ── Pied de page ────────────────────────────────────────────── */
+
+.footer {
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-primary-solid);
+  margin-top: 1rem;
+}
+
+.footerText {
+  color: var(--color-text-muted);
+}

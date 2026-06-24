@@ -1,0 +1,1 @@
+export { TermsNote } from "./TermsNote";
