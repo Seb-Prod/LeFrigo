@@ -7,18 +7,18 @@
     margin-bottom: var(--space-lg);
 }
 
-/* –– Footer –––––––––––––––––––––––––––––––––––––––––––––––––––– */
-.footer{
+/* ── Footer ──────────────────────────────────────────────────── */
+
+.footer {
     display: flex;
     align-items: center;
-    justify-content: right;
+    justify-content: flex-end;
     gap: var(--space-md);
     margin-top: var(--space-md);
 }
 
 /* ── Liste de pills ──────────────────────────────────────────── */
 
-/* Colonne unique sur grand écran */
 .ingredientList {
     display: flex;
     flex-direction: column;
@@ -30,7 +30,6 @@
 
 /* ── Pill ────────────────────────────────────────────────────── */
 
-/* Conteneur pill : nom à gauche, quantité à droite */
 .ingredientItem {
     display: flex;
     align-items: center;
@@ -42,7 +41,6 @@
     background: var(--color-surface);
 }
 
-/* Nom tronqué si trop long */
 .ingredientName {
     font-size: var(--text-sm);
     white-space: nowrap;
@@ -50,7 +48,6 @@
     text-overflow: ellipsis;
 }
 
-/* Quantité en muted, ne rétrécit jamais */
 .ingredientQty {
     font-size: var(--text-sm);
     color: var(--color-text-muted);
@@ -59,10 +56,69 @@
     flex-shrink: 0;
 }
 
-/* Grille fluide sur mobile */
+/* ── Animation Skeleton ─────────────────────────────────────── */
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+}
+
+/* ── Skeleton ───────────────────────────────────────────────── */
+
+.skeletonContent {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.skeletonTitle,
+.skeletonPill,
+.skeletonFooter {
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
+    animation: pulse 1.6s ease-in-out infinite;
+}
+
+.skeletonTitle {
+    width: 180px;
+    height: 32px;
+}
+
+.skeletonGrid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.skeletonPill {
+    height: 44px;
+    width: 100%;
+}
+
+.skeletonFooter {
+    width: 180px;
+    height: 40px;
+    margin-left: auto;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+
 @media (max-width: 768px) {
-    .ingredientList {
+
+    .ingredientList,
+    .skeletonGrid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+
+    .skeletonPill {
+        min-height: 44px;
     }
 }

@@ -14,10 +14,13 @@ type State =
 /** États de forçage disponibles en développement uniquement */
 type DevState = "normal" | "loading" | "error";
 
-/* ── Constante de développement ──────────────────────────────── */
+/* ── Constantes de développement ────────────────────────────── */
 
 /** Changer cette valeur pour simuler un état particulier en dev */
 const DEV_STATE: DevState = "normal";
+
+/** Délai artificiel en ms avant de retourner le résultat réel (0 = désactivé) */
+const DEV_DELAY_MS = 20000;
 
 /* ── Hook ───────────────────────────────────────────────────── */
 
@@ -34,6 +37,8 @@ const DEV_STATE: DevState = "normal";
  *   (flag `cancelled`) et `loading` est retourné immédiatement.
  * - En développement, `DEV_STATE` permet de forcer un état visuel
  *   sans modifier la logique de fetch.
+ * - En développement, `DEV_DELAY_MS` ajoute un délai artificiel
+ *   pour tester les skeletons et états de chargement.
  */
 export function useRecipe(id: string): State {
   /* ── État interne ────────────────────────────────────────── */
@@ -49,6 +54,12 @@ export function useRecipe(id: string): State {
     async function loadRecipe() {
       try {
         const recipe = await recipeService.getById(id);
+
+        /* Délai artificiel en dev pour tester les skeletons */
+        if (process.env.NODE_ENV === "development" && DEV_DELAY_MS > 0) {
+          await new Promise((resolve) => setTimeout(resolve, DEV_DELAY_MS));
+        }
+
         if (cancelled) return;
         setState({ status: "success", id, recipe });
       } catch {

@@ -4,7 +4,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
-  
 }
 
 /* ── Liste ───────────────────────────────────────────────────── */
@@ -17,7 +16,6 @@
 
 /* ── Étape ───────────────────────────────────────────────────── */
 
-/* Numéro et instruction alignés horizontalement */
 .stepItem {
   display: flex;
   align-items: baseline;
@@ -25,15 +23,87 @@
   padding: var(--space-md);
 }
 
-/* Séparateur fin entre chaque étape, sauf la dernière */
 .stepItem + .stepItem {
   border-top: 1px solid var(--color-border);
 }
-
 
 /* ── Instruction ─────────────────────────────────────────────── */
 
 .stepInstruction {
   color: var(--color-text);
   margin: 0;
+}
+
+/* ── Pulse ───────────────────────────────────────────────────── */
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* ── Skeleton ───────────────────────────────────────────────── */
+
+.skeletonTitle,
+.skeletonBadge,
+.skeletonText {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+.skeletonTitle {
+  width: 220px;
+  height: 32px;
+}
+
+.skeletonList {
+  display: flex;
+  flex-direction: column;
+}
+
+.skeletonItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+}
+
+.skeletonItem + .skeletonItem {
+  border-top: 1px solid var(--color-border);
+}
+
+.skeletonBadge {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.skeletonText {
+  width: 100%;
+  height: 24px;
+}
+
+/* Variations de largeur pour un rendu plus naturel */
+
+.skeletonItem:nth-child(2) .skeletonText {
+  width: 85%;
+}
+
+.skeletonItem:nth-child(3) .skeletonText {
+  width: 70%;
+}
+
+.skeletonItem:nth-child(4) .skeletonText {
+  width: 90%;
+}
+
+.skeletonItem:nth-child(5) .skeletonText {
+  width: 60%;
 }

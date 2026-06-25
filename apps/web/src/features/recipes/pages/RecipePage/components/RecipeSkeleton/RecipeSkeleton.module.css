@@ -1,0 +1,47 @@
+/* ── Pulse ───────────────────────────────────────────────────── */
+
+/* Animation partagée par toutes les zones skeleton */
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* Mixin appliqué à chaque zone via la classe de base */
+.hero,
+.meta,
+.block {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+/* ── Hero ────────────────────────────────────────────────────── */
+
+/* Reproduit les proportions du RecipeHero */
+.hero {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-md);
+}
+
+/* ── Ligne ingrédients + étapes ─────────────────────────────── */
+
+.ligne {
+  display: grid;
+  grid-template-columns: 1fr 3fr;       /* ingrédients 1/3 — étapes 2/3 */
+  gap: var(--space-md);
+  align-items: start;                    /* chaque colonne à sa propre hauteur */
+}
+
+@media (max-width: 768px) {
+  .ligne {
+    grid-template-columns: 1fr;          /* empilés sur mobile */
+  }
+}

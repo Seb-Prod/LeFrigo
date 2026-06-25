@@ -53,3 +53,55 @@
   background: var(--color-error-subtle);
   color: var(--color-error);
 }
+
+/* ── Pulse ───────────────────────────────────────────────────── */
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* ── Skeleton ───────────────────────────────────────────────── */
+
+.skeletonRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.skeletonAuthor,
+.skeletonBadge,
+.skeletonDate,
+.skeletonDateShort {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+.skeletonAuthor {
+  width: 220px;
+  height: 18px;
+}
+
+.skeletonBadge {
+  width: 80px;
+  height: 20px;
+  border-radius: var(--radius-full);
+}
+
+.skeletonDate {
+  width: 140px;
+  height: 16px;
+}
+
+.skeletonDateShort {
+  width: 180px;
+  height: 16px;
+}

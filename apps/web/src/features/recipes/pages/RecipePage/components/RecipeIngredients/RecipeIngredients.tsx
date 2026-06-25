@@ -8,6 +8,7 @@ import { InputNumber, Heading, Text } from "@/components/ui";
 type Props = {
   ingredients: RecipeIngredientItem[];
   servings: number | null;
+  isSkeleton?: boolean;
 };
 
 /**
@@ -25,21 +26,44 @@ type Props = {
  * @example
  * <RecipeIngredients ingredients={recipe.ingredients} servings={4} />
  */
-export function RecipeIngredients({ ingredients, servings }: Props) {
-  /* ── Portions ── */
+export function RecipeIngredients({
+  ingredients,
+  servings,
+  isSkeleton,
+}: Props) {
+  /* ── Portions ────────────────────────────────────────────── */
 
   /** Référence immuable : portions pour lesquelles les quantités sont définies */
   const baseServings = servings ?? 1;
 
   /** Portions courantes, pilotées par l'InputNumber */
-  const [currentServings, setCurrentServings] = useState<number>(baseServings);
+  const [currentServings, setCurrentServings] =
+    useState<number>(baseServings);
 
-  /* ── Helpers ── */
+  if (isSkeleton) {
+  return (
+    <div className={styles.skeletonContent}>
+      <div className={styles.skeletonTitle} />
+
+      <div className={styles.skeletonGrid}>
+        {Array.from({ length: 8 }).map((_, i) => (
+          <div key={i} className={styles.skeletonPill} />
+        ))}
+      </div>
+
+      <div className={styles.skeletonFooter} />
+    </div>
+  );
+}
+
+  /* ── Helpers ─────────────────────────────────────────────── */
 
   /** Applique la règle de trois sur une quantité brute */
   const scale = (qty: number | null): string => {
     if (qty == null) return "";
+
     const scaled = (qty * currentServings) / baseServings;
+
     /** Arrondi à 2 décimales, supprime les zéros inutiles */
     return parseFloat(scaled.toFixed(2)).toString();
   };
@@ -58,7 +82,7 @@ export function RecipeIngredients({ ingredients, servings }: Props) {
             {/* ── Nom ── */}
             <span className={styles.ingredientName}>{ing.name}</span>
 
-            {/* ── Quantité + unité (masquées si absentes) ── */}
+            {/* ── Quantité + unité ── */}
             {(ing.quantity != null || ing.unit) && (
               <span className={styles.ingredientQty}>
                 {scale(ing.quantity)}
@@ -69,9 +93,10 @@ export function RecipeIngredients({ ingredients, servings }: Props) {
         ))}
       </ul>
 
-      {/* ── Quantitées ── */}
+      {/* ── Quantités ── */}
       <div className={styles.footer}>
         <Text>Pour :</Text>
+
         <InputNumber
           placeholder="Portions"
           value={currentServings}

@@ -51,3 +51,63 @@
 .ligne:last-child > *:last-child {
   border-radius: 0 0 var(--radius-md) 0;  /* coin bas-droit */
 }
+
+/* ── Pulse ───────────────────────────────────────────────────── */
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+
+}
+
+/* ── Skeleton ───────────────────────────────────────────────── */
+
+.skeletonMeta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  width: 100%;
+}
+
+.skeletonLine {
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.skeletonLine:first-child {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.skeletonLine:last-child {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.skeletonItem {
+  height: 72px;
+  background: var(--color-surface);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+/* Coins supérieurs */
+.skeletonLine:first-child .skeletonItem:first-child {
+  border-radius: var(--radius-md) 0 0 0;
+}
+
+.skeletonLine:first-child .skeletonItem:last-child {
+  border-radius: 0 var(--radius-md) 0 0;
+}
+
+/* Coins inférieurs */
+.skeletonLine:last-child .skeletonItem:first-child {
+  border-radius: 0 0 0 var(--radius-md);
+}
+
+.skeletonLine:last-child .skeletonItem:last-child {
+  border-radius: 0 0 var(--radius-md) 0;
+}

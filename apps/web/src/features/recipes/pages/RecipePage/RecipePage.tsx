@@ -9,6 +9,7 @@ import {
   RecipeHero,
   RecipeInfo,
   RecipeIngredients,
+  RecipeSkeleton,
   RecipeSteps,
 } from "./components";
 import type { RecipeStatus } from "./components/RecipeAuthor/RecipeAuthor";
@@ -41,14 +42,7 @@ export function RecipePage({ recipeId }: Props) {
   /* ── État chargement ── */
   if (state.status === "loading") {
     return (
-      <div className={styles.page}>
-        <div className={[styles.hero, styles.heroSkeleton].join(" ")} />
-        <div className={styles.content}>
-          <div className={styles.skeletonMeta} />
-          <div className={styles.skeletonBlock} />
-          <div className={styles.skeletonBlock} />
-        </div>
-      </div>
+      <RecipeSkeleton/>
     );
   }
 
