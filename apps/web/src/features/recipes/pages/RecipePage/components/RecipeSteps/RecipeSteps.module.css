@@ -1,0 +1,38 @@
+/* ── Section ─────────────────────────────────────────────────── */
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* ── Liste ───────────────────────────────────────────────────── */
+
+.stepList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ── Étape ───────────────────────────────────────────────────── */
+
+/* Numéro et instruction alignés horizontalement */
+.stepItem {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+}
+
+/* Séparateur fin entre chaque étape, sauf la dernière */
+.stepItem + .stepItem {
+  border-top: 1px solid var(--color-border);
+}
+
+
+/* ── Instruction ─────────────────────────────────────────────── */
+
+.stepInstruction {
+  color: var(--color-text);
+  margin: 0;
+}

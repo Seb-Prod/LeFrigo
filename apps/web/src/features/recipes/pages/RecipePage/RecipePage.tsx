@@ -8,6 +8,7 @@ import {
   RecipeHero,
   RecipeInfo,
   RecipeIngredients,
+  RecipeSteps,
 } from "./components";
 import { getRandomDevImage } from "@/helpers/getRandomDevImage";
 
@@ -70,31 +71,16 @@ export function RecipePage({ recipeId }: Props) {
         servings={recipe.servings}
       />
       <RecipeDescription description={recipe.description} />
-      <div>
+      <div className={styles.ligne}>
         <RecipeIngredients
           ingredients={recipe.ingredients}
           servings={recipe.servings}
         />
+        <RecipeSteps steps={recipe.steps}/>
       </div>
 
       {/* ── Contenu ── */}
       <div className={styles.content}>
-        {/* ── Étapes ── */}
-        {recipe.steps.length > 0 && (
-          <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>Préparation</h2>
-            <ol className={styles.stepList}>
-              {[...recipe.steps]
-                .sort((a, b) => a.position - b.position)
-                .map((step, i) => (
-                  <li key={step.id} className={styles.stepItem}>
-                    <span className={styles.stepNumber}>{i + 1}</span>
-                    <p className={styles.stepInstruction}>{step.instruction}</p>
-                  </li>
-                ))}
-            </ol>
-          </section>
-        )}
 
         {/* ── Auteur ── */}
         <footer className={styles.author}>
