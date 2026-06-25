@@ -3,7 +3,12 @@
 import { ErrorState, Surface, Text } from "@/components/ui";
 import { useRecipe } from "@/features/recipes/hooks/useRecipe";
 import styles from "./RecipePage.module.css";
-import { RecipeDescription, RecipeHero, RecipeInfo } from "./components";
+import {
+  RecipeDescription,
+  RecipeHero,
+  RecipeInfo,
+  RecipeIngredients,
+} from "./components";
 import { getRandomDevImage } from "@/helpers/getRandomDevImage";
 
 /* ── Types ─────────────────────────────────────────────────── */
@@ -65,30 +70,15 @@ export function RecipePage({ recipeId }: Props) {
         servings={recipe.servings}
       />
       <RecipeDescription description={recipe.description} />
+      <div>
+        <RecipeIngredients
+          ingredients={recipe.ingredients}
+          servings={recipe.servings}
+        />
+      </div>
+
       {/* ── Contenu ── */}
       <div className={styles.content}>
-        
-
-        {/* ── Ingrédients ── */}
-        {recipe.ingredients.length > 0 && (
-          <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>Ingrédients</h2>
-            <ul className={styles.ingredientList}>
-              {recipe.ingredients.map((ing) => (
-                <li key={ing.id} className={styles.ingredientItem}>
-                  <span className={styles.ingredientName}>{ing.name}</span>
-                  {(ing.quantity != null || ing.unit) && (
-                    <span className={styles.ingredientQty}>
-                      {ing.quantity != null ? ing.quantity : ""}
-                      {ing.unit ? ` ${ing.unit}` : ""}
-                    </span>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-
         {/* ── Étapes ── */}
         {recipe.steps.length > 0 && (
           <section className={styles.section}>

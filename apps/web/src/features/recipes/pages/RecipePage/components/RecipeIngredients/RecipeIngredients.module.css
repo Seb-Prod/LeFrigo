@@ -1,0 +1,59 @@
+/* ── En-tête ─────────────────────────────────────────────────── */
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+}
+
+/* ── Liste de pills ──────────────────────────────────────────── */
+
+/* Colonne unique sur grand écran */
+.ingredientList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* ── Pill ────────────────────────────────────────────────────── */
+
+/* Conteneur pill : nom à gauche, quantité à droite */
+.ingredientItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+}
+
+/* Nom tronqué si trop long */
+.ingredientName {
+    font-size: var(--text-sm);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Quantité en muted, ne rétrécit jamais */
+.ingredientQty {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    font-weight: 600;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* Grille fluide sur mobile */
+@media (max-width: 768px) {
+    .ingredientList {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+}
