@@ -7,6 +7,15 @@
     margin-bottom: var(--space-md);
 }
 
+/* –– Footer –––––––––––––––––––––––––––––––––––––––––––––––––––– */
+.footer{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+}
+
 /* ── Liste de pills ──────────────────────────────────────────── */
 
 /* Colonne unique sur grand écran */

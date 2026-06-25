@@ -3,7 +3,7 @@
 import { RecipeIngredientItem } from "@lefrigo/shared";
 import { useState } from "react";
 import styles from "./RecipeIngredients.module.css";
-import { InputNumber, Heading } from "@/components/ui";
+import { InputNumber, Heading, Text } from "@/components/ui";
 
 type Props = {
   ingredients: RecipeIngredientItem[];
@@ -49,13 +49,6 @@ export function RecipeIngredients({ ingredients, servings }: Props) {
       {/* ── En-tête ── */}
       <div className={styles.header}>
         <Heading>Ingrédients</Heading>
-        <InputNumber
-          placeholder="Portions"
-          value={currentServings}
-          onChange={(v) => setCurrentServings(v ?? baseServings)}
-          min={1}
-          step={1}
-        />
       </div>
 
       {/* ── Grille de pills ── */}
@@ -75,6 +68,18 @@ export function RecipeIngredients({ ingredients, servings }: Props) {
           </li>
         ))}
       </ul>
+
+      {/* ── Quantitées ── */}
+      <div className={styles.footer}>
+        <Text>Pour :</Text>
+        <InputNumber
+          placeholder="Portions"
+          value={currentServings}
+          onChange={(v) => setCurrentServings(v ?? baseServings)}
+          min={1}
+          step={1}
+        />
+      </div>
     </div>
   );
 }
