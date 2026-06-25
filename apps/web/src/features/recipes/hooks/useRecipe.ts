@@ -20,7 +20,7 @@ type DevState = "normal" | "loading" | "error";
 const DEV_STATE: DevState = "normal";
 
 /** Délai artificiel en ms avant de retourner le résultat réel (0 = désactivé) */
-const DEV_DELAY_MS = 20000;
+const DEV_DELAY_MS = 200;
 
 /* ── Hook ───────────────────────────────────────────────────── */
 
