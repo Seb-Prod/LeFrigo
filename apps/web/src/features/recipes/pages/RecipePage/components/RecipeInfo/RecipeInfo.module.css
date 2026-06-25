@@ -1,88 +1,53 @@
-/* ── Conteneur principal ───────────────────────────────── */
+/* ── Grille métadonnées ──────────────────────────────────────── */
 
+/* Conteneur principal : deux lignes empilées */
 .meta {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
-    gap: var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);              /* espace vertical entre les deux lignes */
+  width: 100%;
 }
 
-/* ── Carte d'information ──────────────────────────────── */
+/* ── Ligne ───────────────────────────────────────────────────── */
 
-.metaItem {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-xs);
-
-    padding: var(--space-xs);
-
-    background: var(--color-surface);
-
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: var(--radius-lg);
-
-    box-shadow:var(--shadow-lg);
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
+/* Chaque ligne partage ses bordures et un gap horizontal entre cellules */
+.ligne {
+  display: grid;
+  gap: var(--space-xs);             /* espace horizontal entre les items */
+  border: none;                          /* plus de bordure partagée : chaque item gère la sienne */
 }
 
-.metaItem:hover {
-    transform: translateY(-2px);
-    box-shadow:var(--shadow-md);
+/* Ligne 1 : 3 colonnes — bords arrondis en haut */
+.ligne:first-child {
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
-/* ── Variante temps total ────────────────────────────── */
-
-.metaItemTotal {
-    background: var(--color-primary-border);
-
-    border-color: transparent;
+/* Ligne 2 : 2 colonnes — bords arrondis en bas */
+.ligne:last-child {
+  grid-template-columns: 1fr 1fr;
 }
 
-/* ── Icône ───────────────────────────────────────────── */
+/* ── Cellules ────────────────────────────────────────────────── */
 
-.metaIcon {
-    font-size: 1.5rem;
-    color: var(--color-primary);
+/* Bordure individuelle sur chaque item */
+.ligne > * {
+  border: 1px solid var(--color-border);
 }
 
-/* ── Libellé ─────────────────────────────────────────── */
-
-.metaLabel {
-    font-size: 0.85rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-
-    color: var(--color-text-secondary);
+/* Héritage du rayon sur les coins extérieurs de la ligne 1 */
+.ligne:first-child > *:first-child {
+  border-radius: var(--radius-md) 0 0 0;  /* coin haut-gauche */
 }
 
-/* ── Valeur ──────────────────────────────────────────── */
-
-.metaValue {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--color-text);
+.ligne:first-child > *:last-child {
+  border-radius: 0 var(--radius-md) 0 0;  /* coin haut-droit */
 }
 
-/* ── Responsive mobile ───────────────────────────────── */
+/* Héritage du rayon sur les coins extérieurs de la ligne 2 */
+.ligne:last-child > *:first-child {
+  border-radius: 0 0 0 var(--radius-md);  /* coin bas-gauche */
+}
 
-@media (max-width: 640px) {
-    .meta {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .metaItem {
-        padding: var(--space-xs);
-    }
-
-    .metaIcon {
-        font-size: 1rem;
-    }
-
-    .metaValue {
-        font-size: 1rem;
-    }
+.ligne:last-child > *:last-child {
+  border-radius: 0 0 var(--radius-md) 0;  /* coin bas-droit */
 }

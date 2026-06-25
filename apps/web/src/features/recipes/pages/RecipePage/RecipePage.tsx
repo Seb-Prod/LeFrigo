@@ -57,10 +57,6 @@ export function RecipePage({ recipeId }: Props) {
   }
 
   const { recipe } = state;
-
-  /** Temps total : préparation + cuisson */
-  const totalTime = (recipe.preparationTime ?? 0) + (recipe.cookingTime ?? 0);
-
   const imageSrc = recipe.imageUrl || getRandomDevImage();
 
   return (
