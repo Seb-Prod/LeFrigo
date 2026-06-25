@@ -1,12 +1,9 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
-import { TbArrowLeft, TbClock, TbFlame, TbUsers } from "react-icons/tb";
 import { ErrorState, Surface, Text } from "@/components/ui";
 import { useRecipe } from "@/features/recipes/hooks/useRecipe";
 import styles from "./RecipePage.module.css";
-import { RecipeHero, RecipeInfo } from "./components";
+import { RecipeDescription, RecipeHero, RecipeInfo } from "./components";
 import { getRandomDevImage } from "@/helpers/getRandomDevImage";
 
 /* ── Types ─────────────────────────────────────────────────── */
@@ -62,18 +59,15 @@ export function RecipePage({ recipeId }: Props) {
   return (
     <Surface fullScreen>
       <RecipeHero imageUrl={imageSrc} name={recipe.name} />
-      <RecipeInfo preparationTime={recipe.preparationTime} cookingTime={recipe.cookingTime} servings={recipe.servings}/>
-
+      <RecipeInfo
+        preparationTime={recipe.preparationTime}
+        cookingTime={recipe.cookingTime}
+        servings={recipe.servings}
+      />
+      <RecipeDescription description={recipe.description} />
       {/* ── Contenu ── */}
       <div className={styles.content}>
         
-
-        {/* ── Description ── */}
-        {recipe.description && (
-          <section className={styles.section}>
-            <Text className={styles.description}>{recipe.description}</Text>
-          </section>
-        )}
 
         {/* ── Ingrédients ── */}
         {recipe.ingredients.length > 0 && (
