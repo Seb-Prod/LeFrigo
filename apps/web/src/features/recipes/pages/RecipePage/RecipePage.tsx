@@ -1,18 +1,18 @@
 "use client";
 
-import { ErrorState, Surface, Text } from "@/components/ui";
+import { ErrorState, Surface } from "@/components/ui";
 import { useRecipe } from "@/features/recipes/hooks/useRecipe";
 import styles from "./RecipePage.module.css";
 import {
+  RecipeAuthor,
   RecipeDescription,
   RecipeHero,
   RecipeInfo,
   RecipeIngredients,
   RecipeSteps,
 } from "./components";
+import type { RecipeStatus } from "./components/RecipeAuthor/RecipeAuthor";
 import { getRandomDevImage } from "@/helpers/getRandomDevImage";
-
-/* ── Types ─────────────────────────────────────────────────── */
 
 type Props = {
   recipeId: string;
@@ -21,14 +21,19 @@ type Props = {
 /**
  * Page détail d'une recette.
  *
- * Récupère la recette via `useRecipe(recipeId)` et gère les trois états :
- * - `loading` → skeleton / spinner
- * - `error`   → message d'erreur avec lien retour
- * - `success` → affichage complet (hero, méta, ingrédients, étapes)
+ * Récupère la recette via `useRecipe(recipeId)` et orchestre l'affichage
+ * selon trois états :
+ * - `loading` → squelettes de chargement
+ * - `error`   → message d'erreur avec lien retour vers `/recipes`
+ * - `success` → affichage complet : hero, métadonnées, description,
+ *               ingrédients + étapes en deux colonnes, footer auteur
  *
- * États visuels du hero :
- * - Image disponible : photo en cover avec gradient overlay
- * - Image manquante  : fond surface-sunken + emoji centré
+ * @remarks
+ * `imageUrl` manquant est remplacé par une image de développement aléatoire
+ * via `getRandomDevImage` — à retirer en production.
+ *
+ * @example
+ * <RecipePage recipeId="clx123abc" />
  */
 export function RecipePage({ recipeId }: Props) {
   const state = useRecipe(recipeId);
@@ -59,36 +64,46 @@ export function RecipePage({ recipeId }: Props) {
     );
   }
 
+  /* ── État succès ── */
   const { recipe } = state;
+
+  /** Fallback image de dev si l'API ne renvoie pas d'URL */
   const imageSrc = recipe.imageUrl || getRandomDevImage();
+
+  /** Cast explicite : l'API renvoie un string, RecipeStatus affine le type */
+  const status = recipe.status as RecipeStatus;
 
   return (
     <Surface fullScreen>
+      {/* ── Hero ── */}
       <RecipeHero imageUrl={imageSrc} name={recipe.name} />
+
+      {/* ── Métadonnées chiffrées ── */}
       <RecipeInfo
         preparationTime={recipe.preparationTime}
         cookingTime={recipe.cookingTime}
         servings={recipe.servings}
       />
+
+      {/* ── Description ── */}
       <RecipeDescription description={recipe.description} />
+
+      {/* ── Ingrédients + étapes ── */}
       <div className={styles.ligne}>
         <RecipeIngredients
           ingredients={recipe.ingredients}
           servings={recipe.servings}
         />
-        <RecipeSteps steps={recipe.steps}/>
+        <RecipeSteps steps={recipe.steps} />
       </div>
 
-      {/* ── Contenu ── */}
-      <div className={styles.content}>
-
-        {/* ── Auteur ── */}
-        <footer className={styles.author}>
-          <Text className={styles.authorText}>
-            Recette ajoutée par <strong>{recipe.user.userName}</strong>
-          </Text>
-        </footer>
-      </div>
+      {/* ── Footer auteur ── */}
+      <RecipeAuthor
+        userName={recipe.user.userName}
+        status={status}
+        createdAt={recipe.createdAt}
+        updatedAt={recipe.updatedAt}
+      />
     </Surface>
   );
 }
