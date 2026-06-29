@@ -1,12 +1,7 @@
-"use client";
+import { RecipesPage } from "@/features/recipes/pages/RecipesPage";
 
-import { Surface } from "@/components/ui";
-import { Settings } from "@/features/settings";
-
-export default function SettingsPage() {
+export default function RecipesPageRoute() {
   return (
-    <div>
-      test
-    </div>
+    <RecipesPage/>
   );
 }

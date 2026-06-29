@@ -36,6 +36,7 @@ export { NavLink } from "./NavLink";
 export * from "./RowAction";
 
 export { Select } from "./Select/Select";
+export * from "./SkeletonBox";
 export { SocialLink } from "./SocialLink";
 export { Surface } from "./Surface";
 

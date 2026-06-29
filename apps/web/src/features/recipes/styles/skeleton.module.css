@@ -1,0 +1,57 @@
+/* ── Pulse ───────────────────────────────────────────────────── */
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* ── Skeleton ───────────────────────────────────────────────── */
+
+.skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.skeletonLine,
+.skeletonLineShort {
+  height: 16px;
+  background: var(--color-surface);
+  border-radius: var(--radius-sm);
+  animation: pulse 2.6s ease-in-out infinite;
+}
+
+.skeletonLine {
+  width: 100%;
+}
+
+.skeletonLineShort {
+  width: 70%;
+}
+
+/* -------- */
+
+.skeletonInput{
+  background: var(--color-surface);
+  border-radius: var(--radius-sm);
+  animation: pulse 2.6s ease-in-out infinite;
+}
+
+.skeletonRow {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.skeletonInput {
+  height: 16px;
+  width: 100px;
+}
+

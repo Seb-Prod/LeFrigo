@@ -1,0 +1,1 @@
+export { IngredientSearchSection } from "./IngredientSearchSection";
