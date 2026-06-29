@@ -108,6 +108,7 @@ model Recipe {
 
   preparationTime Int?
   cookingTime     Int?
+  totalTime       Int?
 
   servings Int?
 

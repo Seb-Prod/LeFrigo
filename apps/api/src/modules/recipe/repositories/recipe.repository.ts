@@ -4,6 +4,15 @@ import { toSafeRecipe } from "../recipe.seralizer";
 import { RECIPE_FULL_INCLUDE } from "./recipe.constants";
 import { attachIngredients, createSteps } from "../helpers";
 
+/** Calcule le temps total en gérant les valeurs nulles. */
+const computeTotalTime = (
+  prepTime?: number | null,
+  cookTime?: number | null,
+): number | null => {
+  const total = (prepTime ?? 0) + (cookTime ?? 0);
+  return total > 0 ? total : null;
+};
+
 export const recipeRepository = {
   create: (userId: string, data: CreateRecipeDto) =>
     prisma.$transaction(async (tx) => {
@@ -18,6 +27,7 @@ export const recipeRepository = {
           description: data.description,
           preparationTime: data.preparationTime,
           cookingTime: data.cookingTime,
+          totalTime: computeTotalTime(data.preparationTime, data.cookingTime),
           servings: data.servings,
           status: "PUBLISHED",
         },
@@ -51,6 +61,7 @@ export const recipeRepository = {
           description: data.description,
           preparationTime: data.preparationTime,
           cookingTime: data.cookingTime,
+          totalTime: computeTotalTime(data.preparationTime, data.cookingTime),
           servings: data.servings,
         },
       });

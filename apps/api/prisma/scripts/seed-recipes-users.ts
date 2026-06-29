@@ -5,34 +5,79 @@ const prisma = new PrismaClient();
 // ── CONFIG ────────────────────────────────────────────────────
 
 /** Fenêtre temporelle des recettes (jours dans le passé) */
-const DATE_RANGE_DAYS = 180;
+const DATE_RANGE_DAYS = 1000;
 
 /** Nombre de recettes par user */
-const RECIPES_PER_USER = 20;
+const RECIPES_PER_USER = 100;
 
 // ── DATA ──────────────────────────────────────────────────────
 
 const adjectives = [
-  "croustillant", "fondant", "épicé", "doux", "fumé", "grillé",
-  "mijoté", "caramélisé", "frais", "léger", "généreux", "rustique",
+  "croustillant",
+  "fondant",
+  "épicé",
+  "doux",
+  "fumé",
+  "grillé",
+  "mijoté",
+  "caramélisé",
+  "frais",
+  "léger",
+  "généreux",
+  "rustique",
 ];
 
 const proteins = [
-  "poulet", "saumon", "bœuf", "tofu", "crevettes", "agneau",
-  "thon", "lentilles", "œufs", "canard", "porc", "pois chiches",
+  "poulet",
+  "saumon",
+  "bœuf",
+  "tofu",
+  "crevettes",
+  "agneau",
+  "thon",
+  "lentilles",
+  "œufs",
+  "canard",
+  "porc",
+  "pois chiches",
 ];
 
 const bases = [
-  "aux herbes", "à la tomate", "au citron", "au curry", "à l'ail",
-  "au vin blanc", "aux champignons", "façon asiatique", "à la crème",
-  "au paprika", "aux épices douces", "façon méditerranéenne",
+  "aux herbes",
+  "à la tomate",
+  "au citron",
+  "au curry",
+  "à l'ail",
+  "au vin blanc",
+  "aux champignons",
+  "façon asiatique",
+  "à la crème",
+  "au paprika",
+  "aux épices douces",
+  "façon méditerranéenne",
 ];
 
 const ingredients = [
-  "oignon", "ail", "tomate", "carotte", "courgette", "poivron",
-  "pomme de terre", "aubergine", "champignon", "citron", "persil",
-  "thym", "cumin", "paprika", "gingembre", "basilic", "coriandre",
-  "crème fraîche", "parmesan", "huile d'olive",
+  "oignon",
+  "ail",
+  "tomate",
+  "carotte",
+  "courgette",
+  "poivron",
+  "pomme de terre",
+  "aubergine",
+  "champignon",
+  "citron",
+  "persil",
+  "thym",
+  "cumin",
+  "paprika",
+  "gingembre",
+  "basilic",
+  "coriandre",
+  "crème fraîche",
+  "parmesan",
+  "huile d'olive",
 ];
 
 const units = ["g", "kg", "ml", "L", "tbsp", "tsp", null, null]; // null = sans unité
@@ -89,7 +134,9 @@ function generateSteps(n: number): string[] {
 // ── MAIN ──────────────────────────────────────────────────────
 
 async function main() {
-  const users = await prisma.user.findMany({ select: { id: true, userName: true } });
+  const users = await prisma.user.findMany({
+    select: { id: true, userName: true },
+  });
 
   if (users.length === 0) {
     throw new Error("Aucun utilisateur en base. Lance seed-users.ts d'abord.");
@@ -105,11 +152,13 @@ async function main() {
       const createdAt = randomPastDate();
 
       // Ingrédients aléatoires (3 à 6)
-      const recipeIngredients = pickN(ingredients, randInt(3, 6)).map((ing) => ({
-        name: ing,
-        quantity: Math.random() > 0.2 ? randInt(1, 500) : null,
-        unit: pick(units),
-      }));
+      const recipeIngredients = pickN(ingredients, randInt(3, 6)).map(
+        (ing) => ({
+          name: ing,
+          quantity: Math.random() > 0.2 ? randInt(1, 500) : null,
+          unit: pick(units),
+        }),
+      );
 
       // Étapes aléatoires (3 à 5)
       const steps = generateSteps(randInt(3, 5));
@@ -123,13 +172,19 @@ async function main() {
         RecipeStatus.REJECTED,
       ]);
 
+      const preparationTime = randInt(5, 30);
+      const cookingTime = randInt(10, 90);
+      const totalTime = preparationTime + cookingTime;
+
       const recipe = await prisma.recipe.create({
         data: {
           name,
           description: recipeDescription(name),
-          preparationTime: randInt(5, 30),
-          cookingTime: randInt(10, 90),
+          preparationTime: preparationTime,
+          cookingTime: cookingTime,
+          totalTime: totalTime,
           servings: randInt(2, 8),
+
           status,
           userId: user.id,
           createdAt,
@@ -171,10 +226,14 @@ async function main() {
       total++;
     }
 
-    console.log(`  ✅  ${user.userName.padEnd(12)} — ${RECIPES_PER_USER} recettes`);
+    console.log(
+      `  ✅  ${user.userName.padEnd(12)} — ${RECIPES_PER_USER} recettes`,
+    );
   }
 
-  console.log(`\n🎉  ${total} recettes créées sur ${DATE_RANGE_DAYS} jours d'historique.\n`);
+  console.log(
+    `\n🎉  ${total} recettes créées sur ${DATE_RANGE_DAYS} jours d'historique.\n`,
+  );
 }
 
 main()

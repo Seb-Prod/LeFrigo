@@ -101,20 +101,13 @@ export const recipeQueryRepository = {
       where: {
         status: "PUBLISHED",
         deletedAt: null,
-        // Prisma ne peut pas additionner deux colonnes dans un where —
-        // on filtre large côté DB puis on affine en mémoire
-        preparationTime: { lte: maxTotalTime },
-        cookingTime: { lte: maxTotalTime },
+        totalTime: { lte: maxTotalTime },
       },
       include: RECIPE_SUMMARY_INCLUDE,
-      take: limit * 3, // marge pour compenser le filtre mémoire
+      orderBy: { createdAt: "desc" },
+      take: limit,
     });
 
-    return recipes
-      .filter(
-        (r) => (r.preparationTime ?? 0) + (r.cookingTime ?? 0) <= maxTotalTime,
-      )
-      .slice(0, limit)
-      .map(toSafeRecipeSummary);
+    return recipes.map(toSafeRecipeSummary);
   },
 };
