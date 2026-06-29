@@ -3,6 +3,7 @@ import type { CreateRecipeDto } from "@lefrigo/shared";
 import { userRepository } from "../../users/user.repository";
 import { recipeRepository } from "../repositories";
 import { recipeQueryRepository } from "../repositories/recipe.query.repository";
+import { number } from "zod";
 
 export const recipeService = {
   /**
@@ -80,4 +81,18 @@ export const recipeService = {
   /** Retourne N recettes aléatoires publiées. */
   getRandomRecipes: (limit?: number) =>
     recipeQueryRepository.findRandom(limit),
+
+  /**
+   * Retourne N recettes publiées dont le temps de préparation
+   * est inférieur ou égal à `maxPrepTime` (défaut : 10 min).
+   */
+  getQuickPrepRecipes: (limit?: number, maxPrepTime?: number) =>
+    recipeQueryRepository.findQuickPrep(limit, maxPrepTime),
+
+  /**
+   * Retourne N recettes publiées dont la somme préparation + cuisson
+   * est inférieure ou égale à `maxTotalTime` (défaut : 30 min).
+   */
+  getQuickMealRecipes: (limit?: number, maxTotalTime?: number) =>
+    recipeQueryRepository.findQuickMeal(limit, maxTotalTime),
 };

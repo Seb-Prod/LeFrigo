@@ -72,4 +72,49 @@ export const recipeQueryRepository = {
 
     return full.map(toSafeRecipeSummary);
   },
+
+  /**  */
+  findQuickPrep: async (
+    limit = config.recipes.quickPrepLimit,
+    maxPrepTime = config.recipes.quickPrepMaxTime,
+  ) => {
+    const recipes = await prisma.recipe.findMany({
+      where: {
+        status: "PUBLISHED",
+        deletedAt: null,
+        preparationTime: { lte: maxPrepTime },
+      },
+      include: RECIPE_SUMMARY_INCLUDE,
+      orderBy: { createdAt: "desc" },
+      take: limit,
+    });
+
+    return recipes.map(toSafeRecipeSummary);
+  },
+
+  /**  */
+  findQuickMeal: async (
+    limit = config.recipes.quickMealLimit,
+    maxTotalTime = config.recipes.quickMealMaxTime,
+  ) => {
+    const recipes = await prisma.recipe.findMany({
+      where: {
+        status: "PUBLISHED",
+        deletedAt: null,
+        // Prisma ne peut pas additionner deux colonnes dans un where —
+        // on filtre large côté DB puis on affine en mémoire
+        preparationTime: { lte: maxTotalTime },
+        cookingTime: { lte: maxTotalTime },
+      },
+      include: RECIPE_SUMMARY_INCLUDE,
+      take: limit * 3, // marge pour compenser le filtre mémoire
+    });
+
+    return recipes
+      .filter(
+        (r) => (r.preparationTime ?? 0) + (r.cookingTime ?? 0) <= maxTotalTime,
+      )
+      .slice(0, limit)
+      .map(toSafeRecipeSummary);
+  },
 };

@@ -20,6 +20,12 @@ router.get("/recent", recipeController.getRecent);
 /** N recettes aléatoires publiées */
 router.get("/random", recipeController.getRandom);
 
+/** N recettes publiées dont la préparation est ≤ maxPrepTime (défaut : 10 min) */
+router.get("/quick-prep", recipeController.getQuickPrep);
+
+/** N recettes publiées dont préparation + cuisson est ≤ maxTotalTime (défaut : 30 min) */
+router.get("/quick-meal", recipeController.getQuickMeal);
+
 /** Recette complète par ID */
 router.get("/:id", recipeController.getById);
 
