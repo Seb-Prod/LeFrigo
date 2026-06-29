@@ -72,6 +72,18 @@ export const recipeService = {
       `/recipes/random${limit ? `?limit=${limit}` : ""}`,
     ),
 
+  /** Retoure N recettes publiées dont la prépartion est ≤ maxPrepTime */
+  getQuickPrep: (limit?: number, maxPrepTime?: number) => {
+    const params = new URLSearchParams();
+    if (limit) params.append("limit", String(limit));
+    if (maxPrepTime) params.append("maxPrepTime", String(maxPrepTime));
+    const query = params.toString();
+
+    return request<SafeRecipeSummary[]>(
+      `/recipes/quick-prep${query ? `?${query}` : ""}`,
+    );
+  },
+
   /** Recherche les ingrédients existants pour l'autocomplete. */
   searchIngredients: (query: string) =>
     request<IngredientSuggestion[]>(
