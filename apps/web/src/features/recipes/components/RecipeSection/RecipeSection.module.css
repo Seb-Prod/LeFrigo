@@ -1,0 +1,56 @@
+/* ── Section ────────────────────────────────────────────────── */
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── En-tête ────────────────────────────────────────────────── */
+
+.header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 0 var(--space-md);
+}
+
+/* Pousse le lien "Voir tout" à droite */
+.header > a {
+  margin-left: auto;
+}
+
+.seeAll {
+  font-size: 0.85rem;
+  color: var(--color-primary-solid);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.seeAll:hover {
+  text-decoration: underline;
+}
+
+/* ── Grille scrollable ──────────────────────────────────────── */
+
+.grid {
+  display: flex;
+  gap: 12px;
+
+  overflow-x: auto;
+  overflow-y: visible; /* laisse les box-shadow déborder */
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+
+  /* Padding latéral pour que la 1ère carte soit alignée avec le header,
+     et que la dernière ne soit pas collée au bord */
+  padding: 4px var(--space-md) 12px;
+
+  /* Cache la scrollbar sur desktop sans bloquer le scroll */
+  scrollbar-width: none;
+}
+
+.grid::-webkit-scrollbar {
+  display: none;
+}

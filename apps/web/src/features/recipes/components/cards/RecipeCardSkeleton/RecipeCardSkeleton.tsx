@@ -1,12 +1,25 @@
 import styles from "./RecipeCardSkeleton.module.css";
 
+/* ── Types ─────────────────────────────────────────────────── */
+
+type Props = {
+  variant?: "grid" | "scroll";
+};
+
 /**
  * Skeleton de RecipeCard — simule la forme du composant pendant le chargement.
- * Pas de contenu réel — uniquement des blocs animés.
+ *
+ * @remarks
+ * Doit recevoir le même `variant` que `RecipeCard` pour que les dimensions
+ * des blocs animés correspondent exactement à la carte réelle.
  */
-export function RecipeCardSkeleton() {
+export function RecipeCardSkeleton({ variant = "grid" }: Props) {
   return (
-    <div className={styles.card}>
+    <div
+      className={[styles.card, variant === "scroll" && styles.cardScroll]
+        .filter(Boolean)
+        .join(" ")}
+    >
       {/* ── Thumbnail ── */}
       <div className={styles.thumb} />
 

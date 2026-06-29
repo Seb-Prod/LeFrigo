@@ -16,6 +16,14 @@
   box-shadow: var(--shadow-md);
 }
 
+/* ── Mode scroll Netflix ────────────────────────────────────── */
+
+.cardScroll {
+  flex-shrink: 0;
+  width: clamp(160px, 18vw, 220px);
+  scroll-snap-align: start;
+}
+
 /* ── Thumbnail ──────────────────────────────────────────────── */
 
 .thumb {
@@ -72,4 +80,3 @@
   font-size: 0.8rem;
   color: var(--color-input-placeholder);
 }
-

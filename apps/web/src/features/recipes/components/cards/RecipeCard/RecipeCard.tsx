@@ -5,11 +5,13 @@ import styles from "./RecipeCard.module.css";
 import { TbClock, TbUsers } from "react-icons/tb";
 import { Text } from "@/components/ui";
 import { getRandomDevImage } from "@/helpers/getRandomDevImage";
+import clsx from "clsx";
 
 /* ── Types ─────────────────────────────────────────────────── */
 
 type Props = {
   recipe: SafeRecipeSummary;
+  variant?: "grid" | "scroll";
 };
 
 /**
@@ -21,13 +23,16 @@ type Props = {
  *
  * Cliquable — navigue vers `/recipes/:id`.
  */
-export function RecipeCard({ recipe }: Props) {
+export function RecipeCard({ recipe, variant = "grid" }: Props) {
   const totalTime = (recipe.preparationTime ?? 0) + (recipe.cookingTime ?? 0);
 
   const imageSrc = recipe.imageUrl || getRandomDevImage();
 
   return (
-    <Link href={`/recipes/${recipe.id}`} className={styles.card}>
+    <Link
+      href={`/recipes/${recipe.id}`}
+      className={clsx(styles.card, variant === "scroll" && styles.cardScroll)}
+    >
       {/* ── Thumbnail ── */}
       <div className={styles.thumb}>
         {imageSrc ? (

@@ -3,3 +3,4 @@ export { QuickMealSection } from "./QuickMealSection";
 export { QuickPrepSection } from "./QuickPrepSection";
 export { IngredientSearchSection } from "./IngredientSearchSection";
 export { DiscoverSection } from "./DiscoverSection";
+export { LatestRecipesSection } from "./LatestRecipesSection";

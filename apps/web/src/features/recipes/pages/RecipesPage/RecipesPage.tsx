@@ -2,6 +2,7 @@ import { Surface } from "@/components/ui";
 import {
   DiscoverSection,
   IngredientSearchSection,
+  LatestRecipesSection,
   QuickMealSection,
   QuickPrepSection,
   RecipesTopbar,
@@ -15,6 +16,7 @@ export function RecipesPage() {
       <QuickMealSection />
       <IngredientSearchSection />
       <DiscoverSection />
+      <LatestRecipesSection />
     </Surface>
   );
 }
