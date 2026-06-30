@@ -1,13 +1,13 @@
 /* ── Images de démonstration ───────────────────────────── */
 
 const DEV_IMAGES = [
-  "/test_image1.jpg",
-  "/test_image2.jpg",
-  "/test_image3.jpg",
-  "/test_image4.png",
-  "/test_image5.jpg",
-  "/test_image6.jpg",
-  "/test_image7.jpg",
+  "/images/fake/test_image1.jpg",
+  "/images/fake/test_image2.jpg",
+  "/images/fake/test_image3.jpg",
+  "/images/fake/test_image4.png",
+  "/images/fake/test_image5.jpg",
+  "/images/fake/test_image6.jpg",
+  "/images/fake/test_image7.jpg",
 ];
 
 /**

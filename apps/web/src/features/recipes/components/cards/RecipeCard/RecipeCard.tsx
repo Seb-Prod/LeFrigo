@@ -40,6 +40,7 @@ export function RecipeCard({ recipe, variant = "grid" }: Props) {
             src={imageSrc}
             alt={recipe.name}
             fill
+            priority
             sizes="(max-width: 768px) 100vw, 200px"
             style={{ objectFit: "cover" }}
           />
