@@ -73,13 +73,14 @@ export const recipeService = {
     ),
 
   /** Retoure N recettes publiées dont la prépartion est ≤ maxPrepTime */
-  getQuickPrep: (limit?: number, maxPrepTime?: number) => {
+  getQuickPrep: (page?: number, limit?: number, maxPrepTime?: number) => {
     const params = new URLSearchParams();
+    if (page) params.append("page", String(page));
     if (limit) params.append("limit", String(limit));
     if (maxPrepTime) params.append("maxPrepTime", String(maxPrepTime));
     const query = params.toString();
 
-    return request<SafeRecipeSummary[]>(
+    return request<PaginatedRecipes>(
       `/recipes/quick-prep${query ? `?${query}` : ""}`,
     );
   },

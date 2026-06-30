@@ -75,21 +75,34 @@ export const recipeQueryRepository = {
 
   /**  */
   findQuickPrep: async (
-    limit = config.recipes.quickPrepLimit,
+    page = 1,
+    pageSize = config.recipes.quickPrepLimit,
     maxPrepTime = config.recipes.quickPrepMaxTime,
   ) => {
-    const recipes = await prisma.recipe.findMany({
-      where: {
-        status: "PUBLISHED",
-        deletedAt: null,
-        preparationTime: { lte: maxPrepTime },
-      },
-      include: RECIPE_SUMMARY_INCLUDE,
-      orderBy: { createdAt: "desc" },
-      take: limit,
-    });
+    const where = {
+      status: "PUBLISHED" as const,
+      deletedAt: null,
+      preparationTime: { lte: maxPrepTime },
+    };
 
-    return recipes.map(toSafeRecipeSummary);
+    const [recipes, total] = await Promise.all([
+      prisma.recipe.findMany({
+        where,
+        include: RECIPE_SUMMARY_INCLUDE,
+        orderBy: { createdAt: "desc" },
+        skip: (page - 1) * pageSize,
+        take: pageSize,
+      }),
+      prisma.recipe.count({ where }),
+    ]);
+
+    return {
+      recipes: recipes.map(toSafeRecipeSummary),
+      total,
+      page,
+      pageSize,
+      totalPages: Math.ceil(total / pageSize),
+    };
   },
 
   /**  */

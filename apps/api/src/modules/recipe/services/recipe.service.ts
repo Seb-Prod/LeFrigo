@@ -75,19 +75,17 @@ export const recipeService = {
     recipeQueryRepository.countByUser(userId),
 
   /** Retourne les N dernières recettes publiées tous utilisateurs confondus. */
-  getRecentRecipes: (limit?: number) =>
-    recipeQueryRepository.findRecent(limit),
+  getRecentRecipes: (limit?: number) => recipeQueryRepository.findRecent(limit),
 
   /** Retourne N recettes aléatoires publiées. */
-  getRandomRecipes: (limit?: number) =>
-    recipeQueryRepository.findRandom(limit),
+  getRandomRecipes: (limit?: number) => recipeQueryRepository.findRandom(limit),
 
   /**
    * Retourne N recettes publiées dont le temps de préparation
    * est inférieur ou égal à `maxPrepTime` (défaut : 10 min).
    */
-  getQuickPrepRecipes: (limit?: number, maxPrepTime?: number) =>
-    recipeQueryRepository.findQuickPrep(limit, maxPrepTime),
+  getQuickPrepRecipes: (page?: number, limit?: number, maxPrepTime?: number) =>
+    recipeQueryRepository.findQuickPrep(page, limit, maxPrepTime),
 
   /**
    * Retourne N recettes publiées dont la somme préparation + cuisson
