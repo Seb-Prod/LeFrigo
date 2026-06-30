@@ -105,9 +105,9 @@ export const recipeQueryRepository = {
       },
       include: RECIPE_SUMMARY_INCLUDE,
       orderBy: { createdAt: "desc" },
-      take: limit * 2 ,
+      take: limit,
     });
 
-    return recipes.sort(() => Math.random() - 0.5).slice(0, limit);
+    return recipes.map(toSafeRecipeSummary);
   },
 };

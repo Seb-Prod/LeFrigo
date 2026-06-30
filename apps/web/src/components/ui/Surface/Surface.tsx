@@ -9,11 +9,14 @@ import { useBack } from "@/hooks/useBack";
 import { usePathname } from "next/navigation";
 import { getPageConfig } from "@/lib/navigation";
 import { Logo } from "../Logo";
+import { Text } from "../Text";
 
 type Props = {
   fullScreen?: boolean;
   className?: string;
   children: React.ReactNode;
+  titleSize?: "sm" | "md" | "lg";
+  subtitle?: string;
 };
 
 /**
@@ -31,8 +34,8 @@ type Props = {
  * - Le titre et le bouton retour ne s'affichent qu'en mode PWA
  * - `getPageConfig` détermine le titre et si le bouton retour est pertinent
  */
-export function Surface({ className, children, fullScreen }: Props) {
-  const { isPWA, isMobile } = useDevice();
+export function Surface({ className, children, fullScreen, titleSize ="md", subtitle }: Props) {
+  const { isPWA } = useDevice();
   const pathname = usePathname();
   const page = getPageConfig(pathname);
   const goBack = useBack();
@@ -42,8 +45,13 @@ export function Surface({ className, children, fullScreen }: Props) {
 
   return (
     <div className={styles.wrapper}>
-      <div className={clsx(styles.card, fullScreen && styles.fullScreen, className)}>
-
+      <div
+        className={clsx(
+          styles.card,
+          fullScreen && styles.fullScreen,
+          className,
+        )}
+      >
         {/* ── Header (mobile/PWA uniquement) ── */}
         {showHeader && (
           <div className={styles.header}>
@@ -53,9 +61,14 @@ export function Surface({ className, children, fullScreen }: Props) {
                 {page.showBackButton && (
                   <ButtonPrev onClick={goBack} className={styles.backButton} />
                 )}
-                <Heading align="center" className={styles.title}>
-                  {page.title === "LeFrigo" ? <Logo display="both"/> : page.title}
+                <Heading align="center" size={titleSize} className={styles.title}>
+                  {page.title === "LeFrigo" ? (
+                    <Logo display="both" />
+                  ) : (
+                    page.title
+                  )}
                 </Heading>
+                <Text align="center">{subtitle}</Text>
               </>
             )}
           </div>
@@ -63,7 +76,6 @@ export function Surface({ className, children, fullScreen }: Props) {
 
         {/* ── Contenu ── */}
         {children}
-
       </div>
     </div>
   );

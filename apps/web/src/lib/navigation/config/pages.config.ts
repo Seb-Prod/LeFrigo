@@ -10,7 +10,7 @@ import {
 } from "react-icons/md";
 import { TbDevicesQuestion } from "react-icons/tb";
 import { FaUser } from "react-icons/fa";
-import { IconType } from "react-icons";
+import { IconBaseProps, IconType } from "react-icons";
 import { GoLaw } from "react-icons/go";
 
 /* ── Types ──────────────────────────────────────────────────── */
@@ -25,7 +25,7 @@ export type ConfirmationModalConfig = {
 export type PageConfig = {
   path: string;
   title: string;
-  icon: IconType;
+  icon?: IconType;
   showBackButton?: boolean;
   confirmationModal?: ConfirmationModalConfig;
 };
@@ -52,8 +52,14 @@ export const PAGE_CONFIG: PageConfig[] = [
     },
   },
   {
+    path: "/recipes/quick-prep",
+    title: "Pas le courage de cuisiner",
+    showBackButton: true,
+    icon: MdRestaurant,
+  },
+  {
     path: "/recipes/",
-    title: "Recette",
+    title: "Recettes",
     icon: MdRestaurant,
     showBackButton: true,
   },
