@@ -84,6 +84,18 @@ export const recipeService = {
     );
   },
 
+  /** Retourne N recettes publiées dont le temps total est  ≤ maxTotalTime*/
+  getQuickMeal: (limit?: number, maxTotalTime?: number) => {
+    const params = new URLSearchParams();
+    if (limit) params.append("limit", String(limit));
+    if (maxTotalTime) params.append("maxTotalTime", String(maxTotalTime));
+    const query = params.toString();
+
+    return request<SafeRecipeSummary[]>(
+      `/recipes/quick-meal${query ? `?${query}` : ""}`,
+    );
+  },
+
   /** Recherche les ingrédients existants pour l'autocomplete. */
   searchIngredients: (query: string) =>
     request<IngredientSuggestion[]>(

@@ -1,4 +1,4 @@
-import { Surface } from "@/components/ui";
+import { Divider, Surface } from "@/components/ui";
 import {
   DiscoverSection,
   IngredientSearchSection,
@@ -13,6 +13,7 @@ export function RecipesPage() {
     <Surface fullScreen>
       <RecipesTopbar isSkeleton />
       <QuickPrepSection />
+      <Divider/>
       <QuickMealSection />
       <IngredientSearchSection />
       <DiscoverSection />

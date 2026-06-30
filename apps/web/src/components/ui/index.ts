@@ -12,6 +12,7 @@ export * from "./Checkbox";
 export { ConfirmDialog } from "./ConfirmDialog";
 
 export { DevCredit } from "./DevCredit";
+export { Divider } from "./Divider";
 
 export { ErrorState } from "./ErrorState";
 
