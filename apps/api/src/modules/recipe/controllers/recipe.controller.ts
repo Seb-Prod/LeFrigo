@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { createRecipeSchema } from "@lefrigo/shared";
 import { recipeService } from "../services/recipe.service";
 import { handleError } from "../../../core/errors/handleError";
+import { RecipeFilters } from "../types/recipe-filters";
 
 type RecipeParams = {
   id: string;
@@ -157,27 +158,48 @@ export const recipeController = {
   },
 
   /** Retourne N recettes publiées dont la préparation est ≤ maxPrepTime (?limit=&maxPrepTime=). */
-  getQuickPrep: async (
+  find: async (
     req: Request<
       {},
       {},
       {},
-      { page?: string; limit?: string; maxPrepTime?: string }
+      {
+        page?: string;
+        limit?: string;
+        maxPrepTime?: string;
+        maxCookingTime: string;
+        maxTotalTime: string;
+        search:string;
+      }
     >,
     res: Response,
   ) => {
     try {
+      const filters: RecipeFilters = {
+        page: req.query.page ? Number(req.query.page) : 2,
+        limit: req.query.limit ? Number(req.query.limit) : 10,
+
+        maxPreparationTime: req.query.maxPrepTime
+          ? Number(req.query.maxPrepTime)
+          : undefined,
+        maxCookingTime: req.query.maxCookingTime
+          ? Number(req.query.maxCookingTime)
+          : undefined,
+
+        maxTotalTime: req.query.maxTotalTime
+          ? Number(req.query.maxTotalTime)
+          : undefined,
+
+        search: req.query.search,
+      };
+
       const page = req.query.page ? Number(req.query.page) : 2;
       const limit = req.query.limit ? Number(req.query.limit) : undefined;
       const maxPrepTime = req.query.maxPrepTime
         ? Number(req.query.maxPrepTime)
         : undefined;
 
-      const recipes = await recipeService.getQuickPrepRecipes(
-        page,
-        limit,
-        maxPrepTime,
-      );
+      const recipes = await recipeService.find(filters);
 
       return res.json(recipes);
     } catch (error) {

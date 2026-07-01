@@ -5,6 +5,8 @@ import {
   RECIPE_SUMMARY_INCLUDE,
 } from "./recipe.constants";
 import { config } from "../../../core/config/";
+import { RecipeFilters } from "../types/recipe-filters";
+import { Prisma } from "@prisma/client";
 
 export const recipeQueryRepository = {
   /** Retourne une recette complète par son ID. */
@@ -122,5 +124,90 @@ export const recipeQueryRepository = {
     });
 
     return recipes.map(toSafeRecipeSummary);
+  },
+
+  find: async (filters: RecipeFilters) => {
+    const where: Prisma.RecipeWhereInput = {
+      deletedAt: null,
+      status: "PUBLISHED",
+    };
+
+    if (filters.maxPreparationTime) {
+      where.preparationTime = {
+        lte: filters.maxPreparationTime,
+      };
+    }
+
+    if (filters.maxCookingTime) {
+      where.cookingTime = {
+        lte: filters.maxCookingTime,
+      };
+    }
+
+    if (filters.maxTotalTime) {
+      where.totalTime = {
+        lte: filters.maxTotalTime,
+      };
+    }
+
+    if (filters.search) {
+      where.OR = [
+        {
+          name: {
+            contains: filters.search,
+          },
+        },
+
+        {
+          description: {
+            contains: filters.search,
+          },
+        },
+      ];
+    }
+
+    const sortableFields = {
+      createdAt: "createdAt",
+      name: "name",
+      preparationTime: "preparationTime",
+      cookingTime: "cookingTime",
+      totalTime: "totalTime",
+    } as const;
+
+    const orderBy: Prisma.RecipeOrderByWithRelationInput = filters.sort
+      ? {
+          [sortableFields[filters.sort]]: filters.order ?? "asc",
+        }
+      : {
+          createdAt: "desc",
+        };
+
+    const skip = (filters.page - 1) * filters.limit;
+
+    const [recipes, total] = await Promise.all([
+      prisma.recipe.findMany({
+        where,
+        orderBy,
+        include: RECIPE_SUMMARY_INCLUDE,
+        skip,
+        take: filters.limit,
+      }),
+
+      prisma.recipe.count({
+        where,
+      }),
+    ]);
+
+    return {
+      recipes: recipes.map(toSafeRecipeSummary),
+
+      total,
+
+      page: filters.page,
+
+      limit: filters.limit,
+
+      totalPages: Math.ceil(total / filters.limit),
+    };
   },
 };

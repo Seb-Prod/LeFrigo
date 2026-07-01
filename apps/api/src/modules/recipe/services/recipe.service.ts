@@ -4,6 +4,7 @@ import { userRepository } from "../../users/user.repository";
 import { recipeRepository } from "../repositories";
 import { recipeQueryRepository } from "../repositories/recipe.query.repository";
 import { number } from "zod";
+import { RecipeFilters } from "../types/recipe-filters";
 
 export const recipeService = {
   /**
@@ -93,4 +94,6 @@ export const recipeService = {
    */
   getQuickMealRecipes: (limit?: number, maxTotalTime?: number) =>
     recipeQueryRepository.findQuickMeal(limit, maxTotalTime),
+
+  find: (filters: RecipeFilters) => recipeQueryRepository.find(filters),
 };
