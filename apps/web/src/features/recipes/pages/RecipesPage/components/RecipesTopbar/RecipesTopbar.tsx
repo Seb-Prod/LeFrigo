@@ -1,17 +1,36 @@
-import { InputSkeleton } from "@/components/ui";
+import Image from "next/image";
+
 import styles from "./RecipesTopbar.module.css";
-import stylesSkeleton from "@/features/recipes/styles/skeleton.module.css"
+import { Heading, Logo, Text } from "@/components/ui";
 
-type Props = {
-  isSkeleton?: boolean;
-};
+export function RecipesTopbar() {
+  return (
+    <section className={styles.content}>
+      <div className={styles.thumb}>
+        <Image
+          src="/images/background_01.jpg"
+          alt="Une sélection de recettes gourmandes."
+          fill
+          priority
+          sizes="100vw"
+          style={{ objectFit: "cover" }}
+        />
 
-export function RecipesTopbar({ isSkeleton }: Props) {
-  if (isSkeleton) {
-    return (
-      <InputSkeleton iconLeft/>
-    );
-  }
+        <div className={styles.overlay} />
 
-  return <div>ddd</div>;
+        <div className={styles.titleOverlay}>
+          <Logo size="sm" display="both"/>
+
+          <Heading size="lg">Trouvez votre prochaine recette</Heading>
+
+          <Text>
+            Plus de 500 recettes simples, rapides et gourmandes pour toutes les
+            les envies.
+          </Text>
+
+          {/* SearchBar */}
+        </div>
+      </div>
+    </section>
+  );
 }

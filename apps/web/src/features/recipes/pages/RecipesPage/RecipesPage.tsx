@@ -11,7 +11,7 @@ import {
 export function RecipesPage() {
   return (
     <Surface fullScreen>
-      <RecipesTopbar isSkeleton />
+      <RecipesTopbar />
       <QuickPrepSection />
       <Divider/>
       <QuickMealSection />

@@ -1,0 +1,66 @@
+.content {
+  margin-bottom: 3rem;
+}
+
+.thumb {
+  position: relative;
+  height: 340px;
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, .65) 0%,
+    rgba(0, 0, 0, .45) 35%,
+    rgba(0, 0, 0, .15) 100%
+  );
+}
+
+.titleOverlay {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  max-width: 560px;
+
+  padding: 3rem;
+
+  color: white;
+
+  z-index: 1;
+}
+
+.tag {
+  margin-bottom: .75rem;
+
+  font-size: .9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+
+  opacity: .85;
+}
+
+.titleOverlay h1 {
+  margin: 0 0 1rem;
+
+  font-size: 3rem;
+  line-height: 1.1;
+}
+
+.titleOverlay p {
+  margin: 0;
+
+  font-size: 1.1rem;
+  line-height: 1.6;
+
+  opacity: .9;
+}
