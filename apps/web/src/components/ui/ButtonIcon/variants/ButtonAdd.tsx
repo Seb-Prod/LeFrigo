@@ -1,13 +1,18 @@
 import { IoIosAdd } from "react-icons/io";
-import { ButtonIcon } from "../ButtonIcon";
+import { ButtonIcon, Size, Variant } from "../ButtonIcon";
 
 type Props = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "children"> & {
-  size?: "sm" | "md" | "lg";
+  size?: Size;
+  variant?: Variant;
 };
 
-export function ButtonAdd({ size = "md", ...props }: Props) {
+export function ButtonAdd({
+  size = "md",
+  variant = "success",
+  ...props
+}: Props) {
   return (
-    <ButtonIcon variant="success" size={size} aria-label="Ajouter" {...props}>
+    <ButtonIcon variant={variant} size={size} aria-label="Ajouter" {...props}>
       <IoIosAdd />
     </ButtonIcon>
   );

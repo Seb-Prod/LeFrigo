@@ -34,6 +34,8 @@ export { MenuItemIcon } from "./MenuItemIcon";
 
 export { NavLink } from "./NavLink";
 
+export { Pagination } from "./Pagination";
+
 export * from "./RowAction";
 
 export { Select } from "./Select/Select";

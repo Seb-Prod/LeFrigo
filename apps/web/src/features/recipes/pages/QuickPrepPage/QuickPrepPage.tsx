@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Surface } from "@/components/ui";
+import { Pagination, Surface } from "@/components/ui";
 import { RecipeGrid } from "../../components/RecipeGrid";
-import { Pagination } from "../../components/Pagination";
 import { useQuickPrepRecipesPaginated } from "../../hooks/useQuickPrepRecipesPaginated";
 
 export function QuickPrepPage() {
@@ -12,7 +11,7 @@ export function QuickPrepPage() {
   const [page, setPage] = useState(1);
 
   const { recipes, loading, error, totalPages } =
-    useQuickPrepRecipesPaginated(page, 30, 10);
+    useQuickPrepRecipesPaginated(page, 10, 10);
 
   return (
     <Surface titleSize="sm" subtitle="Préparation" fullScreen>

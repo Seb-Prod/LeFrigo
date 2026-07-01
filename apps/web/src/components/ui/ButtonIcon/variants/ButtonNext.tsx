@@ -1,13 +1,18 @@
-import { ButtonIcon } from "../ButtonIcon";
+import { ButtonIcon, Size, Variant } from "../ButtonIcon";
 import { IoChevronForward } from "react-icons/io5";
 
 type Props = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "children"> & {
-  size?: "sm" | "md" | "lg";
+  size?: Size;
+  variant?: Variant;
 };
 
-export function ButtonNext({ size = "md", ...props }: Props) {
+export function ButtonNext({
+  size = "md",
+  variant = "accent",
+  ...props
+}: Props) {
   return (
-    <ButtonIcon variant="accent" size={size} aria-label="Suivant" {...props}>
+    <ButtonIcon variant={variant} size={size} aria-label="Suivant" {...props}>
       <IoChevronForward />
     </ButtonIcon>
   );

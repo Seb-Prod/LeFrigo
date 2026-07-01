@@ -1,13 +1,18 @@
 import { IoIosRemove } from "react-icons/io";
-import { ButtonIcon } from "../ButtonIcon";
+import { ButtonIcon, Size, Variant } from "../ButtonIcon";
 
 type Props = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "children"> & {
-  size?: "sm" | "md" | "lg";
+  size?: Size;
+  variant?: Variant;
 };
 
-export function ButtonRemove({ size = "md", ...props }: Props) {
+export function ButtonRemove({
+  size = "md",
+  variant = "danger",
+  ...props
+}: Props) {
   return (
-    <ButtonIcon variant="danger" size={size} aria-label="Ajouter" {...props}>
+    <ButtonIcon variant={variant} size={size} aria-label="Ajouter" {...props}>
       <IoIosRemove />
     </ButtonIcon>
   );
