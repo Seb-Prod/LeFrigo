@@ -9,6 +9,7 @@ export * from "./ButtonIcon";
 export { Card } from "./Card";
 export { Carousel } from "./Carousel";
 export * from "./Checkbox";
+export { Column } from "./Column";
 export { ConfirmDialog } from "./ConfirmDialog";
 
 export { DevCredit } from "./DevCredit";
@@ -36,6 +37,7 @@ export { NavLink } from "./NavLink";
 
 export { Pagination } from "./Pagination";
 
+export { Row } from "./Row";
 export * from "./RowAction";
 
 export { Select } from "./Select/Select";

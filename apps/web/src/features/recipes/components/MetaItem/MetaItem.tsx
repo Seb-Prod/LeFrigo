@@ -37,6 +37,9 @@ type Props = {
   recipeMeta: RecipeMeta;
   /** Valeur brute en minutes (durées) ou en unité entière (portions). `null` affiche "-" */
   value: number | null;
+  /** `"compact"` : icône + valeur uniquement, sans libellé, tailles réduites.
+   *  Utile dans les espaces restreints (ex. `RecipeCard`), indépendamment du viewport. */
+  size?: "default" | "compact";
 };
 
 /**
@@ -48,11 +51,12 @@ type Props = {
  * Les variantes `total` et `serving` reçoivent une couleur d'accentuation distincte.
  *
  * @example
- * <MetaItem recipeMeta="preparation" value={30} />  // "30 min"
- * <MetaItem recipeMeta="serving"     value={4} />   // "4"
- * <MetaItem recipeMeta="cooking"     value={null} /> // "-"
+ * <MetaItem recipeMeta="preparation" value={30} />                  // "30 min"
+ * <MetaItem recipeMeta="serving"     value={4} />                   // "4"
+ * <MetaItem recipeMeta="cooking"     value={null} />                // "-"
+ * <MetaItem recipeMeta="total" value={90} size="compact" />         // icône + "1 h 30 min", sans libellé
  */
-export function MetaItem({ recipeMeta, value }: Props) {
+export function MetaItem({ recipeMeta, value, size = "default" }: Props) {
   const { icon, label, isTime } = META_MAP[recipeMeta];
 
   /** Normalise `number | null` en `string | null` pour `formatMetaValue` */
@@ -67,12 +71,15 @@ export function MetaItem({ recipeMeta, value }: Props) {
     recipeMeta === "serving" && styles.serving,
   ].filter(Boolean).join(" ");
 
+  /** Classe de taille compacte (icône + valeur seules) */
+  const sizeClass = size === "compact" ? styles.compact : "";
+
   return (
-    <div className={clsx(styles.metaItem, variantClass)}>
+    <div className={clsx(styles.metaItem, variantClass, sizeClass)}>
       {/* ── Icône ── */}
       <Text className={styles.metaIcon}>{icon}</Text>
 
-      {/* ── Libellé ── */}
+      {/* ── Libellé (masqué en compact via CSS) ── */}
       <Text className={styles.metaLabel}>{label}</Text>
 
       {/* ── Valeur formatée ── */}

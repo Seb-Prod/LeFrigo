@@ -60,6 +60,32 @@
   letter-spacing: -0.02em;  /* resserrement pour un look chiffre moderne */
 }
 
+/* ── Variante compacte (icône + valeur, sans libellé) ──────── */
+/* Pilotée par la prop `size="compact"`, indépendante du viewport — */
+/* pensée pour les espaces restreints comme RecipeCard.            */
+
+.compact {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 0;
+}
+
+.compact .metaLabel {
+  display: none;
+}
+
+.compact .metaIcon {
+  font-size: 1rem;
+  opacity: 0.7;
+}
+
+.compact .metaValue {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
 /* ── Responsive (≤ 768px) ────────────────────────────────── */
 
 @media (max-width: 768px) {

@@ -19,7 +19,7 @@
  */
 export function formatMetaValue(
   value: string | null,
-  isTime?: boolean
+  isTime?: boolean,
 ): string {
   if (!value) return "-";
   if (!isTime) return value;
@@ -39,5 +39,21 @@ export function formatMetaValue(
     return `${hours} h`;
   }
 
-  return `${hours} h ${remainingMinutes} min`;
+  if (remainingMinutes < 10) {
+    return `${hours} h 0${remainingMinutes}`;
+  }
+
+  return `${hours} h ${remainingMinutes}`;
+}
+
+/** Formate la date de dernière activité en durée relative (ex : "Il y a 5 min"). */
+export function formatRelativeTime(date: Date): string {
+  const diffMs = Date.now() - date.getTime();
+  const diffMin = Math.floor(diffMs / 1000 / 60);
+  const diffHours = Math.floor(diffMin / 60);
+  const diffDays = Math.floor(diffHours / 24);
+
+  if (diffMin < 60) return `Il y a ${diffMin} min`;
+  if (diffHours < 24) return `Il y a ${diffHours}h`;
+  return `Il y a ${diffDays}j`;
 }

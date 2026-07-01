@@ -66,17 +66,9 @@
   text-transform: capitalize;
 }
 
-/* ── Méta ───────────────────────────────────────────────────── */
+/* ── Date relative ──────────────────────────────────────────── */
 
-.meta {
-  display: flex;
-  gap: 10px;
-}
-
-.metaItem {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 0.8rem;
+.date {
+  font-size: 0.75rem;
   color: var(--color-input-placeholder);
 }

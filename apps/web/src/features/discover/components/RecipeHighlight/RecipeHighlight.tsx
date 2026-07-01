@@ -55,6 +55,8 @@ export function RecipeHighlight() {
               <RecipeCard
                 key={recipe.id}
                 recipe={recipe}
+                layout="minimal"
+                showDate
               />
             ))}
       </div>

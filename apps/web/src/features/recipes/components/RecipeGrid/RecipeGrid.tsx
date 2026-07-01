@@ -9,6 +9,19 @@ type Props = {
   hasError: boolean;
 };
 
+/** Nombre de cartes considérées "above the fold" — seules celles-ci
+ *  reçoivent `priority` pour précharger leur image. */
+const PRIORITY_CARD_COUNT = 4;
+
+/**
+ * Grille de recettes — gère les états chargement / erreur / vide, puis
+ * affiche les cartes recette ou leurs skeletons.
+ *
+ * États visuels :
+ * - Chargement : 10 `RecipeCardSkeleton`
+ * - Erreur ou liste vide : rien n'est rendu (`null`)
+ * - Contenu disponible : grille de `RecipeCard`
+ */
 export function RecipeGrid({ recipes, isLoading, hasError }: Props) {
   /* ── Gestion des états sans contenu ─────────────────────── */
 
@@ -18,12 +31,17 @@ export function RecipeGrid({ recipes, isLoading, hasError }: Props) {
 
   return (
     <div className={styles.grid}>
+      {/* ── Cartes ── */}
       {isLoading
         ? Array.from({ length: 10 }).map((_, i) => (
-            <RecipeCardSkeleton  key={i} />
+            <RecipeCardSkeleton key={i} />
           ))
-        : recipes.map((recipe) => (
-            <RecipeCard  key={recipe.id} recipe={recipe} />
+        : recipes.map((recipe, index) => (
+            <RecipeCard
+              key={recipe.id}
+              recipe={recipe}
+              priority={index < PRIORITY_CARD_COUNT}
+            />
           ))}
     </div>
   );
