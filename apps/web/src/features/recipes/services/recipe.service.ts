@@ -1,9 +1,11 @@
 import { request } from "@/lib/api/request";
 import type {
   CreateRecipeDto,
+  RecipeFilters,
   SafeRecipe,
   SafeRecipeSummary,
 } from "@lefrigo/shared";
+import { buildQuery } from "./buildQuery";
 
 /* ── Types ─────────────────────────────────────────────────── */
 
@@ -95,6 +97,12 @@ export const recipeService = {
     return request<SafeRecipeSummary[]>(
       `/recipes/quick-meal${query ? `?${query}` : ""}`,
     );
+  },
+
+  find: (filters: RecipeFilters = {}) => {
+    const query = buildQuery(filters);
+
+    return request<PaginatedRecipes>(`/recipes${query ? `?${query}` : ""}`);
   },
 
   /** Recherche les ingrédients existants pour l'autocomplete. */

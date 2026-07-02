@@ -32,3 +32,23 @@ export type SafeRecipe = {
 
 /** Version allégée pour les listes — sans steps ni ingrédients */
 export type SafeRecipeSummary = Omit<SafeRecipe, "ingredients" | "steps">;
+
+export type RecipeFilters = {
+  page?: number;
+  limit?: number;
+
+  search?: string;
+
+  sort?:
+    | "createdAt"
+    | "name"
+    | "preparationTime"
+    | "cookingTime"
+    | "totalTime";
+
+  order?: "asc" | "desc";
+
+  maxPreparationTime?: number;
+  maxCookingTime?: number;
+  maxTotalTime?: number;
+};

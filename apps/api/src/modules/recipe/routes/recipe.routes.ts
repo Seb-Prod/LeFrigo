@@ -16,8 +16,7 @@ router.get("/me/count", authMiddleware, recipeController.getMyCount);
 /** Recherche de recettes (pagination, filtres, tri...) */
 router.get("/", recipeController.find);
 
-/** N dernières recettes publiées */
-router.get("/recent", recipeController.getRecent);
+
 
 /** N recettes aléatoires publiées */
 router.get("/random", recipeController.getRandom);
