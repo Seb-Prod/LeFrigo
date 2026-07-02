@@ -60,7 +60,7 @@ export const recipeController = {
         result.data,
       );
 
-      return res.status(201).json(recipe);
+      return res.status(200).json(recipe);
     } catch (error) {
       return handleError(error, res);
     }
@@ -125,22 +125,6 @@ export const recipeController = {
     }
   },
 
-  /** Retourne les N dernières recettes publiées (?limit=). */
-  getRecent: async (
-    req: Request<{}, {}, {}, { limit?: string }>,
-    res: Response,
-  ) => {
-    try {
-      const limit = req.query.limit ? Number(req.query.limit) : undefined;
-
-      const recipes = await recipeService.getRecentRecipes(limit);
-
-      return res.json(recipes);
-    } catch (error) {
-      return handleError(error, res);
-    }
-  },
-
   /** Retourne N recettes aléatoires publiées (?limit=). */
   getRandom: async (
     req: Request<{}, {}, {}, { limit?: string }>,
@@ -157,7 +141,7 @@ export const recipeController = {
     }
   },
 
-  /** Retourne N recettes publiées dont la préparation est ≤ maxPrepTime (?limit=&maxPrepTime=). */
+  /** Retourne N recettes publiées et filtrées. */
   find: async (
     req: Request<
       {},
@@ -167,16 +151,16 @@ export const recipeController = {
         page?: string;
         limit?: string;
         maxPreparationTime?: string;
-        maxCookingTime: string;
-        maxTotalTime: string;
-        search:string;
+        maxCookingTime?: string;
+        maxTotalTime?: string;
+        search?:string;
       }
     >,
     res: Response,
   ) => {
     try {
       const filters: RecipeFilters = {
-        page: req.query.page ? Number(req.query.page) : 2,
+        page: req.query.page ? Number(req.query.page) : 1,
         limit: req.query.limit ? Number(req.query.limit) : 10,
 
         maxPreparationTime: req.query.maxPreparationTime
@@ -192,36 +176,8 @@ export const recipeController = {
 
         search: req.query.search,
       };
-
-      const page = req.query.page ? Number(req.query.page) : 2;
-      const limit = req.query.limit ? Number(req.query.limit) : undefined;
-      const maxPrepTime = req.query.maxPreparationTime
-        ? Number(req.query.maxPreparationTime)
-        : undefined;
-
+      
       const recipes = await recipeService.find(filters);
-
-      return res.json(recipes);
-    } catch (error) {
-      return handleError(error, res);
-    }
-  },
-
-  /** Retourne N recettes publiées dont préparation + cuisson est ≤ maxTotalTime (?limit=&maxTotalTime=). */
-  getQuickMeal: async (
-    req: Request<{}, {}, {}, { limit?: string; maxTotalTime?: string }>,
-    res: Response,
-  ) => {
-    try {
-      const limit = req.query.limit ? Number(req.query.limit) : undefined;
-      const maxTotalTime = req.query.maxTotalTime
-        ? Number(req.query.maxTotalTime)
-        : undefined;
-
-      const recipes = await recipeService.getQuickMealRecipes(
-        limit,
-        maxTotalTime,
-      );
 
       return res.json(recipes);
     } catch (error) {

@@ -40,18 +40,6 @@ export const recipeQueryRepository = {
       where: { userId, deletedAt: null },
     }),
 
-  /** Retourne les N dernières recettes publiées tous utilisateurs confondus. */
-  findRecent: async (limit = config.recipes.recentLimit) => {
-    const recipes = await prisma.recipe.findMany({
-      where: { status: "PUBLISHED", deletedAt: null },
-      include: RECIPE_SUMMARY_INCLUDE,
-      orderBy: { createdAt: "desc" },
-      take: limit,
-    });
-
-    return recipes.map(toSafeRecipeSummary);
-  },
-
   /** Retourne les N recettes aléatoire publiées.
    * utilise une requête SQL brute - Prisma n'exporse pas ORDER BY RAND().
    */
@@ -73,57 +61,6 @@ export const recipeQueryRepository = {
     });
 
     return full.map(toSafeRecipeSummary);
-  },
-
-  /**  */
-  findQuickPrep: async (
-    page = 1,
-    pageSize = config.recipes.quickPrepLimit,
-    maxPrepTime = config.recipes.quickPrepMaxTime,
-  ) => {
-    const where = {
-      status: "PUBLISHED" as const,
-      deletedAt: null,
-      preparationTime: { lte: maxPrepTime },
-    };
-
-    const [recipes, total] = await Promise.all([
-      prisma.recipe.findMany({
-        where,
-        include: RECIPE_SUMMARY_INCLUDE,
-        orderBy: { createdAt: "desc" },
-        skip: (page - 1) * pageSize,
-        take: pageSize,
-      }),
-      prisma.recipe.count({ where }),
-    ]);
-
-    return {
-      recipes: recipes.map(toSafeRecipeSummary),
-      total,
-      page,
-      pageSize,
-      totalPages: Math.ceil(total / pageSize),
-    };
-  },
-
-  /**  */
-  findQuickMeal: async (
-    limit = config.recipes.quickMealLimit,
-    maxTotalTime = config.recipes.quickMealMaxTime,
-  ) => {
-    const recipes = await prisma.recipe.findMany({
-      where: {
-        status: "PUBLISHED",
-        deletedAt: null,
-        totalTime: { lte: maxTotalTime },
-      },
-      include: RECIPE_SUMMARY_INCLUDE,
-      orderBy: { createdAt: "desc" },
-      take: limit,
-    });
-
-    return recipes.map(toSafeRecipeSummary);
   },
 
   find: async (filters: RecipeFilters) => {
