@@ -2,16 +2,19 @@
 
 import { useState } from "react";
 import { Pagination, Surface } from "@/components/ui";
+import { useRecipes } from "../../hooks";
 import { RecipeGrid } from "../../components/RecipeGrid";
-import { useQuickPrepRecipesPaginated } from "../../hooks/useQuickPrepRecipesPaginated";
 
 export function QuickPrepPage() {
   /* ── État pagination ──────────────────────────────────── */
 
   const [page, setPage] = useState(1);
 
-  const { recipes, loading, error, totalPages } =
-    useQuickPrepRecipesPaginated(page, 10, 10);
+  const { recipes, loading, error, totalPages } = useRecipes({
+    page:page,
+    maxPreparationTime: 10,
+    limit: 20,
+  });
 
   return (
     <Surface titleSize="sm" subtitle="Préparation" fullScreen>

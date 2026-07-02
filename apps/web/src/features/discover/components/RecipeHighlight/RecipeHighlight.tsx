@@ -3,13 +3,10 @@
 import Link from "next/link";
 
 import { Heading } from "@/components/ui";
-import {
-  RecipeCard,
-  RecipeCardSkeleton,
-} from "@/features/recipes";
-import { useRecentRecipes } from "@/features/recipes/";
+import { RecipeCard, RecipeCardSkeleton } from "@/features/recipes";
 
 import styles from "./RecipeHighlight.module.css";
+import { useRecipes } from "@/features/recipes/hooks";
 
 /**
  * Met en avant les dernières recettes publiées sur la plateforme.
@@ -24,7 +21,11 @@ import styles from "./RecipeHighlight.module.css";
  * - `succès` → affichage des recettes récentes.
  */
 export function RecipeHighlight() {
-  const { recipes, loading, error } = useRecentRecipes(5);
+  const { recipes, loading, error } = useRecipes({
+    sort: "createdAt",
+    order: "desc",
+    limit: 10,
+  });
 
   /* ── Gestion des états sans contenu ─────────────────────── */
 

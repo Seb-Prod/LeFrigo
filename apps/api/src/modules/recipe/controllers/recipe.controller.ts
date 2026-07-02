@@ -166,7 +166,7 @@ export const recipeController = {
       {
         page?: string;
         limit?: string;
-        maxPrepTime?: string;
+        maxPreparationTime?: string;
         maxCookingTime: string;
         maxTotalTime: string;
         search:string;
@@ -179,8 +179,8 @@ export const recipeController = {
         page: req.query.page ? Number(req.query.page) : 2,
         limit: req.query.limit ? Number(req.query.limit) : 10,
 
-        maxPreparationTime: req.query.maxPrepTime
-          ? Number(req.query.maxPrepTime)
+        maxPreparationTime: req.query.maxPreparationTime
+          ? Number(req.query.maxPreparationTime)
           : undefined,
         maxCookingTime: req.query.maxCookingTime
           ? Number(req.query.maxCookingTime)
@@ -195,8 +195,8 @@ export const recipeController = {
 
       const page = req.query.page ? Number(req.query.page) : 2;
       const limit = req.query.limit ? Number(req.query.limit) : undefined;
-      const maxPrepTime = req.query.maxPrepTime
-        ? Number(req.query.maxPrepTime)
+      const maxPrepTime = req.query.maxPreparationTime
+        ? Number(req.query.maxPreparationTime)
         : undefined;
 
       const recipes = await recipeService.find(filters);

@@ -1,7 +1,7 @@
 "use client";
 
 import { RecipeSection } from "@/features/recipes/components/RecipeSection";
-import { useQuickMealRecipes } from "@/features/recipes/hooks";
+import { useRecipes } from "@/features/recipes/hooks";
 
 /**
  * Section "Prêt en 30 minutes" — recettes dont la somme
@@ -13,7 +13,10 @@ import { useQuickMealRecipes } from "@/features/recipes/hooks";
  * quand disponible.
  */
 export function QuickMealSection() {
-  const { recipes, loading, error } = useQuickMealRecipes(10, 30);
+  const { recipes, loading, error } = useRecipes({
+    maxTotalTime: 30,
+    limit: 10,
+  });
 
   return (
     <RecipeSection

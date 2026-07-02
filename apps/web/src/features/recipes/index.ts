@@ -4,7 +4,6 @@ export { RecipePage } from "./pages/RecipePage";
 
 /** Hooks */
 export { useRandomRecipes } from "./hooks/useRandomRecipes";
-export { useRecentRecipes } from "./hooks/useRecentRecipes";
 
 /** Cards */
 export { RecipeCard } from "./components/cards/RecipeCard";
