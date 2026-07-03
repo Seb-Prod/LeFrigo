@@ -15,8 +15,12 @@ type Props = {
   fullScreen?: boolean;
   className?: string;
   children: React.ReactNode;
+
   titleSize?: "sm" | "md" | "lg";
   subtitle?: string;
+
+  replaceHeader?: boolean;
+  headerContent?: React.ReactNode;
 };
 
 /**
@@ -34,7 +38,15 @@ type Props = {
  * - Le titre et le bouton retour ne s'affichent qu'en mode PWA
  * - `getPageConfig` détermine le titre et si le bouton retour est pertinent
  */
-export function Surface({ className, children, fullScreen, titleSize ="md", subtitle }: Props) {
+export function Surface({
+  className,
+  children,
+  fullScreen,
+  titleSize = "md",
+  subtitle,
+  replaceHeader,
+  headerContent,
+}: Props) {
   const { isPWA } = useDevice();
   const pathname = usePathname();
   const page = getPageConfig(pathname);
@@ -55,20 +67,29 @@ export function Surface({ className, children, fullScreen, titleSize ="md", subt
         {/* ── Header (mobile/PWA uniquement) ── */}
         {showHeader && (
           <div className={styles.header}>
-            {/* ── Titre + retour (PWA uniquement — la Topbar web gère déjà ça) ── */}
-            {isPWA && (
+            {replaceHeader ? (
+              headerContent
+            ) : (
               <>
                 {page.showBackButton && (
                   <ButtonPrev onClick={goBack} className={styles.backButton} />
                 )}
-                <Heading align="center" size={titleSize} className={styles.title}>
+
+                <Heading
+                  align="center"
+                  size={titleSize}
+                  className={styles.title}
+                >
                   {page.title === "LeFrigo" ? (
                     <Logo display="both" />
                   ) : (
                     page.title
                   )}
                 </Heading>
-                <Text align="center">{subtitle}</Text>
+
+                {subtitle && <Text align="center">{subtitle}</Text>}
+
+                {headerContent}
               </>
             )}
           </div>

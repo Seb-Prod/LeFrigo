@@ -17,7 +17,7 @@ export function QuickPrepSection() {
     <RecipeSection
       title="Pas le courage de cuisiner"
       subtitle="Quand la motivation manque, mais pas l'appétit."
-      seeAllHref="/recipes/quick-prep"
+      seeAllHref={`/recipes?view=catalog&maxPreparationTime=10`}
       recipes={recipes}
       isLoading={loading}
       hasError={error}

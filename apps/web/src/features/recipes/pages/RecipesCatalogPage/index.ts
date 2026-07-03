@@ -1,0 +1,1 @@
+export { RecipesCatalogPage } from "./RecipesCatalogPage";

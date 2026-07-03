@@ -8,7 +8,7 @@ import {
   RecipesTopbar,
 } from "./components";
 
-export function RecipesPage() {
+export function RecipesHomePage() {
   return (
     <Surface fullScreen>
       <RecipesTopbar />

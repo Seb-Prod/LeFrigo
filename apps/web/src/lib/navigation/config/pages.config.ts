@@ -24,7 +24,7 @@ export type ConfirmationModalConfig = {
 
 export type PageConfig = {
   path: string;
-  title: string;
+  title?: string;
   icon?: IconType;
   showBackButton?: boolean;
   confirmationModal?: ConfirmationModalConfig;
@@ -59,7 +59,6 @@ export const PAGE_CONFIG: PageConfig[] = [
   },
   {
     path: "/recipes/",
-    title: "Recettes",
     icon: MdRestaurant,
     showBackButton: true,
   },
