@@ -1,7 +1,14 @@
-import { Button, RangeSlider } from "@/components/ui";
-import { FilterKey, getRecipeFilterBadges } from "@/features/recipes/utils/recipeFilterBadges";
-import type { RecipeFilters } from "@lefrigo/shared";
+"use client";
 
+import { Button, RangeSlider, Row } from "@/components/ui";
+import { InputSearch } from "@/components/ui/Input";
+import {
+  FilterKey,
+  getRecipeFilterBadges,
+} from "@/features/recipes/utils/recipeFilterBadges";
+import type { RecipeFilters } from "@lefrigo/shared";
+import { FiFilter } from "react-icons/fi";
+import styles from "./RecipeCatalogHeader.module.css";
 
 /* ── Types ─────────────────────────────────────────────────── */
 
@@ -15,10 +22,9 @@ type Props = {
 
   onRemoveFilter?: (key: FilterKey) => void;
 
-  onNumericFilterChange?: (
-    key: NumericFilterKey,
-    value: string,
-  ) => void;
+  onNumericFilterChange?: (key: NumericFilterKey, value: string) => void;
+
+  onSearchChange?: (value: string) => void;
 };
 
 /* ── Configuration ─────────────────────────────────────────── */
@@ -53,11 +59,24 @@ export function RecipeCatalogHeader({
   filters,
   onRemoveFilter,
   onNumericFilterChange,
+  onSearchChange,
 }: Props) {
   const badges = getRecipeFilterBadges(filters);
 
   return (
     <div>
+      <Row gap="md" justify="spaceBetween">
+        <InputSearch
+          className={styles.input}
+          placeholder="Rechercher une recette..."
+          value={filters?.search ?? ""}
+          onChange={(e) => onSearchChange?.(e.target.value)}
+        />
+        <Button icon={<FiFilter />} count={badges.length}>
+          Filtres
+        </Button>
+      </Row>
+
       {/* ── Sliders ───────────────────────────────────────────
       <div>
         {NUMERIC_FILTER_INPUTS.map(({ key, label, max }) => (
@@ -77,10 +96,7 @@ export function RecipeCatalogHeader({
       {/* ── Badges ──────────────────────────────────────────── */}
       <div>
         {badges.map(({ key, label }) => (
-          <Button
-            key={key}
-            onClick={() => onRemoveFilter?.(key)}
-          >
+          <Button key={key} onClick={() => onRemoveFilter?.(key)}>
             {label}
           </Button>
         ))}

@@ -1,23 +1,25 @@
 import { Input } from "../../Input";
-import { FiUser } from "react-icons/fi";
+import { FiSearch } from "react-icons/fi";
 
-type Props = Omit<
-  React.ComponentProps<typeof Input>,
-  "type"
->;
+type Props = Omit<React.ComponentProps<typeof Input>, "type">;
 
 /**
- * Champ de saisie pour les pseudo avec icône user
+ * Champ de saisie pour la recherche, avec icône loupe.
  *
  * @example
- * <InputUserName
- *   placeholder="Pseudo"
- *   value={userName}
- *   onChange={(e) => setUserName(e.target.value)}
+ * <InputSearch
+ *   placeholder="Rechercher"
+ *   value={search}
+ *   onChange={(e) => setSearch(e.target.value)}
  * />
  */
 export function InputSearch({ className, ...props }: Props) {
   return (
-    <Input {...props} type="text" iconLeft={<FiUser />} className={className} />
+    <Input
+      {...props}
+      type="text"
+      iconLeft={<FiSearch />}
+      className={className}
+    />
   );
 }

@@ -16,8 +16,10 @@ type RecipesCatalogPageProps = {
 };
 
 /** Clés de `RecipeFilters` pilotables via un input number de test. */
-type NumericFilterKey = "maxPreparationTime" | "maxCookingTime" | "maxTotalTime";
-
+type NumericFilterKey =
+  | "maxPreparationTime"
+  | "maxCookingTime"
+  | "maxTotalTime";
 
 /* ── Composant ─────────────────────────────────────────────── */
 
@@ -74,22 +76,30 @@ export function RecipesCatalogPage({
     setPage(1);
   };
 
+  /**
+   * Met à jour le filtre `search` depuis `InputSearch`.
+   * Une valeur vide retire le filtre plutôt que de garder une chaîne vide.
+   */
+  const handleSearchChange = (value: string) => {
+    setFilters((prev) => ({
+      ...prev,
+      search: value === "" ? undefined : value,
+    }));
+    setPage(1);
+  };
+
   const catalogHeader = (
     <RecipeCatalogHeader
       filters={filters}
       onRemoveFilter={handleRemoveFilter}
       onNumericFilterChange={handleNumericFilterChange}
+      onSearchChange={handleSearchChange}
     />
   );
 
   return (
     <div>
-      
-      <Surface
-        fullScreen
-        replaceHeader
-        headerContent={catalogHeader}
-      >
+      <Surface fullScreen replaceHeader headerContent={catalogHeader}>
         <RecipeGrid recipes={recipes} isLoading={loading} hasError={error} />
 
         {/* ── Pagination ── */}

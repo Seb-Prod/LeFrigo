@@ -8,6 +8,7 @@
 
   /* ── Espacements ──────────────────────────────────────────── */
 
+  --space-none: 0px;
   --space-xs:  4px;
   --space-sm:  8px;
   --space-md:  16px;

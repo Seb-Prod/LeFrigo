@@ -1,3 +1,16 @@
+.wrapper {
+  position: relative;
+  display: inline-block; /* ne casse pas le layout inline du bouton */
+}
+
+.badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  translate: 35% -35%;
+  z-index: 2;
+}
+
 /* ── Variables internes ───────────────────────────────────── */
 
 /* Chaque variante surcharge uniquement les props qu'elle concerne. */
@@ -10,6 +23,10 @@
   position: relative;
   overflow: hidden;
   isolation: isolate;
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
 
   border: 1.5px solid transparent;
   /* réservé pour ghost, invisible ailleurs */
@@ -27,6 +44,11 @@
   transition:
     transform 0.2s cubic-bezier(0.34, 1.4, 0.64, 1),
     box-shadow 0.25s ease;
+}
+
+.icon{
+  display: inline-flex;
+  align-items: center;
 }
 
 /* ── Blobs ────────────────────────────────────────────────── */

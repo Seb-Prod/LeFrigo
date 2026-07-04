@@ -5,11 +5,12 @@ type BadgeColor = "default" | "success" | "warning" | "danger" | "info" | "neutr
 
 type Props = {
   children: React.ReactNode;
+  size?: "xs" | "sm" | "md" | "xl"
   color?: BadgeColor;
   className?: string;
 };
 
-export function Badge({ children, color = "default", className }: Props) {
+export function Badge({ children, color = "default", className, size ="md" }: Props) {
   return (
     <span className={clsx(styles.badge, styles[color], className)}>
       {children}
