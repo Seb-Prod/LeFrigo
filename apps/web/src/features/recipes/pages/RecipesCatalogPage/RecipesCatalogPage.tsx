@@ -84,11 +84,11 @@ export function RecipesCatalogPage({
 
   return (
     <div>
-      {!isPWA && catalogHeader}
+      
       <Surface
         fullScreen
         replaceHeader
-        headerContent={isPWA ? catalogHeader : undefined}
+        headerContent={catalogHeader}
       >
         <RecipeGrid recipes={recipes} isLoading={loading} hasError={error} />
 

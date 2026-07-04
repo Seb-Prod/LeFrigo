@@ -96,6 +96,7 @@ export function Surface({
         )}
 
         {/* ── Contenu ── */}
+        {!showHeader && headerContent}
         {children}
       </div>
     </div>

@@ -1,0 +1,168 @@
+/* ── Conteneur principal ───────────────────────────────────── */
+.range {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: var(--color-primary-text);
+    margin-top: 120px;
+}
+
+/* ── En-tête : label + valeur courante ─────────────────────── */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.5rem;
+}
+
+.label {
+    font-weight: 600;
+}
+
+.value {
+    font-weight: 700;
+    color: red;
+    /* met la valeur en évidence */
+}
+
+/* ── Corps : min / piste / max ─────────────────────────────── */
+.body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.min,
+.max {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 600;
+}
+
+.rangeInput {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin: 0 2.5rem;
+}
+
+/* ── Bulle de sélection (visible uniquement pendant le drag) ── */
+.selector {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -90%);
+    opacity: 0;
+    /* masquée par défaut */
+    pointer-events: none;
+    /* n'intercepte jamais le curseur */
+    transition: opacity 0.15s ease;
+}
+
+.selectorVisible {
+    opacity: 1;
+    /* affichée pendant le glissement */
+}
+
+.selectValue {
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 1.5rem;
+    line-height: 3rem;
+    color: var(--color-primary-solid-text);
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 500;
+    border-radius: 50%;
+    background-color: var(--color-primary-solid);
+}
+
+.selectValue::after {
+    content: '';
+    position: absolute;
+    width: 3rem;
+    height: 3rem;
+    top: 0;
+    left: 0;
+    transform: rotate(45deg);
+    /* forme la pointe de la bulle */
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    border-bottom-left-radius: 50%;
+    background-color: var(--color-primary-solid);
+    z-index: -1;
+}
+
+.selectBtn {
+    width: 3rem;
+    height: 1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    background-color: var(--color-primary-solid);
+}
+
+/* ── Piste et progression ──────────────────────────────────── */
+.progressBar {
+    position: absolute;
+    height: 5px;
+    border-radius: 5px;
+    background-color: var(--color-primary-solid);
+    pointer-events: none;
+    /* laisse le clic passer au input natif */
+}
+
+.sliderInput {
+    -webkit-appearance: none;
+    /* supprime le style natif du track (indispensable sur iOS) */
+    appearance: none;
+    /* équivalent standard, pour les autres moteurs */
+    width: 100%;
+    height: 5px;
+    background: transparent;
+    background-image: none;
+    /* iOS applique parfois un dégradé par défaut malgré appearance:none */
+    border: none;
+    /* iOS ajoute une bordure/rectangle blanc par défaut sur le track */
+    border-radius: 5px;
+    outline: none;
+}
+
+.sliderInput::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 3rem;
+    height: 1rem;
+    background: transparent;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    z-index: 3;
+}
+
+.sliderInput::-webkit-slider-runnable-track {
+    height: 5px;
+    background: var(--color-primary-border);
+    border: none;
+    border-radius: 5px;
+}
+
+/* ── Track Firefox ─────────────────────────────────────────── */
+/* iOS/Safari suit le style de .sliderInput, mais Firefox a besoin */
+/* de son propre pseudo-élément pour ne pas garder son track natif */
+.sliderInput::-moz-range-track {
+    background-color: var(--color-primary-border);
+    border: none;
+    border-radius: 5px;
+    height: 5px;
+}
+
+.sliderInput::-moz-range-thumb {
+    width: 3rem;
+    height: 1rem;
+    border: none;
+    cursor: pointer;
+}

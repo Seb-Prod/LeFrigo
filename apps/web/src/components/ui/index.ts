@@ -37,6 +37,7 @@ export { NavLink } from "./NavLink";
 
 export { Pagination } from "./Pagination";
 
+export { RangeSlider } from "./RangeSlider";
 export { Row } from "./Row";
 export * from "./RowAction";
 
