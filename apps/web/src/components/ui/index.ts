@@ -9,6 +9,7 @@ export * from "./ButtonIcon";
 export { Card } from "./Card";
 export { Carousel } from "./Carousel";
 export * from "./Checkbox";
+export { Chip } from "./Chip";
 export { Column } from "./Column";
 export { ConfirmDialog } from "./ConfirmDialog";
 
@@ -41,6 +42,7 @@ export { RangeSlider } from "./RangeSlider";
 export { Row } from "./Row";
 export * from "./RowAction";
 
+export { SearchFilterBar } from "./SearchFilterBar";
 export { Select } from "./Select/Select";
 export * from "./SkeletonBox";
 export { SocialLink } from "./SocialLink";

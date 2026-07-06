@@ -1,16 +1,9 @@
-"use client";
-
-import { Button, RangeSlider, Row } from "@/components/ui";
-import { InputSearch } from "@/components/ui/Input";
+import { SearchFilterBar } from "@/components/ui/SearchFilterBar";
 import {
   FilterKey,
   getRecipeFilterBadges,
 } from "@/features/recipes/utils/recipeFilterBadges";
 import type { RecipeFilters } from "@lefrigo/shared";
-import { FiFilter } from "react-icons/fi";
-import styles from "./RecipeCatalogHeader.module.css";
-
-/* ── Types ─────────────────────────────────────────────────── */
 
 type NumericFilterKey =
   | "maxPreparationTime"
@@ -19,88 +12,34 @@ type NumericFilterKey =
 
 type Props = {
   filters?: RecipeFilters;
-
   onRemoveFilter?: (key: FilterKey) => void;
-
-  onNumericFilterChange?: (key: NumericFilterKey, value: string) => void;
-
+  onNumericFilterChange?: (
+    key: NumericFilterKey,
+    value: string,
+  ) => void;
   onSearchChange?: (value: string) => void;
+  onOpenFilters?: () => void;
 };
-
-/* ── Configuration ─────────────────────────────────────────── */
-
-const NUMERIC_FILTER_INPUTS: {
-  key: NumericFilterKey;
-  label: string;
-  max: number;
-}[] = [
-  {
-    key: "maxPreparationTime",
-    label: "Préparation max",
-    max: 100,
-  },
-
-  {
-    key: "maxCookingTime",
-    label: "Cuisson max",
-    max: 100,
-  },
-
-  {
-    key: "maxTotalTime",
-    label: "Temps total max",
-    max: 100,
-  },
-];
-
-/* ── Composant ─────────────────────────────────────────────── */
 
 export function RecipeCatalogHeader({
   filters,
   onRemoveFilter,
-  onNumericFilterChange,
   onSearchChange,
+  onOpenFilters,
 }: Props) {
-  const badges = getRecipeFilterBadges(filters);
+  const chips = getRecipeFilterBadges(filters).map((badge) => ({
+    id: badge.key,
+    label: badge.label,
+    onRemove: () => onRemoveFilter?.(badge.key),
+  }));
 
   return (
-    <div>
-      <Row gap="md" justify="spaceBetween">
-        <InputSearch
-          className={styles.input}
-          placeholder="Rechercher une recette..."
-          value={filters?.search ?? ""}
-          onChange={(e) => onSearchChange?.(e.target.value)}
-        />
-        <Button icon={<FiFilter />} count={badges.length}>
-          Filtres
-        </Button>
-      </Row>
-
-      {/* ── Sliders ───────────────────────────────────────────
-      <div>
-        {NUMERIC_FILTER_INPUTS.map(({ key, label, max }) => (
-          <RangeSlider
-            key={key}
-            label={label}
-            min={0}
-            max={max}
-            value={filters?.[key] ?? max}
-            onChange={(value) =>
-              onNumericFilterChange?.(key, String(value))
-            }
-          />
-        ))}
-      </div> */}
-
-      {/* ── Badges ──────────────────────────────────────────── */}
-      <Row gap="sm" scroll>
-        {badges.map(({ key, label }) => (
-          <Button key={key} onClick={() => onRemoveFilter?.(key)}>
-            {label}
-          </Button>
-        ))}
-      </Row>
-    </div>
+    <SearchFilterBar
+      search={filters?.search}
+      searchPlaceholder="Rechercher une recette..."
+      onSearchChange={onSearchChange}
+      onOpenFilters={onOpenFilters}
+      chips={chips}
+    />
   );
 }
