@@ -94,13 +94,13 @@ export function RecipeCatalogHeader({
       </div> */}
 
       {/* ── Badges ──────────────────────────────────────────── */}
-      <div>
+      <Row gap="sm" scroll>
         {badges.map(({ key, label }) => (
           <Button key={key} onClick={() => onRemoveFilter?.(key)}>
             {label}
           </Button>
         ))}
-      </div>
+      </Row>
     </div>
   );
 }

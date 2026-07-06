@@ -1,5 +1,6 @@
 import { CSSProperties, ReactNode } from "react";
 import styles from "./Row.module.css";
+import clsx from "clsx";
 
 /** Valeurs d'alignement horizontal supportées par `Row`. */
 type Justify =
@@ -15,6 +16,7 @@ type Props = {
   children: ReactNode;
   justify?: Justify;
   gap?: Gap;
+  scroll?: boolean
 };
 
 /** Correspondance prop → valeur CSS `justify-content`.
@@ -48,7 +50,7 @@ const GAP_MAP: Record<Gap, string> = {
  * variables CSS (`--row-justify`, `--row-gap`) plutôt qu'en classes
  * conditionnelles, le style restant entièrement délégué à `Row.module.css`.
  */
-export function Row({ children, justify = "start", gap = "none" }: Props) {
+export function Row({ children, justify = "start", gap = "none", scroll }: Props) {
   /** Cast nécessaire : le typage `CSSProperties` de React ne connaît pas les custom properties. */
   const style = {
     "--row-justify": JUSTIFY_MAP[justify],
@@ -56,7 +58,7 @@ export function Row({ children, justify = "start", gap = "none" }: Props) {
   } as CSSProperties;
 
   return (
-    <div className={styles.row} style={style}>
+    <div className={clsx(styles.row, scroll && styles.grid)} style={style}>
       {children}
     </div>
   );
