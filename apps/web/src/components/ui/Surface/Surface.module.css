@@ -23,6 +23,7 @@
   -webkit-backdrop-filter: blur(2px);
   padding-block: var(--space-sm);
   border-radius: var(--radius-md);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
 }
 
 /* Colonne 1 — bouton retour */
