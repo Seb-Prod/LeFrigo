@@ -1,0 +1,250 @@
+/* ==========================================================
+ * Palette — LeFrigo
+ * Valeurs brutes (primitives). Ne jamais utiliser ces variables
+ * directement dans les composants : elles servent uniquement
+ * à construire les tokens sémantiques (voir fichier de tokens).
+ * ========================================================== */
+
+:root {
+
+  /* ── Aubergine (primary) ─────────────────────────────────── */
+  --aubergine-50: #F3EEF5;
+  --aubergine-100: #E8DDEE;
+  --aubergine-200: #D8C2E2;
+  --aubergine-300: #B68CCB;
+  --aubergine-400: #9860B5;
+  --aubergine-500: #7D409E;
+  --aubergine-500-rgb: 125, 64, 158;
+  --aubergine-600: #6A3287;
+  --aubergine-700: #57276F;
+  --aubergine-800: #491B5C;
+  --aubergine-900: #3B1248;
+
+  /* ── Miel (accent) ───────────────────────────────────────── */
+  --miel-50: #FDF8EE;
+  --miel-100: #F9F0D9;
+  --miel-200: #F8E4B0;
+  --miel-300: #EDC86A;
+  --miel-400: #D8A838;
+  --miel-500: #C48E14;
+  --miel-500-rgb: 196, 142, 20;
+  --miel-600: #A87810;
+  --miel-700: #8D620D;
+  --miel-800: #734E09;
+  --miel-900: #5A3600;
+
+  /* ── Vert (success) ──────────────────────────────────────── */
+  --green-50: #EEF6EC;
+  --green-100: #E2F0DF;
+  --green-200: #C2E0BC;
+  --green-300: #8FC788;
+  --green-400: #68B161;
+  --green-500: #4A9E43;
+  --green-500-rgb: 74, 158, 67;
+  --green-600: #3B8235;
+  --green-700: #316D2B;
+  --green-800: #285A23;
+  --green-900: #1C4F18;
+
+  /* ── Jaune (warning) ─────────────────────────────────────── */
+  --yellow-50: #FDF8E6;
+  --yellow-100: #FBF2CF;
+  --yellow-200: #FAE9A0;
+  --yellow-300: #F0D263;
+  --yellow-400: #E0BA2A;
+  --yellow-500: #D4A00A;
+  --yellow-500-rgb: 212, 160, 10;
+  --yellow-600: #B88A08;
+  --yellow-700: #987306;
+  --yellow-800: #805F05;
+  --yellow-900: #6E5005;
+
+  /* ── Rouge (danger) ──────────────────────────────────────── */
+  --red-50: #FDF0EE;
+  --red-100: #FAE1DC;
+  --red-200: #F29880;
+  --red-300: #E96F55;
+  --red-400: #D64D30;
+  --red-500: #C43318;
+  --red-500-rgb: 196, 51, 24;
+  --red-600: #A82910;
+  --red-700: #94230F;
+  --red-800: #7E1D0D;
+  --red-900: #8F2410;
+
+  /* ── Bleu (info) ─────────────────────────────────────────── */
+  --blue-50: #EEF3F9;
+  --blue-100: #DEE8F7;
+  --blue-200: #BED2EF;
+  --blue-300: #8FAFDD;
+  --blue-400: #6F8FC8;
+  --blue-500: #4A6FAF;
+  --blue-500-rgb: 74, 111, 175;
+  --blue-600: #395B95;
+  --blue-700: #2F4A7A;
+  --blue-800: #243A60;
+  --blue-900: #1A2A46;
+
+  /* ── Gris (neutral) ──────────────────────────────────────── */
+  --gray-50: #F3F4F6;
+  --gray-100: #EAEBEB;
+  --gray-150: #E5E7EB;
+  --gray-200: #D1D5DB;
+  --gray-300: #B7BDC6;
+  --gray-400: #8B93A1;
+  --gray-500: #6B7280;
+  --gray-500-rgb: 107, 114, 128;
+  --gray-600: #4B5563;
+  --gray-700: #414955;
+  --gray-800: #374151;
+  --gray-900: #1F2937;
+
+  /* ── Encre (texte) ───────────────────────────────────────── */
+  --ink-900: #281631;
+  --ink-900-rgb: 40, 22, 49;
+  --ink-950: #1C0B2E;
+  --ink-950-rgb: 28, 11, 46;
+
+  /* ── Sable (fond de page) ────────────────────────────────── */
+  --sable-25: #FDFCFA;
+  --sable-50: #F9F5E9;
+  --sable-100: #F3EDDD;
+
+  /* ── Neutres purs ────────────────────────────────────────── */
+  --pure-white: #FFFFFF;
+  --pure-white-rgb: 255, 255, 255;
+
+  --pure-black: #000000;
+  --pure-black-rgb: 0, 0, 0;
+
+  /* ==========================================================
+   * Variantes sombres (mode dark)
+   * Même échelle que le mode clair (50/100/200/500/600/900) :
+   * un cran donné désigne toujours le même rôle, quelle que soit
+   * la clarté réelle de la couleur (ex. dark-50 = fond doux,
+   * comme light-50 — même si en dark c'est la teinte la plus
+   * foncée de la famille, pas la plus claire).
+   *
+   * 100 et 200 pointent vers la même teinte : la palette dark ne
+   * fournit pas de palier "hover" distinct du "border" comme le
+   * fait le light (ex. --aubergine-100 ≠ --aubergine-200).
+   *
+   * 950 est un cran supplémentaire, sans équivalent en light :
+   * le texte à poser sur un fond solide. En light ce rôle est
+   * toujours blanc pur (--pure-white), donc non numéroté ; en
+   * dark c'est une teinte de la famille, d'où ce cran dédié.
+   * ========================================================== */
+
+  /* ── Aubergine (dark) ────────────────────────────────────── */
+  --aubergine-dark-50: #1A0828;
+  --aubergine-dark-100: #4A1D64;
+  --aubergine-dark-200: #5A2478;
+  --aubergine-dark-300: #703393;
+  --aubergine-dark-400: #8A4AAF;
+  --aubergine-dark-500: #A865CC;
+  --aubergine-dark-500-rgb: 168, 101, 204;
+  --aubergine-dark-600: #BC7DE0;
+  --aubergine-dark-700: #CA94EA;
+  --aubergine-dark-800: #D5A1EF;
+  --aubergine-dark-900: #E2B8F8;
+  --aubergine-dark-950: #F4EDFA;
+
+  /* ── Miel (dark) ──────────────────────────────────────────── */
+  --miel-dark-50: #221500;
+  --miel-dark-100: #5F3F00;
+  --miel-dark-200: #7A5200;
+  --miel-dark-300: #976B08;
+  --miel-dark-400: #BE8B18;
+  --miel-dark-500: #E0A820;
+  --miel-dark-500-rgb: 224, 168, 32;
+  --miel-dark-600: #F0BC3A;
+  --miel-dark-700: #F5C94F;
+  --miel-dark-800: #F7D86C;
+  --miel-dark-900: #FAE7A0;
+  --miel-dark-950: #FFF8E8;
+
+  /* ── Vert / success (dark) ───────────────────────────────── */
+  --green-dark-50: #041E02;
+  --green-dark-100: #1C4F18;
+  --green-dark-200: #1C4F18;
+  --green-dark-500: #5ABA52;
+  --green-dark-500-rgb: 90, 186, 82;
+  --green-dark-600: #74CC68;
+  --green-dark-900: #90DA88;
+  --green-dark-950: #041E02;
+  /* = 50, identique au fond dans l'original */
+
+  /* ── Jaune / warning (dark) ───────────────────────────────── */
+  --yellow-dark-50: #1C1000;
+  --yellow-dark-100: #523A03;
+  --yellow-dark-200: #6E5005;
+  --yellow-dark-300: #927007;
+  --yellow-dark-400: #C09012;
+  --yellow-dark-500: #E8B420;
+  --yellow-dark-500-rgb: 232, 180, 32;
+  --yellow-dark-600: #F5C840;
+  --yellow-dark-700: #F8D45C;
+  --yellow-dark-800: #F9DF7E;
+  --yellow-dark-900: #FBE9A6;
+  --yellow-dark-950: #FFF9E8;
+
+  /* ── Rouge / danger (dark) ────────────────────────────────── */
+  --red-dark-50: #1F0500;
+  --red-dark-100: #551006;
+  --red-dark-200: #7A1A08;
+  --red-dark-300: #A02C18;
+  --red-dark-400: #C9462E;
+  --red-dark-500: #E05540;
+  --red-dark-500-rgb: 224, 85, 64;
+  --red-dark-600: #F07060;
+  --red-dark-700: #F58B7D;
+  --red-dark-800: #F8AAA0;
+  --red-dark-900: #FBCBC4;
+  --red-dark-950: #FFF0ED;
+
+  /* ── Bleu / info — Ardoise (dark) ─────────────────────────── */
+  --blue-dark-50: #081120;
+  --blue-dark-100: #173454;
+  --blue-dark-200: #214A74;
+  --blue-dark-300: #37689C;
+  --blue-dark-400: #4D82BC;
+  --blue-dark-500: #5F99D8;
+  --blue-dark-500-rgb: 95, 153, 216;
+  --blue-dark-600: #79AFE8;
+  --blue-dark-700: #95C2F2;
+  --blue-dark-800: #B3D6F8;
+  --blue-dark-900: #D3E8FC;
+  --blue-dark-950: #EFF7FF;
+
+  /* ── Gris / neutral (dark) ────────────────────────────────── */
+  --gray-dark-50: #111827;
+  --gray-dark-100: #1F2937;
+  --gray-dark-200: #374151;
+  --gray-dark-300: #4B5563;
+  --gray-dark-400: #6B7280;
+  --gray-dark-500: #9CA3AF;
+  --gray-dark-500-rgb: 156, 163, 175;
+  --gray-dark-600: #B6BEC8;
+  --gray-dark-700: #CDD3DB;
+  --gray-dark-800: #E2E6EB;
+  --gray-dark-900: #F1F3F5;
+  --gray-dark-950: #FFFFFF;
+
+  /* ── Encre (texte) ───────────────────────────────────────── */
+  --ink-dark-900: #F0EAF5;
+  --ink-dark-900-rgb: 240, 234, 245;
+  --ink-dark-950: #FCFAFD;
+  --ink-dark-950-rgb: 252, 250, 253;
+
+  /* ── Sable (fond de page) ────────────────────────────────── */
+  --sable-dark-25: #120820;
+  --sable-dark-50: #1A0F2A;
+  --sable-dark-100: #241436;
+
+  /* ── Neutres purs ────────────────────────────────────────── */
+  --pure-white-dark: #FFFFFF;
+  --pure-white-dark-rgb: 255, 255, 255;
+
+  --pure-black-dark: #000000;
+  --pure-black-dark-rgb: 0, 0, 0;
+}

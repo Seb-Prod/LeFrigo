@@ -1,45 +1,36 @@
 import clsx from "clsx";
 import styles from "./Button.module.css";
 import { Badge } from "../Badge";
-
-/* ── Types ── */
-
-type Colors = "primary" | "accent" | "danger" | "info" | "warning" | "neutral";
-type Variants = "solid" | "soft" | "ghost";
-type Sizes = "sm" | "md" | "lg";
+import { Color, Size, Variant } from "../types";
 
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  /** Couleur sémantique du bouton. @default "primary" */
-  color?: Colors;
-  /** Apparence visuelle. @default "solid" */
-  variant?: Variants;
-  /** Désactive l'animation blob. @default false */
-  animate?: boolean;
-  size?: Sizes;
-  /** Icône affichée avant le contenu du bouton. */
+  color?: Color;
+  variant?: Variant;
+  size?: Size;
   icon?: React.ReactNode;
-  /** Affiche une pastille en haut à droite du bouton. */
   count?: number;
 };
 
+/** Nombre au-delà duquel le badge affiche "+99" plutôt que la valeur exacte. */
+const MAX_DISPLAYED_COUNT = 99;
+
 /**
- * Bouton polyvalent avec animation blob liquide.
+ * Button — bouton principal avec icône, badge de compteur et variantes de style.
  *
- * Axes de personnalisation :
- * - `variant`      : couleur sémantique (primary / accent / danger)
- * - `appearance` : solid (fond plein) | soft (pastel) | ghost (contour)
+ * États visuels clés :
+ * - `variant` × `color` pilotent l'apparence via les data-attributes
+ *   (`data-appearance`, `data-color`) consommés par les tokens CSS.
+ * - `size` pilote le gabarit (padding, font-size, icône) via `data-size`.
  *
- * Contenu :
- * - `icon` : rendue avant `children`, dans un wrapper dédié pour l'espacement/alignement
- *
- * Animation :
- * - Hover  → deux blobs montent depuis le bas (CSS pur, ::before + ::after)
- * - Active → scale press (0.08s)
+ * Comportements dynamiques :
+ * - Le badge n'est rendu que si `count` est défini et strictement positif.
+ * - Un `blur()` est forcé sur `mouseup` pour retirer le focus visuel après
+ *   un clic à la souris (accessibilité clavier préservée via `onMouseUp`
+ *   qui n'intercepte pas les autres méthodes de focus).
  */
 export function Button({
   color = "primary",
   variant = "solid",
-  animate = true,
   size = "md",
   icon,
   count,
@@ -47,31 +38,36 @@ export function Button({
   children,
   ...props
 }: Props) {
+  /** Retire le focus visuel après un clic souris, sans bloquer le onMouseUp du parent. */
+  const handleMouseUp = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.currentTarget.blur();
+    props.onMouseUp?.(e);
+  };
+
+  /** Texte affiché dans le badge, plafonné à MAX_DISPLAYED_COUNT. */
+  const displayedCount =
+    count != null && count > MAX_DISPLAYED_COUNT
+      ? `+${MAX_DISPLAYED_COUNT}`
+      : count;
+
   return (
-    <span className={styles.wrapper}>
-      <button
-        className={clsx(
-          styles.button,
-          styles[variant],
-          styles[color],
-          styles[size],
-          !animate && styles.noBlob,
-          className,
-        )}
-        {...props}
-        onMouseUp={(e) => {
-          e.currentTarget.blur();
-          props.onMouseUp?.(e);
-        }}
-      >
+    <span
+      data-sizeable
+      data-size={size}
+      data-color={color}
+      data-appearance={variant}
+      className={clsx(styles.wrapper, className)}
+    >
+      <button className={styles.button} {...props} onMouseUp={handleMouseUp}>
         {/* ── Icône ── */}
         {icon && <span className={styles.icon}>{icon}</span>}
         {children}
       </button>
-      {/* –– Badge –– */}
+
+      {/* ── Badge de compteur (affiché si count > 0) ── */}
       {count != null && count > 0 && (
         <Badge size="xs" color="danger" className={styles.badge}>
-          {count}{" "}
+          {displayedCount}{" "}
         </Badge>
       )}
     </span>

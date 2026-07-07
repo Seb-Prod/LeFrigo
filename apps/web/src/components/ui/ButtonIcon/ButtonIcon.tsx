@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import styles from "./ButtonIcon.module.css";
 
-export type Size = "sm" | "md" | "lg";
+export type Size = "xs" | "sm" | "md" | "lg" | "xl";
 export type Variant =
   | "default"
   | "primary"

@@ -30,6 +30,7 @@ export function RecipeCatalogHeader({
   const chips = getRecipeFilterBadges(filters).map((badge) => ({
     id: badge.key,
     label: badge.label,
+    icon: <badge.icon />,
     onRemove: () => onRemoveFilter?.(badge.key),
   }));
 

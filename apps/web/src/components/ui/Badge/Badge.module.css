@@ -1,40 +1,17 @@
+/* ── Badge ─────────────────────────────────────────────── */
 .badge {
   display: inline-flex;
   align-items: center;
-  padding: 0.2rem 0.6rem;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 500;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight-bold);
   white-space: nowrap;
   gap: 4px;
-}
 
-.default {
-  background-color: var(--color-primary-solid);
-  color: var(--color-primary-solid-text);
-}
+  padding: 0.2rem 0.6rem;
 
-.success {
-  background-color: var(--color-success-solid);
-  color: var(--color-success-solid-text);
-}
-
-.warning {
-  background-color: var(--color-warning-solid);
-  color: var(--color-warning-solid-text);
-}
-
-.danger {
-  background-color: var(--color-danger-solid);
-  color: var(--color-danger-solid-text);
-}
-
-.info {
-  background-color: var(--color-info-solid);
-  color: var(--color-info-solid-text);
-}
-
-.neutral {
-  background-color: var(--color-neutral-solid);
-  color: var(--color-neutral-solid-text);
+  background: var(--variant-background);
+  border: 1.5px solid var(--variant-border);
+  color: var(--variant-text);
+  box-shadow: var(--shadow-size) var(--variant-shadow);
 }

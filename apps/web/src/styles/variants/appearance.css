@@ -1,0 +1,252 @@
+/* ==========================================================
+ * Résolution color × appearance — Button (LeFrigo)
+ * Le composant pose data-color="…" et data-appearance="…" sur
+ * son élément racine ; ce fichier traduit ces deux attributs
+ * en 4 variables locales génériques que le CSS Module du
+ * Button consomme directement (--btn-background, --btn-text,
+ * --btn-border, --btn-hover). Aucune logique JS de mapping
+ * couleur/apparence n'est nécessaire côté composant.
+ *
+ * Le bloc :root.dark utilise le même nommage que :root (solid/
+ * soft/outline/ghost × background/text/border/hover), donc les
+ * 28 blocs ci-dessous basculent automatiquement en mode sombre
+ * dès que .dark est posé sur <html> — aucune duplication requise.
+ * ========================================================== */
+
+/* ── Primary (Aubergine) ─────────────────────────────────── */
+
+[data-color="primary"][data-appearance="solid"] {
+  --variant-background: var(--color-primary-solid-background);
+  --variant-text: var(--color-primary-solid-text);
+  --variant-border: var(--color-primary-solid-border);
+  --variant-hover: var(--color-primary-solid-hover);
+  --variant-shadow: var(--shadow-color-primary);
+}
+
+[data-color="primary"][data-appearance="soft"] {
+  --variant-background: var(--color-primary-soft-background);
+  --variant-text: var(--color-primary-soft-text);
+  --variant-border: var(--color-primary-soft-border);
+  --variant-hover: var(--color-primary-soft-hover);
+  --variant-shadow: var(--shadow-color-primary);
+}
+
+[data-color="primary"][data-appearance="outline"] {
+  --variant-background: var(--color-primary-outline-background);
+  --variant-text: var(--color-primary-outline-text);
+  --variant-border: var(--color-primary-outline-border);
+  --variant-hover: var(--color-primary-outline-hover);
+  --variant-shadow: var(--shadow-color-primary);
+}
+
+[data-color="primary"][data-appearance="ghost"] {
+  --variant-background: var(--color-primary-ghost-background);
+  --variant-text: var(--color-primary-ghost-text);
+  --variant-border: var(--color-primary-ghost-border);
+  --variant-hover: var(--color-primary-ghost-hover);
+  --variant-shadow: var(--shadow-color-primary);
+}
+
+/* ── Accent (Miel) ───────────────────────────────────────── */
+
+[data-color="accent"][data-appearance="solid"] {
+  --variant-background: var(--color-accent-solid-background);
+  --variant-text: var(--color-accent-solid-text);
+  --variant-border: var(--color-accent-solid-border);
+  --variant-hover: var(--color-accent-solid-hover);
+  --variant-shadow: var(--shadow-color-accent);
+}
+
+[data-color="accent"][data-appearance="soft"] {
+  --variant-background: var(--color-accent-soft-background);
+  --variant-text: var(--color-accent-soft-text);
+  --variant-border: var(--color-accent-soft-border);
+  --variant-hover: var(--color-accent-soft-hover);
+  --variant-shadow: var(--shadow-color-accent);
+}
+
+[data-color="accent"][data-appearance="outline"] {
+  --variant-background: var(--color-accent-outline-background);
+  --variant-text: var(--color-accent-outline-text);
+  --variant-border: var(--color-accent-outline-border);
+  --variant-hover: var(--color-accent-outline-hover);
+  --variant-shadow: var(--shadow-color-accent);
+}
+
+[data-color="accent"][data-appearance="ghost"] {
+  --variant-background: var(--color-accent-ghost-background);
+  --variant-text: var(--color-accent-ghost-text);
+  --variant-border: var(--color-accent-ghost-border);
+  --variant-hover: var(--color-accent-ghost-hover);
+  --variant-shadow: var(--shadow-color-accent);
+}
+
+/* ── Success ─────────────────────────────────────────────── */
+
+[data-color="success"][data-appearance="solid"] {
+  --variant-background: var(--color-success-solid-background);
+  --variant-text: var(--color-success-solid-text);
+  --variant-border: var(--color-success-solid-border);
+  --variant-hover: var(--color-success-solid-hover);
+  --variant-shadow: var(--shadow-color-success);
+}
+
+[data-color="success"][data-appearance="soft"] {
+  --variant-background: var(--color-success-soft-background);
+  --variant-text: var(--color-success-soft-text);
+  --variant-border: var(--color-success-soft-border);
+  --variant-hover: var(--color-success-soft-hover);
+  --variant-shadow: var(--shadow-color-success);
+}
+
+[data-color="success"][data-appearance="outline"] {
+  --variant-background: var(--color-success-outline-background);
+  --variant-text: var(--color-success-outline-text);
+  --variant-border: var(--color-success-outline-border);
+  --variant-hover: var(--color-success-outline-hover);
+  --variant-shadow: var(--shadow-color-success);
+}
+
+[data-color="success"][data-appearance="ghost"] {
+  --variant-background: var(--color-success-ghost-background);
+  --variant-text: var(--color-success-ghost-text);
+  --variant-border: var(--color-success-ghost-border);
+  --variant-hover: var(--color-success-ghost-hover);
+  --variant-shadow: var(--shadow-color-success);
+}
+
+/* ── Warning ─────────────────────────────────────────────── */
+
+[data-color="warning"][data-appearance="solid"] {
+  --variant-background: var(--color-warning-solid-background);
+  --variant-text: var(--color-warning-solid-text);
+  --variant-border: var(--color-warning-solid-border);
+  --variant-hover: var(--color-warning-solid-hover);
+  --variant-shadow: var(--shadow-color-warning);
+}
+
+[data-color="warning"][data-appearance="soft"] {
+  --variant-background: var(--color-warning-soft-background);
+  --variant-text: var(--color-warning-soft-text);
+  --variant-border: var(--color-warning-soft-border);
+  --variant-hover: var(--color-warning-soft-hover);
+  --variant-shadow: var(--shadow-color-warning);
+}
+
+[data-color="warning"][data-appearance="outline"] {
+  --variant-background: var(--color-warning-outline-background);
+  --variant-text: var(--color-warning-outline-text);
+  --variant-border: var(--color-warning-outline-border);
+  --variant-hover: var(--color-warning-outline-hover);
+  --variant-shadow: var(--shadow-color-warning);
+}
+
+[data-color="warning"][data-appearance="ghost"] {
+  --variant-background: var(--color-warning-ghost-background);
+  --variant-text: var(--color-warning-ghost-text);
+  --variant-border: var(--color-warning-ghost-border);
+  --variant-hover: var(--color-warning-ghost-hover);
+  --variant-shadow: var(--shadow-color-warning);
+}
+
+/* ── Danger ──────────────────────────────────────────────── */
+
+[data-color="danger"][data-appearance="solid"] {
+  --variant-background: var(--color-danger-solid-background);
+  --variant-text: var(--color-danger-solid-text);
+  --variant-border: var(--color-danger-solid-border);
+  --variant-hover: var(--color-danger-solid-hover);
+  --variant-shadow: var(--shadow-color-danger);
+}
+
+[data-color="danger"][data-appearance="soft"] {
+  --variant-background: var(--color-danger-soft-background);
+  --variant-text: var(--color-danger-soft-text);
+  --variant-border: var(--color-danger-soft-border);
+  --variant-hover: var(--color-danger-soft-hover);
+  --variant-shadow: var(--shadow-color-danger);
+}
+
+[data-color="danger"][data-appearance="outline"] {
+  --variant-background: var(--color-danger-outline-background);
+  --variant-text: var(--color-danger-outline-text);
+  --variant-border: var(--color-danger-outline-border);
+  --variant-hover: var(--color-danger-outline-hover);
+  --variant-shadow: var(--shadow-color-danger);
+}
+
+[data-color="danger"][data-appearance="ghost"] {
+  --variant-background: var(--color-danger-ghost-background);
+  --variant-text: var(--color-danger-ghost-text);
+  --variant-border: var(--color-danger-ghost-border);
+  --variant-hover: var(--color-danger-ghost-hover);
+  --variant-shadow: var(--shadow-color-danger);
+}
+
+/* ── Info ────────────────────────────────────────────────── */
+
+[data-color="info"][data-appearance="solid"] {
+  --variant-background: var(--color-info-solid-background);
+  --variant-text: var(--color-info-solid-text);
+  --variant-border: var(--color-info-solid-border);
+  --variant-hover: var(--color-info-solid-hover);
+  --variant-shadow: var(--shadow-color-info);
+}
+
+[data-color="info"][data-appearance="soft"] {
+  --variant-background: var(--color-info-soft-background);
+  --variant-text: var(--color-info-soft-text);
+  --variant-border: var(--color-info-soft-border);
+  --variant-hover: var(--color-info-soft-hover);
+  --variant-shadow: var(--shadow-color-info);
+}
+
+[data-color="info"][data-appearance="outline"] {
+  --variant-background: var(--color-info-outline-background);
+  --variant-text: var(--color-info-outline-text);
+  --variant-border: var(--color-info-outline-border);
+  --variant-hover: var(--color-info-outline-hover);
+  --variant-shadow: var(--shadow-color-info);
+}
+
+[data-color="info"][data-appearance="ghost"] {
+  --variant-background: var(--color-info-ghost-background);
+  --variant-text: var(--color-info-ghost-text);
+  --variant-border: var(--color-info-ghost-border);
+  --variant-hover: var(--color-info-ghost-hover);
+  --variant-shadow: var(--shadow-color-info);
+}
+
+/* ── Neutral ─────────────────────────────────────────────── */
+
+[data-color="neutral"][data-appearance="solid"] {
+  --variant-background: var(--color-neutral-solid-background);
+  --variant-text: var(--color-neutral-solid-text);
+  --variant-border: var(--color-neutral-solid-border);
+  --variant-hover: var(--color-neutral-solid-hover);
+  --variant-shadow: var(--shadow-color-neutral);
+}
+
+[data-color="neutral"][data-appearance="soft"] {
+  --variant-background: var(--color-neutral-soft-background);
+  --variant-text: var(--color-neutral-soft-text);
+  --variant-border: var(--color-neutral-soft-border);
+  --variant-hover: var(--color-neutral-soft-hover);
+  --variant-shadow: var(--shadow-color-neutral);
+}
+
+[data-color="neutral"][data-appearance="outline"] {
+  --variant-background: var(--color-neutral-outline-background);
+  --variant-text: var(--color-neutral-outline-text);
+  --variant-border: var(--color-neutral-outline-border);
+  --variant-hover: var(--color-neutral-outline-hover);
+  --variant-shadow: var(--shadow-color-neutral);
+}
+
+[data-color="neutral"][data-appearance="ghost"] {
+  --variant-background: var(--color-neutral-ghost-background);
+  --variant-text: var(--color-neutral-ghost-text);
+  --variant-border: var(--color-neutral-ghost-border);
+  --variant-hover: var(--color-neutral-ghost-hover);
+  --variant-shadow: var(--shadow-color-neutral);
+}

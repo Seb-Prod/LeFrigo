@@ -1,18 +1,38 @@
 import clsx from "clsx";
 import styles from "./Badge.module.css";
-
-type BadgeColor = "default" | "success" | "warning" | "danger" | "info" | "neutral";
+import { Color, Size } from "../types";
 
 type Props = {
   children: React.ReactNode;
-  size?: "xs" | "sm" | "md" | "xl"
-  color?: BadgeColor;
+  size?: Size;
+  color?: Color;
   className?: string;
 };
 
-export function Badge({ children, color = "default", className, size ="md" }: Props) {
+/**
+ * Badge — étiquette compacte pour afficher un compteur ou un statut.
+ *
+ * États visuels clés :
+ * - `color` pilote l'apparence via le data-attribute `data-color`,
+ *   toujours en variante `solid` (pas de prop `variant` ici).
+ * - `size` pilote le gabarit (padding, font-size, radius) via
+ *   `data-sizeable` + `data-size`, consommés par les tokens partagés
+ *   avec `Button`/`Chip`.
+ */
+export function Badge({
+  children,
+  color = "danger",
+  className,
+  size = "md",
+}: Props) {
   return (
-    <span className={clsx(styles.badge, styles[color], className)}>
+    <span
+      data-sizeable
+      data-size={size}
+      data-color={color}
+      data-appearance="solid"
+      className={clsx(styles.badge, className)}
+    >
       {children}
     </span>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Row } from "@/components/ui";
+import { Button, Chip, Row } from "@/components/ui";
 import { InputSearch } from "@/components/ui/Input";
 import { FiFilter } from "react-icons/fi";
 import styles from "./SearchFilterBar.module.css";
@@ -10,16 +10,17 @@ import styles from "./SearchFilterBar.module.css";
 export type FilterChip = {
   id: string;
   label: string;
+  icon?: React.ReactNode;
   onRemove?: () => void;
 };
 
 type Props = {
-search?: string;
-searchPlaceholder?: string;
-onSearchChange?: (value: string) => void;
-onOpenFilters?: () => void;
-chips?: FilterChip[];
-filterLabel?: string;
+  search?: string;
+  searchPlaceholder?: string;
+  onSearchChange?: (value: string) => void;
+  onOpenFilters?: () => void;
+  chips?: FilterChip[];
+  filterLabel?: string;
 };
 
 /* ── Composant ─────────────────────────────────────────────── */
@@ -56,14 +57,17 @@ export function SearchFilterBar({
       {chips.length > 0 && (
         <Row gap="sm" scroll>
           {chips.map((chip) => (
-            <Button
-              key={chip.id}
-              variant="soft"
-              size="sm"
-              onClick={chip.onRemove}
-            >
+            <Chip key={chip.id} icon={chip.icon} removable>
               {chip.label}
-            </Button>
+            </Chip>
+            // <Button
+            //   key={chip.id}
+            //   variant="soft"
+            //   size="sm"
+            //   onClick={chip.onRemove}
+            // >
+            //   {chip.label}
+            // </Button>
           ))}
         </Row>
       )}

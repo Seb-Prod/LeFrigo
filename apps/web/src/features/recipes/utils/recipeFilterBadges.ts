@@ -1,4 +1,7 @@
 import type { RecipeFilters } from "@lefrigo/shared";
+import { IconType } from "react-icons";
+import { FiSliders } from "react-icons/fi";
+import { TbChefHat, TbClockHour4, TbFlame, TbSearch } from "react-icons/tb";
 
 /* ── Types ─────────────────────────────────────────────────── */
 
@@ -7,48 +10,46 @@ export type FilterKey = keyof RecipeFilters;
 export type RecipeFilterBadge = {
   key: FilterKey;
   label: string;
+  icon: IconType;
 };
 
 /* ── Configuration ─────────────────────────────────────────── */
 
 const BADGE_CONFIG: {
   key: FilterKey;
+  icon: IconType;
   getLabel: (filters: RecipeFilters) => string | null;
 }[] = [
   {
     key: "search",
-    getLabel: (f) =>
-      f.search ? `Recherche : "${f.search}"` : null,
+    icon: TbSearch,
+    getLabel: (f) => (f.search ? f.search : null),
   },
 
   {
     key: "maxPreparationTime",
+    icon: TbChefHat,
     getLabel: (f) =>
-      f.maxPreparationTime
-        ? `Préparation ≤ ${f.maxPreparationTime} min`
-        : null,
+      f.maxPreparationTime ? `≤ ${f.maxPreparationTime} min` : null,
   },
 
   {
     key: "maxCookingTime",
+    icon: TbFlame,
     getLabel: (f) =>
-      f.maxCookingTime
-        ? `Cuisson ≤ ${f.maxCookingTime} min`
-        : null,
+      f.maxCookingTime ? `≤ ${f.maxCookingTime} min` : null,
   },
 
   {
     key: "maxTotalTime",
-    getLabel: (f) =>
-      f.maxTotalTime
-        ? `Repas ≤ ${f.maxTotalTime} min`
-        : null,
+    icon: TbClockHour4,
+    getLabel: (f) => (f.maxTotalTime ? `≤ ${f.maxTotalTime} min` : null),
   },
 
   {
     key: "sort",
-    getLabel: (f) =>
-      f.sort ? `Tri : ${f.sort}` : null,
+    icon: FiSliders,
+    getLabel: (f) => (f.sort ? `Tri : ${f.sort}` : null),
   },
 ];
 
@@ -61,9 +62,9 @@ export function getRecipeFilterBadges(
     return [];
   }
 
-  return BADGE_CONFIG.flatMap(({ key, getLabel }) => {
+  return BADGE_CONFIG.flatMap(({ key, icon, getLabel }) => {
     const label = getLabel(filters);
 
-    return label ? [{ key, label }] : [];
+    return label ? [{ key, label, icon }] : [];
   });
 }

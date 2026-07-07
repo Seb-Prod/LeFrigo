@@ -1,8 +1,10 @@
+/* ── Conteneur (span externe) ─────────────────────────── */
 .wrapper {
   position: relative;
-  display: inline-block; /* ne casse pas le layout inline du bouton */
+  display: inline-block;
 }
 
+/* ── Badge de compteur ─────────────────────────────────── */
 .badge {
   position: absolute;
   top: 0;
@@ -11,15 +13,11 @@
   z-index: 2;
 }
 
-/* ── Variables internes ───────────────────────────────────── */
+/* ── Bouton principal ──────────────────────────────────── */
 
-/* Chaque variante surcharge uniquement les props qu'elle concerne. */
+/* Chaque variante (color × appearance) surcharge uniquement les
+   variables CSS qui la concernent (background, border, text). */
 .button {
-  --bg: var(--color-primary-solid);
-  --color: var(--color-primary-solid-text);
-  --shadow-color: rgba(83, 74, 183, 0.35);
-  --ripple: rgba(255, 255, 255, 0.22);
-
   position: relative;
   overflow: hidden;
   isolation: isolate;
@@ -28,310 +26,49 @@
   align-items: center;
   gap: var(--space-sm);
 
-  border: 1.5px solid transparent;
-  /* réservé pour ghost, invisible ailleurs */
+  background: var(--variant-background);
+  border: 1.5px solid var(--variant-border);
+  color: var(--variant-text);
   cursor: pointer;
+  box-shadow: var(--shadow-size) var(--variant-shadow);
 
-  padding: 10px 22px;
-  border-radius: var(--radius-md);
+  padding: var(--padding);
+  border-radius: var(--radius);
 
-  background: var(--bg);
-  color: var(--color);
-
-  font-size: 14px;
-  font-weight: 600;
-
-  transition:
-    transform 0.2s cubic-bezier(0.34, 1.4, 0.64, 1),
-    box-shadow 0.25s ease;
+  font-size: var(--font-size);
+  font-weight: var(--font-weight-medium);
 }
 
-.icon{
+/* survol : légère mise en avant du bouton */
+.button:hover {
+  background: var(--variant-hover);
+  box-shadow: none;
+}
+
+/* pression : léger enfoncement visuel façon "bouton physique" */
+.button:active {
+  scale: 0.96;
+}
+
+/* focus clavier : anneau visible sans dépendre du survol souris */
+.button:focus-visible {
+  outline: 2px solid var(--variant-text);
+  outline-offset: 2px;
+}
+
+/* état désactivé : neutralise couleur, curseur et interactions */
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Icône ─────────────────────────────────────────────── */
+.icon {
   margin: 0;
   padding: 0;
   width: 20px;
   height: 20px;
   display: inline-flex;
   align-items: center;
-}
-
-/* ── Blobs ────────────────────────────────────────────────── */
-
-/* Deux pseudo-éléments décalés pour un effet liquide bicouche */
-.button::before,
-.button::after {
-  content: "";
-
-  position: absolute;
-
-  width: 200%;
-  height: 200%;
-  left: -50%;
-  top: 110%;
-  /* part du bas, invisible au repos */
-
-  background: var(--ripple);
-  z-index: 0;
-  pointer-events: none;
-
-  /* Blobs ronds : ratio x/y proche de 1 pour éviter l'effet anguleux */
-  border-radius: 45% 55% 60% 40% / 50% 45% 55% 50%;
-  transition:
-    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    border-radius 0.7s ease;
-}
-
-/* Second blob légèrement décalé en opacité et timing */
-.button::after {
-  opacity: 0.6;
-  border-radius: 55% 45% 40% 60% / 45% 55% 50% 50%;
-  transition-duration: 0.9s;
-}
-
-/* Le contenu reste au-dessus des blobs */
-.button>* {
-  position: relative;
-  z-index: 1;
-}
-
-
-/* ── Press ────────────────────────────────────────────────── */
-
-.button:active:not(:disabled) {
-  transform: scale(0.97);
-  transition-duration: 0.08s;
-}
-
-/* Repousse les blobs vers le bas au press pour annuler l'effet hover */
-.button:active:not(:disabled)::before,
-.button:active:not(:disabled)::after {
-  transform: translateY(0%) rotate(0deg);
-  transition-duration: 0.08s;
-  animation: none; /* stoppe blobFloat si actif */
-}
-
-/* ── Disabled ─────────────────────────────────────────────── */
-
-.button:disabled {
-  opacity: 0.42;
-  cursor: not-allowed;
-}
-
-/* ── Appearance : no-blob ─────────────────────────────────── */
-
-/* Supprime les pseudo-éléments quand l'animation est désactivée */
-.noBlob::before,
-.noBlob::after {
-  display: none;
-}
-
-/* ── Animation flottante post-hover ──────────────────────── */
-
-@keyframes blobFloat {
-  0% {
-    transform: translateY(-98%) rotate(-10deg);
-  }
-
-  50% {
-    transform: translateY(-103%) rotate(-4deg);
-  }
-
-  100% {
-    transform: translateY(-98%) rotate(-10deg);
-  }
-}
-
-/* ── Appearance : solid (défaut) ─────────────────────────── */
-
-/* Fond plein — ripple blanc semi-transparent */
-.solid {
-  --ripple: rgba(255, 255, 255, 0.22);
-}
-
-/* ── Appearance : soft ────────────────────────────────────── */
-
-/* Fond pastel — ripple teinté dans la même couleur */
-.soft {
-  --ripple: color-mix(in srgb, var(--bg) 30%, transparent);
-}
-
-/* ── Appearance : ghost ───────────────────────────────────── */
-
-/* Fond transparent + bordure colorée */
-.ghost {
-  --ripple: color-mix(in srgb, var(--color) 10%, transparent);
-  background: transparent;
-  border-color: var(--color);
-}
-
-/* ── Color : primary ─────────────────────────────────────── */
-
-.primary {
-  --bg: var(--color-primary-solid);
-  --color: var(--color-primary-solid-text);
-  --shadow-color: rgba(83, 74, 183, 0.35);
-}
-
-.primary.soft {
-  --bg: var(--color-primary-soft);
-  --color: var(--color-primary-soft-text);
-}
-
-.primary.ghost {
-  --bg: transparent;
-  --color: var(--color-primary-solid);
-}
-
-/* ── Color : accent ──────────────────────────────────────── */
-
-.accent {
-  --bg: var(--color-accent-solid);
-  --color: var(--color-accent-solid-text);
-  --shadow-color: rgba(29, 158, 117, 0.35);
-}
-
-.accent.soft {
-  --bg: var(--color-accent-soft);
-  --color: var(--color-accent-soft-text);
-}
-
-.accent.ghost {
-  --bg: transparent;
-  --color: var(--color-accent-solid);
-}
-
-/* ── Color : danger ──────────────────────────────────────── */
-
-.danger {
-  --bg: var(--color-danger-solid);
-  --color: var(--color-danger-solid-text);
-  --shadow-color: rgba(216, 90, 48, 0.35);
-}
-
-.danger.soft {
-  --bg: var(--color-danger-soft);
-  --color: var(--color-danger-soft-text);
-}
-
-.danger.ghost {
-  --bg: transparent;
-  --color: var(--color-danger-solid);
-}
-
-.success {
-  --bg: var(--color-success-solid);
-  --color: var(--color-success-solid-text);
-  --shadow-color: var(--shadow-color-success);
-}
-
-.success.soft {
-  --bg: var(--color-success-soft);
-  --color: var(--color-success-soft-text);
-}
-
-.success.ghost {
-  --bg: transparent;
-  --color: var(--color-success-solid);
-}
-
-.warning {
-  --bg: var(--color-warning-solid);
-  --color: var(--color-warning-solid-text);
-  --shadow-color: var(--shadow-color-warning);
-}
-
-.warning.soft {
-  --bg: var(--color-warning-soft);
-  --color: var(--color-warning-soft-text);
-}
-
-.warning.ghost {
-  --bg: transparent;
-  --color: var(--color-warning-solid);
-}
-
-.info {
-  --bg: var(--color-info-solid);
-  --color: var(--color-info-solid-text);
-  --shadow-color: var(--shadow-color-info);
-}
-
-.info.soft {
-  --bg: var(--color-info-soft);
-  --color: var(--color-info-soft-text);
-}
-
-.info.ghost {
-  --bg: transparent;
-  --color: var(--color-info-solid);
-}
-
-.accent {
-  --bg: var(--color-accent-solid);
-  --color: var(--color-accent-solid-text);
-  --shadow-color: var(--shadow-color-accent);
-}
-
-.accent.soft {
-  --bg: var(--color-accent-soft);
-  --color: var(--color-accent-soft-text);
-}
-
-.accent.ghost {
-  --bg: transparent;
-  --color: var(--color-accent-solid);
-}
-
-.neutral {
-  --bg: var(--color-neutral-solid);
-  --color: var(--color-neutral-solid-text);
-  --shadow-color: var(--shadow-color-neutral);
-}
-
-.neutral.soft {
-  --bg: var(--color-neutral-soft);
-  --color: var(--color-neutral-soft-text);
-}
-
-.neutral.ghost {
-  --bg: transparent;
-  --color: var(--color-neutral-solid);
-}
-
-/* ── Sizes ────────────────────────────────────────────────── */
-
-.sm {
-  padding: 6px 14px;
-  font-size: 12px;
-  border-radius: var(--radius-sm);
-}
-
-.md {
-  padding: 10px 22px; /* déjà défini sur .button, redondant mais explicite */
-  font-size: 14px;
-}
-
-.lg {
-  padding: 13px 28px;
-  font-size: 16px;
-}
-
-/* ── Blobs — uniquement sur devices avec hover réel ─────────── */
-
-@media (hover: hover) {
-  .button:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 28px -8px var(--shadow-color);
-  }
-
-  .button:hover:not(:disabled)::before {
-    transform: translateY(-88%) rotate(8deg);
-    border-radius: 50% 50% 45% 55% / 48% 52% 50% 50%;
-  }
-
-  .button:hover:not(:disabled)::after {
-    transform: translateY(-98%) rotate(-10deg);
-    border-radius: 52% 48% 55% 45% / 50% 48% 52% 50%;
-    animation: blobFloat 3.5s ease-in-out infinite;
-  }
 }

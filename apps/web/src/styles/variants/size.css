@@ -1,0 +1,34 @@
+[data-sizeable][data-size="xs"] {
+    --padding: var(--button-py-xs) var(--button-px-xs);
+    --font-size: var(--font-xs);
+    --radius: var(--radius-sm);
+    --shadow-size: var(--shadow-size-xs);
+}
+
+[data-sizeable][data-size="sm"] {
+    --padding: var(--button-py-sm) var(--button-px-sm);
+    --font-size: var(--font-sm);
+    --radius: var(--radius-sm);
+    --shadow-size: var(--shadow-size-sm);
+}
+
+[data-sizeable][data-size="md"] {
+    --padding: var(--button-py-md) var(--button-px-md);
+    --font-size: var(--font-md);
+    --radius: var(--radius-md);
+    --shadow-size: var(--shadow-size-md);
+}
+
+[data-sizeable][data-size="lg"] {
+    --padding: var(--button-py-lg) var(--button-px-lg);
+    --font-size: var(--font-lg);
+    --radius: var(--radius-lg);
+    --shadow-size: var(--shadow-size-lg);
+}
+
+[data-sizeable][data-size="xl"] {
+    --padding: var(--button-py-xl) var(--button-px-xl);
+    --font-size: var(--font-xl);
+    --radius: var(--radius-xl);
+    --shadow-size: var(--shadow-size-xl);
+}

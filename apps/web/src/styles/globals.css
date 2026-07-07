@@ -1,6 +1,10 @@
 @import "./variables.css";
+/* @import "./themes/light-back.css";
+@import "./themes/dark-back.css"; */
+@import "./palette/palette.css";
 @import "./themes/light.css";
 @import "./themes/dark.css";
+@import "./variants/index.css";
 @import "./reset.css";
 
 * {

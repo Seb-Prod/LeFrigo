@@ -1,43 +1,91 @@
-import { Color } from "../types";
+import { IoMdCloseCircle } from "react-icons/io";
+import { Color, Size, Variant } from "../types";
+import styles from "./Chip.module.css";
+import clsx from "clsx";
 
 type Props = {
-  /** Contenu du chip. */
   children: React.ReactNode;
-
-  /** Icône affichée avant le texte. */
   icon?: React.ReactNode;
-
-  /** Variante visuelle. */
-  variant?: "solid" | "soft" | "outline";
-
-  /** Couleur sémantique. */
+  variant?: Variant;
   color?: Color;
-
-  /** Taille. */
-  size?: "sm" | "md" | "lg";
-
-  /** État sélectionné. */
+  size?: Size;
   selected?: boolean;
-
-  /** Désactive le chip. */
   disabled?: boolean;
-
-  /** Rend le chip cliquable. */
   onClick?: () => void;
-
-  /** Affiche une croix de suppression. */
   removable?: boolean;
-
-  /** Callback de suppression. */
   onRemove?: () => void;
-
   className?: string;
 };
 
-export function Chip(){
-    return(
-        <button>
+/**
+ * Chip — étiquette compacte, sélectionnable, cliquable et/ou supprimable.
+ *
+ * États visuels clés :
+ * - `variant` × `color` pilotent l'apparence via les data-attributes
+ *   (`data-appearance`, `data-color`) consommés par les tokens CSS.
+ * - `size` pilote le gabarit (padding, font-size) via `data-size`.
+ * - `selected` bascule un style actif via `data-selected`.
+ * - `disabled` désactive les interactions.
+ *
+ * Comportements dynamiques :
+ * - `onClick` et `onRemove` sont indépendants : un chip peut être
+ *   cliquable ET supprimable en même temps.
+ * - Le clic sur l'icône de suppression stoppe la propagation pour ne
+ *   pas déclencher `onClick` par la même occasion.
+ */
+export function Chip({
+  children,
+  icon,
+  variant = "ghost",
+  color = "primary",
+  size = "sm",
+  selected,
+  disabled,
+  onClick,
+  removable,
+  onRemove,
+  className,
+}: Props) {
+  /** Ferme/supprime le chip sans déclencher le onClick du parent. */
+  const handleRemove = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    onRemove?.();
+  };
 
+  return (
+    <span
+      data-sizeable
+      data-size={size}
+      data-color={color}
+      data-appearance={variant}
+      data-selected={selected || undefined}
+      className={clsx(styles.wrapper, className)}
+    >
+      {/* ── Chip principal (cliquable) ── */}
+      <button
+        type="button"
+        className={styles.chip}
+        onClick={onClick}
+        disabled={disabled}
+      >
+        {/* ── Icône de préfixe (optionnelle) ── */}
+        {icon && <span className={styles.icon}>{icon}</span>}
+
+        {children}
+      </button>
+
+      {/* ── Bouton de suppression (indépendant du clic principal) ── */}
+      {removable && (
+        <button
+          type="button"
+          className={clsx(styles.icon, styles.removeIcon)}
+          onClick={handleRemove}
+          disabled={disabled}
+          aria-label="Supprimer"
+        >
+          <IoMdCloseCircle />
         </button>
-    )
+      )}
+    </span>
+  );
 }

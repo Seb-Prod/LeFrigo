@@ -8,3 +8,26 @@ export type Color =
   | "success"
   | "warning"
   | "danger";
+
+/* ── Variantes ────────────────────────────────────────────── */
+
+export type Variant =
+  | "solid"
+  | "soft"
+  | "ghost"
+  | "outline";
+
+/* ── Tailles ──────────────────────────────────────────────── */
+
+export type Size =
+  | "xs"
+  | "sm"
+  | "md"
+  | "lg";
+
+/* ── Alignements ──────────────────────────────────────────── */
+
+export type Align =
+  | "left"
+  | "center"
+  | "right";
