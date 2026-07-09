@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import clsx from "clsx";
 import styles from "./ButtonBurger.module.css";
 
@@ -11,48 +10,46 @@ type Props = {
 };
 
 /**
- * ButtonBurger
- * Bouton hamburger animé (transformation en croix + cercle qui se trace
- * en fond) basé sur https://codepen.io (animation "open"/"closed").
- * `mounted` évite que l'animation "closed" ne se joue au premier rendu
- * si `isOpen` démarre à `false`.
+ * ButtonBurger — icône hamburger animée, transformable en croix.
+ *
+ * États visuels clés :
+ * - `isOpen` pilote la transformation via le data-attribute `data-open`,
+ *   consommé par les sélecteurs CSS `.hamburger[data-open="true"]`.
+ * - Fermé : trois lignes horizontales en bleu primaire.
+ * - Ouvert : les lignes top/bot pivotent en croix (couleur danger), la ligne
+ *   du milieu disparaît, et un cercle SVG se dessine progressivement
+ *   autour de l'icône via `stroke-dashoffset`.
+ *
+ * Comportements dynamiques :
+ * - `onClick` est déclenché au clic sur l'ensemble du conteneur (pas
+ *   seulement sur les lignes), pour maximiser la zone cliquable.
  */
-export function ButtonBurger({ className, onClick, isOpen }: Props) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
+export function ButtonBurger({ className, onClick, isOpen = false }: Props) {
   return (
     <div
       onClick={onClick}
-      className={clsx(
-        styles.hamburger,
-        className,
-        mounted && (isOpen ? styles.open : styles.closed),
-      )}
+      data-open={isOpen}
+      className={clsx(styles.hamburger, className)}
     >
+      {/* ── Lignes du hamburger ── */}
       <div className={styles.burgerMain}>
         <div className={styles.burgerInner}>
-          <span className={styles.top}></span>
-          <span className={styles.mid}></span>
-          <span className={styles.bot}></span>
+          <span className={clsx(styles.line, styles.top)} />
+          <span className={clsx(styles.line, styles.mid)} />
+          <span className={clsx(styles.line, styles.bot)} />
         </div>
       </div>
 
-      {/* ── Cercle de fond animé (trait qui se trace) ── */}
+      {/* ── Cercle de contour animé ── */}
       <div className={styles.svgMain}>
         <svg className={styles.svgCircle} viewBox="0 0 48 48">
           <path
             className={styles.path}
             d="M24,2 a22,22 0 1,1 -0.01,0"
             fill="none"
-            stroke="var(--color-danger-solid)"
+            stroke="var(--color-danger-solid-background)"
             strokeWidth="4"
             strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeMiterlimit="10"
           />
         </svg>
       </div>

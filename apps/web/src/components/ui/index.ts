@@ -3,7 +3,7 @@ export { Avatar } from "./Avatar"; //refactor
 
 export { Badge } from "./Badge";
 export { Button } from "./Button/Button";
-export { ButtonBurger } from "./ButtonBurger"; //refactor
+export { ButtonBurger } from "./ButtonBurger";
 export * from "./ButtonIcon"; //refactor
 
 export { Card } from "./Card"; //refactor
