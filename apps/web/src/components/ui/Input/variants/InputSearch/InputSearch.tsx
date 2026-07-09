@@ -13,9 +13,16 @@ type Props = Omit<React.ComponentProps<typeof Input>, "type">;
  *   onChange={(e) => setSearch(e.target.value)}
  * />
  */
-export function InputSearch({ className, ...props }: Props) {
+export function InputSearch({
+  className,
+  color = "primary",
+  variant = "flushed",
+  ...props
+}: Props) {
   return (
     <Input
+      color={color}
+      variant={variant}
       {...props}
       type="text"
       iconLeft={<FiSearch />}

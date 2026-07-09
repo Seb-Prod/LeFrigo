@@ -55,7 +55,7 @@ export function Button({
       data-sizeable
       data-size={size}
       data-color={color}
-      data-appearance={variant}
+      data-variant={variant}
       className={clsx(styles.wrapper, className)}
     >
       <button className={styles.button} {...props} onMouseUp={handleMouseUp}>

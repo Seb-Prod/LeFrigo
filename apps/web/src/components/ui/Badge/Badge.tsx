@@ -30,7 +30,7 @@ export function Badge({
       data-sizeable
       data-size={size}
       data-color={color}
-      data-appearance="solid"
+      data-variant="solid"
       className={clsx(styles.badge, className)}
     >
       {children}

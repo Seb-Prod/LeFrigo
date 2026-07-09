@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, Chip, Row } from "@/components/ui";
-import { InputSearch } from "@/components/ui/Input";
+import { InputPassword, InputSearch } from "@/components/ui/Input";
 import { FiFilter } from "react-icons/fi";
 import styles from "./SearchFilterBar.module.css";
 
@@ -43,7 +43,7 @@ export function SearchFilterBar({
           value={search}
           onChange={(e) => onSearchChange?.(e.target.value)}
         />
-
+        <InputPassword/>
         <Button
           icon={<FiFilter />}
           count={chips.length}

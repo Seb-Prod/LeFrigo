@@ -1,0 +1,71 @@
+/* ── Solid ───────────────────────────────────────────────── */
+[data-variant="solid"] {
+  --variant-background: var(--solid-background);
+  --variant-text: var(--solid-text);
+  --variant-border: var(--solid-border);
+  --variant-hover: var(--solid-hover);
+  --variant-shadow: var(--shadow);
+}
+
+/* ── Soft ────────────────────────────────────────────────── */
+[data-variant="soft"] {
+  --variant-background: var(--soft-background);
+  --variant-text: var(--soft-text);
+  --variant-border: var(--soft-border);
+  --variant-hover: var(--soft-hover);
+  --variant-shadow: var(--shadow);
+}
+
+/* ── Outline ─────────────────────────────────────────────── */
+[data-variant="outline"] {
+  --variant-background: var(--outline-background);
+  --variant-text: var(--outline-text);
+  --variant-border: var(--outline-border);
+  --variant-hover: var(--outline-hover);
+  --variant-shadow: var(--shadow);
+}
+
+/* ── Ghost ───────────────────────────────────────────────── */
+[data-variant="ghost"] {
+  --variant-background: var(--ghost-background);
+  --variant-text: var(--ghost-text);
+  --variant-border: var(--ghost-border);
+  --variant-hover: var(--ghost-hover);
+  --variant-shadow: var(--shadow);
+}
+
+/* ── Outline ─────────────────────────────────────────────── */
+[data-variant="outline"] {
+  --variant-background: var(--outline-background);
+  --variant-text: var(--outline-text);
+  --variant-border: var(--outline-border);
+  --variant-hover: var(--outline-hover);
+  --variant-shadow: var(--shadow);
+}
+
+/* ── Filled ──────────────────────────────────────────────── */
+[data-variant="filled"] {
+  --variant-background: var(--filled-background);
+  --variant-text: var(--filled-text);
+  --variant-border: var(--filled-border);
+  --variant-hover: var(--filled-hover);
+  --variant-shadow: var(--shadow);
+}
+
+/* ── Underlined ──────────────────────────────────────────── */
+[data-variant="underlined"] {
+  --variant-background: var(--underlined-background);
+  --variant-text: var(--underlined-text);
+  --variant-border: var(--underlined-border);
+  --variant-hover: var(--underlined-hover);
+  --variant-shadow: var(--shadow);
+}
+
+/* ── Flushed ─────────────────────────────────────────────── */
+[data-variant="flushed"] {
+  --variant-background: var(--flushed-background);
+  --variant-text: var(--flushed-text);
+  --variant-border: var(--flushed-border);
+  --variant-hover: var(--flushed-hover);
+  --variant-shadow: var(--shadow);
+}

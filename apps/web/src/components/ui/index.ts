@@ -24,7 +24,7 @@ export { Heading } from "./Heading"; //refactor
 export { Highlight } from "./Highlight"; //refactor
 
 export { IngredientAutocomplete } from "./IngredientAutocomplete"; //refactor
-export { Input, InputEmail, InputPassword, InputUserName } from "./Input"; //refactor
+export * from "./Input";
 export { InputNumber } from "./InputNumber"; //refactor
 
 export { Logo } from "./Logo"; //refactor

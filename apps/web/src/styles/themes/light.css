@@ -22,6 +22,21 @@
     --color-primary-ghost-hover: rgba(var(--aubergine-500-rgb), 0.08);
     --color-primary-ghost-border: transparent;
 
+    --color-primary-filled-background: var(--aubergine-50);
+    --color-primary-filled-text: var(--aubergine-900);
+    --color-primary-filled-hover: var(--aubergine-100);
+    --color-primary-filled-border: transparent;
+
+    --color-primary-underlined-background: transparent;
+    --color-primary-underlined-text: var(--aubergine-900);
+    --color-primary-underlined-hover: var(--aubergine-50);
+    --color-primary-underlined-border: var(--aubergine-500);
+
+    --color-primary-flushed-background: transparent;
+    --color-primary-flushed-text: var(--aubergine-900);
+    --color-primary-flushed-hover: var(--aubergine-50);
+    --color-primary-flushed-border: var(--aubergine-300);
+
     --shadow-color-primary: rgba(var(--aubergine-500-rgb), 0.28);
 
     /* –– ACCENT –– */
@@ -45,6 +60,21 @@
     --color-accent-ghost-text: var(--miel-500);
     --color-accent-ghost-hover: rgba(var(--miel-500-rgb), 0.08);
     --color-accent-ghost-border: transparent;
+
+    --color-accent-filled-background: var(--miel-50);
+    --color-accent-filled-text: var(--miel-900);
+    --color-accent-filled-hover: var(--miel-100);
+    --color-accent-filled-border: transparent;
+
+    --color-accent-underlined-background: transparent;
+    --color-accent-underlined-text: var(--miel-900);
+    --color-accent-underlined-hover: var(--miel-50);
+    --color-accent-underlined-border: var(--miel-500);
+
+    --color-accent-flushed-background: transparent;
+    --color-accent-flushed-text: var(--miel-900);
+    --color-accent-flushed-hover: var(--miel-50);
+    --color-accent-flushed-border: var(--miel-300);
 
     --shadow-color-accent: rgba(var(--miel-500-rgb), 0.28);
 
@@ -70,6 +100,21 @@
     --color-success-ghost-hover: rgba(var(--green-500-rgb), 0.08);
     --color-success-ghost-border: transparent;
 
+    --color-success-filled-background: var(--green-50);
+    --color-success-filled-text: var(--green-900);
+    --color-success-filled-hover: var(--green-100);
+    --color-success-filled-border: transparent;
+
+    --color-success-underlined-background: transparent;
+    --color-success-underlined-text: var(--green-900);
+    --color-success-underlined-hover: var(--green-50);
+    --color-success-underlined-border: var(--green-500);
+
+    --color-success-flushed-background: transparent;
+    --color-success-flushed-text: var(--green-900);
+    --color-success-flushed-hover: var(--green-50);
+    --color-success-flushed-border: var(--green-300);
+
     --shadow-color-success: rgba(var(--green-500-rgb), 0.28);
 
     /* –– WARNING –– */
@@ -93,6 +138,21 @@
     --color-warning-ghost-text: var(--yellow-500);
     --color-warning-ghost-hover: rgba(var(--yellow-500-rgb), 0.08);
     --color-warning-ghost-border: transparent;
+
+    --color-warning-filled-background: var(--yellow-50);
+    --color-warning-filled-text: var(--yellow-900);
+    --color-warning-filled-hover: var(--yellow-100);
+    --color-warning-filled-border: transparent;
+
+    --color-warning-underlined-background: transparent;
+    --color-warning-underlined-text: var(--yellow-900);
+    --color-warning-underlined-hover: var(--yellow-50);
+    --color-warning-underlined-border: var(--yellow-500);
+
+    --color-warning-flushed-background: transparent;
+    --color-warning-flushed-text: var(--yellow-900);
+    --color-warning-flushed-hover: var(--yellow-50);
+    --color-warning-flushed-border: var(--yellow-300);
 
     --shadow-color-warning: rgba(var(--yellow-500-rgb), 0.28);
 
@@ -118,6 +178,21 @@
     --color-danger-ghost-hover: rgba(var(--red-500-rgb), 0.08);
     --color-danger-ghost-border: transparent;
 
+    --color-danger-filled-background: var(--red-50);
+    --color-danger-filled-text: var(--red-900);
+    --color-danger-filled-hover: var(--red-100);
+    --color-danger-filled-border: transparent;
+
+    --color-danger-underlined-background: transparent;
+    --color-danger-underlined-text: var(--red-900);
+    --color-danger-underlined-hover: var(--red-50);
+    --color-danger-underlined-border: var(--red-500);
+
+    --color-danger-flushed-background: transparent;
+    --color-danger-flushed-text: var(--red-900);
+    --color-danger-flushed-hover: var(--red-50);
+    --color-danger-flushed-border: var(--red-300);
+
     --shadow-color-danger: rgba(var(--red-500-rgb), 0.28);
 
     /* –– INFO –– */
@@ -141,6 +216,21 @@
     --color-info-ghost-text: var(--blue-500);
     --color-info-ghost-hover: rgba(var(--blue-500-rgb), 0.08);
     --color-info-ghost-border: transparent;
+
+    --color-info-filled-background: var(--blue-50);
+    --color-info-filled-text: var(--blue-900);
+    --color-info-filled-hover: var(--blue-100);
+    --color-info-filled-border: transparent;
+
+    --color-info-underlined-background: transparent;
+    --color-info-underlined-text: var(--blue-900);
+    --color-info-underlined-hover: var(--blue-50);
+    --color-info-underlined-border: var(--blue-500);
+
+    --color-info-flushed-background: transparent;
+    --color-info-flushed-text: var(--blue-900);
+    --color-info-flushed-hover: var(--blue-50);
+    --color-info-flushed-border: var(--blue-300);
 
     --shadow-color-info: rgba(var(--blue-500-rgb), 0.28);
 
@@ -167,6 +257,21 @@
     --color-neutral-ghost-hover: rgba(var(--gray-500-rgb), 0.08);
     --color-neutral-ghost-border: transparent;
 
+    --color-neutral-filled-background: var(--gray-50);
+    --color-neutral-filled-text: var(--gray-800);
+    --color-neutral-filled-hover: var(--gray-100);
+    --color-neutral-filled-border: transparent;
+
+    --color-neutral-underlined-background: transparent;
+    --color-neutral-underlined-text: var(--gray-800);
+    --color-neutral-underlined-hover: var(--gray-50);
+    --color-neutral-underlined-border: var(--gray-500);
+
+    --color-neutral-flushed-background: transparent;
+    --color-neutral-flushed-text: var(--gray-800);
+    --color-neutral-flushed-hover: var(--gray-50);
+    --color-neutral-flushed-border: var(--gray-300);
+
     --shadow-color-neutral: rgba(var(--gray-500-rgb), 0.28);
 
     /* –– Background (layout global) –– */
@@ -181,4 +286,7 @@
     --color-text-secondary: var(--gray-700);
     --color-text-muted: var(--gray-500);
 
+    /* –– Input –– */
+
+    --color-input-placeholder: var(--gray-400);
 }

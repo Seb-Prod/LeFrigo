@@ -1,0 +1,279 @@
+/* ── Primary ─────────────────────────────────────────────── */
+[data-color="primary"] {
+  --shadow: var(--shadow-color-primary); /* mutualisée entre les 4 appearances */
+
+  --solid-background: var(--color-primary-solid-background);
+  --solid-text: var(--color-primary-solid-text);
+  --solid-border: var(--color-primary-solid-border);
+  --solid-hover: var(--color-primary-solid-hover);
+
+  --soft-background: var(--color-primary-soft-background);
+  --soft-text: var(--color-primary-soft-text);
+  --soft-border: var(--color-primary-soft-border);
+  --soft-hover: var(--color-primary-soft-hover);
+
+  --outline-background: var(--color-primary-outline-background);
+  --outline-text: var(--color-primary-outline-text);
+  --outline-border: var(--color-primary-outline-border);
+  --outline-hover: var(--color-primary-outline-hover);
+
+  --ghost-background: var(--color-primary-ghost-background);
+  --ghost-text: var(--color-primary-ghost-text);
+  --ghost-border: var(--color-primary-ghost-border);
+  --ghost-hover: var(--color-primary-ghost-hover);
+
+  --filled-background: var(--color-primary-filled-background);
+  --filled-text: var(--color-primary-filled-text);
+  --filled-border: var(--color-primary-filled-border);
+  --filled-hover: var(--color-primary-filled-hover);
+
+  --underlined-background: var(--color-primary-underlined-background);
+  --underlined-text: var(--color-primary-underlined-text);
+  --underlined-border: var(--color-primary-underlined-border);
+  --underlined-hover: var(--color-primary-underlined-hover);
+
+  --flushed-background: var(--color-primary-flushed-background);
+  --flushed-text: var(--color-primary-flushed-text);
+  --flushed-border: var(--color-primary-flushed-border);
+  --flushed-hover: var(--color-primary-flushed-hover);
+}
+
+/* ── Accent ──────────────────────────────────────────────── */
+[data-color="accent"] {
+  --shadow: var(--shadow-color-accent);
+
+  --solid-background: var(--color-accent-solid-background);
+  --solid-text: var(--color-accent-solid-text);
+  --solid-border: var(--color-accent-solid-border);
+  --solid-hover: var(--color-accent-solid-hover);
+
+  --soft-background: var(--color-accent-soft-background);
+  --soft-text: var(--color-accent-soft-text);
+  --soft-border: var(--color-accent-soft-border);
+  --soft-hover: var(--color-accent-soft-hover);
+
+  --outline-background: var(--color-accent-outline-background);
+  --outline-text: var(--color-accent-outline-text);
+  --outline-border: var(--color-accent-outline-border);
+  --outline-hover: var(--color-accent-outline-hover);
+
+  --ghost-background: var(--color-accent-ghost-background);
+  --ghost-text: var(--color-accent-ghost-text);
+  --ghost-border: var(--color-accent-ghost-border);
+  --ghost-hover: var(--color-accent-ghost-hover);
+
+  --filled-background: var(--color-accent-filled-background);
+  --filled-text: var(--color-accent-filled-text);
+  --filled-border: var(--color-accent-filled-border);
+  --filled-hover: var(--color-accent-filled-hover);
+
+  --underlined-background: var(--color-accent-underlined-background);
+  --underlined-text: var(--color-accent-underlined-text);
+  --underlined-border: var(--color-accent-underlined-border);
+  --underlined-hover: var(--color-accent-underlined-hover);
+
+  --flushed-background: var(--color-accent-flushed-background);
+  --flushed-text: var(--color-accent-flushed-text);
+  --flushed-border: var(--color-accent-flushed-border);
+  --flushed-hover: var(--color-accent-flushed-hover);
+}
+
+/* ── Success ─────────────────────────────────────────────── */
+[data-color="success"] {
+  --shadow: var(--shadow-color-success);
+
+  --solid-background: var(--color-success-solid-background);
+  --solid-text: var(--color-success-solid-text);
+  --solid-border: var(--color-success-solid-border);
+  --solid-hover: var(--color-success-solid-hover);
+
+  --soft-background: var(--color-success-soft-background);
+  --soft-text: var(--color-success-soft-text);
+  --soft-border: var(--color-success-soft-border);
+  --soft-hover: var(--color-success-soft-hover);
+
+  --outline-background: var(--color-success-outline-background);
+  --outline-text: var(--color-success-outline-text);
+  --outline-border: var(--color-success-outline-border);
+  --outline-hover: var(--color-success-outline-hover);
+
+  --ghost-background: var(--color-success-ghost-background);
+  --ghost-text: var(--color-success-ghost-text);
+  --ghost-border: var(--color-success-ghost-border);
+  --ghost-hover: var(--color-success-ghost-hover);
+
+  --filled-background: var(--color-success-filled-background);
+  --filled-text: var(--color-success-filled-text);
+  --filled-border: var(--color-success-filled-border);
+  --filled-hover: var(--color-success-filled-hover);
+
+  --underlined-background: var(--color-success-underlined-background);
+  --underlined-text: var(--color-success-underlined-text);
+  --underlined-border: var(--color-success-underlined-border);
+  --underlined-hover: var(--color-success-underlined-hover);
+
+  --flushed-background: var(--color-success-flushed-background);
+  --flushed-text: var(--color-success-flushed-text);
+  --flushed-border: var(--color-success-flushed-border);
+  --flushed-hover: var(--color-success-flushed-hover);
+}
+
+/* ── Warning ─────────────────────────────────────────────── */
+[data-color="warning"] {
+  --shadow: var(--shadow-color-warning);
+
+  --solid-background: var(--color-warning-solid-background);
+  --solid-text: var(--color-warning-solid-text);
+  --solid-border: var(--color-warning-solid-border);
+  --solid-hover: var(--color-warning-solid-hover);
+
+  --soft-background: var(--color-warning-soft-background);
+  --soft-text: var(--color-warning-soft-text);
+  --soft-border: var(--color-warning-soft-border);
+  --soft-hover: var(--color-warning-soft-hover);
+
+  --outline-background: var(--color-warning-outline-background);
+  --outline-text: var(--color-warning-outline-text);
+  --outline-border: var(--color-warning-outline-border);
+  --outline-hover: var(--color-warning-outline-hover);
+
+  --ghost-background: var(--color-warning-ghost-background);
+  --ghost-text: var(--color-warning-ghost-text);
+  --ghost-border: var(--color-warning-ghost-border);
+  --ghost-hover: var(--color-warning-ghost-hover);
+
+  --filled-background: var(--color-warning-filled-background);
+  --filled-text: var(--color-warning-filled-text);
+  --filled-border: var(--color-warning-filled-border);
+  --filled-hover: var(--color-warning-filled-hover);
+
+  --underlined-background: var(--color-warning-underlined-background);
+  --underlined-text: var(--color-warning-underlined-text);
+  --underlined-border: var(--color-warning-underlined-border);
+  --underlined-hover: var(--color-warning-underlined-hover);
+
+  --flushed-background: var(--color-warning-flushed-background);
+  --flushed-text: var(--color-warning-flushed-text);
+  --flushed-border: var(--color-warning-flushed-border);
+  --flushed-hover: var(--color-warning-flushed-hover);
+}
+
+/* ── Danger ──────────────────────────────────────────────── */
+[data-color="danger"] {
+  --shadow: var(--shadow-color-danger);
+
+  --solid-background: var(--color-danger-solid-background);
+  --solid-text: var(--color-danger-solid-text);
+  --solid-border: var(--color-danger-solid-border);
+  --solid-hover: var(--color-danger-solid-hover);
+
+  --soft-background: var(--color-danger-soft-background);
+  --soft-text: var(--color-danger-soft-text);
+  --soft-border: var(--color-danger-soft-border);
+  --soft-hover: var(--color-danger-soft-hover);
+
+  --outline-background: var(--color-danger-outline-background);
+  --outline-text: var(--color-danger-outline-text);
+  --outline-border: var(--color-danger-outline-border);
+  --outline-hover: var(--color-danger-outline-hover);
+
+  --ghost-background: var(--color-danger-ghost-background);
+  --ghost-text: var(--color-danger-ghost-text);
+  --ghost-border: var(--color-danger-ghost-border);
+  --ghost-hover: var(--color-danger-ghost-hover);
+
+  --filled-background: var(--color-danger-filled-background);
+  --filled-text: var(--color-danger-filled-text);
+  --filled-border: var(--color-danger-filled-border);
+  --filled-hover: var(--color-danger-filled-hover);
+
+  --underlined-background: var(--color-danger-underlined-background);
+  --underlined-text: var(--color-danger-underlined-text);
+  --underlined-border: var(--color-danger-underlined-border);
+  --underlined-hover: var(--color-danger-underlined-hover);
+
+  --flushed-background: var(--color-danger-flushed-background);
+  --flushed-text: var(--color-danger-flushed-text);
+  --flushed-border: var(--color-danger-flushed-border);
+  --flushed-hover: var(--color-danger-flushed-hover);
+}
+
+/* ── Info ────────────────────────────────────────────────── */
+[data-color="info"] {
+  --shadow: var(--shadow-color-info);
+
+  --solid-background: var(--color-info-solid-background);
+  --solid-text: var(--color-info-solid-text);
+  --solid-border: var(--color-info-solid-border);
+  --solid-hover: var(--color-info-solid-hover);
+
+  --soft-background: var(--color-info-soft-background);
+  --soft-text: var(--color-info-soft-text);
+  --soft-border: var(--color-info-soft-border);
+  --soft-hover: var(--color-info-soft-hover);
+
+  --outline-background: var(--color-info-outline-background);
+  --outline-text: var(--color-info-outline-text);
+  --outline-border: var(--color-info-outline-border);
+  --outline-hover: var(--color-info-outline-hover);
+
+  --ghost-background: var(--color-info-ghost-background);
+  --ghost-text: var(--color-info-ghost-text);
+  --ghost-border: var(--color-info-ghost-border);
+  --ghost-hover: var(--color-info-ghost-hover);
+
+  --filled-background: var(--color-info-filled-background);
+  --filled-text: var(--color-info-filled-text);
+  --filled-border: var(--color-info-filled-border);
+  --filled-hover: var(--color-info-filled-hover);
+
+  --underlined-background: var(--color-info-underlined-background);
+  --underlined-text: var(--color-info-underlined-text);
+  --underlined-border: var(--color-info-underlined-border);
+  --underlined-hover: var(--color-info-underlined-hover);
+
+  --flushed-background: var(--color-info-flushed-background);
+  --flushed-text: var(--color-info-flushed-text);
+  --flushed-border: var(--color-info-flushed-border);
+  --flushed-hover: var(--color-info-flushed-hover);
+}
+
+/* ── Neutral ─────────────────────────────────────────────── */
+[data-color="neutral"] {
+  --shadow: var(--shadow-color-neutral);
+
+  --solid-background: var(--color-neutral-solid-background);
+  --solid-text: var(--color-neutral-solid-text);
+  --solid-border: var(--color-neutral-solid-border);
+  --solid-hover: var(--color-neutral-solid-hover);
+
+  --soft-background: var(--color-neutral-soft-background);
+  --soft-text: var(--color-neutral-soft-text);
+  --soft-border: var(--color-neutral-soft-border);
+  --soft-hover: var(--color-neutral-soft-hover);
+
+  --outline-background: var(--color-neutral-outline-background);
+  --outline-text: var(--color-neutral-outline-text);
+  --outline-border: var(--color-neutral-outline-border);
+  --outline-hover: var(--color-neutral-outline-hover);
+
+  --ghost-background: var(--color-neutral-ghost-background);
+  --ghost-text: var(--color-neutral-ghost-text);
+  --ghost-border: var(--color-neutral-ghost-border);
+  --ghost-hover: var(--color-neutral-ghost-hover);
+
+  --filled-background: var(--color-neutral-filled-background);
+  --filled-text: var(--color-neutral-filled-text);
+  --filled-border: var(--color-neutral-filled-border);
+  --filled-hover: var(--color-neutral-filled-hover);
+
+  --underlined-background: var(--color-neutral-underlined-background);
+  --underlined-text: var(--color-neutral-underlined-text);
+  --underlined-border: var(--color-neutral-underlined-border);
+  --underlined-hover: var(--color-neutral-underlined-hover);
+
+  --flushed-background: var(--color-neutral-flushed-background);
+  --flushed-text: var(--color-neutral-flushed-text);
+  --flushed-border: var(--color-neutral-flushed-border);
+  --flushed-hover: var(--color-neutral-flushed-hover);
+}

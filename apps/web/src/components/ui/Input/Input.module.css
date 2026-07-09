@@ -1,29 +1,32 @@
+/* ── Input ───────────────────────────────────────────────── */
+/* Consomme les variables résolues par [data-color] × [data-variant] */
 .input {
   width: 100%;
-  padding: 12px 16px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-input-border);
-  background: var(--color-input-background);
-  font-size: 1rem;
-  color: var(--color-input-text);
-   box-shadow:
-        0 10px 25px rgba(0, 0, 0, .15),
-        0 2px 5px rgba(0, 0, 0, .1);
+  padding: var(--padding);
+  border-radius: var(--radius);
+  border: 1px solid var(--variant-border);
+  background: var(--variant-background);
+  font-size: var(--font-size);
+  color: var(--variant-text);
+  box-shadow: var(--shadow-size) var(--variant-shadow);
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease;
 }
 
+/* ── État focus ──────────────────────────────────────────── */
+/* Halo coloré basé sur --shadow (déjà calibré à 0.28 d'opacité par couleur) */
 .input:focus {
   outline: none;
-  border-color: var(--color-primary-solid);
-  box-shadow: 0 0 0 3px rgba(107, 142, 35, 0.15);
+  border-color: var(--variant-border);
+  box-shadow: 0 0 0 3px var(--shadow);
 }
 
 .input::placeholder {
-  color: var(--color-input-placeholder);
+  color: var(--color-input-placeholder); /* hors matrice color × appearance, reste un token dédié */
 }
 
+/* ── Wrapper & icônes ────────────────────────────────────── */
 .wrapper {
   position: relative;
   display: flex;
@@ -36,7 +39,7 @@
   position: absolute;
   display: flex;
   align-items: center;
-  color: var(--color-input-text);
+  color: var(--variant-text);
 }
 
 .iconLeft {
@@ -54,17 +57,4 @@
 
 .hasIconRight {
   padding-right: 2.25rem;
-}
-
-.hasError .iconLeft,
-
-.hasError .iconRight {
-  color: var(--color-danger-text);
-}
-
-.hasError .input {
-  border-color: var(--color-danger-border);
-  color: var(--color-danger-text);
-  background: var(--color-danger-background);
-
 }

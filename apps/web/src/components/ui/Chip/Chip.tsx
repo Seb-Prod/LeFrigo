@@ -36,7 +36,7 @@ type Props = {
 export function Chip({
   children,
   icon,
-  variant = "ghost",
+  variant = "soft",
   color = "primary",
   size = "sm",
   selected,
@@ -57,7 +57,7 @@ export function Chip({
       data-sizeable
       data-size={size}
       data-color={color}
-      data-appearance={variant}
+      data-variant={variant}
       data-selected={selected || undefined}
       className={clsx(styles.wrapper, className)}
     >

@@ -1,14 +1,11 @@
-"use client"
+"use client";
 
 import { useState } from "react";
 import { Input } from "../../Input";
 import { FiLock, FiEye, FiEyeOff } from "react-icons/fi";
 import styles from "./InputPassword.module.css";
 
-type Props = Omit<
-  React.ComponentProps<typeof Input>,
-  "type"
->;
+type Props = Omit<React.ComponentProps<typeof Input>, "type">;
 
 /**
  * Champ de saisie pour les mots de passe avec icône de verrouillage
@@ -21,7 +18,12 @@ type Props = Omit<
  *   onChange={(e) => setPassword(e.target.value)}
  * />
  */
-export function InputPassword({ className, ...props }: Props) {
+export function InputPassword({
+  className,
+  color = "primary",
+  variant = "flushed",
+  ...props
+}: Props) {
   const [show, setShow] = useState(false);
 
   const toggleButton = (
@@ -38,6 +40,8 @@ export function InputPassword({ className, ...props }: Props) {
 
   return (
     <Input
+      color={color}
+      variant={variant}
       {...props}
       className={className}
       type={show ? "text" : "password"}
