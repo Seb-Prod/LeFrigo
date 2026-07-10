@@ -9,6 +9,7 @@ type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   size?: Size;
   variant?: ButtonVariant;
   children?: ReactNode;
+  className?: string;
 };
 
 /**
@@ -31,6 +32,7 @@ export function ActionButton({
   color = "primary",
   size = "xs",
   variant = "ghost",
+  className,
   children,
   ...props
 }: Props) {
@@ -41,7 +43,7 @@ export function ActionButton({
       data-variant={variant}
       data-size={size}
       type="button"
-      className={clsx("ui-control", styles.actionButton)}
+      className={clsx("ui-control", styles.actionButton, className)}
       {...props}
     >
       {/* ── Contenu ── */}

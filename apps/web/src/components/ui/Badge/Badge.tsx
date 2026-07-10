@@ -31,7 +31,7 @@ export function Badge({
       data-size={size}
       data-color={color}
       data-variant="solid"
-      className={clsx(styles.badge, className)}
+      className={clsx("ui-control",styles.badge, className)}
     >
       {children}
     </span>

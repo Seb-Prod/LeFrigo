@@ -1,17 +1,6 @@
 /* ── Badge ─────────────────────────────────────────────── */
 .badge {
-  display: inline-flex;
-  align-items: center;
-  border-radius: var(--radius-full);
-  font-size: var(--font-size);
-  font-weight: var(--font-weight-bold);
-  white-space: nowrap;
-  gap: 4px;
-
-  padding: 0.2rem 0.6rem;
-
-  background: var(--variant-background);
-  border: 1.5px solid var(--variant-border);
-  color: var(--variant-text);
-  box-shadow: var(--shadow-size) var(--variant-shadow);
+  padding: 0.2rem 0.6rem !important;
+  border-radius: var(--radius-full) !important;
+  position: absolute !important;
 }
