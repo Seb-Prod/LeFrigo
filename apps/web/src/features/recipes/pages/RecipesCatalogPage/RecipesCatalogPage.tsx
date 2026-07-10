@@ -3,7 +3,7 @@
 import type { RecipeFilters } from "@lefrigo/shared";
 import { useState } from "react";
 import { useRecipes } from "../../hooks";
-import { Pagination, Surface } from "@/components/ui";
+import { Modal, Pagination, Surface } from "@/components/ui";
 import { RecipeGrid } from "../../components/RecipeGrid";
 import { RecipeCatalogHeader } from "./components/RecipeCatalogHeader";
 import { useDevice } from "@/contexts/device.context";
@@ -88,12 +88,15 @@ export function RecipesCatalogPage({
     setPage(1);
   };
 
+  const [filterOpen, setFilterOpen] = useState(false);
+
   const catalogHeader = (
     <RecipeCatalogHeader
       filters={filters}
       onRemoveFilter={handleRemoveFilter}
       onNumericFilterChange={handleNumericFilterChange}
       onSearchChange={handleSearchChange}
+      onOpenFilters={() => setFilterOpen(true)}
     />
   );
 
@@ -111,6 +114,9 @@ export function RecipesCatalogPage({
           />
         )}
       </Surface>
+      <Modal open={filterOpen} onClose={() => setFilterOpen(false)}>
+        Test
+      </Modal>
     </div>
   );
 }
