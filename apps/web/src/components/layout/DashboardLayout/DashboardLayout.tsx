@@ -17,10 +17,10 @@ export function DashboardLayout({
     <div className={styles.container}>
       <div className={styles.content}>
         {!isMobilePWA && (
-          <>
+          <div className={styles.top}>
             <Sidebar />
             <Topbar />
-          </>
+          </div>
         )}
 
         <main className={styles.main}>

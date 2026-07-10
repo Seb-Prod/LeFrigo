@@ -2,6 +2,9 @@
 
 .topbar {
   height: 72px;
+  flex: 1;
+
+
 
   display: flex;
   align-items: center;
@@ -11,10 +14,9 @@
 
   /* Même recette que la sidebar : fond semi-transparent + flou */
   background: var(--color-background);
-  
 
   /* Séparation subtile vers le bas */
-  border-bottom: 1px solid color-mix(in srgb, var(--color-primary-solid) 20%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-primary-solid-background) 20%, transparent);
 touch-action: none; 
   z-index: 100;
 }
@@ -79,7 +81,7 @@ touch-action: none;
   }
 
   .center{
-    margin-left: 50px;
+    margin-left: 0px;
   }
 
   /* Menu horizontal masqué sur mobile (sidebar prend le relais) */

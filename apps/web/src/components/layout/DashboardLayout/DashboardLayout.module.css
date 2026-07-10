@@ -6,6 +6,10 @@
   overflow: hidden;
 }
 
+.top{
+  display: flex;
+}
+
 /* ── Zone de contenu principal ───────────────────────────── */
 .content {
   flex: 1;
