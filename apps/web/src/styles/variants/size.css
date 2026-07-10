@@ -32,3 +32,10 @@
     --radius: var(--radius-xl);
     --shadow-size: var(--shadow-size-xl);
 }
+
+[data-sizeable][data-size="2xl"] {
+    --padding: var(--button-py-xl) var(--button-px-xl);
+    --font-size: var(--font-2xl);
+    --radius: var(--radius-xl);
+    --shadow-size: var(--shadow-size-xl);
+}

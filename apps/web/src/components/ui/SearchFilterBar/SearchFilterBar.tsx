@@ -57,17 +57,9 @@ export function SearchFilterBar({
       {chips.length > 0 && (
         <Row gap="sm" scroll>
           {chips.map((chip) => (
-            <Chip key={chip.id} icon={chip.icon} removable>
+            <Chip key={chip.id} icon={chip.icon} removable onRemove={chip.onRemove}>
               {chip.label}
             </Chip>
-            // <Button
-            //   key={chip.id}
-            //   variant="soft"
-            //   size="sm"
-            //   onClick={chip.onRemove}
-            // >
-            //   {chip.label}
-            // </Button>
           ))}
         </Row>
       )}

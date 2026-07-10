@@ -1,7 +1,7 @@
-import { IoMdCloseCircle } from "react-icons/io";
 import { Color, Size, Variant } from "../types";
 import styles from "./Chip.module.css";
 import clsx from "clsx";
+import { ActionButtonClose } from "../ActionButton";
 
 type Props = {
   children: React.ReactNode;
@@ -64,7 +64,7 @@ export function Chip({
       {/* ── Chip principal (cliquable) ── */}
       <button
         type="button"
-        className={styles.chip}
+        className={clsx(styles.chip, "ui-control")}
         onClick={onClick}
         disabled={disabled}
       >
@@ -76,15 +76,12 @@ export function Chip({
 
       {/* ── Bouton de suppression (indépendant du clic principal) ── */}
       {removable && (
-        <button
-          type="button"
-          className={clsx(styles.icon, styles.removeIcon)}
+        <ActionButtonClose
+          size="xl"
           onClick={handleRemove}
           disabled={disabled}
           aria-label="Supprimer"
-        >
-          <IoMdCloseCircle />
-        </button>
+        />
       )}
     </span>
   );

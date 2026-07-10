@@ -4,58 +4,19 @@
     display: inline-flex;
     align-items: center;
     gap: var(--space-xs);
+    margin:8px;
 }
 
 /* ── Chip (bouton principal) ──────────────────────────── */
 .chip {
-    position: relative;
     overflow: hidden;
-    isolation: isolate;
-
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-sm);
-
-    background: var(--variant-background);
-    border: 1px solid var(--variant-border);
-    color: var(--variant-text);
-    box-shadow: var(--shadow-size) var(--variant-shadow);
-
-    padding: var(--padding);
-    border-radius: var(--radius);
-
-    font-size: var(--font-size);
-    font-weight: var(--font-weight-medium);
 }
 
-/* survol : légère mise en avant du bouton */
-.chip:hover {
-    background: var(--variant-hover);
-    box-shadow: none;
-}
-
-/* pression : léger enfoncement visuel façon "bouton physique" */
-.chip:active {
-    scale: 0.96;
-}
-
-/* focus clavier : anneau visible sans dépendre du survol souris */
-.chip:focus-visible {
-    outline: 2px solid var(--variant-text);
-    outline-offset: 2px;
-}
-
-/* état désactivé : neutralise couleur, curseur et interactions */
-.chip:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    pointer-events: none;
-}
 
 /* état sélectionné : liseré marqué autour du chip */
 .wrapper[data-selected] .chip {
-    border-color: var(--variant-text);
-    box-shadow: 0 0 0 1px var(--variant-text);
+    border-color: var(--variant-border);
+    box-shadow: 0 0 0 1px var(--variant-border);
 }
 
 /* ── Icônes ────────────────────────────────────────────── */

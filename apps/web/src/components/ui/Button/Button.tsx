@@ -58,7 +58,7 @@ export function Button({
       data-variant={variant}
       className={clsx(styles.wrapper, className)}
     >
-      <button className={styles.button} {...props} onMouseUp={handleMouseUp}>
+      <button className={clsx(styles.button, "ui-control")} {...props} onMouseUp={handleMouseUp}>
         {/* ── Icône ── */}
         {icon && <span className={styles.icon}>{icon}</span>}
         {children}

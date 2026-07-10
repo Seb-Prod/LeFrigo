@@ -18,49 +18,9 @@
 /* Chaque variante (color × appearance) surcharge uniquement les
    variables CSS qui la concernent (background, border, text). */
 .button {
-  position: relative;
   overflow: hidden;
-  isolation: isolate;
-
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-sm);
-
-  background: var(--variant-background);
-  border: 1.5px solid var(--variant-border);
-  color: var(--variant-text);
   cursor: pointer;
-  box-shadow: var(--shadow-size) var(--variant-shadow);
-
-  padding: var(--padding);
-  border-radius: var(--radius);
-
-  font-size: var(--font-size);
-  font-weight: var(--font-weight-medium);
-}
-
-/* survol : légère mise en avant du bouton */
-.button:hover {
-  background: var(--variant-hover);
-  box-shadow: none;
-}
-
-/* pression : léger enfoncement visuel façon "bouton physique" */
-.button:active {
-  scale: 0.96;
-}
-
-/* focus clavier : anneau visible sans dépendre du survol souris */
-.button:focus-visible {
-  outline: 2px solid var(--variant-text);
-  outline-offset: 2px;
-}
-
-/* état désactivé : neutralise couleur, curseur et interactions */
-.button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  pointer-events: none;
+  
 }
 
 /* ── Icône ─────────────────────────────────────────────── */

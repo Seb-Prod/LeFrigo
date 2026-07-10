@@ -1,0 +1,44 @@
+.ui-control {
+    position: relative;
+    isolation: isolate;
+
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+
+    background: var(--variant-background);
+    border: 1.5px solid var(--variant-border);
+    color: var(--variant-text);
+
+    box-shadow: var(--shadow-size) var(--variant-shadow);
+
+    padding: var(--padding);
+    border-radius: var(--radius);
+
+    font-size: var(--font-size);
+    font-weight: var(--font-weight-medium);
+}
+
+/* survol : légère mise en avant du bouton */
+.ui-control:hover {
+  background: var(--variant-hover);
+  box-shadow: none;
+}
+
+/* pression : léger enfoncement visuel façon "bouton physique" */
+.ui-control:active {
+  scale: 0.96;
+}
+
+/* focus clavier : anneau visible sans dépendre du survol souris */
+.ui-control:focus-visible {
+  outline: 2px solid var(--variant-border);
+  outline-offset: 2px;
+}
+
+/* état désactivé : neutralise couleur, curseur et interactions */
+.ui-control:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}

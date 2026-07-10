@@ -31,7 +31,7 @@
   --variant-text: var(--ghost-text);
   --variant-border: var(--ghost-border);
   --variant-hover: var(--ghost-hover);
-  --variant-shadow: var(--shadow);
+  --variant-shadow: none;
 }
 
 /* ── Outline ─────────────────────────────────────────────── */
