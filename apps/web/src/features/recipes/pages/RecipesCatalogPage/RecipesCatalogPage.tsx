@@ -7,6 +7,7 @@ import { Modal, Pagination, Surface } from "@/components/ui";
 import { RecipeGrid } from "../../components/RecipeGrid";
 import { RecipeCatalogHeader } from "./components/RecipeCatalogHeader";
 import { useDevice } from "@/contexts/device.context";
+import { FilterModal } from "./components/FilterModal";
 
 /* ── Types ─────────────────────────────────────────────────── */
 
@@ -45,6 +46,7 @@ export function RecipesCatalogPage({
   const { isPWA } = useDevice();
   const [page, setPage] = useState(1);
   const [filters, setFilters] = useState<RecipeFilters>(initialFilters ?? {});
+  const [filterOpen, setFilterOpen] = useState(false);
 
   const { recipes, loading, total, error, totalPages } = useRecipes({
     page: page,
@@ -88,8 +90,6 @@ export function RecipesCatalogPage({
     setPage(1);
   };
 
-  const [filterOpen, setFilterOpen] = useState(false);
-
   const catalogHeader = (
     <RecipeCatalogHeader
       filters={filters}
@@ -114,9 +114,13 @@ export function RecipesCatalogPage({
           />
         )}
       </Surface>
-      <Modal open={filterOpen} onClose={() => setFilterOpen(false)}>
-        Test
-      </Modal>
+      <FilterModal
+        open={filterOpen}
+        filters={filters}
+        onApply={setFilters}
+        onClose={() => setFilterOpen(false)}
+        dismissable
+      />
     </div>
   );
 }

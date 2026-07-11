@@ -1,7 +1,17 @@
-"use client"
+"use client";
 
 import { useState } from "react";
 import styles from "./RangeSlider.module.css";
+
+type Props = {
+  label: string;
+  min: number;
+  max: number;
+  value: number;
+  showMin: boolean;
+  showMax: boolean;
+  onChange: (value: number) => void;
+};
 
 /**
  * Slider de sélection d'une valeur numérique dans une plage [min, max].
@@ -18,14 +28,10 @@ export function RangeSlider({
   min,
   max,
   value,
+  showMin = false,
+  showMax = false,
   onChange,
-}: {
-  label: string;
-  min: number;
-  max: number;
-  value: number;
-  onChange: (value: number) => void;
-}) {
+}: Props) {
   /** Indique si l'utilisateur est en train de glisser le curseur */
   const [isDragging, setIsDragging] = useState(false);
 
@@ -43,12 +49,15 @@ export function RangeSlider({
   /** Masque le selector à la fin du glissement */
   const handleDragEnd = () => setIsDragging(false);
 
-  const selectorClassName = [styles.selector, isDragging ? styles.selectorVisible : ""]
+  const selectorClassName = [
+    styles.selector,
+    isDragging ? styles.selectorVisible : "",
+  ]
     .filter(Boolean)
     .join(" ");
 
   return (
-    <div className={styles.range}>
+    <div data-color="primary" data-variant="solid" className={styles.range}>
       {/* ── Label + valeur courante ── */}
       <div className={styles.header}>
         <span className={styles.label}>{label}</span>
@@ -56,10 +65,12 @@ export function RangeSlider({
       </div>
 
       <div className={styles.body}>
-        <div className={styles.min}>
-          Min
-          <span>{min}</span>
-        </div>
+        {showMin && (
+          <div className={styles.min}>
+            Min
+            <span>{min}</span>
+          </div>
+        )}
 
         <div className={styles.rangeInput}>
           {/* ── Bulle affichée uniquement pendant le drag ── */}
@@ -69,7 +80,10 @@ export function RangeSlider({
           </div>
 
           {/* ── Barre de progression proportionnelle à la valeur ── */}
-          <div className={styles.progressBar} style={{ width: `${percent}%` }}></div>
+          <div
+            className={styles.progressBar}
+            style={{ width: `${percent}%` }}
+          ></div>
 
           <input
             type="range"
@@ -86,10 +100,12 @@ export function RangeSlider({
           />
         </div>
 
-        <div className={styles.max}>
-          Max
-          <span>{max}</span>
-        </div>
+        {showMax && (
+          <div className={styles.max}>
+            Max
+            <span>{max}</span>
+          </div>
+        )}
       </div>
     </div>
   );
