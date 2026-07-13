@@ -1,0 +1,14 @@
+:root.dark {
+    --danger-50: var(--red-dark-50);
+    --danger-100: var(--red-dark-100);
+    --danger-200: var(--red-dark-200);
+    --danger-300: var(--red-dark-300);
+    --danger-400: var(--red-dark-400);
+    --danger-500: var(--red-dark-500);
+    --danger-500-rgb: var(--red-dark-500-rgb);
+    --danger-600: var(--red-dark-600);
+    --danger-700: var(--red-dark-700);
+    --danger-800: var(--red-dark-800);
+    --danger-900: var(--red-dark-900);
+    --danger-950: var(--red-dark-950);
+}

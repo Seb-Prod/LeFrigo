@@ -1,0 +1,14 @@
+:root.dark {
+    --warning-50: var(--yellow-dark-50);
+    --warning-100: var(--yellow-dark-100);
+    --warning-200: var(--yellow-dark-200);
+    --warning-300: var(--yellow-dark-300);
+    --warning-400: var(--yellow-dark-400);
+    --warning-500: var(--yellow-dark-500);
+    --warning-500-rgb: var(--yellow-dark-500-rgb);
+    --warning-600: var(--yellow-dark-600);
+    --warning-700: var(--yellow-dark-700);
+    --warning-800: var(--yellow-dark-800);
+    --warning-900: var(--yellow-dark-900);
+    --warning-950: var(--yellow-dark-950);
+}

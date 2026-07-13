@@ -1,0 +1,43 @@
+:root {
+    /* Light */
+    --aubergine-50: #F3EEF5;
+    --aubergine-100: #E8DDEE;
+    --aubergine-200: #D8C2E2;
+    --aubergine-300: #B68CCB;
+    --aubergine-400: #9860B5;
+    --aubergine-500: #7D409E;
+    --aubergine-500-rgb: 125, 64, 158;
+    --aubergine-600: #6A3287;
+    --aubergine-700: #57276F;
+    --aubergine-800: #491B5C;
+    --aubergine-900: #3B1248;
+
+    /* Dark */
+    --aubergine-dark-50: #1A0828;
+    --aubergine-dark-100: #4A1D64;
+    --aubergine-dark-200: #5A2478;
+    --aubergine-dark-300: #703393;
+    --aubergine-dark-400: #8A4AAF;
+    --aubergine-dark-500: #A865CC;
+    --aubergine-dark-500-rgb: 168, 101, 204;
+    --aubergine-dark-600: #BC7DE0;
+    --aubergine-dark-700: #CA94EA;
+    --aubergine-dark-800: #D5A1EF;
+    --aubergine-dark-900: #E2B8F8;
+    --aubergine-dark-950: #F4EDFA;
+
+    /* Surface Dark */
+    --aubergine-surface-dark-25: #0E0718;
+    --aubergine-surface-dark-50: #120820;
+    --aubergine-surface-dark-100: #1A0D2B;
+    --aubergine-surface-dark-200: #24143A;
+    --aubergine-surface-dark-300: #321B4D;
+    --aubergine-surface-dark-400: #42255F;
+    --aubergine-surface-dark-500: #563170;
+    --aubergine-surface-dark-500-rgb: 86, 49, 112;
+    --aubergine-surface-dark-600: #70438C;
+    --aubergine-surface-dark-700: #8C62A5;
+    --aubergine-surface-dark-800: #B394C7;
+    --aubergine-surface-dark-900: #D8C9E3;
+    --aubergine-surface-dark-950: #F4EFF7;
+}

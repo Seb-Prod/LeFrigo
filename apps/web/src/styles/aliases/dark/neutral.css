@@ -1,0 +1,14 @@
+:root.dark {
+    --neutral-50: var(--gray-dark-50);
+    --neutral-100: var(--gray-dark-100);
+    --neutral-200: var(--gray-dark-200);
+    --neutral-300: var(--gray-dark-300);
+    --neutral-400: var(--gray-dark-400);
+    --neutral-500: var(--gray-dark-500);
+    --neutral-500-rgb: var(--gray-dark-500-rgb);
+    --neutral-600: var(--gray-dark-600);
+    --neutral-700: var(--gray-dark-700);
+    --neutral-800: var(--gray-dark-800);
+    --neutral-900: var(--gray-dark-900);
+    --neutral-950: var(--gray-dark-950);
+}

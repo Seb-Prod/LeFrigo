@@ -1,0 +1,14 @@
+:root.dark {
+    --primary-50: var(--aubergine-dark-50);
+    --primary-100: var(--aubergine-dark-100);
+    --primary-200: var(--aubergine-dark-200);
+    --primary-300: var(--aubergine-dark-300);
+    --primary-400: var(--aubergine-dark-400);
+    --primary-500: var(--aubergine-dark-500);
+    --primary-500-rgb: var(--aubergine-dark-500-rgb);
+    --primary-600: var(--aubergine-dark-600);
+    --primary-700: var(--aubergine-dark-700);
+    --primary-800: var(--aubergine-dark-800);
+    --primary-900: var(--aubergine-dark-900);
+    --primary-950: var(--aubergine-dark-950);
+}

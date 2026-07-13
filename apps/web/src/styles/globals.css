@@ -1,7 +1,13 @@
+@import "./reset.css";
+
+@import "./palettes/index.css";
+@import "./aliases/index.css";
+@import "./themes/index.css";
+
 @import "./variables.css";
 @import "./themes/light.css";
 @import "./themes/dark.css";
-@import "./reset.css";
+
 
 * {
   box-sizing: border-box;

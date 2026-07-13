@@ -1,0 +1,14 @@
+:root.dark {
+    --surface-50: var(--aubergine-surface-dark-50);
+    --surface-100: var(--aubergine-surface-dark-100);
+    --surface-200: var(--aubergine-surface-dark-200);
+    --surface-300: var(--aubergine-surface-dark-300);
+    --surface-400: var(--aubergine-surface-dark-400);
+    --surface-500: var(--aubergine-surface-dark-500);
+    --surface-500-rgb: var(--aubergine-surface-dark-500-rgb);
+    --surface-600: var(--aubergine-surface-dark-600);
+    --surface-700: var(--aubergine-surface-dark-700);
+    --surface-800: var(--aubergine-surface-dark-800);
+    --surface-900: var(--aubergine-surface-dark-900);
+    --surface-950: var(--aubergine-surface-dark-950);
+}

@@ -1,0 +1,39 @@
+/* ── Container ────────────────────────────────────────────── */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 32px;
+}
+
+/* ── Section ──────────────────────────────────────────────── */
+.section {
+}
+
+.sectionTitle {
+  text-transform: capitalize; /* nom de palette en Title Case */
+  margin-bottom: 8px;
+}
+
+/* ── Swatch ───────────────────────────────────────────────── */
+.swatch {
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 6px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Couleur du label selon le contraste du fond (posé en JS : shade >= 500) */
+.swatch[data-contrast="inverse"] {
+  color: var(--color-text-inverse); /* fond foncé (shade ≥ 500) */
+}
+
+.swatch[data-contrast="default"] {
+  color: var(--color-text); /* fond clair (shade < 500) */
+}

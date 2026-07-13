@@ -1,0 +1,14 @@
+:root.dark {
+    --accent-50: var(--honey-dark-50);
+    --accent-100: var(--honey-dark-100);
+    --accent-200: var(--honey-dark-200);
+    --accent-300: var(--honey-dark-300);
+    --accent-400: var(--honey-dark-400);
+    --accent-500: var(--honey-dark-500);
+    --accent-500-rgb: var(--honey-dark-500-rgb);
+    --accent-600: var(--honey-dark-600);
+    --accent-700: var(--honey-dark-700);
+    --accent-800: var(--honey-dark-800);
+    --accent-900: var(--honey-dark-900);
+    --accent-950: var(--honey-dark-950);
+}

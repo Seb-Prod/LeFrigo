@@ -1,0 +1,13 @@
+:root {
+    --info-50: var(--blue-50);
+    --info-100: var(--blue-100);
+    --info-200: var(--blue-200);
+    --info-300: var(--blue-300);
+    --info-400: var(--blue-400);
+    --info-500: var(--blue-500);
+    --info-500-rgb: var(--blue-500-rgb);
+    --info-600: var(--blue-600);
+    --info-700: var(--blue-700);
+    --info-800: var(--blue-800);
+    --info-900: var(--blue-900);
+}

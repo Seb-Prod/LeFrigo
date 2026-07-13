@@ -1,0 +1,14 @@
+:root.dark {
+    --info-50: var(--blue-dark-50);
+    --info-100: var(--blue-dark-100);
+    --info-200: var(--blue-dark-200);
+    --info-300: var(--blue-dark-300);
+    --info-400: var(--blue-dark-400);
+    --info-500: var(--blue-dark-500);
+    --info-500-rgb: var(--blue-dark-500-rgb);
+    --info-600: var(--blue-dark-600);
+    --info-700: var(--blue-dark-700);
+    --info-800: var(--blue-dark-800);
+    --info-900: var(--blue-dark-900);
+    --info-950: var(--blue-dark-950);
+}

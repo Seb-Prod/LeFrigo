@@ -19,7 +19,7 @@ export type NavItem = {
 export const NAVIGATION: NavItem[] = [
   { label: "Accueil",     href: "/dashboard", icon: MdDashboard    },
   { label: "Recettes",    href: "/recipes",   icon: MdMenuBook     },
-  { label: "Planning",    href: "/planning",  icon: MdCalendarMonth },
+  { label: "Planning",    href: "/test",  icon: MdCalendarMonth },
   { label: "Paramètres",  href: "/settings",  icon: MdSettings     },
 ];
 

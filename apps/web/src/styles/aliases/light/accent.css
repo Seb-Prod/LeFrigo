@@ -1,0 +1,13 @@
+:root {
+    --accent-50: var(--honey-50);
+    --accent-100: var(--honey-100);
+    --accent-200: var(--honey-200);
+    --accent-300: var(--honey-300);
+    --accent-400: var(--honey-400);
+    --accent-500: var(--honey-500);
+    --accent-500-rgb: var(--honey-500-rgb);
+    --accent-600: var(--honey-600);
+    --accent-700: var(--honey-700);
+    --accent-800: var(--honey-800);
+    --accent-900: var(--honey-900);
+}

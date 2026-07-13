@@ -1,0 +1,14 @@
+:root.dark {
+    --success-50: var(--green-dark-50);
+    --success-100: var(--green-dark-100);
+    --success-200: var(--green-dark-200);
+    --success-300: var(--green-dark-300);
+    --success-400: var(--green-dark-400);
+    --success-500: var(--green-dark-500);
+    --success-500-rgb: var(--green-dark-500-rgb);
+    --success-600: var(--green-dark-600);
+    --success-700: var(--green-dark-700);
+    --success-800: var(--green-dark-800);
+    --success-900: var(--green-dark-900);
+    --success-950: var(--green-dark-950);
+}

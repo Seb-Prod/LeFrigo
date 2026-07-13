@@ -2,7 +2,8 @@
 
   /* ── Primary — Aubergine ──────────────────────────────────── */
 
-  --color-primary-solid: #a865cc;        /* plus lumineux sur fond sombre */
+  --color-primary-solid: #a865cc;
+  /* plus lumineux sur fond sombre */
   --color-primary-solid-text: #1f0830;
   --color-primary-hover: #bc7de0;
   --color-primary-border: #5a2478;
@@ -79,7 +80,8 @@
 
   /* ── Inputs ───────────────────────────────────────────────── */
 
-  --color-input-background: #1e1228;    /* teinté aubergine très sombre */
+  --color-input-background: #1e1228;
+  /* teinté aubergine très sombre */
   --color-input-border: var(--color-border);
   --color-input-text: var(--color-text);
   --color-input-placeholder: var(--color-text-muted);
@@ -96,20 +98,27 @@
 
   /* ── Surfaces & fond global ───────────────────────────────── */
 
-  --color-background: #120820;          /* aubergine très sombre, identité LeFrigo */
-  --color-surface: #1e1030;            /* cartes légèrement surélevées */
-  --color-surface-hover: #2a1840;
+  --color-background: var(--surface-50);
+  --color-surface: var(--surface-100);
+  --color-surface-secondary: var(--surface-200);
+  --color-surface-hover: var(--surface-300);
 
   /* ── Texte global ─────────────────────────────────────────── */
 
-  --color-text: #f0eaf5;               /* blanc teinté aubergine */
-  --color-text-secondary: #c4a8d8;     /* violet clair désaturé */
-  --color-text-muted: #7a6888;
+  /* principal */
+  --color-text: var(--ink-dark-900);
+  --color-text-secondary: var(--ink-dark-700);
+  --color-text-muted: var(--neutral-dark-500);
+  --color-heading: var(--ink-dark-950);
+
+  --color-text-inverse: var(--ink-950);
+  --color-text-inverse-secondary: var(--ink-700);
 
   /* ── Bordures globales ────────────────────────────────────── */
 
-  --color-border: #2e1848;
-  --color-border-strong: #442260;
+  --color-border: var(--neutral-200);
+  --color-border-strong: var(--neutral-300);
+  --color-border-subtle: var(--neutral-100);
 
   /* ── Ombres (plus opaques sur fond sombre) ────────────────── */
 

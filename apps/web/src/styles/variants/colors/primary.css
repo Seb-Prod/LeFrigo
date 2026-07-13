@@ -1,0 +1,38 @@
+[data-color="primary"] {
+    --shadow: rgba(var(--primary-500-rgb), 0.28);
+
+    --solid-background: var(--primary-500);
+    --solid-text: var(--pure-white);
+    --solid-hover: var(--primary-600);
+    --solid-border: var(--primary-500);
+
+    --soft-background: var(--primary-50);
+    --soft-text: var(--primary-900);
+    --soft-hover: var(--primary-100);
+    --soft-border: var(--primary-200);
+
+    --outline-background: transparent;
+    --outline-text: var(--primary-600);
+    --outline-hover: var(--primary-50);
+    --outline-border: var(--primary-500);
+
+    --ghost-background: transparent;
+    --ghost-text: var(--primary-500);
+    --ghost-hover: rgba(var(--primary-500-rgb), 0.08);
+    --ghost-border: transparent;
+
+    --filled-background: var(--primary-50);
+    --filled-text: var(--primary-900);
+    --filled-hover: var(--primary-100);
+    --filled-border: transparent;
+
+    --underlined-background: transparent;
+    --underlined-text: var(--primary-900);
+    --underlined-hover: var(--primary-50);
+    --underlined-border: var(--primary-500);
+
+    --flushed-background: transparent;
+    --flushed-text: var(--primary-900);
+    --flushed-hover: var(--primary-50);
+    --flushed-border: var(--primary-300);
+}
