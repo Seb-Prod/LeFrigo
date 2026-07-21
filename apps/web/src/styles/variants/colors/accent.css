@@ -1,0 +1,168 @@
+/* ==========================================================
+ * accent — honey
+ * Variantes sémantiques :
+ * solid, soft, outline, ghost, filled, underlined, flushed
+ *
+ * Chaque variante expose :
+ * --variant-background
+ * --variant-text
+ * --variant-border
+ *
+ * États :
+ * --variant-hover-background
+ * --variant-hover-text
+ * --variant-hover-border
+ *
+ * --variant-active-background
+ * --variant-active-text
+ * --variant-active-border
+ * ========================================================== */
+
+
+/* ==========================================================
+ * SOLID
+ * ========================================================== */
+
+[data-color="accent"][data-variant="solid"] {
+    --variant-background: var(--accent-500);
+    --variant-text: var(--ink-50);
+    --variant-border: var(--accent-500);
+
+    --variant-hover-background: var(--accent-600);
+    --variant-hover-text: var(--ink-50);
+    --variant-hover-border: var(--accent-600);
+
+    --variant-active-background: var(--accent-700);
+    --variant-active-text: var(--ink-50);
+    --variant-active-border: var(--accent-700);
+}
+
+
+/* ==========================================================
+ * SOFT
+ * ========================================================== */
+
+[data-color="accent"][data-variant="soft"] {
+    --variant-background: var(--accent-50);
+    --variant-text: var(--accent-700);
+    --variant-border: var(--accent-100);
+
+    --variant-hover-background: var(--accent-100);
+    --variant-hover-text: var(--accent-800);
+    --variant-hover-border: var(--accent-200);
+
+    --variant-active-background: var(--accent-200);
+    --variant-active-text: var(--accent-900);
+    --variant-active-border: var(--accent-300);
+}
+
+
+/* ==========================================================
+ * OUTLINE
+ * ========================================================== */
+
+[data-color="accent"][data-variant="outline"] {
+    --variant-background: transparent;
+    --variant-text: var(--accent-600);
+    --variant-border: var(--accent-500);
+
+    --variant-hover-background: var(--accent-50);
+    --variant-hover-text: var(--accent-700);
+    --variant-hover-border: var(--accent-600);
+
+    --variant-active-background: var(--accent-100);
+    --variant-active-text: var(--accent-800);
+    --variant-active-border: var(--accent-700);
+}
+
+
+/* ==========================================================
+ * GHOST
+ * ========================================================== */
+
+[data-color="accent"][data-variant="ghost"] {
+    --variant-background: transparent;
+    --variant-text: var(--accent-600);
+    --variant-border: transparent;
+
+    --variant-hover-background: var(--accent-50);
+    --variant-hover-text: var(--accent-700);
+    --variant-hover-border: transparent;
+
+    --variant-active-background: var(--accent-100);
+    --variant-active-text: var(--accent-800);
+    --variant-active-border: transparent;
+}
+
+
+/* ==========================================================
+ * FILLED
+ * ========================================================== */
+
+[data-color="accent"][data-variant="filled"] {
+    --variant-background: var(--accent-100);
+    --variant-text: var(--accent-700);
+    --variant-border: var(--accent-100);
+
+    --variant-hover-background: var(--accent-200);
+    --variant-hover-text: var(--accent-800);
+    --variant-hover-border: var(--accent-200);
+
+    --variant-active-background: var(--accent-300);
+    --variant-active-text: var(--accent-900);
+    --variant-active-border: var(--accent-300);
+}
+
+
+/* ==========================================================
+ * UNDERLINED
+ * ========================================================== */
+
+[data-color="accent"][data-variant="underlined"] {
+    --variant-background: transparent;
+    --variant-text: var(--accent-600);
+    --variant-border: transparent;
+
+    --variant-hover-background: transparent;
+    --variant-hover-text: var(--accent-700);
+    --variant-hover-border: var(--accent-500);
+
+    --variant-active-background: transparent;
+    --variant-active-text: var(--accent-800);
+    --variant-active-border: var(--accent-700);
+}
+
+
+/* ==========================================================
+ * FLUSHED
+ * ========================================================== */
+
+[data-color="accent"][data-variant="flushed"] {
+    --variant-background: transparent;
+    --variant-text: var(--accent-600);
+    --variant-border: var(--accent-200);
+
+    --variant-hover-background: var(--accent-50);
+    --variant-hover-text: var(--accent-700);
+    --variant-hover-border: var(--accent-400);
+
+    --variant-active-background: var(--accent-100);
+    --variant-active-text: var(--accent-800);
+    --variant-active-border: var(--accent-600);
+}
+
+[data-color="accent"][data-variant="nav"] {
+    --variant-background: transparent;
+    --variant-text: var(--accent-700);
+    --variant-border: transparent;
+
+    --variant-hover-background: var(--accent-50);
+    --variant-hover-text: var(--accent-800);
+    --variant-hover-border: transparent;
+
+    --variant-active-background: var(--accent-100);
+    --variant-active-text: var(--accent-900);
+    --variant-active-border: transparent;
+}
+
+

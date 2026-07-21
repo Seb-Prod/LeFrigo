@@ -1,0 +1,168 @@
+/* ==========================================================
+ * info — blue
+ * Variantes sémantiques :
+ * solid, soft, outline, ghost, filled, underlined, flushed
+ *
+ * Chaque variante expose :
+ * --variant-background
+ * --variant-text
+ * --variant-border
+ *
+ * États :
+ * --variant-hover-background
+ * --variant-hover-text
+ * --variant-hover-border
+ *
+ * --variant-active-background
+ * --variant-active-text
+ * --variant-active-border
+ * ========================================================== */
+
+
+/* ==========================================================
+ * SOLID
+ * ========================================================== */
+
+[data-color="info"][data-variant="solid"] {
+    --variant-background: var(--info-500);
+    --variant-text: var(--ink-50);
+    --variant-border: var(--info-500);
+
+    --variant-hover-background: var(--info-600);
+    --variant-hover-text: var(--ink-50);
+    --variant-hover-border: var(--info-600);
+
+    --variant-active-background: var(--info-700);
+    --variant-active-text: var(--ink-50);
+    --variant-active-border: var(--info-700);
+}
+
+
+/* ==========================================================
+ * SOFT
+ * ========================================================== */
+
+[data-color="info"][data-variant="soft"] {
+    --variant-background: var(--info-50);
+    --variant-text: var(--info-700);
+    --variant-border: var(--info-100);
+
+    --variant-hover-background: var(--info-100);
+    --variant-hover-text: var(--info-800);
+    --variant-hover-border: var(--info-200);
+
+    --variant-active-background: var(--info-200);
+    --variant-active-text: var(--info-900);
+    --variant-active-border: var(--info-300);
+}
+
+
+/* ==========================================================
+ * OUTLINE
+ * ========================================================== */
+
+[data-color="info"][data-variant="outline"] {
+    --variant-background: transparent;
+    --variant-text: var(--info-600);
+    --variant-border: var(--info-500);
+
+    --variant-hover-background: var(--info-50);
+    --variant-hover-text: var(--info-700);
+    --variant-hover-border: var(--info-600);
+
+    --variant-active-background: var(--info-100);
+    --variant-active-text: var(--info-800);
+    --variant-active-border: var(--info-700);
+}
+
+
+/* ==========================================================
+ * GHOST
+ * ========================================================== */
+
+[data-color="info"][data-variant="ghost"] {
+    --variant-background: transparent;
+    --variant-text: var(--info-600);
+    --variant-border: transparent;
+
+    --variant-hover-background: var(--info-50);
+    --variant-hover-text: var(--info-700);
+    --variant-hover-border: transparent;
+
+    --variant-active-background: var(--info-100);
+    --variant-active-text: var(--info-800);
+    --variant-active-border: transparent;
+}
+
+
+/* ==========================================================
+ * FILLED
+ * ========================================================== */
+
+[data-color="info"][data-variant="filled"] {
+    --variant-background: var(--info-100);
+    --variant-text: var(--info-700);
+    --variant-border: var(--info-100);
+
+    --variant-hover-background: var(--info-200);
+    --variant-hover-text: var(--info-800);
+    --variant-hover-border: var(--info-200);
+
+    --variant-active-background: var(--info-300);
+    --variant-active-text: var(--info-900);
+    --variant-active-border: var(--info-300);
+}
+
+
+/* ==========================================================
+ * UNDERLINED
+ * ========================================================== */
+
+[data-color="info"][data-variant="underlined"] {
+    --variant-background: transparent;
+    --variant-text: var(--info-600);
+    --variant-border: transparent;
+
+    --variant-hover-background: transparent;
+    --variant-hover-text: var(--info-700);
+    --variant-hover-border: var(--info-500);
+
+    --variant-active-background: transparent;
+    --variant-active-text: var(--info-800);
+    --variant-active-border: var(--info-700);
+}
+
+
+/* ==========================================================
+ * FLUSHED
+ * ========================================================== */
+
+[data-color="info"][data-variant="flushed"] {
+    --variant-background: transparent;
+    --variant-text: var(--info-600);
+    --variant-border: var(--info-200);
+
+    --variant-hover-background: var(--info-50);
+    --variant-hover-text: var(--info-700);
+    --variant-hover-border: var(--info-400);
+
+    --variant-active-background: var(--info-100);
+    --variant-active-text: var(--info-800);
+    --variant-active-border: var(--info-600);
+}
+
+[data-color="info"][data-variant="nav"] {
+    --variant-background: transparent;
+    --variant-text: var(--info-700);
+    --variant-border: transparent;
+
+    --variant-hover-background: var(--info-50);
+    --variant-hover-text: var(--info-800);
+    --variant-hover-border: transparent;
+
+    --variant-active-background: var(--info-100);
+    --variant-active-text: var(--info-900);
+    --variant-active-border: transparent;
+}
+
+

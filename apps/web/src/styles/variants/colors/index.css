@@ -1,1 +1,7 @@
 @import "./primary.css";
+@import "./accent.css";
+@import "./success.css";
+@import "./warning.css";
+@import "./danger.css";
+@import "./info.css";
+@import "./neutral.css";

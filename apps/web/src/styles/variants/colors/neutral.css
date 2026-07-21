@@ -1,0 +1,168 @@
+/* ==========================================================
+ * neutral — gray
+ * Variantes sémantiques :
+ * solid, soft, outline, ghost, filled, underlined, flushed
+ *
+ * Chaque variante expose :
+ * --variant-background
+ * --variant-text
+ * --variant-border
+ *
+ * États :
+ * --variant-hover-background
+ * --variant-hover-text
+ * --variant-hover-border
+ *
+ * --variant-active-background
+ * --variant-active-text
+ * --variant-active-border
+ * ========================================================== */
+
+
+/* ==========================================================
+ * SOLID
+ * ========================================================== */
+
+[data-color="neutral"][data-variant="solid"] {
+    --variant-background: var(--neutral-500);
+    --variant-text: var(--ink-50);
+    --variant-border: var(--neutral-500);
+
+    --variant-hover-background: var(--neutral-600);
+    --variant-hover-text: var(--ink-50);
+    --variant-hover-border: var(--neutral-600);
+
+    --variant-active-background: var(--neutral-700);
+    --variant-active-text: var(--ink-50);
+    --variant-active-border: var(--neutral-700);
+}
+
+
+/* ==========================================================
+ * SOFT
+ * ========================================================== */
+
+[data-color="neutral"][data-variant="soft"] {
+    --variant-background: var(--neutral-50);
+    --variant-text: var(--neutral-700);
+    --variant-border: var(--neutral-100);
+
+    --variant-hover-background: var(--neutral-100);
+    --variant-hover-text: var(--neutral-800);
+    --variant-hover-border: var(--neutral-200);
+
+    --variant-active-background: var(--neutral-200);
+    --variant-active-text: var(--neutral-900);
+    --variant-active-border: var(--neutral-300);
+}
+
+
+/* ==========================================================
+ * OUTLINE
+ * ========================================================== */
+
+[data-color="neutral"][data-variant="outline"] {
+    --variant-background: transparent;
+    --variant-text: var(--neutral-600);
+    --variant-border: var(--neutral-500);
+
+    --variant-hover-background: var(--neutral-50);
+    --variant-hover-text: var(--neutral-700);
+    --variant-hover-border: var(--neutral-600);
+
+    --variant-active-background: var(--neutral-100);
+    --variant-active-text: var(--neutral-800);
+    --variant-active-border: var(--neutral-700);
+}
+
+
+/* ==========================================================
+ * GHOST
+ * ========================================================== */
+
+[data-color="neutral"][data-variant="ghost"] {
+    --variant-background: transparent;
+    --variant-text: var(--neutral-600);
+    --variant-border: transparent;
+
+    --variant-hover-background: var(--neutral-50);
+    --variant-hover-text: var(--neutral-700);
+    --variant-hover-border: transparent;
+
+    --variant-active-background: var(--neutral-100);
+    --variant-active-text: var(--neutral-800);
+    --variant-active-border: transparent;
+}
+
+
+/* ==========================================================
+ * FILLED
+ * ========================================================== */
+
+[data-color="neutral"][data-variant="filled"] {
+    --variant-background: var(--neutral-100);
+    --variant-text: var(--neutral-700);
+    --variant-border: var(--neutral-100);
+
+    --variant-hover-background: var(--neutral-200);
+    --variant-hover-text: var(--neutral-800);
+    --variant-hover-border: var(--neutral-200);
+
+    --variant-active-background: var(--neutral-300);
+    --variant-active-text: var(--neutral-900);
+    --variant-active-border: var(--neutral-300);
+}
+
+
+/* ==========================================================
+ * UNDERLINED
+ * ========================================================== */
+
+[data-color="neutral"][data-variant="underlined"] {
+    --variant-background: transparent;
+    --variant-text: var(--neutral-600);
+    --variant-border: transparent;
+
+    --variant-hover-background: transparent;
+    --variant-hover-text: var(--neutral-700);
+    --variant-hover-border: var(--neutral-500);
+
+    --variant-active-background: transparent;
+    --variant-active-text: var(--neutral-800);
+    --variant-active-border: var(--neutral-700);
+}
+
+
+/* ==========================================================
+ * FLUSHED
+ * ========================================================== */
+
+[data-color="neutral"][data-variant="flushed"] {
+    --variant-background: transparent;
+    --variant-text: var(--neutral-600);
+    --variant-border: var(--neutral-200);
+
+    --variant-hover-background: var(--neutral-50);
+    --variant-hover-text: var(--neutral-700);
+    --variant-hover-border: var(--neutral-400);
+
+    --variant-active-background: var(--neutral-100);
+    --variant-active-text: var(--neutral-800);
+    --variant-active-border: var(--neutral-600);
+}
+
+[data-color="neutral"][data-variant="nav"] {
+    --variant-background: transparent;
+    --variant-text: var(--neutral-700);
+    --variant-border: transparent;
+
+    --variant-hover-background: var(--neutral-50);
+    --variant-hover-text: var(--neutral-800);
+    --variant-hover-border: transparent;
+
+    --variant-active-background: var(--neutral-100);
+    --variant-active-text: var(--neutral-900);
+    --variant-active-border: transparent;
+}
+
+

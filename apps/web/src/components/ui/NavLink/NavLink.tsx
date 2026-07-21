@@ -57,17 +57,20 @@ export function NavLink({ href, label, activeStyle = false }: Props) {
       href={href}
       onClick={handleClick}
       className={clsx(styles.link, active && styles.active)}
+      data-color="neutral"
+      data-variant="nav"
     >
-      {/* ── Blob organique de fond ── */}
       <span className={styles.blob} aria-hidden="true" />
 
-      {/* ── Ondes de clic ── */}
-      {ripples.map((r) => (
+      {ripples.map((ripple) => (
         <span
-          key={r.id}
+          key={ripple.id}
           className={styles.ripple}
           aria-hidden="true"
-          style={{ left: r.x, top: r.y }}
+          style={{
+            left: ripple.x,
+            top: ripple.y,
+          }}
         />
       ))}
 

@@ -1,38 +1,168 @@
-[data-color="primary"] {
-    --shadow: rgba(var(--primary-500-rgb), 0.28);
+/* ==========================================================
+ * Primary — Aubergine
+ * Variantes sémantiques :
+ * solid, soft, outline, ghost, filled, underlined, flushed
+ *
+ * Chaque variante expose :
+ * --variant-background
+ * --variant-text
+ * --variant-border
+ *
+ * États :
+ * --variant-hover-background
+ * --variant-hover-text
+ * --variant-hover-border
+ *
+ * --variant-active-background
+ * --variant-active-text
+ * --variant-active-border
+ * ========================================================== */
 
-    --solid-background: var(--primary-500);
-    --solid-text: var(--pure-white);
-    --solid-hover: var(--primary-600);
-    --solid-border: var(--primary-500);
 
-    --soft-background: var(--primary-50);
-    --soft-text: var(--primary-900);
-    --soft-hover: var(--primary-100);
-    --soft-border: var(--primary-200);
+/* ==========================================================
+ * SOLID
+ * ========================================================== */
 
-    --outline-background: transparent;
-    --outline-text: var(--primary-600);
-    --outline-hover: var(--primary-50);
-    --outline-border: var(--primary-500);
+[data-color="primary"][data-variant="solid"] {
+    --variant-background: var(--primary-500);
+    --variant-text: var(--ink-50);
+    --variant-border: var(--primary-500);
 
-    --ghost-background: transparent;
-    --ghost-text: var(--primary-500);
-    --ghost-hover: rgba(var(--primary-500-rgb), 0.08);
-    --ghost-border: transparent;
+    --variant-hover-background: var(--primary-600);
+    --variant-hover-text: var(--ink-50);
+    --variant-hover-border: var(--primary-600);
 
-    --filled-background: var(--primary-50);
-    --filled-text: var(--primary-900);
-    --filled-hover: var(--primary-100);
-    --filled-border: transparent;
-
-    --underlined-background: transparent;
-    --underlined-text: var(--primary-900);
-    --underlined-hover: var(--primary-50);
-    --underlined-border: var(--primary-500);
-
-    --flushed-background: transparent;
-    --flushed-text: var(--primary-900);
-    --flushed-hover: var(--primary-50);
-    --flushed-border: var(--primary-300);
+    --variant-active-background: var(--primary-700);
+    --variant-active-text: var(--ink-50);
+    --variant-active-border: var(--primary-700);
 }
+
+
+/* ==========================================================
+ * SOFT
+ * ========================================================== */
+
+[data-color="primary"][data-variant="soft"] {
+    --variant-background: var(--primary-50);
+    --variant-text: var(--primary-700);
+    --variant-border: var(--primary-100);
+
+    --variant-hover-background: var(--primary-100);
+    --variant-hover-text: var(--primary-800);
+    --variant-hover-border: var(--primary-200);
+
+    --variant-active-background: var(--primary-200);
+    --variant-active-text: var(--primary-900);
+    --variant-active-border: var(--primary-300);
+}
+
+
+/* ==========================================================
+ * OUTLINE
+ * ========================================================== */
+
+[data-color="primary"][data-variant="outline"] {
+    --variant-background: transparent;
+    --variant-text: var(--primary-600);
+    --variant-border: var(--primary-500);
+
+    --variant-hover-background: var(--primary-50);
+    --variant-hover-text: var(--primary-700);
+    --variant-hover-border: var(--primary-600);
+
+    --variant-active-background: var(--primary-100);
+    --variant-active-text: var(--primary-800);
+    --variant-active-border: var(--primary-700);
+}
+
+
+/* ==========================================================
+ * GHOST
+ * ========================================================== */
+
+[data-color="primary"][data-variant="ghost"] {
+    --variant-background: transparent;
+    --variant-text: var(--primary-600);
+    --variant-border: transparent;
+
+    --variant-hover-background: var(--primary-50);
+    --variant-hover-text: var(--primary-700);
+    --variant-hover-border: transparent;
+
+    --variant-active-background: var(--primary-100);
+    --variant-active-text: var(--primary-800);
+    --variant-active-border: transparent;
+}
+
+
+/* ==========================================================
+ * FILLED
+ * ========================================================== */
+
+[data-color="primary"][data-variant="filled"] {
+    --variant-background: var(--primary-100);
+    --variant-text: var(--primary-700);
+    --variant-border: var(--primary-100);
+
+    --variant-hover-background: var(--primary-200);
+    --variant-hover-text: var(--primary-800);
+    --variant-hover-border: var(--primary-200);
+
+    --variant-active-background: var(--primary-300);
+    --variant-active-text: var(--primary-900);
+    --variant-active-border: var(--primary-300);
+}
+
+
+/* ==========================================================
+ * UNDERLINED
+ * ========================================================== */
+
+[data-color="primary"][data-variant="underlined"] {
+    --variant-background: transparent;
+    --variant-text: var(--primary-600);
+    --variant-border: transparent;
+
+    --variant-hover-background: transparent;
+    --variant-hover-text: var(--primary-700);
+    --variant-hover-border: var(--primary-500);
+
+    --variant-active-background: transparent;
+    --variant-active-text: var(--primary-800);
+    --variant-active-border: var(--primary-700);
+}
+
+
+/* ==========================================================
+ * FLUSHED
+ * ========================================================== */
+
+[data-color="primary"][data-variant="flushed"] {
+    --variant-background: transparent;
+    --variant-text: var(--primary-600);
+    --variant-border: var(--primary-200);
+
+    --variant-hover-background: var(--primary-50);
+    --variant-hover-text: var(--primary-700);
+    --variant-hover-border: var(--primary-400);
+
+    --variant-active-background: var(--primary-100);
+    --variant-active-text: var(--primary-800);
+    --variant-active-border: var(--primary-600);
+}
+
+[data-color="primary"][data-variant="nav"] {
+    --variant-background: transparent;
+    --variant-text: var(--primary-700);
+    --variant-border: transparent;
+
+    --variant-hover-background: var(--primary-50);
+    --variant-hover-text: var(--primary-800);
+    --variant-hover-border: transparent;
+
+    --variant-active-background: var(--primary-100);
+    --variant-active-text: var(--primary-900);
+    --variant-active-border: transparent;
+}
+
+

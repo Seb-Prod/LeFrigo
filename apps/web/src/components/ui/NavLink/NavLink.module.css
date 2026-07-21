@@ -1,98 +1,180 @@
-/* ── Conteneur du lien ────────────────────────────────────── */
+/* ==========================================================
+ * NavLink
+ * Lien de navigation avec blob organique animé
+ * ========================================================== */
 
 .link {
   position: relative;
+  isolation: isolate;
+
   display: inline-flex;
   align-items: center;
+
   padding: 10px 16px;
+
+  border: 1px solid var(--variant-border);
   border-radius: 14px;
+
   overflow: hidden;
-  isolation: isolate;
+
   text-decoration: none;
-  color: var(--color-accent-text); /* cohérent avec .navLink de la Sidebar */
-  transition: color 0.25s ease;
+
+  background: var(--variant-background);
+  color: var(--variant-text);
+
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease;
 }
+
+
+/* ==========================================================
+ * Label
+ * ========================================================== */
 
 .label {
   position: relative;
   z-index: 2;
 }
 
-/* ── Blob organique de fond ───────────────────────────────── */
+
+/* ==========================================================
+ * Blob organique
+ * ========================================================== */
 
 .blob {
   position: absolute;
   inset: -20%;
   z-index: 1;
 
-  background: var(--color-primary-border);
-  border-radius: 42% 58% 65% 35% / 45% 40% 60% 55%;
+  background: var(--variant-background);
+
+  border-radius:
+    42% 58% 65% 35% /
+    45% 40% 60% 55%;
 
   opacity: 0;
   transform: scale(0.6);
   transform-origin: center;
+
+  pointer-events: none;
 
   transition:
     opacity 0.7s ease-in-out,
     transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* ── Hover ────────────────────────────────────────────────── */
+
+/* ==========================================================
+ * Hover
+ * ========================================================== */
 
 .link:hover {
-  /* color: var(--color-text); */
+  color: var(--variant-hover-text);
+  background: var(--variant-hover-background);
+  border-color: var(--variant-hover-border);
 }
 
 .link:hover .blob {
   opacity: 1;
   transform: scale(1);
-  /* morph uniquement quand visible */
+
+  background: var(--variant-hover-background);
+
   animation: blob-morph 6s ease-in-out infinite;
 }
 
-/* ── État actif ───────────────────────────────────────────── */
+
+/* ==========================================================
+ * État actif
+ * ========================================================== */
 
 .active {
-  color: var(--color-primary-solid-text); /* cohérent avec li.active de la Sidebar */
+  color: var(--variant-active-text);
+  background: var(--variant-active-background);
+  border-color: var(--variant-active-border);
+
   font-weight: 600;
 }
 
 .active .blob {
   opacity: 1;
   transform: scale(1);
-  background: var(--color-primary-solid); /* même que --color-secondary de la Sidebar */
-  /* breathing subtil en idle */
+
+  background: var(--variant-active-background);
+
   animation:
     blob-morph 6s ease-in-out infinite,
     blob-breathe 4s ease-in-out infinite;
 }
 
-/* ── Morph continu du blob ────────────────────────────────── */
+
+/* ==========================================================
+ * Morphing du blob
+ * ========================================================== */
 
 @keyframes blob-morph {
-  0%,  100% { border-radius: 42% 58% 65% 35% / 45% 40% 60% 55%; }
-  33%       { border-radius: 60% 40% 35% 65% / 55% 60% 40% 45%; }
-  66%       { border-radius: 48% 52% 58% 42% / 40% 55% 45% 60%; }
+  0%,
+  100% {
+    border-radius:
+      42% 58% 65% 35% /
+      45% 40% 60% 55%;
+  }
+
+  33% {
+    border-radius:
+      60% 40% 35% 65% /
+      55% 60% 40% 45%;
+  }
+
+  66% {
+    border-radius:
+      48% 52% 58% 42% /
+      40% 55% 45% 60%;
+  }
 }
 
-/* ── Breathing idle (scale léger) ────────────────────────── */
+
+/* ==========================================================
+ * Respiration du blob actif
+ * ========================================================== */
 
 @keyframes blob-breathe {
-  0%,  100% { transform: scale(1); }
-  50%        { transform: scale(1.06); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.06);
+  }
 }
 
-/* ── Onde de clic (ripple) ────────────────────────────────── */
+
+/* ==========================================================
+ * Ripple
+ * ========================================================== */
 
 .ripple {
   position: absolute;
-  z-index: 1;
+  z-index: 3;
+
   width: 12px;
   height: 12px;
-  background: color-mix(in srgb, var(--color-primary-solid) 35%, transparent);
+
+  background: color-mix(
+    in srgb,
+    var(--variant-text) 35%,
+    transparent
+  );
+
   border-radius: 50%;
+
   transform: translate(-50%, -50%) scale(0);
+
   pointer-events: none;
+
   animation: ripple-expand 0.6s ease-out forwards;
 }
 
@@ -103,9 +185,19 @@
   }
 }
 
-/* ── Accessibilité : réduction des animations ─────────────── */
+
+/* ==========================================================
+ * Accessibilité
+ * ========================================================== */
 
 @media (prefers-reduced-motion: reduce) {
-  .blob  { animation: none; transition: opacity 0.2s ease; }
-  .ripple { animation: none; display: none; }
+  .blob {
+    animation: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .ripple {
+    display: none;
+    animation: none;
+  }
 }
