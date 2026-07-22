@@ -1,0 +1,63 @@
+/* ── 🫧 Blob (survol / actif) ────────────────────────────────────── */
+
+/* Fond organique positionné derrière le contenu du trigger */
+.blob {
+  position: absolute;
+  inset: 4px;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0;
+  transform: scale(0.85);
+  pointer-events: none;
+  z-index: 0;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+/* Le parent doit porter la classe .trigger avec position: relative + overflow: hidden */
+.trigger:hover .blob {
+  opacity: 0.12;                                  /* légère présence au survol */
+  transform: scale(1);
+}
+
+.trigger[data-active="true"] .blob {
+  opacity: 0.16;                                  /* état actif : blob visible en permanence */
+  transform: scale(1);
+  animation: blob-breathe 3s ease-in-out infinite;
+}
+
+@keyframes blob-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+
+/* ── 💧 Ripple (clic) ────────────────────────────────────────────── */
+
+/* Onde ponctuelle positionnée via style inline (left/top) au point de clic */
+.ripple {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;                          /* centre le point de départ sur (x, y) */
+  border-radius: 999px;
+  background: var(--color-9, currentColor);
+  opacity: 0.35;
+  transform: scale(0);
+  pointer-events: none;
+  z-index: 1;
+  animation: ripple-expand 600ms ease-out forwards;
+}
+
+@keyframes ripple-expand {
+  to {
+    transform: scale(18);                         /* couvre largement le trigger, quelle que soit sa taille */
+    opacity: 0;
+  }
+}

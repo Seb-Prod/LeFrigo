@@ -1,0 +1,34 @@
+[data-component="button"][data-size="xs"] {
+  --padding-inline: 8px;
+  --padding-block: 4px;
+  --font-size: 12px;
+  --radius: 8px;
+}
+
+[data-component="button"][data-size="sm"] {
+  --padding-inline: 12px;
+  --padding-block: 6px;
+  --font-size: 13px;
+  --radius: 10px;
+}
+
+[data-component="button"][data-size="md"] {
+  --padding-inline: 16px;
+  --padding-block: 10px;
+  --font-size: 14px;
+  --radius: 12px;
+}
+
+[data-component="button"][data-size="lg"] {
+  --padding-inline: 20px;
+  --padding-block: 12px;
+  --font-size: 16px;
+  --radius: 14px;
+}
+
+[data-component="button"][data-size="xl"] {
+  --padding-inline: 24px;
+  --padding-block: 14px;
+  --font-size: 18px;
+  --radius: 16px;
+}
