@@ -1,0 +1,103 @@
+/* ── Wrapper ────────────────────────────────────────────────── */
+
+.wrapper {
+  width: 100%;
+  overflow-x: auto;
+
+  border: 1px solid var(--variant-border);
+  border-radius: var(--radius-lg);
+
+  background: var(--color-neutral-background);
+
+  /* Évite que les coins du tableau dépassent du wrapper */
+  isolation: isolate;
+}
+
+/* ── Table ──────────────────────────────────────────────────── */
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+
+  text-align: left;
+}
+
+/* ── En-tête ────────────────────────────────────────────────── */
+
+.head {
+  background: var(--variant-background);
+  color: var(--variant-text);
+}
+
+.head th {
+  padding: var(--space-sm) var(--space-md);
+
+  border-bottom: 1px solid var(--variant-border);
+
+  font-size: var(--font-sm);
+  font-weight: 600;
+  line-height: 1.4;
+
+  white-space: nowrap;
+}
+
+/* ── Lignes ─────────────────────────────────────────────────── */
+
+.table tbody tr {
+  background: var(--color-neutral-background);
+
+  transition:
+    background-color 150ms ease;
+}
+
+/* ── Hover ──────────────────────────────────────────────────── */
+
+.table tbody tr:hover {
+  background: var(--color-neutral-soft-background);
+}
+
+/* ── Cellules ───────────────────────────────────────────────── */
+
+.cell {
+  padding: var(--space-sm) var(--space-md);
+
+  border-bottom: 1px solid var(--color-neutral-border);
+
+  color: var(--color-neutral-text);
+
+  font-size: var(--font-sm);
+  line-height: 1.5;
+}
+
+/* Dernière ligne sans bordure */
+
+.table tbody tr:last-child .cell {
+  border-bottom: 0;
+}
+
+/* ── État vide ──────────────────────────────────────────────── */
+
+.empty {
+  padding: var(--space-xl) var(--space-md);
+
+  color: var(--color-neutral-text);
+
+  font-size: var(--font-sm);
+  text-align: center;
+}
+
+/* ── Code ───────────────────────────────────────────────────── */
+
+.cell code {
+  display: inline-block;
+
+  padding: 2px var(--space-xs);
+
+  border-radius: var(--radius-sm);
+
+  background: var(--color-neutral-soft-background);
+  color: var(--color-neutral-text);
+
+  font-family: monospace;
+  font-size: 0.9em;
+}

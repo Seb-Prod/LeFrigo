@@ -1,0 +1,20 @@
+.tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--variant-border);
+}
+
+.tab {
+  padding: 8px 16px;
+  border: none;
+  background: none;
+  color: var(--variant-text);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.tab[data-active="true"] {
+  color: var(--variant-active-text);
+  border-bottom-color: var(--variant-active-border);
+  font-weight: 600;
+}

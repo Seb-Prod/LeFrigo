@@ -1,0 +1,20 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  width: 100%;
+}
+
+.title {
+  margin: 0;
+
+  font-size: var(--font-lg);
+  font-weight: 600;
+  line-height: 1.2;
+
+  text-transform: capitalize;
+}
+
+.content {
+  width: 100%;
+}

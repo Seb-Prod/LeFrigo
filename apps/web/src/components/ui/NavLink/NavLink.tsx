@@ -7,7 +7,7 @@ import { isActivePath } from "@/lib/navigation";
 import styles from "./NavLink.module.css";
 import { useRipple } from "@/hooks/useRipple";
 import { RippleLayer } from "../RippleLayer";
-import { Color, Size } from "@/components/types";
+import { Color, Size, Variant } from "@/components/types";
 
 type Props = {
   href: string;
@@ -15,12 +15,13 @@ type Props = {
   activeStyle?: boolean;
   color?: Color;
   size?: Size;
+  variant?: Variant;
 };
 
 /**
  * NavLink
  */
-export function NavLink({ href, label, activeStyle = false, color= "primary", size="md" }: Props) {
+export function NavLink({ href, label, activeStyle = false, color= "primary", size="md", variant="ghost" }: Props) {
   const pathname = usePathname();
   const active = isActivePath(pathname, href) || activeStyle;
 
@@ -34,7 +35,7 @@ export function NavLink({ href, label, activeStyle = false, color= "primary", si
       data-color={color}
       data-component="button"
       data-size={size}
-      data-variant="solid"
+      data-variant={variant}
       data-active={active}
     >
       <RippleLayer ripples={ripples} />

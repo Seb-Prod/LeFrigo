@@ -1,0 +1,126 @@
+/* NavLinkShowcase.module.css */
+
+.showcase {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+  width: 100%;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--font-lg);
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+/* ── Size selector ─────────────────────────────────────────── */
+
+.sizeSelector {
+  display: inline-flex;
+  align-self: flex-start;
+  gap: var(--space-xs);
+  padding: var(--space-xs);
+  border: 1px solid var(--color-neutral-border);
+  border-radius: var(--radius-md);
+  background: var(--color-neutral-soft-background);
+}
+
+.sizeButton {
+  min-width: 48px;
+  padding: var(--space-xs) var(--space-sm);
+
+  border: 0;
+  border-radius: var(--radius-sm);
+
+  background: transparent;
+  color: var(--color-neutral-text);
+
+  font-size: var(--font-sm);
+  font-weight: 500;
+
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.sizeButton:hover {
+  background: var(--color-neutral-soft-hover);
+}
+
+.sizeButton[data-active="true"] {
+  background: var(--color-neutral-solid-background);
+  color: var(--color-neutral-solid-text);
+}
+
+/* ── Table ─────────────────────────────────────────────────── */
+
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--color-neutral-border);
+  border-radius: var(--radius-lg);
+}
+
+.table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--color-neutral-border);
+}
+
+.table tbody tr:last-child th,
+.table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* ── Header ────────────────────────────────────────────────── */
+
+.table thead {
+  background: var(--color-neutral-soft-background);
+}
+
+.stateHeader {
+  width: 100px;
+  text-align: left;
+}
+
+.colorHeader {
+  text-align: center;
+  font-size: var(--font-sm);
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+/* ── State ─────────────────────────────────────────────────── */
+
+.stateCell {
+  text-align: left;
+  font-size: var(--font-sm);
+  font-weight: 600;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+/* ── Component ─────────────────────────────────────────────── */
+
+.componentCell {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.componentCell > a {
+  display: inline-flex;
+}

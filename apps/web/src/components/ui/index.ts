@@ -45,5 +45,7 @@ export * from "./SkeletonBox";
 export { SocialLink } from "./SocialLink";
 export { Surface } from "./Surface";
 
+export { Table } from "./Table";
+export { Tabs } from "./Tabs";
 export { Text } from "./Text";
 export { TextArea } from "./TextArea";
