@@ -1,0 +1,53 @@
+/* ── Conteneur du groupe (style pilule) 💊 ─────────────────── */
+.buttonGroup {
+  --group-color: var(--variant-background);              /* couleur par défaut, surchargeable */
+  --group-color-hover: var(--variant-hover-background);
+
+  display: flex;
+  border-radius: 999px;                                 /* forme pilule */
+  overflow: hidden;                                      /* coupe les bords internes des boutons */
+  background-color: var(--variant-background);
+}
+
+/* ── Bouton individuel ─────────────────────────────────────── */
+.button {
+  flex: 1 1 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 var(--space-4, 16px);
+  border: none;
+  background-color: transparent;
+  color: var(--variant-text);
+  font-size: var(--font-size-sm, 14px);
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+/* Séparateur fin entre les boutons (sauf le premier) */
+.button:not(:first-child) {
+  border-left: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.button:hover {
+  background-color: var(--variant-hover-background)
+}
+
+/* Focus clavier uniquement */
+.button:focus-visible {
+  outline: 2px solid var(--color-white, #fff);
+  outline-offset: -4px;                                   /* anneau à l'intérieur du bouton */
+}
+
+/* ── État actif ────────────────────────────────────────────── */
+.button[data-active="true"] {
+  background-color: var(--variant-active-background)
+}
+
+.button[data-active="true"]:hover {
+  background-color: rgba(0, 0, 0, 0.18);
+}
+

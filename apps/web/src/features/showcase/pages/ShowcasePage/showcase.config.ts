@@ -1,5 +1,6 @@
-import { NavLinkShowcase } from "../../components/NavLink/NavLink";
+
 import { Palettes } from "../../components/Palette/Palette";
+import { NavLinkShowcase } from "../../showcases/NavLink";
 
 export const COMPONENTS = {
   palettes: { label: "Palettes", Component: Palettes },

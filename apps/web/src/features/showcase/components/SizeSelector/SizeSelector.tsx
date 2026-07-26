@@ -1,6 +1,7 @@
 "use client";
 
 import type { Size } from "@/components/types";
+import { ButtonGroup } from "@/components/ui";
 import styles from "./SizeSelector.module.css";
 
 const SIZES: Size[] = [
@@ -28,24 +29,14 @@ export function SizeSelector({
         {label}
       </h3>
 
-      <div className={styles.sizeSelector}>
-        {SIZES.map((size) => {
-          const active = value === size;
-
-          return (
-            <button
-              key={size}
-              type="button"
-              className={styles.sizeButton}
-              data-active={active}
-              aria-pressed={active}
-              onClick={() => onChange(size)}
-            >
-              {size}
-            </button>
-          );
-        })}
-      </div>
+      <ButtonGroup
+        options={SIZES.map((size) => ({
+          value: size,
+        }))}
+        value={value}
+        onChange={onChange}
+        aria-label={label}
+      />
     </section>
   );
 }
