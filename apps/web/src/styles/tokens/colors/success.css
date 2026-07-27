@@ -1,0 +1,79 @@
+[data-color="success"] {
+  /* ── Solid ── */
+  --color-solid-background: var(--semantic-success-solid-bg);
+  --color-solid-text: var(--semantic-success-solid-text);
+  --color-solid-border: var(--semantic-success-solid-border);
+
+  --color-solid-hover-background: var(--semantic-success-solid-hover-bg);
+  --color-solid-hover-text: var(--semantic-success-solid-hover-text);
+  --color-solid-hover-border: var(--semantic-success-solid-hover-border);
+
+  --color-solid-active-background: var(--semantic-success-solid-active-bg);
+  --color-solid-active-text: var(--semantic-success-solid-active-text);
+  --color-solid-active-border: var(--semantic-success-solid-active-border);
+
+  /* ── Soft ── */
+  --color-soft-background: var(--semantic-success-soft-bg);
+  --color-soft-text: var(--semantic-success-soft-text);
+  --color-soft-border: var(--semantic-success-soft-border);
+
+  --color-soft-hover-background: var(--semantic-success-soft-hover-bg);
+  --color-soft-hover-text: var(--semantic-success-soft-hover-text);
+  --color-soft-hover-border: var(--semantic-success-soft-hover-border);
+
+  --color-soft-active-background: var(--semantic-success-soft-active-bg);
+  --color-soft-active-text: var(--semantic-success-soft-active-text);
+  --color-soft-active-border: var(--semantic-success-soft-active-border);
+
+  /* ── Outline ── */
+  --color-outline-background: var(--semantic-success-outline-bg);
+  --color-outline-text: var(--semantic-success-outline-text);
+  --color-outline-border: var(--semantic-success-outline-border);
+
+  --color-outline-hover-background: var(--semantic-success-outline-hover-bg);
+  --color-outline-hover-text: var(--semantic-success-outline-hover-text);
+  --color-outline-hover-border: var(--semantic-success-outline-hover-border);
+
+  --color-outline-active-background: var(--semantic-success-outline-active-bg);
+  --color-outline-active-text: var(--semantic-success-outline-active-text);
+  --color-outline-active-border: var(--semantic-success-outline-active-border);
+
+  /* ── Ghost ── */
+  --color-ghost-background: var(--semantic-success-ghost-bg);
+  --color-ghost-text: var(--semantic-success-ghost-text);
+  --color-ghost-border: var(--semantic-success-ghost-border);
+
+  --color-ghost-hover-background: var(--semantic-success-ghost-hover-bg);
+  --color-ghost-hover-text: var(--semantic-success-ghost-hover-text);
+  --color-ghost-hover-border: var(--semantic-success-ghost-hover-border);
+
+  --color-ghost-active-background: var(--semantic-success-ghost-active-bg);
+  --color-ghost-active-text: var(--semantic-success-ghost-active-text);
+  --color-ghost-active-border: var(--semantic-success-ghost-active-border);
+  
+  /* ── Plain ── */
+  --color-plain-background: var(--semantic-success-plain-bg);
+  --color-plain-text: var(--semantic-success-plain-text);
+  --color-plain-border: var(--semantic-success-plain-border);
+
+  --color-plain-hover-background: var(--semantic-success-plain-hover-bg);
+  --color-plain-hover-text: var(--semantic-success-plain-hover-text);
+  --color-plain-hover-border: var(--semantic-success-plain-hover-border);
+
+  --color-plain-active-background: var(--semantic-success-plain-active-bg);
+  --color-plain-active-text: var(--semantic-success-plain-active-text);
+  --color-plain-active-border: var(--semantic-success-plain-active-border);
+
+  /* ── Link ── */
+  --color-link-background: var(--semantic-success-link-bg);
+  --color-link-text: var(--semantic-success-link-text);
+  --color-link-border: var(--semantic-success-link-border);
+
+  --color-link-hover-background: var(--semantic-success-link-hover-bg);
+  --color-link-hover-text: var(--semantic-success-link-hover-text);
+  --color-link-hover-border: var(--semantic-success-link-hover-border);
+
+  --color-link-active-background: var(--semantic-success-link-active-bg);
+  --color-link-active-text: var(--semantic-success-link-active-text);
+  --color-link-active-border: var(--semantic-success-link-active-border);
+}

@@ -1,0 +1,126 @@
+ /* ────────────────────────────────────────────────────────────────
+   🎨 Tokens sémantiques — Success
+   ────────────────────────────────────────────────────────────────
+   Ce fichier définit les tokens de couleur sémantiques associés à
+   la couleur succes. Les composants consomment ces tokens via
+   leur système de variantes afin de conserver une séparation entre
+   la palette de couleurs et leur usage dans l'interface.
+
+   Chaque variante expose 9 tokens :
+     - bg     : couleur de fond
+     - text   : couleur du contenu
+     - border : couleur de bordure
+
+   Ces propriétés sont déclinées selon 3 états :
+     - repos
+     - hover
+     - active
+
+   Hiérarchie d'intensité visuelle :
+     solid > soft > outline > ghost > plain
+
+   Variantes :
+     - solid  : présence visuelle forte, destinée aux éléments prioritaires
+     - soft   : présence visuelle modérée avec un fond teinté
+     - outline: fond transparent avec une bordure visible
+     - ghost  : apparence discrète avec un fond révélé à l'interaction
+     - plain  : apparence minimale sans fond ni bordure
+     - link   : apparence textuelle destinée aux éléments de navigation
+                ou aux actions se comportant comme des liens
+
+   Les tokens définissent uniquement les propriétés visuelles.
+   Le comportement spécifique aux composants (soulignement, animation,
+   transition, focus, etc.) est géré par les composants eux-mêmes.
+   ──────────────────────────────────────────────────────────────── */
+
+:root.dark {
+
+  /* ── Solid ── */
+  /* Présence visuelle forte — usage : éléments prioritaires */
+  --semantic-success-solid-bg: var(--green-dark-500);
+  --semantic-success-solid-text: #ffffff;
+  --semantic-success-solid-border: var(--green-dark-500);
+
+  --semantic-success-solid-hover-bg: var(--green-dark-600);
+  --semantic-success-solid-hover-text: #ffffff;
+  --semantic-success-solid-hover-border: var(--green-dark-600);
+
+  --semantic-success-solid-active-bg: var(--green-dark-700);
+  --semantic-success-solid-active-text: #ffffff;
+  --semantic-success-solid-active-border: var(--green-dark-700);
+
+
+  /* ── Soft ── */
+  /* Présence visuelle modérée — fond teinté et contraste doux */
+  --semantic-success-soft-bg: var(--green-dark-50);
+  --semantic-success-soft-text: var(--green-dark-700);
+  --semantic-success-soft-border: var(--green-dark-200);
+
+  --semantic-success-soft-hover-bg: var(--green-dark-100);
+  --semantic-success-soft-hover-text: var(--green-dark-800);
+  --semantic-success-soft-hover-border: var(--green-dark-300);
+
+  --semantic-success-soft-active-bg: var(--green-dark-200);
+  --semantic-success-soft-active-text: var(--green-dark-900);
+  --semantic-success-soft-active-border: var(--green-dark-400);
+
+
+  /* ── Outline ── */
+  /* Fond transparent et bordure visible — présence visuelle intermédiaire */
+  --semantic-success-outline-bg: transparent;
+  --semantic-success-outline-text: var(--green-dark-600);
+  --semantic-success-outline-border: var(--green-dark-500);
+
+  --semantic-success-outline-hover-bg: var(--green-dark-50);
+  --semantic-success-outline-hover-text: var(--green-dark-700);
+  --semantic-success-outline-hover-border: var(--green-dark-600);
+
+  --semantic-success-outline-active-bg: var(--green-dark-100);
+  --semantic-success-outline-active-text: var(--green-dark-800);
+  --semantic-success-outline-active-border: var(--green-dark-700);
+
+
+  /* ── Ghost ── */
+  /* Apparence discrète — fond et bordure révélés lors de l'interaction */
+  --semantic-success-ghost-bg: transparent;
+  --semantic-success-ghost-text: var(--green-dark-600);
+  --semantic-success-ghost-border: transparent;
+
+  --semantic-success-ghost-hover-bg: var(--green-dark-50);
+  --semantic-success-ghost-hover-text: var(--green-dark-700);
+  --semantic-success-ghost-hover-border: transparent;
+
+  --semantic-success-ghost-active-bg: var(--green-dark-100);
+  --semantic-success-ghost-active-text: var(--green-dark-800);
+  --semantic-success-ghost-active-border: transparent;
+
+
+  /* ── Plain ── */
+  /* Apparence minimale — aucune surface ni bordure */
+  --semantic-success-plain-bg: transparent;
+  --semantic-success-plain-text: var(--green-dark-600);
+  --semantic-success-plain-border: transparent;
+
+  --semantic-success-plain-hover-bg: transparent;
+  --semantic-success-plain-hover-text: var(--green-dark-700);
+  --semantic-success-plain-hover-border: transparent;
+
+  --semantic-success-plain-active-bg: transparent;
+  --semantic-success-plain-active-text: var(--green-dark-800);
+  --semantic-success-plain-active-border: transparent;
+
+
+  /* ── Link ── */
+  /* Apparence textuelle — destinée aux éléments de navigation ou assimilés */
+  --semantic-success-link-bg: transparent;
+  --semantic-success-link-text: var(--green-dark-600);
+  --semantic-success-link-border: transparent;
+
+  --semantic-success-link-hover-bg: transparent;
+  --semantic-success-link-hover-text: var(--green-dark-700);
+  --semantic-success-link-hover-border: transparent;
+
+  --semantic-success-link-active-bg: transparent;
+  --semantic-success-link-active-text: var(--green-dark-800);
+  --semantic-success-link-active-border: transparent;
+}

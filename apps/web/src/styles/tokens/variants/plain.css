@@ -1,0 +1,13 @@
+[data-variant="plain"] {
+    --color-background: var(--color-plain-background);
+    --color-text: var(--color-plain-text);
+    --color-border: var(--color-plain-border);
+    
+    --color-hover-background: var(--color-plain-hover-background);
+    --color-hover-text: var(--color-plain-hover-text);
+    --color-hover-border: var(--color-plain-hover-border);
+    
+    --color-active-background: var(--color-plain-active-background);
+    --color-active-text: var(--color-plain-active-text);
+    --color-active-border: var(--color-plain-active-border);
+}

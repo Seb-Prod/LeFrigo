@@ -1,0 +1,126 @@
+ /* ────────────────────────────────────────────────────────────────
+   🎨 Tokens sémantiques — Primary
+   ────────────────────────────────────────────────────────────────
+   Ce fichier définit les tokens de couleur sémantiques associés à
+   la couleur primaire. Les composants consomment ces tokens via
+   leur système de variantes afin de conserver une séparation entre
+   la palette de couleurs et leur usage dans l'interface.
+
+   Chaque variante expose 9 tokens :
+     - bg     : couleur de fond
+     - text   : couleur du contenu
+     - border : couleur de bordure
+
+   Ces propriétés sont déclinées selon 3 états :
+     - repos
+     - hover
+     - active
+
+   Hiérarchie d'intensité visuelle :
+     solid > soft > outline > ghost > plain
+
+   Variantes :
+     - solid  : présence visuelle forte, destinée aux éléments prioritaires
+     - soft   : présence visuelle modérée avec un fond teinté
+     - outline: fond transparent avec une bordure visible
+     - ghost  : apparence discrète avec un fond révélé à l'interaction
+     - plain  : apparence minimale sans fond ni bordure
+     - link   : apparence textuelle destinée aux éléments de navigation
+                ou aux actions se comportant comme des liens
+
+   Les tokens définissent uniquement les propriétés visuelles.
+   Le comportement spécifique aux composants (soulignement, animation,
+   transition, focus, etc.) est géré par les composants eux-mêmes.
+   ──────────────────────────────────────────────────────────────── */
+
+:root {
+
+  /* ── Solid ─────────────────────────────────────────────────── */
+  /* Présence visuelle forte — usage : éléments prioritaires */
+  --semantic-primary-solid-bg: var(--aubergine-500);
+  --semantic-primary-solid-text: #ffffff;
+  --semantic-primary-solid-border: var(--aubergine-500);
+
+  --semantic-primary-solid-hover-bg: var(--aubergine-600);
+  --semantic-primary-solid-hover-text: #ffffff;
+  --semantic-primary-solid-hover-border: var(--aubergine-600);
+
+  --semantic-primary-solid-active-bg: var(--aubergine-700);
+  --semantic-primary-solid-active-text: #ffffff;
+  --semantic-primary-solid-active-border: var(--aubergine-700);
+
+
+  /* ── Soft ──────────────────────────────────────────────────── */
+  /* Présence visuelle modérée — fond teinté et contraste doux */
+  --semantic-primary-soft-bg: var(--aubergine-50);
+  --semantic-primary-soft-text: var(--aubergine-700);
+  --semantic-primary-soft-border: var(--aubergine-200);
+
+  --semantic-primary-soft-hover-bg: var(--aubergine-100);
+  --semantic-primary-soft-hover-text: var(--aubergine-800);
+  --semantic-primary-soft-hover-border: var(--aubergine-300);
+
+  --semantic-primary-soft-active-bg: var(--aubergine-200);
+  --semantic-primary-soft-active-text: var(--aubergine-900);
+  --semantic-primary-soft-active-border: var(--aubergine-400);
+
+
+  /* ── Outline ───────────────────────────────────────────────── */
+  /* Fond transparent et bordure visible — présence visuelle intermédiaire */
+  --semantic-primary-outline-bg: transparent;
+  --semantic-primary-outline-text: var(--aubergine-600);
+  --semantic-primary-outline-border: var(--aubergine-500);
+
+  --semantic-primary-outline-hover-bg: var(--aubergine-50);
+  --semantic-primary-outline-hover-text: var(--aubergine-700);
+  --semantic-primary-outline-hover-border: var(--aubergine-600);
+
+  --semantic-primary-outline-active-bg: var(--aubergine-100);
+  --semantic-primary-outline-active-text: var(--aubergine-800);
+  --semantic-primary-outline-active-border: var(--aubergine-700);
+
+
+  /* ── Ghost ─────────────────────────────────────────────────── */
+  /* Apparence discrète — fond et bordure révélés lors de l'interaction */
+  --semantic-primary-ghost-bg: transparent;
+  --semantic-primary-ghost-text: var(--aubergine-600);
+  --semantic-primary-ghost-border: transparent;
+
+  --semantic-primary-ghost-hover-bg: var(--aubergine-50);
+  --semantic-primary-ghost-hover-text: var(--aubergine-700);
+  --semantic-primary-ghost-hover-border: transparent;
+
+  --semantic-primary-ghost-active-bg: var(--aubergine-100);
+  --semantic-primary-ghost-active-text: var(--aubergine-800);
+  --semantic-primary-ghost-active-border: transparent;
+
+
+  /* ── Plain ─────────────────────────────────────────────────── */
+  /* Apparence minimale — aucune surface ni bordure */
+  --semantic-primary-plain-bg: transparent;
+  --semantic-primary-plain-text: var(--aubergine-600);
+  --semantic-primary-plain-border: transparent;
+
+  --semantic-primary-plain-hover-bg: transparent;
+  --semantic-primary-plain-hover-text: var(--aubergine-700);
+  --semantic-primary-plain-hover-border: transparent;
+
+  --semantic-primary-plain-active-bg: transparent;
+  --semantic-primary-plain-active-text: var(--aubergine-800);
+  --semantic-primary-plain-active-border: transparent;
+
+
+  /* ── Link ──────────────────────────────────────────────────── */
+  /* Apparence textuelle — destinée aux éléments de navigation ou assimilés */
+  --semantic-primary-link-bg: transparent;
+  --semantic-primary-link-text: var(--aubergine-600);
+  --semantic-primary-link-border: transparent;
+
+  --semantic-primary-link-hover-bg: transparent;
+  --semantic-primary-link-hover-text: var(--aubergine-700);
+  --semantic-primary-link-hover-border: transparent;
+
+  --semantic-primary-link-active-bg: transparent;
+  --semantic-primary-link-active-text: var(--aubergine-800);
+  --semantic-primary-link-active-border: transparent;
+}

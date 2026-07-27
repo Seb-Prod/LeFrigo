@@ -1,0 +1,79 @@
+[data-color="danger"] {
+  /* ── Solid ── */
+  --color-solid-background: var(--semantic-danger-solid-bg);
+  --color-solid-text: var(--semantic-danger-solid-text);
+  --color-solid-border: var(--semantic-danger-solid-border);
+
+  --color-solid-hover-background: var(--semantic-danger-solid-hover-bg);
+  --color-solid-hover-text: var(--semantic-danger-solid-hover-text);
+  --color-solid-hover-border: var(--semantic-danger-solid-hover-border);
+
+  --color-solid-active-background: var(--semantic-danger-solid-active-bg);
+  --color-solid-active-text: var(--semantic-danger-solid-active-text);
+  --color-solid-active-border: var(--semantic-danger-solid-active-border);
+
+  /* ── Soft ── */
+  --color-soft-background: var(--semantic-danger-soft-bg);
+  --color-soft-text: var(--semantic-danger-soft-text);
+  --color-soft-border: var(--semantic-danger-soft-border);
+
+  --color-soft-hover-background: var(--semantic-danger-soft-hover-bg);
+  --color-soft-hover-text: var(--semantic-danger-soft-hover-text);
+  --color-soft-hover-border: var(--semantic-danger-soft-hover-border);
+
+  --color-soft-active-background: var(--semantic-danger-soft-active-bg);
+  --color-soft-active-text: var(--semantic-danger-soft-active-text);
+  --color-soft-active-border: var(--semantic-danger-soft-active-border);
+
+  /* ── Outline ── */
+  --color-outline-background: var(--semantic-danger-outline-bg);
+  --color-outline-text: var(--semantic-danger-outline-text);
+  --color-outline-border: var(--semantic-danger-outline-border);
+
+  --color-outline-hover-background: var(--semantic-danger-outline-hover-bg);
+  --color-outline-hover-text: var(--semantic-danger-outline-hover-text);
+  --color-outline-hover-border: var(--semantic-danger-outline-hover-border);
+
+  --color-outline-active-background: var(--semantic-danger-outline-active-bg);
+  --color-outline-active-text: var(--semantic-danger-outline-active-text);
+  --color-outline-active-border: var(--semantic-danger-outline-active-border);
+
+  /* ── Ghost ── */
+  --color-ghost-background: var(--semantic-danger-ghost-bg);
+  --color-ghost-text: var(--semantic-danger-ghost-text);
+  --color-ghost-border: var(--semantic-danger-ghost-border);
+
+  --color-ghost-hover-background: var(--semantic-danger-ghost-hover-bg);
+  --color-ghost-hover-text: var(--semantic-danger-ghost-hover-text);
+  --color-ghost-hover-border: var(--semantic-danger-ghost-hover-border);
+
+  --color-ghost-active-background: var(--semantic-danger-ghost-active-bg);
+  --color-ghost-active-text: var(--semantic-danger-ghost-active-text);
+  --color-ghost-active-border: var(--semantic-danger-ghost-active-border);
+  
+  /* ── Plain ── */
+  --color-plain-background: var(--semantic-danger-plain-bg);
+  --color-plain-text: var(--semantic-danger-plain-text);
+  --color-plain-border: var(--semantic-danger-plain-border);
+
+  --color-plain-hover-background: var(--semantic-danger-plain-hover-bg);
+  --color-plain-hover-text: var(--semantic-danger-plain-hover-text);
+  --color-plain-hover-border: var(--semantic-danger-plain-hover-border);
+
+  --color-plain-active-background: var(--semantic-danger-plain-active-bg);
+  --color-plain-active-text: var(--semantic-danger-plain-active-text);
+  --color-plain-active-border: var(--semantic-danger-plain-active-border);
+
+  /* ── Link ── */
+  --color-link-background: var(--semantic-danger-link-bg);
+  --color-link-text: var(--semantic-danger-link-text);
+  --color-link-border: var(--semantic-danger-link-border);
+
+  --color-link-hover-background: var(--semantic-danger-link-hover-bg);
+  --color-link-hover-text: var(--semantic-danger-link-hover-text);
+  --color-link-hover-border: var(--semantic-danger-link-hover-border);
+
+  --color-link-active-background: var(--semantic-danger-link-active-bg);
+  --color-link-active-text: var(--semantic-danger-link-active-text);
+  --color-link-active-border: var(--semantic-danger-link-active-border);
+}

@@ -1,0 +1,13 @@
+[data-variant="ghost"] {
+    --color-background: var(--color-ghost-background);
+    --color-text: var(--color-ghost-text);
+    --color-border: var(--color-ghost-border);
+    
+    --color-hover-background: var(--color-ghost-hover-background);
+    --color-hover-text: var(--color-ghost-hover-text);
+    --color-hover-border: var(--color-ghost-hover-border);
+    
+    --color-active-background: var(--color-ghost-active-background);
+    --color-active-text: var(--color-ghost-active-text);
+    --color-active-border: var(--color-ghost-active-border);
+}

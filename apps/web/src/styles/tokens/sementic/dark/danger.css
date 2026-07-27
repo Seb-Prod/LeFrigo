@@ -1,0 +1,126 @@
+ /* ────────────────────────────────────────────────────────────────
+   🎨 Tokens sémantiques — Danger
+   ────────────────────────────────────────────────────────────────
+   Ce fichier définit les tokens de couleur sémantiques associés à
+   la couleur danger. Les composants consomment ces tokens via
+   leur système de variantes afin de conserver une séparation entre
+   la palette de couleurs et leur usage dans l'interface.
+
+   Chaque variante expose 9 tokens :
+     - bg     : couleur de fond
+     - text   : couleur du contenu
+     - border : couleur de bordure
+
+   Ces propriétés sont déclinées selon 3 états :
+     - repos
+     - hover
+     - active
+
+   Hiérarchie d'intensité visuelle :
+     solid > soft > outline > ghost > plain
+
+   Variantes :
+     - solid  : présence visuelle forte, destinée aux éléments prioritaires
+     - soft   : présence visuelle modérée avec un fond teinté
+     - outline: fond transparent avec une bordure visible
+     - ghost  : apparence discrète avec un fond révélé à l'interaction
+     - plain  : apparence minimale sans fond ni bordure
+     - link   : apparence textuelle destinée aux éléments de navigation
+                ou aux actions se comportant comme des liens
+
+   Les tokens définissent uniquement les propriétés visuelles.
+   Le comportement spécifique aux composants (soulignement, animation,
+   transition, focus, etc.) est géré par les composants eux-mêmes.
+   ──────────────────────────────────────────────────────────────── */
+
+:root.dark {
+
+  /* ── Solid ── */
+  /* Présence visuelle forte — usage : éléments prioritaires */
+  --semantic-danger-solid-bg: var(--red-dark-500);
+  --semantic-danger-solid-text: #ffffff;
+  --semantic-danger-solid-border: var(--red-dark-500);
+
+  --semantic-danger-solid-hover-bg: var(--red-dark-600);
+  --semantic-danger-solid-hover-text: #ffffff;
+  --semantic-danger-solid-hover-border: var(--red-dark-600);
+
+  --semantic-danger-solid-active-bg: var(--red-dark-700);
+  --semantic-danger-solid-active-text: #ffffff;
+  --semantic-danger-solid-active-border: var(--red-dark-700);
+
+
+  /* ── Soft ── */
+  /* Présence visuelle modérée — fond teinté et contraste doux */
+  --semantic-danger-soft-bg: var(--red-dark-50);
+  --semantic-danger-soft-text: var(--red-dark-700);
+  --semantic-danger-soft-border: var(--red-dark-200);
+
+  --semantic-danger-soft-hover-bg: var(--red-dark-100);
+  --semantic-danger-soft-hover-text: var(--red-dark-800);
+  --semantic-danger-soft-hover-border: var(--red-dark-300);
+
+  --semantic-danger-soft-active-bg: var(--red-dark-200);
+  --semantic-danger-soft-active-text: var(--red-dark-900);
+  --semantic-danger-soft-active-border: var(--red-dark-400);
+
+
+  /* ── Outline ── */
+  /* Fond transparent et bordure visible — présence visuelle intermédiaire */
+  --semantic-danger-outline-bg: transparent;
+  --semantic-danger-outline-text: var(--red-dark-600);
+  --semantic-danger-outline-border: var(--red-dark-500);
+
+  --semantic-danger-outline-hover-bg: var(--red-dark-50);
+  --semantic-danger-outline-hover-text: var(--red-dark-700);
+  --semantic-danger-outline-hover-border: var(--red-dark-600);
+
+  --semantic-danger-outline-active-bg: var(--red-dark-100);
+  --semantic-danger-outline-active-text: var(--red-dark-800);
+  --semantic-danger-outline-active-border: var(--red-dark-700);
+
+
+  /* ── Ghost ── */
+  /* Apparence discrète — fond et bordure révélés lors de l'interaction */
+  --semantic-danger-ghost-bg: transparent;
+  --semantic-danger-ghost-text: var(--red-dark-600);
+  --semantic-danger-ghost-border: transparent;
+
+  --semantic-danger-ghost-hover-bg: var(--red-dark-50);
+  --semantic-danger-ghost-hover-text: var(--red-dark-700);
+  --semantic-danger-ghost-hover-border: transparent;
+
+  --semantic-danger-ghost-active-bg: var(--red-dark-100);
+  --semantic-danger-ghost-active-text: var(--red-dark-800);
+  --semantic-danger-ghost-active-border: transparent;
+
+
+  /* ── Plain ── */
+  /* Apparence minimale — aucune surface ni bordure */
+  --semantic-danger-plain-bg: transparent;
+  --semantic-danger-plain-text: var(--red-dark-600);
+  --semantic-danger-plain-border: transparent;
+
+  --semantic-danger-plain-hover-bg: transparent;
+  --semantic-danger-plain-hover-text: var(--red-dark-700);
+  --semantic-danger-plain-hover-border: transparent;
+
+  --semantic-danger-plain-active-bg: transparent;
+  --semantic-danger-plain-active-text: var(--red-dark-800);
+  --semantic-danger-plain-active-border: transparent;
+
+
+  /* ── Link ── */
+  /* Apparence textuelle — destinée aux éléments de navigation ou assimilés */
+  --semantic-danger-link-bg: transparent;
+  --semantic-danger-link-text: var(--red-dark-600);
+  --semantic-danger-link-border: transparent;
+
+  --semantic-danger-link-hover-bg: transparent;
+  --semantic-danger-link-hover-text: var(--red-dark-700);
+  --semantic-danger-link-hover-border: transparent;
+
+  --semantic-danger-link-active-bg: transparent;
+  --semantic-danger-link-active-text: var(--red-dark-800);
+  --semantic-danger-link-active-border: transparent;
+}

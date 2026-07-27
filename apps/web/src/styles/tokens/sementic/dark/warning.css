@@ -1,0 +1,126 @@
+ /* ────────────────────────────────────────────────────────────────
+   🎨 Tokens sémantiques — Warning
+   ────────────────────────────────────────────────────────────────
+   Ce fichier définit les tokens de couleur sémantiques associés à
+   la couleur attention. Les composants consomment ces tokens via
+   leur système de variantes afin de conserver une séparation entre
+   la palette de couleurs et leur usage dans l'interface.
+
+   Chaque variante expose 9 tokens :
+     - bg     : couleur de fond
+     - text   : couleur du contenu
+     - border : couleur de bordure
+
+   Ces propriétés sont déclinées selon 3 états :
+     - repos
+     - hover
+     - active
+
+   Hiérarchie d'intensité visuelle :
+     solid > soft > outline > ghost > plain
+
+   Variantes :
+     - solid  : présence visuelle forte, destinée aux éléments prioritaires
+     - soft   : présence visuelle modérée avec un fond teinté
+     - outline: fond transparent avec une bordure visible
+     - ghost  : apparence discrète avec un fond révélé à l'interaction
+     - plain  : apparence minimale sans fond ni bordure
+     - link   : apparence textuelle destinée aux éléments de navigation
+                ou aux actions se comportant comme des liens
+
+   Les tokens définissent uniquement les propriétés visuelles.
+   Le comportement spécifique aux composants (soulignement, animation,
+   transition, focus, etc.) est géré par les composants eux-mêmes.
+   ──────────────────────────────────────────────────────────────── */
+
+:root.dark {
+
+  /* ── Solid ── */
+  /* Présence visuelle forte — usage : éléments prioritaires */
+  --semantic-warning-solid-bg: var(--yellow-dark-500);
+  --semantic-warning-solid-text: #ffffff;
+  --semantic-warning-solid-border: var(--yellow-dark-500);
+
+  --semantic-warning-solid-hover-bg: var(--yellow-dark-600);
+  --semantic-warning-solid-hover-text: #ffffff;
+  --semantic-warning-solid-hover-border: var(--yellow-dark-600);
+
+  --semantic-warning-solid-active-bg: var(--yellow-dark-700);
+  --semantic-warning-solid-active-text: #ffffff;
+  --semantic-warning-solid-active-border: var(--yellow-dark-700);
+
+
+  /* ── Soft ── */
+  /* Présence visuelle modérée — fond teinté et contraste doux */
+  --semantic-warning-soft-bg: var(--yellow-dark-50);
+  --semantic-warning-soft-text: var(--yellow-dark-700);
+  --semantic-warning-soft-border: var(--yellow-dark-200);
+
+  --semantic-warning-soft-hover-bg: var(--yellow-dark-100);
+  --semantic-warning-soft-hover-text: var(--yellow-dark-800);
+  --semantic-warning-soft-hover-border: var(--yellow-dark-300);
+
+  --semantic-warning-soft-active-bg: var(--yellow-dark-200);
+  --semantic-warning-soft-active-text: var(--yellow-dark-900);
+  --semantic-warning-soft-active-border: var(--yellow-dark-400);
+
+
+  /* ── Outline ── */
+  /* Fond transparent et bordure visible — présence visuelle intermédiaire */
+  --semantic-warning-outline-bg: transparent;
+  --semantic-warning-outline-text: var(--yellow-dark-600);
+  --semantic-warning-outline-border: var(--yellow-dark-500);
+
+  --semantic-warning-outline-hover-bg: var(--yellow-dark-50);
+  --semantic-warning-outline-hover-text: var(--yellow-dark-700);
+  --semantic-warning-outline-hover-border: var(--yellow-dark-600);
+
+  --semantic-warning-outline-active-bg: var(--yellow-dark-100);
+  --semantic-warning-outline-active-text: var(--yellow-dark-800);
+  --semantic-warning-outline-active-border: var(--yellow-dark-700);
+
+
+  /* ── Ghost ── */
+  /* Apparence discrète — fond et bordure révélés lors de l'interaction */
+  --semantic-warning-ghost-bg: transparent;
+  --semantic-warning-ghost-text: var(--yellow-dark-600);
+  --semantic-warning-ghost-border: transparent;
+
+  --semantic-warning-ghost-hover-bg: var(--yellow-dark-50);
+  --semantic-warning-ghost-hover-text: var(--yellow-dark-700);
+  --semantic-warning-ghost-hover-border: transparent;
+
+  --semantic-warning-ghost-active-bg: var(--yellow-dark-100);
+  --semantic-warning-ghost-active-text: var(--yellow-dark-800);
+  --semantic-warning-ghost-active-border: transparent;
+
+
+  /* ── Plain ── */
+  /* Apparence minimale — aucune surface ni bordure */
+  --semantic-warning-plain-bg: transparent;
+  --semantic-warning-plain-text: var(--yellow-dark-600);
+  --semantic-warning-plain-border: transparent;
+
+  --semantic-warning-plain-hover-bg: transparent;
+  --semantic-warning-plain-hover-text: var(--yellow-dark-700);
+  --semantic-warning-plain-hover-border: transparent;
+
+  --semantic-warning-plain-active-bg: transparent;
+  --semantic-warning-plain-active-text: var(--yellow-dark-800);
+  --semantic-warning-plain-active-border: transparent;
+
+
+  /* ── Link ── */
+  /* Apparence textuelle — destinée aux éléments de navigation ou assimilés */
+  --semantic-warning-link-bg: transparent;
+  --semantic-warning-link-text: var(--yellow-dark-600);
+  --semantic-warning-link-border: transparent;
+
+  --semantic-warning-link-hover-bg: transparent;
+  --semantic-warning-link-hover-text: var(--yellow-dark-700);
+  --semantic-warning-link-hover-border: transparent;
+
+  --semantic-warning-link-active-bg: transparent;
+  --semantic-warning-link-active-text: var(--yellow-dark-800);
+  --semantic-warning-link-active-border: transparent;
+}

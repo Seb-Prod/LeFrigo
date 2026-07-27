@@ -1,0 +1,22 @@
+:root {
+  /* Fond global de l'application */
+  --color-background: var(--sable-100);
+
+  /* Surface principale des containers */
+  --color-surface: #ffffff;
+
+  /* Surface légèrement contrastée */
+  --color-surface-secondary: var(--sable-50);
+
+  /* Surface plus contrastée / imbriquée */
+  --color-surface-tertiary: var(--sable-100);
+
+  /* Surface élevée : cards, dropdowns, popovers */
+  --color-surface-elevated: #ffffff;
+
+  /* Surface pour les éléments désactivés */
+  --color-surface-disabled: var(--sable-200);
+
+  /* Surface d'overlay */
+  --color-surface-overlay: rgba(47, 36, 18, 0.5);
+}

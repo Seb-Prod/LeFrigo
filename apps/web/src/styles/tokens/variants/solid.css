@@ -1,0 +1,13 @@
+[data-variant="solid"] {
+    --color-background: var(--color-solid-background);
+    --color-text: var(--color-solid-text);
+    --color-border: var(--color-solid-border);
+    
+    --color-hover-background: var(--color-solid-hover-background);
+    --color-hover-text: var(--color-solid-hover-text);
+    --color-hover-border: var(--color-solid-hover-border);
+    
+    --color-active-background: var(--color-solid-active-background);
+    --color-active-text: var(--color-solid-active-text);
+    --color-active-border: var(--color-solid-active-border);
+}

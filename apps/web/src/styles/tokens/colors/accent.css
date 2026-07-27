@@ -1,0 +1,79 @@
+[data-color="accent"] {
+  /* ── Solid ── */
+  --color-solid-background: var(--semantic-accent-solid-bg);
+  --color-solid-text: var(--semantic-accent-solid-text);
+  --color-solid-border: var(--semantic-accent-solid-border);
+
+  --color-solid-hover-background: var(--semantic-accent-solid-hover-bg);
+  --color-solid-hover-text: var(--semantic-accent-solid-hover-text);
+  --color-solid-hover-border: var(--semantic-accent-solid-hover-border);
+
+  --color-solid-active-background: var(--semantic-accent-solid-active-bg);
+  --color-solid-active-text: var(--semantic-accent-solid-active-text);
+  --color-solid-active-border: var(--semantic-accent-solid-active-border);
+
+  /* ── Soft ── */
+  --color-soft-background: var(--semantic-accent-soft-bg);
+  --color-soft-text: var(--semantic-accent-soft-text);
+  --color-soft-border: var(--semantic-accent-soft-border);
+
+  --color-soft-hover-background: var(--semantic-accent-soft-hover-bg);
+  --color-soft-hover-text: var(--semantic-accent-soft-hover-text);
+  --color-soft-hover-border: var(--semantic-accent-soft-hover-border);
+
+  --color-soft-active-background: var(--semantic-accent-soft-active-bg);
+  --color-soft-active-text: var(--semantic-accent-soft-active-text);
+  --color-soft-active-border: var(--semantic-accent-soft-active-border);
+
+  /* ── Outline ── */
+  --color-outline-background: var(--semantic-accent-outline-bg);
+  --color-outline-text: var(--semantic-accent-outline-text);
+  --color-outline-border: var(--semantic-accent-outline-border);
+
+  --color-outline-hover-background: var(--semantic-accent-outline-hover-bg);
+  --color-outline-hover-text: var(--semantic-accent-outline-hover-text);
+  --color-outline-hover-border: var(--semantic-accent-outline-hover-border);
+
+  --color-outline-active-background: var(--semantic-accent-outline-active-bg);
+  --color-outline-active-text: var(--semantic-accent-outline-active-text);
+  --color-outline-active-border: var(--semantic-accent-outline-active-border);
+
+  /* ── Ghost ── */
+  --color-ghost-background: var(--semantic-accent-ghost-bg);
+  --color-ghost-text: var(--semantic-accent-ghost-text);
+  --color-ghost-border: var(--semantic-accent-ghost-border);
+
+  --color-ghost-hover-background: var(--semantic-accent-ghost-hover-bg);
+  --color-ghost-hover-text: var(--semantic-accent-ghost-hover-text);
+  --color-ghost-hover-border: var(--semantic-accent-ghost-hover-border);
+
+  --color-ghost-active-background: var(--semantic-accent-ghost-active-bg);
+  --color-ghost-active-text: var(--semantic-accent-ghost-active-text);
+  --color-ghost-active-border: var(--semantic-accent-ghost-active-border);
+  
+  /* ── Plain ── */
+  --color-plain-background: var(--semantic-accent-plain-bg);
+  --color-plain-text: var(--semantic-accent-plain-text);
+  --color-plain-border: var(--semantic-accent-plain-border);
+
+  --color-plain-hover-background: var(--semantic-accent-plain-hover-bg);
+  --color-plain-hover-text: var(--semantic-accent-plain-hover-text);
+  --color-plain-hover-border: var(--semantic-accent-plain-hover-border);
+
+  --color-plain-active-background: var(--semantic-accent-plain-active-bg);
+  --color-plain-active-text: var(--semantic-accent-plain-active-text);
+  --color-plain-active-border: var(--semantic-accent-plain-active-border);
+
+  /* ── Link ── */
+  --color-link-background: var(--semantic-accent-link-bg);
+  --color-link-text: var(--semantic-accent-link-text);
+  --color-link-border: var(--semantic-accent-link-border);
+
+  --color-link-hover-background: var(--semantic-accent-link-hover-bg);
+  --color-link-hover-text: var(--semantic-accent-link-hover-text);
+  --color-link-hover-border: var(--semantic-accent-link-hover-border);
+
+  --color-link-active-background: var(--semantic-accent-link-active-bg);
+  --color-link-active-text: var(--semantic-accent-link-active-text);
+  --color-link-active-border: var(--semantic-accent-link-active-border);
+}

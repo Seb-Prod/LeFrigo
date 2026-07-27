@@ -94,11 +94,7 @@
   --shadow-color-info: rgba(58, 111, 168, 0.28);    /* ← corrigé : ardoise */
   --shadow-color-neutral: rgba(107, 114, 128, 0.20);
 
-  /* ── Surfaces & fond global ───────────────────────────────── */
 
-  --color-background: #f9f5e9;
-  --color-surface: #ffffff;
-  --color-surface-hover: #f3f4f6;
 
   /* ── Texte global ─────────────────────────────────────────── */
 

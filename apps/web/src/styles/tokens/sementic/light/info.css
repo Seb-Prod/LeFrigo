@@ -1,0 +1,126 @@
+ /* ────────────────────────────────────────────────────────────────
+   🎨 Tokens sémantiques — Info
+   ────────────────────────────────────────────────────────────────
+   Ce fichier définit les tokens de couleur sémantiques associés à
+   la couleur info. Les composants consomment ces tokens via
+   leur système de variantes afin de conserver une séparation entre
+   la palette de couleurs et leur usage dans l'interface.
+
+   Chaque variante expose 9 tokens :
+     - bg     : couleur de fond
+     - text   : couleur du contenu
+     - border : couleur de bordure
+
+   Ces propriétés sont déclinées selon 3 états :
+     - repos
+     - hover
+     - active
+
+   Hiérarchie d'intensité visuelle :
+     solid > soft > outline > ghost > plain
+
+   Variantes :
+     - solid  : présence visuelle forte, destinée aux éléments prioritaires
+     - soft   : présence visuelle modérée avec un fond teinté
+     - outline: fond transparent avec une bordure visible
+     - ghost  : apparence discrète avec un fond révélé à l'interaction
+     - plain  : apparence minimale sans fond ni bordure
+     - link   : apparence textuelle destinée aux éléments de navigation
+                ou aux actions se comportant comme des liens
+
+   Les tokens définissent uniquement les propriétés visuelles.
+   Le comportement spécifique aux composants (soulignement, animation,
+   transition, focus, etc.) est géré par les composants eux-mêmes.
+   ──────────────────────────────────────────────────────────────── */
+
+:root {
+
+  /* ── Solid ── */
+  /* Présence visuelle forte — usage : éléments prioritaires */
+  --semantic-info-solid-bg: var(--blue-500);
+  --semantic-info-solid-text: #ffffff;
+  --semantic-info-solid-border: var(--blue-500);
+
+  --semantic-info-solid-hover-bg: var(--blue-600);
+  --semantic-info-solid-hover-text: #ffffff;
+  --semantic-info-solid-hover-border: var(--blue-600);
+
+  --semantic-info-solid-active-bg: var(--blue-700);
+  --semantic-info-solid-active-text: #ffffff;
+  --semantic-info-solid-active-border: var(--blue-700);
+
+
+  /* ── Soft ── */
+  /* Présence visuelle modérée — fond teinté et contraste doux */
+  --semantic-info-soft-bg: var(--blue-50);
+  --semantic-info-soft-text: var(--blue-700);
+  --semantic-info-soft-border: var(--blue-200);
+
+  --semantic-info-soft-hover-bg: var(--blue-100);
+  --semantic-info-soft-hover-text: var(--blue-800);
+  --semantic-info-soft-hover-border: var(--blue-300);
+
+  --semantic-info-soft-active-bg: var(--blue-200);
+  --semantic-info-soft-active-text: var(--blue-900);
+  --semantic-info-soft-active-border: var(--blue-400);
+
+
+  /* ── Outline ── */
+  /* Fond transparent et bordure visible — présence visuelle intermédiaire */
+  --semantic-info-outline-bg: transparent;
+  --semantic-info-outline-text: var(--blue-600);
+  --semantic-info-outline-border: var(--blue-500);
+
+  --semantic-info-outline-hover-bg: var(--blue-50);
+  --semantic-info-outline-hover-text: var(--blue-700);
+  --semantic-info-outline-hover-border: var(--blue-600);
+
+  --semantic-info-outline-active-bg: var(--blue-100);
+  --semantic-info-outline-active-text: var(--blue-800);
+  --semantic-info-outline-active-border: var(--blue-700);
+
+
+  /* ── Ghost ── */
+  /* Apparence discrète — fond et bordure révélés lors de l'interaction */
+  --semantic-info-ghost-bg: transparent;
+  --semantic-info-ghost-text: var(--blue-600);
+  --semantic-info-ghost-border: transparent;
+
+  --semantic-info-ghost-hover-bg: var(--blue-50);
+  --semantic-info-ghost-hover-text: var(--blue-700);
+  --semantic-info-ghost-hover-border: transparent;
+
+  --semantic-info-ghost-active-bg: var(--blue-100);
+  --semantic-info-ghost-active-text: var(--blue-800);
+  --semantic-info-ghost-active-border: transparent;
+
+
+  /* ── Plain ── */
+  /* Apparence minimale — aucune surface ni bordure */
+  --semantic-info-plain-bg: transparent;
+  --semantic-info-plain-text: var(--blue-600);
+  --semantic-info-plain-border: transparent;
+
+  --semantic-info-plain-hover-bg: transparent;
+  --semantic-info-plain-hover-text: var(--blue-700);
+  --semantic-info-plain-hover-border: transparent;
+
+  --semantic-info-plain-active-bg: transparent;
+  --semantic-info-plain-active-text: var(--blue-800);
+  --semantic-info-plain-active-border: transparent;
+
+
+  /* ── Link ── */
+  /* Apparence textuelle — destinée aux éléments de navigation ou assimilés */
+  --semantic-info-link-bg: transparent;
+  --semantic-info-link-text: var(--blue-600);
+  --semantic-info-link-border: transparent;
+
+  --semantic-info-link-hover-bg: transparent;
+  --semantic-info-link-hover-text: var(--blue-700);
+  --semantic-info-link-hover-border: transparent;
+
+  --semantic-info-link-active-bg: transparent;
+  --semantic-info-link-active-text: var(--blue-800);
+  --semantic-info-link-active-border: transparent;
+}

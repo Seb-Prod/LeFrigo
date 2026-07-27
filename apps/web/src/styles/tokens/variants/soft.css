@@ -1,0 +1,13 @@
+[data-variant="soft"] {
+    --color-background: var(--color-soft-background);
+    --color-text: var(--color-soft-text);
+    --color-border: var(--color-soft-border);
+    
+    --color-hover-background: var(--color-soft-hover-background);
+    --color-hover-text: var(--color-soft-hover-text);
+    --color-hover-border: var(--color-soft-hover-border);
+    
+    --color-active-background: var(--color-soft-active-background);
+    --color-active-text: var(--color-soft-active-text);
+    --color-active-border: var(--color-soft-active-border);
+}

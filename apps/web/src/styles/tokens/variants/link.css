@@ -1,0 +1,13 @@
+[data-variant="link"] {
+    --color-background: var(--color-link-background);
+    --color-text: var(--color-link-text);
+    --color-border: var(--color-link-border);
+    
+    --color-hover-background: var(--color-link-hover-background);
+    --color-hover-text: var(--color-link-hover-text);
+    --color-hover-border: var(--color-link-hover-border);
+    
+    --color-active-background: var(--color-link-active-background);
+    --color-active-text: var(--color-link-active-text);
+    --color-active-border: var(--color-link-active-border);
+}

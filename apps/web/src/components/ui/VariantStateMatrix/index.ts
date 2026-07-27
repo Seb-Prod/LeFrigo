@@ -1,0 +1,1 @@
+export { VariantStateMatrix } from "./VariantStateMatrix";

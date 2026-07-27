@@ -2,7 +2,7 @@
 
   /* ── Primary — Aubergine ──────────────────────────────────── */
 
-  --color-primary-solid: #a865cc;        /* plus lumineux sur fond sombre */
+  --color-primary-solid: #a865cc;
   --color-primary-solid-text: #1f0830;
   --color-primary-hover: #bc7de0;
   --color-primary-border: #5a2478;
@@ -96,7 +96,7 @@
 
   /* ── Surfaces & fond global ───────────────────────────────── */
 
-  --color-background: #120820;          /* aubergine très sombre, identité LeFrigo */
+  
   --color-surface: #1e1030;            /* cartes légèrement surélevées */
   --color-surface-hover: #2a1840;
 

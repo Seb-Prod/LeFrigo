@@ -1,0 +1,22 @@
+:root.dark {
+  /* Fond global de l'application */
+  --color-background: var(--aubergine-surface-dark-25);
+
+  /* Surface principale des containers */
+  --color-surface: var(--aubergine-surface-dark-50);
+
+  /* Surface légèrement contrastée */
+  --color-surface-secondary: var(--aubergine-surface-dark-100);
+
+  /* Surface plus contrastée / imbriquée */
+  --color-surface-tertiary: var(--aubergine-surface-dark-200);
+
+  /* Surface élevée : cards, dropdowns, popovers */
+  --color-surface-elevated: var(--aubergine-surface-dark-300);
+
+  /* Surface pour les éléments désactivés */
+  --color-surface-disabled: var(--aubergine-surface-dark-200);
+
+  /* Surface d'overlay */
+  --color-surface-overlay: rgba(14, 7, 24, 0.7);
+}

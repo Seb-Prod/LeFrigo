@@ -1,0 +1,126 @@
+ /* ────────────────────────────────────────────────────────────────
+   🎨 Tokens sémantiques — Accent
+   ────────────────────────────────────────────────────────────────
+   Ce fichier définit les tokens de couleur sémantiques associés à
+   la couleur accent. Les composants consomment ces tokens via
+   leur système de variantes afin de conserver une séparation entre
+   la palette de couleurs et leur usage dans l'interface.
+
+   Chaque variante expose 9 tokens :
+     - bg     : couleur de fond
+     - text   : couleur du contenu
+     - border : couleur de bordure
+
+   Ces propriétés sont déclinées selon 3 états :
+     - repos
+     - hover
+     - active
+
+   Hiérarchie d'intensité visuelle :
+     solid > soft > outline > ghost > plain
+
+   Variantes :
+     - solid  : présence visuelle forte, destinée aux éléments prioritaires
+     - soft   : présence visuelle modérée avec un fond teinté
+     - outline: fond transparent avec une bordure visible
+     - ghost  : apparence discrète avec un fond révélé à l'interaction
+     - plain  : apparence minimale sans fond ni bordure
+     - link   : apparence textuelle destinée aux éléments de navigation
+                ou aux actions se comportant comme des liens
+
+   Les tokens définissent uniquement les propriétés visuelles.
+   Le comportement spécifique aux composants (soulignement, animation,
+   transition, focus, etc.) est géré par les composants eux-mêmes.
+   ──────────────────────────────────────────────────────────────── */
+
+:root.dark {
+
+  /* ── Solid ── */
+  /* Présence visuelle forte — usage : éléments prioritaires */
+  --semantic-accent-solid-bg: var(--honey-dark-500);
+  --semantic-accent-solid-text: #ffffff;
+  --semantic-accent-solid-border: var(--honey-dark-500);
+
+  --semantic-accent-solid-hover-bg: var(--honey-dark-600);
+  --semantic-accent-solid-hover-text: #ffffff;
+  --semantic-accent-solid-hover-border: var(--honey-dark-600);
+
+  --semantic-accent-solid-active-bg: var(--honey-dark-700);
+  --semantic-accent-solid-active-text: #ffffff;
+  --semantic-accent-solid-active-border: var(--honey-dark-700);
+
+
+  /* ── Soft ── */
+  /* Présence visuelle modérée — fond teinté et contraste doux */
+  --semantic-accent-soft-bg: var(--honey-dark-50);
+  --semantic-accent-soft-text: var(--honey-dark-700);
+  --semantic-accent-soft-border: var(--honey-dark-200);
+
+  --semantic-accent-soft-hover-bg: var(--honey-dark-100);
+  --semantic-accent-soft-hover-text: var(--honey-dark-800);
+  --semantic-accent-soft-hover-border: var(--honey-dark-300);
+
+  --semantic-accent-soft-active-bg: var(--honey-dark-200);
+  --semantic-accent-soft-active-text: var(--honey-dark-900);
+  --semantic-accent-soft-active-border: var(--honey-dark-400);
+
+
+  /* ── Outline ── */
+  /* Fond transparent et bordure visible — présence visuelle intermédiaire */
+  --semantic-accent-outline-bg: transparent;
+  --semantic-accent-outline-text: var(--honey-dark-600);
+  --semantic-accent-outline-border: var(--honey-dark-500);
+
+  --semantic-accent-outline-hover-bg: var(--honey-dark-50);
+  --semantic-accent-outline-hover-text: var(--honey-dark-700);
+  --semantic-accent-outline-hover-border: var(--honey-dark-600);
+
+  --semantic-accent-outline-active-bg: var(--honey-dark-100);
+  --semantic-accent-outline-active-text: var(--honey-dark-800);
+  --semantic-accent-outline-active-border: var(--honey-dark-700);
+
+
+  /* ── Ghost ── */
+  /* Apparence discrète — fond et bordure révélés lors de l'interaction */
+  --semantic-accent-ghost-bg: transparent;
+  --semantic-accent-ghost-text: var(--honey-dark-600);
+  --semantic-accent-ghost-border: transparent;
+
+  --semantic-accent-ghost-hover-bg: var(--honey-dark-50);
+  --semantic-accent-ghost-hover-text: var(--honey-dark-700);
+  --semantic-accent-ghost-hover-border: transparent;
+
+  --semantic-accent-ghost-active-bg: var(--honey-dark-100);
+  --semantic-accent-ghost-active-text: var(--honey-dark-800);
+  --semantic-accent-ghost-active-border: transparent;
+
+
+  /* ── Plain ── */
+  /* Apparence minimale — aucune surface ni bordure */
+  --semantic-accent-plain-bg: transparent;
+  --semantic-accent-plain-text: var(--honey-dark-600);
+  --semantic-accent-plain-border: transparent;
+
+  --semantic-accent-plain-hover-bg: transparent;
+  --semantic-accent-plain-hover-text: var(--honey-dark-700);
+  --semantic-accent-plain-hover-border: transparent;
+
+  --semantic-accent-plain-active-bg: transparent;
+  --semantic-accent-plain-active-text: var(--honey-dark-800);
+  --semantic-accent-plain-active-border: transparent;
+
+
+  /* ── Link ── */
+  /* Apparence textuelle — destinée aux éléments de navigation ou assimilés */
+  --semantic-accent-link-bg: transparent;
+  --semantic-accent-link-text: var(--honey-dark-600);
+  --semantic-accent-link-border: transparent;
+
+  --semantic-accent-link-hover-bg: transparent;
+  --semantic-accent-link-hover-text: var(--honey-dark-700);
+  --semantic-accent-link-hover-border: transparent;
+
+  --semantic-accent-link-active-bg: transparent;
+  --semantic-accent-link-active-text: var(--honey-dark-800);
+  --semantic-accent-link-active-border: transparent;
+}

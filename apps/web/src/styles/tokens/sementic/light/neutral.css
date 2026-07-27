@@ -1,0 +1,126 @@
+ /* ────────────────────────────────────────────────────────────────
+   🎨 Tokens sémantiques — Neutral
+   ────────────────────────────────────────────────────────────────
+   Ce fichier définit les tokens de couleur sémantiques associés à
+   la couleur neutre. Les composants consomment ces tokens via
+   leur système de variantes afin de conserver une séparation entre
+   la palette de couleurs et leur usage dans l'interface.
+
+   Chaque variante expose 9 tokens :
+     - bg     : couleur de fond
+     - text   : couleur du contenu
+     - border : couleur de bordure
+
+   Ces propriétés sont déclinées selon 3 états :
+     - repos
+     - hover
+     - active
+
+   Hiérarchie d'intensité visuelle :
+     solid > soft > outline > ghost > plain
+
+   Variantes :
+     - solid  : présence visuelle forte, destinée aux éléments prioritaires
+     - soft   : présence visuelle modérée avec un fond teinté
+     - outline: fond transparent avec une bordure visible
+     - ghost  : apparence discrète avec un fond révélé à l'interaction
+     - plain  : apparence minimale sans fond ni bordure
+     - link   : apparence textuelle destinée aux éléments de navigation
+                ou aux actions se comportant comme des liens
+
+   Les tokens définissent uniquement les propriétés visuelles.
+   Le comportement spécifique aux composants (soulignement, animation,
+   transition, focus, etc.) est géré par les composants eux-mêmes.
+   ──────────────────────────────────────────────────────────────── */
+
+:root {
+
+  /* ── Solid ── */
+  /* Présence visuelle forte — usage : éléments prioritaires */
+  --semantic-neutral-solid-bg: var(--gray-500);
+  --semantic-neutral-solid-text: #ffffff;
+  --semantic-neutral-solid-border: var(--gray-500);
+
+  --semantic-neutral-solid-hover-bg: var(--gray-600);
+  --semantic-neutral-solid-hover-text: #ffffff;
+  --semantic-neutral-solid-hover-border: var(--gray-600);
+
+  --semantic-neutral-solid-active-bg: var(--gray-700);
+  --semantic-neutral-solid-active-text: #ffffff;
+  --semantic-neutral-solid-active-border: var(--gray-700);
+
+
+  /* ── Soft ── */
+  /* Présence visuelle modérée — fond teinté et contraste doux */
+  --semantic-neutral-soft-bg: var(--gray-50);
+  --semantic-neutral-soft-text: var(--gray-700);
+  --semantic-neutral-soft-border: var(--gray-200);
+
+  --semantic-neutral-soft-hover-bg: var(--gray-100);
+  --semantic-neutral-soft-hover-text: var(--gray-800);
+  --semantic-neutral-soft-hover-border: var(--gray-300);
+
+  --semantic-neutral-soft-active-bg: var(--gray-200);
+  --semantic-neutral-soft-active-text: var(--gray-900);
+  --semantic-neutral-soft-active-border: var(--gray-400);
+
+
+  /* ── Outline ── */
+  /* Fond transparent et bordure visible — présence visuelle intermédiaire */
+  --semantic-neutral-outline-bg: transparent;
+  --semantic-neutral-outline-text: var(--gray-600);
+  --semantic-neutral-outline-border: var(--gray-500);
+
+  --semantic-neutral-outline-hover-bg: var(--gray-50);
+  --semantic-neutral-outline-hover-text: var(--gray-700);
+  --semantic-neutral-outline-hover-border: var(--gray-600);
+
+  --semantic-neutral-outline-active-bg: var(--gray-100);
+  --semantic-neutral-outline-active-text: var(--gray-800);
+  --semantic-neutral-outline-active-border: var(--gray-700);
+
+
+  /* ── Ghost ── */
+  /* Apparence discrète — fond et bordure révélés lors de l'interaction */
+  --semantic-neutral-ghost-bg: transparent;
+  --semantic-neutral-ghost-text: var(--gray-600);
+  --semantic-neutral-ghost-border: transparent;
+
+  --semantic-neutral-ghost-hover-bg: var(--gray-50);
+  --semantic-neutral-ghost-hover-text: var(--gray-700);
+  --semantic-neutral-ghost-hover-border: transparent;
+
+  --semantic-neutral-ghost-active-bg: var(--gray-100);
+  --semantic-neutral-ghost-active-text: var(--gray-800);
+  --semantic-neutral-ghost-active-border: transparent;
+
+
+  /* ── Plain ── */
+  /* Apparence minimale — aucune surface ni bordure */
+  --semantic-neutral-plain-bg: transparent;
+  --semantic-neutral-plain-text: var(--gray-600);
+  --semantic-neutral-plain-border: transparent;
+
+  --semantic-neutral-plain-hover-bg: transparent;
+  --semantic-neutral-plain-hover-text: var(--gray-700);
+  --semantic-neutral-plain-hover-border: transparent;
+
+  --semantic-neutral-plain-active-bg: transparent;
+  --semantic-neutral-plain-active-text: var(--gray-800);
+  --semantic-neutral-plain-active-border: transparent;
+
+
+  /* ── Link ── */
+  /* Apparence textuelle — destinée aux éléments de navigation ou assimilés */
+  --semantic-neutral-link-bg: transparent;
+  --semantic-neutral-link-text: var(--gray-600);
+  --semantic-neutral-link-border: transparent;
+
+  --semantic-neutral-link-hover-bg: transparent;
+  --semantic-neutral-link-hover-text: var(--gray-700);
+  --semantic-neutral-link-hover-border: transparent;
+
+  --semantic-neutral-link-active-bg: transparent;
+  --semantic-neutral-link-active-text: var(--gray-800);
+  --semantic-neutral-link-active-border: transparent;
+}

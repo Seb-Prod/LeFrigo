@@ -1,0 +1,79 @@
+[data-color="warning"] {
+  /* ── Solid ── */
+  --color-solid-background: var(--semantic-warning-solid-bg);
+  --color-solid-text: var(--semantic-warning-solid-text);
+  --color-solid-border: var(--semantic-warning-solid-border);
+
+  --color-solid-hover-background: var(--semantic-warning-solid-hover-bg);
+  --color-solid-hover-text: var(--semantic-warning-solid-hover-text);
+  --color-solid-hover-border: var(--semantic-warning-solid-hover-border);
+
+  --color-solid-active-background: var(--semantic-warning-solid-active-bg);
+  --color-solid-active-text: var(--semantic-warning-solid-active-text);
+  --color-solid-active-border: var(--semantic-warning-solid-active-border);
+
+  /* ── Soft ── */
+  --color-soft-background: var(--semantic-warning-soft-bg);
+  --color-soft-text: var(--semantic-warning-soft-text);
+  --color-soft-border: var(--semantic-warning-soft-border);
+
+  --color-soft-hover-background: var(--semantic-warning-soft-hover-bg);
+  --color-soft-hover-text: var(--semantic-warning-soft-hover-text);
+  --color-soft-hover-border: var(--semantic-warning-soft-hover-border);
+
+  --color-soft-active-background: var(--semantic-warning-soft-active-bg);
+  --color-soft-active-text: var(--semantic-warning-soft-active-text);
+  --color-soft-active-border: var(--semantic-warning-soft-active-border);
+
+  /* ── Outline ── */
+  --color-outline-background: var(--semantic-warning-outline-bg);
+  --color-outline-text: var(--semantic-warning-outline-text);
+  --color-outline-border: var(--semantic-warning-outline-border);
+
+  --color-outline-hover-background: var(--semantic-warning-outline-hover-bg);
+  --color-outline-hover-text: var(--semantic-warning-outline-hover-text);
+  --color-outline-hover-border: var(--semantic-warning-outline-hover-border);
+
+  --color-outline-active-background: var(--semantic-warning-outline-active-bg);
+  --color-outline-active-text: var(--semantic-warning-outline-active-text);
+  --color-outline-active-border: var(--semantic-warning-outline-active-border);
+
+  /* ── Ghost ── */
+  --color-ghost-background: var(--semantic-warning-ghost-bg);
+  --color-ghost-text: var(--semantic-warning-ghost-text);
+  --color-ghost-border: var(--semantic-warning-ghost-border);
+
+  --color-ghost-hover-background: var(--semantic-warning-ghost-hover-bg);
+  --color-ghost-hover-text: var(--semantic-warning-ghost-hover-text);
+  --color-ghost-hover-border: var(--semantic-warning-ghost-hover-border);
+
+  --color-ghost-active-background: var(--semantic-warning-ghost-active-bg);
+  --color-ghost-active-text: var(--semantic-warning-ghost-active-text);
+  --color-ghost-active-border: var(--semantic-warning-ghost-active-border);
+  
+  /* ── Plain ── */
+  --color-plain-background: var(--semantic-warning-plain-bg);
+  --color-plain-text: var(--semantic-warning-plain-text);
+  --color-plain-border: var(--semantic-warning-plain-border);
+
+  --color-plain-hover-background: var(--semantic-warning-plain-hover-bg);
+  --color-plain-hover-text: var(--semantic-warning-plain-hover-text);
+  --color-plain-hover-border: var(--semantic-warning-plain-hover-border);
+
+  --color-plain-active-background: var(--semantic-warning-plain-active-bg);
+  --color-plain-active-text: var(--semantic-warning-plain-active-text);
+  --color-plain-active-border: var(--semantic-warning-plain-active-border);
+
+  /* ── Link ── */
+  --color-link-background: var(--semantic-warning-link-bg);
+  --color-link-text: var(--semantic-warning-link-text);
+  --color-link-border: var(--semantic-warning-link-border);
+
+  --color-link-hover-background: var(--semantic-warning-link-hover-bg);
+  --color-link-hover-text: var(--semantic-warning-link-hover-text);
+  --color-link-hover-border: var(--semantic-warning-link-hover-border);
+
+  --color-link-active-background: var(--semantic-warning-link-active-bg);
+  --color-link-active-text: var(--semantic-warning-link-active-text);
+  --color-link-active-border: var(--semantic-warning-link-active-border);
+}

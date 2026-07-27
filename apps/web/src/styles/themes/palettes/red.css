@@ -1,0 +1,28 @@
+:root {
+    /* Light */
+    --red-50: #FDF0EE;
+    --red-100: #FAE1DC;
+    --red-200: #F29880;
+    --red-300: #E96F55;
+    --red-400: #D64D30;
+    --red-500: #C43318;
+    --red-500-rgb: 196, 51, 24;
+    --red-600: #A82910;
+    --red-700: #94230F;
+    --red-800: #7E1D0D;
+    --red-900: #8F2410;
+
+    /* Dark */
+    --red-dark-50: #1F0500;
+    --red-dark-100: #551006;
+    --red-dark-200: #7A1A08;
+    --red-dark-300: #A02C18;
+    --red-dark-400: #C9462E;
+    --red-dark-500: #E05540;
+    --red-dark-500-rgb: 224, 85, 64;
+    --red-dark-600: #F07060;
+    --red-dark-700: #F58B7D;
+    --red-dark-800: #F8AAA0;
+    --red-dark-900: #FBCBC4;
+    --red-dark-950: #FFF0ED;
+}

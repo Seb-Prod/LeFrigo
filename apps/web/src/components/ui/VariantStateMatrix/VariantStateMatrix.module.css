@@ -1,0 +1,232 @@
+/* ────────────────────────────────────────────────────────────────
+   🎨 VariantStateMatrix
+   ────────────────────────────────────────────────────────────────
+   Matrice de visualisation des tokens sémantiques.
+
+   Chaque couleur présente ses variantes d'apparence sur des lignes
+   et leurs états visuels sur des colonnes.
+
+   Structure :
+
+   Variant      Default      Hover      Active
+   ─────────────────────────────────────────────────────────────
+   solid          Aa           Aa          Aa
+   soft           Aa           Aa          Aa
+   outline        Aa           Aa          Aa
+   ghost          Aa           Aa          Aa
+   plain          Aa           Aa          Aa
+   link           Aa           Aa          Aa
+   ─────────────────────────────────────────────────────────────
+   ──────────────────────────────────────────────────────────────── */
+
+
+/* ═══════════════════════════════════════════════════════════════
+   Layout global
+═══════════════════════════════════════════════════════════════ */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  width: 100%;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   Bloc couleur
+═══════════════════════════════════════════════════════════════ */
+
+.colorBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   En-tête couleur
+═══════════════════════════════════════════════════════════════ */
+
+.colorHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.colorIndicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-primary-solid-bg);
+}
+
+.colorTitle {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: var(--color-text);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   Matrice
+═══════════════════════════════════════════════════════════════ */
+
+.matrix {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   En-tête
+═══════════════════════════════════════════════════════════════ */
+
+.headerRow {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 20px;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.variantHeader {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.statesHeader {
+  display: grid;
+  grid-template-columns: repeat(3, 72px);
+  justify-content: space-around;
+}
+
+.stateHeader {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   Ligne variant
+═══════════════════════════════════════════════════════════════ */
+
+.row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  align-items: center;
+  min-height: 104px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.row:last-child {
+  border-bottom: 0;
+}
+
+.variantLabel {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text);
+  text-transform: capitalize;
+}
+
+.states {
+  display: grid;
+  grid-template-columns: repeat(3, 72px);
+  justify-content: space-around;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   Pastille
+═══════════════════════════════════════════════════════════════ */
+
+.swatch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 64px;
+  height: 40px;
+
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+
+  font-size: 0.875rem;
+  font-weight: 600;
+
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.pill:hover {
+  transform: translateY(-2px);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   États — tokens sémantiques
+═══════════════════════════════════════════════════════════════ */
+
+.default {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.hover {
+  background-color: var(--color-hover-background);
+  color: var(--color-hover-text);
+  border-color: var(--color-hover-border);
+}
+
+.active {
+  background-color: var(--color-active-background);
+  color: var(--color-active-text);
+  border-color: var(--color-active-border);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   Responsive
+═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 640px) {
+  .matrix {
+    overflow-x: auto;
+  }
+
+  .headerRow,
+  .row {
+    min-width: 400px;
+  }
+
+  .headerRow,
+  .row {
+    grid-template-columns: 100px 1fr;
+  }
+}

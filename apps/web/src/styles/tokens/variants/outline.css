@@ -1,0 +1,13 @@
+[data-variant="outline"] {
+    --color-background: var(--color-outline-background);
+    --color-text: var(--color-outline-text);
+    --color-border: var(--color-outline-border);
+    
+    --color-hover-background: var(--color-outline-hover-background);
+    --color-hover-text: var(--color-outline-hover-text);
+    --color-hover-border: var(--color-outline-hover-border);
+    
+    --color-active-background: var(--color-outline-active-background);
+    --color-active-text: var(--color-outline-active-text);
+    --color-active-border: var(--color-outline-active-border);
+}
