@@ -1,9 +1,10 @@
-import { VariantStateMatrix } from "@/components/ui";
+
+import { DesignTokensPlaygroundPage } from "@/features/designTokensPlayground/pages";
 
 export default function TermsPageRoute() {
   return (
     <div>
-      <VariantStateMatrix/>
+      <DesignTokensPlaygroundPage/>
     </div>
   );
 }

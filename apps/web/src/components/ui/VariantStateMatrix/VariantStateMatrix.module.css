@@ -1,232 +1,127 @@
 /* ────────────────────────────────────────────────────────────────
-   🎨 VariantStateMatrix
+   🎨 VariantStateMatrix — playground de tokens (surface × couleur ×
+   variant × état)
    ────────────────────────────────────────────────────────────────
-   Matrice de visualisation des tokens sémantiques.
-
-   Chaque couleur présente ses variantes d'apparence sur des lignes
-   et leurs états visuels sur des colonnes.
-
-   Structure :
-
-   Variant      Default      Hover      Active
-   ─────────────────────────────────────────────────────────────
-   solid          Aa           Aa          Aa
-   soft           Aa           Aa          Aa
-   outline        Aa           Aa          Aa
-   ghost          Aa           Aa          Aa
-   plain          Aa           Aa          Aa
-   link           Aa           Aa          Aa
-   ─────────────────────────────────────────────────────────────
+   Une pastille unique reflète la combinaison sélectionnée via les
+   4 ButtonGroup. Ses couleurs calculées (fond/texte/bordure) sont
+   lues en JS et affichées en hex à côté, pour validation rapide.
    ──────────────────────────────────────────────────────────────── */
 
-
-/* ═══════════════════════════════════════════════════════════════
-   Layout global
-═══════════════════════════════════════════════════════════════ */
-
-.page {
+/* ── Sections ──────────────────────────────────────────────────── */
+.section {
   display: flex;
-  flex-direction: column;
-  gap: 48px;
-  width: 100%;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding: 24px 32px;
 }
 
-
-/* ═══════════════════════════════════════════════════════════════
-   Bloc couleur
-═══════════════════════════════════════════════════════════════ */
-
-.colorBlock {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-
-/* ═══════════════════════════════════════════════════════════════
-   En-tête couleur
-═══════════════════════════════════════════════════════════════ */
-
-.colorHeader {
+/* ── Zone de surface + pastille ────────────────────────────────── */
+/* padding généreux : la pastille doit "respirer" dans son fond de surface */
+.surface {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--color-border);
+  justify-content: center;
+  width: 160px;
+  height: 160px;
+  border-radius: 20px;
+  border: 1px solid var(--gray-200);
 }
 
-.colorIndicator {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--color-primary-solid-bg);
+.surface[data-surface="background"]{
+  background: var(--color-background);
 }
 
-.colorTitle {
-  margin: 0;
-  font-size: 1.125rem;
-  font-weight: 600;
-  text-transform: capitalize;
-  color: var(--color-text);
-}
-
-
-/* ═══════════════════════════════════════════════════════════════
-   Matrice
-═══════════════════════════════════════════════════════════════ */
-
-.matrix {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  overflow: hidden;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-}
-
-
-/* ═══════════════════════════════════════════════════════════════
-   En-tête
-═══════════════════════════════════════════════════════════════ */
-
-.headerRow {
-  display: grid;
-  grid-template-columns: 140px 1fr;
-  align-items: center;
-  min-height: 44px;
-  padding: 0 20px;
+.surface[data-surface="surface"]{
   background: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
 }
 
-.variantHeader {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--color-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+.surface[data-surface="surface-secondary"]{
+  background: var(--color-surface-secondary);
 }
 
-.statesHeader {
-  display: grid;
-  grid-template-columns: repeat(3, 72px);
-  justify-content: space-around;
+.surface[data-surface="surface-tertiary"]{
+  background: var(--color-surface-tertiary);
 }
 
-.stateHeader {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--color-text-muted);
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+.surface[data-surface="surface-elevated"]{
+  background: var(--color-surface-elevated);
 }
 
-
-/* ═══════════════════════════════════════════════════════════════
-   Ligne variant
-═══════════════════════════════════════════════════════════════ */
-
-.row {
-  display: grid;
-  grid-template-columns: 140px 1fr;
-  align-items: center;
-  min-height: 104px;
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--color-border);
-}
-
-.row:last-child {
-  border-bottom: 0;
-}
-
-.variantLabel {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--color-text);
-  text-transform: capitalize;
-}
-
-.states {
-  display: grid;
-  grid-template-columns: repeat(3, 72px);
-  justify-content: space-around;
-}
-
-
-/* ═══════════════════════════════════════════════════════════════
-   Pastille
-═══════════════════════════════════════════════════════════════ */
-
-.swatch {
+.watch {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.pill {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 64px;
-  height: 40px;
-
+  width: 72px;
+  height: 72px;
+  border-radius: 16px;
   border: 1px solid transparent;
-  border-radius: var(--radius-md);
-
-  font-size: 0.875rem;
   font-weight: 600;
-
-  transition:
-    transform 150ms ease,
-    box-shadow 150ms ease;
+  font-size: 1rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.pill:hover {
+.watch[data-state=default]{
+  background: var(--color-background);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.watch[data-state=hover]{
+  background: var(--color-hover-background);
+  color: var(--color-hover-text);
+  border: 1px solid var(--color-hover-border);
+}
+
+.watch[data-state=active]{
+  background: var(--color-active-background);
+  color: var(--color-active-text);
+  border: 1px solid var(--color-active-border);
+}
+
+.watch:hover {
   transform: translateY(-2px);
 }
 
-
-/* ═══════════════════════════════════════════════════════════════
-   États — tokens sémantiques
-═══════════════════════════════════════════════════════════════ */
-
-.default {
-  background-color: var(--color-background);
-  color: var(--color-text);
-  border-color: var(--color-border);
+/* ── Données résolues ──────────────────────────────────────────── */
+.data {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 220px;
+  padding: 16px 20px;
+  border-radius: 14px;
+  background-color: var(--gray-50);
+  border: 1px solid var(--gray-200);
 }
 
-.hover {
-  background-color: var(--color-hover-background);
-  color: var(--color-hover-text);
-  border-color: var(--color-hover-border);
+.dataRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8125rem;
 }
 
-.active {
-  background-color: var(--color-active-background);
-  color: var(--color-active-text);
-  border-color: var(--color-active-border);
+.dataRow dt {
+  color: var(--gray-500);
+  font-weight: 500;
 }
 
+.dataRow dd {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font-family: var(--font-mono, monospace);
+  font-weight: 600;
+  color: var(--gray-800);
+}
 
-/* ═══════════════════════════════════════════════════════════════
-   Responsive
-═══════════════════════════════════════════════════════════════ */
-
-@media (max-width: 640px) {
-  .matrix {
-    overflow-x: auto;
-  }
-
-  .headerRow,
-  .row {
-    min-width: 400px;
-  }
-
-  .headerRow,
-  .row {
-    grid-template-columns: 100px 1fr;
-  }
+/* ── Pastille de couleur dans le tableau de données ───────────────── */
+/* Petit rond qui prévisualise la couleur à côté de sa valeur hex */
+.swatchDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid var(--gray-300);
+  flex-shrink: 0;
 }

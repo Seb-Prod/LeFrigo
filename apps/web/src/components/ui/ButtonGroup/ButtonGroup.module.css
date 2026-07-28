@@ -1,0 +1,106 @@
+/* ────────────────────────────────────────────────────────────────
+   🔘 ButtonGroup — groupe de boutons façon pilule segmentée
+   ──────────────────────────────────────────────────────────────── */
+
+/* ── Conteneur global ──────────────────────────────────────────── */
+
+.group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--gray-600);
+}
+
+/* ── Pilule ────────────────────────────────────────────────────── */
+
+.buttons {
+  display: inline-flex;
+  
+  overflow: hidden;
+
+  background-color: var(--color-soft-background);
+  /* border: 1px solid var(--color-soft-border); */
+  border-radius: 999px;
+
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.08),
+    inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+/* ── Bouton individuel ─────────────────────────────────────────── */
+
+.button {
+  position: relative;
+
+  padding: 6px 16px;
+
+  border: none;
+  border-radius: 0;
+
+  background-color: transparent;
+  color: var(--color-soft-text);
+
+  font-size: 0.875rem;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.15s ease,
+    box-shadow 0.15s ease,
+    color 0.15s ease,
+    transform 0.1s ease;
+}
+
+/* ── Arrondis des extrémités ──────────────────────────────────── */
+
+.button:first-child {
+  border-radius: 999px 0 0 999px;
+}
+
+.button:last-child {
+  border-radius: 0 999px 999px 0;
+}
+
+/* Cas particulier : un seul bouton */
+
+.button:only-child {
+  border-radius: 999px;
+}
+
+/* ── Hover ─────────────────────────────────────────────────────── */
+
+.button:hover:not([data-active="true"]) {
+  background-color: var(--color-soft-hover-background);
+}
+
+/* ── État actif ────────────────────────────────────────────────── */
+
+.button[data-active="true"] {
+  background-color: var(--color-soft-active-background);
+  color: var(--color-soft-active-text);
+
+  /* Effet "bouton enfoncé" */
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.18),
+    inset 0 1px 2px rgba(0, 0, 0, 0.12),
+    inset 0 -1px 1px rgb(255, 255, 255);
+
+  transform: translateY(1px);
+}
+
+/* ── Pression réelle ───────────────────────────────────────────── */
+
+.button:active {
+  transform: translateY(2px);
+
+  box-shadow:
+    inset 0 3px 5px rgba(0, 0, 0, 0.22),
+    inset 0 1px 2px rgba(0, 0, 0, 0.15);
+}
