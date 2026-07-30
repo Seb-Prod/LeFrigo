@@ -2,6 +2,7 @@ import styles from "./MatrixSelectors.module.css";
 import { ButtonGroup } from "@/components/ui/ButtonGroup";
 import { COLORS, VARIANTS, STATES, SURFACES } from "../../constants/constants";
 import { ColorSelector } from "../ColorSelector";
+import { SurfaceSelector } from "../SurfaceSelector";
 
 type Props = {
   surface: (typeof SURFACES)[number];
@@ -34,10 +35,9 @@ export function MatrixSelectors({
         onChange={onSurfaceChange}
       />
 
-      <ColorSelector
-        value={color}
-        onChange={onColorChange}
-      />
+      <SurfaceSelector value={surface} onChange={onSurfaceChange} />
+
+      <ColorSelector value={color} onChange={onColorChange} />
 
       <ButtonGroup
         label="Variant"
