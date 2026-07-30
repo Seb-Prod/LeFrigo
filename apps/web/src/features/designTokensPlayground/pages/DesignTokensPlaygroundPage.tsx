@@ -12,6 +12,7 @@ import { MatrixSelectors } from "../components/MatrixSelectors";
 import { TokenPreview } from "../components/TokenPreview";
 import { TokenDataPanel } from "../components/TokenDataPanel";
 import styles from "./DesignTokensPlaygroundPage.module.css";
+import { ColorSelector } from "../components/ColorSelector";
 
 /**
  * Playground de test pour les tokens de couleur : permet de choisir
@@ -22,7 +23,7 @@ import styles from "./DesignTokensPlaygroundPage.module.css";
 export function DesignTokensPlaygroundPage() {
   const [surface, setSurface] =
     useState<(typeof SURFACES)[number]>("background");
-  const [color, setColor] = useState<(typeof COLORS)[number]>("primary");
+  const [color, setColor] = useState<(typeof COLORS)[number]>("accent");
   const [variant, setVariant] = useState<(typeof VARIANTS)[number]>("solid");
   const [state, setState] = useState<(typeof STATES)[number]>("default");
 
@@ -64,7 +65,6 @@ export function DesignTokensPlaygroundPage() {
         onVariantChange={setVariant}
         onStateChange={setState}
       />
-
       <section className={styles.section}>
         <TokenPreview
           surface={surface}
